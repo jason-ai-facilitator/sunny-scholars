@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>구르미 — 의성의 실버카</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: #111;
+  color: #e0dcd6;
+  line-height: 1.9;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+::selection { background: #d4a06a; color: #111; }
+
+/* ===== PROGRESS BAR ===== */
+#progress-bar {
+  position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+  background: linear-gradient(90deg, #d4a06a, #e8c496);
+  z-index: 9999; transition: width 0.1s linear;
+}
+
+/* ===== FILM GRAIN OVERLAY ===== */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 9998;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+
+/* ===== TYPOGRAPHY ===== */
+.mono {
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  letter-spacing: 0.05em;
+}
+h1, h2, h3 { font-weight: 700; }
+
+/* ===== LETTERBOX IMAGE ===== */
+.letterbox {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  aspect-ratio: 2.35 / 1;
+  overflow: hidden;
+  background: #000;
+}
+.letterbox img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: sepia(0.2) saturate(0.55) brightness(0.75) contrast(1.05);
+  display: block;
+}
+.letterbox::after {
+  content: '';
+  position: absolute; inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+
+/* Letterbox with gradient overlay */
+.letterbox-overlay::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to top, rgba(17,17,17,0.85) 0%, transparent 40%);
+}
+
+/* ===== 16:9 IMAGE VARIANT ===== */
+.widescreen {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000;
+}
+.widescreen img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: sepia(0.2) saturate(0.55) brightness(0.75) contrast(1.05);
+  display: block;
+}
+.widescreen::after {
+  content: '';
+  position: absolute; inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+
+/* ===== CHAPTER TITLE CARD ===== */
+.title-card {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 24px;
+  position: relative;
+}
+.title-card .chapter-num {
+  font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: #d4a06a;
+  margin-bottom: 24px;
+}
+.title-card .chapter-title {
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.2;
+  max-width: 800px;
+  margin-bottom: 20px;
+}
+.title-card .chapter-sub {
+  font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+  color: #777;
+  font-weight: 300;
+  max-width: 500px;
+  line-height: 1.7;
+}
+.title-card .divider-line {
+  width: 60px; height: 1px;
+  background: #d4a06a;
+  margin: 28px auto;
+}
+
+/* ===== CONTENT CONTAINER ===== */
+.content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===== SECTION SPACING ===== */
+.scene {
+  padding: 100px 0;
+}
+.scene-sm {
+  padding: 60px 0;
+}
+
+/* ===== BODY TEXT ===== */
+.body-text {
+  font-size: 1.05rem;
+  color: #b8b4ae;
+  margin-bottom: 32px;
+  font-weight: 300;
+  line-height: 2;
+}
+.body-text:last-child { margin-bottom: 0; }
+
+/* ===== SUBTITLE / SECTION HEADER ===== */
+.scene-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+.scene-header .scene-code {
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.7rem;
+  color: #d4a06a;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.scene-header .scene-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+}
+.scene-header .line {
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, #333, transparent);
+}
+
+/* ===== STAT CARD (CINEMATIC) ===== */
+.stat-card {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 24px;
+}
+.stat-card .stat-number {
+  font-size: clamp(5rem, 18vw, 12rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.stat-card .stat-unit {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 300;
+  color: #d4a06a;
+  margin-top: 8px;
+}
+.stat-card .stat-label {
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  color: #666;
+  margin-top: 20px;
+  max-width: 400px;
+  line-height: 1.7;
+}
+.stat-card .stat-sub {
+  font-size: 0.8rem;
+  color: #555;
+  margin-top: 12px;
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+/* ===== INTERVIEW TRANSCRIPT ===== */
+.transcript-block {
+  border-left: 1px solid #333;
+  padding: 0;
+  margin: 48px 0;
+}
+.transcript-entry {
+  display: flex;
+  gap: 0;
+  padding: 24px 0;
+  border-bottom: 1px solid #1a1a1a;
+}
+.transcript-entry:last-child { border-bottom: none; }
+
+.transcript-meta {
+  width: 130px;
+  flex-shrink: 0;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.transcript-meta .code {
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.65rem;
+  color: #d4a06a;
+  letter-spacing: 1px;
+}
+.transcript-meta .speaker {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #999;
+}
+.transcript-meta .age {
+  font-size: 0.7rem;
+  color: #555;
+}
+
+.transcript-dialogue {
+  flex: 1;
+  padding: 0 24px;
+  border-left: 1px solid #222;
+  font-size: 1.05rem;
+  color: #c5c0b8;
+  line-height: 1.95;
+  font-weight: 300;
+}
+.transcript-dialogue em {
+  font-style: normal;
+  color: #d4a06a;
+}
+
+/* ===== QUOTE BLOCK ===== */
+.film-quote {
+  padding: 60px 24px;
+  text-align: center;
+  max-width: 650px;
+  margin: 40px auto;
+}
+.film-quote .quote-text {
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 400;
+  color: #d4a06a;
+  line-height: 1.8;
+  font-style: italic;
+}
+.film-quote .quote-attr {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 20px;
+  font-style: normal;
+}
+
+/* ===== DATA GRID ===== */
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2px;
+  margin: 48px 0;
+  background: #1a1a1a;
+}
+.data-cell {
+  background: #111;
+  padding: 28px 20px;
+  text-align: center;
+}
+.data-cell .val {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+}
+.data-cell .lbl {
+  font-size: 0.75rem;
+  color: #777;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* ===== SOLUTION CARD ===== */
+.solution-block {
+  margin: 60px 0;
+  padding: 40px;
+  border: 1px solid #222;
+  position: relative;
+}
+.solution-block::before {
+  content: attr(data-phase);
+  position: absolute;
+  top: -10px; left: 24px;
+  background: #111;
+  padding: 0 12px;
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.65rem;
+  color: #d4a06a;
+  letter-spacing: 2px;
+}
+.solution-block .sol-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+}
+.solution-block .sol-desc {
+  font-size: 0.95rem;
+  color: #999;
+  line-height: 1.9;
+  margin-bottom: 16px;
+}
+.solution-block .sol-result {
+  font-size: 0.85rem;
+  padding: 12px 16px;
+  background: #1a1a1a;
+  border-left: 2px solid #d4a06a;
+  color: #888;
+  line-height: 1.7;
+}
+.sol-result.fail { border-left-color: #884444; }
+.sol-result.partial { border-left-color: #888844; }
+.sol-result.success { border-left-color: #448844; }
+
+/* ===== HORIZONTAL SCROLL GALLERY ===== */
+.filmstrip-wrap {
+  position: relative;
+  padding: 40px 0;
+}
+.filmstrip {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 0 24px 20px;
+  -webkit-overflow-scrolling: touch;
+}
+.filmstrip::-webkit-scrollbar { height: 3px; }
+.filmstrip::-webkit-scrollbar-track { background: #1a1a1a; }
+.filmstrip::-webkit-scrollbar-thumb { background: #d4a06a; }
+.filmstrip .frame {
+  flex-shrink: 0;
+  width: clamp(280px, 50vw, 500px);
+  aspect-ratio: 2.35 / 1;
+  scroll-snap-align: center;
+  overflow: hidden;
+  position: relative;
+}
+.filmstrip .frame img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: sepia(0.2) saturate(0.55) brightness(0.75) contrast(1.05);
+}
+.filmstrip .frame::after {
+  content: '';
+  position: absolute; inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+.filmstrip-label {
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.6rem;
+  color: #555;
+  letter-spacing: 2px;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+.hero img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: sepia(0.15) saturate(0.7) brightness(0.6) contrast(1.1);
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to top, #111 0%, rgba(17,17,17,0.6) 30%, transparent 60%);
+}
+.hero::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 2;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+.hero-content {
+  position: relative; z-index: 3;
+  padding: 60px clamp(24px, 5vw, 80px) 80px;
+  max-width: 800px;
+}
+.hero-content .tag {
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.65rem;
+  color: #d4a06a;
+  letter-spacing: 4px;
+  margin-bottom: 16px;
+}
+.hero-content h1 {
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+.hero-content .subtitle {
+  font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+  color: #888;
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 500px;
+}
+.hero-content .meta-line {
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.6rem;
+  color: #555;
+  margin-top: 24px;
+  letter-spacing: 1px;
+}
+
+/* ===== CREDITS ===== */
+.credits {
+  padding: 120px 24px 80px;
+  text-align: center;
+}
+.credits .credit-logo {
+  font-size: 0.65rem;
+  letter-spacing: 6px;
+  color: #555;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.credits .credit-team {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.credits .credit-year {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 40px;
+}
+.credits .credit-line {
+  font-size: 0.75rem;
+  color: #444;
+  line-height: 2;
+}
+
+/* ===== FADE-IN ANIMATION ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-in-delay-1 { transition-delay: 0.15s; }
+.fade-in-delay-2 { transition-delay: 0.3s; }
+.fade-in-delay-3 { transition-delay: 0.45s; }
+
+/* ===== IMAGE CAPTION ===== */
+.img-caption {
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.6rem;
+  color: #444;
+  text-align: right;
+  padding: 8px 12px 0;
+  letter-spacing: 1px;
+}
+
+/* ===== SEPARATOR ===== */
+.sep {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 80px 0;
+}
+.sep .dot { width: 3px; height: 3px; background: #d4a06a; border-radius: 50%; }
+.sep .line-h { width: 40px; height: 1px; background: #333; }
+
+/* ===== MAP IMAGE ===== */
+.map-wrap {
+  max-width: 600px;
+  margin: 40px auto;
+  position: relative;
+}
+.map-wrap img {
+  width: 100%;
+  filter: brightness(0.9) contrast(1.05);
+  border: 1px solid #222;
+}
+
+/* ===== TIMELINE ===== */
+.timeline {
+  position: relative;
+  padding: 40px 0;
+  margin: 48px 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: #333;
+}
+.timeline-item {
+  position: relative;
+  padding: 0 0 40px 52px;
+}
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 16px; top: 6px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: #d4a06a;
+}
+.timeline-item .t-time {
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.7rem;
+  color: #d4a06a;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.timeline-item .t-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.timeline-item .t-desc {
+  font-size: 0.9rem;
+  color: #888;
+  line-height: 1.8;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .title-card { min-height: 80vh; }
+  .stat-card { min-height: 60vh; }
+  .transcript-entry { flex-direction: column; gap: 8px; }
+  .transcript-meta {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 0 20px;
+  }
+  .transcript-dialogue {
+    border-left: none;
+    border-top: 1px solid #222;
+    padding: 16px 20px 0;
+  }
+  .data-grid { grid-template-columns: repeat(2, 1fr); }
+  .solution-block { padding: 32px 20px; }
+  .content { padding: 0 20px; }
+  .scene { padding: 60px 0; }
+  .letterbox { aspect-ratio: 16/9; }
+}
+
+@media (max-width: 480px) {
+  .data-grid { grid-template-columns: 1fr; }
+  .hero-content h1 { font-size: 2.2rem; }
+  .title-card .chapter-title { font-size: 2rem; }
+}
+
+
+
+/* Base: warm muted tone for all images */
+img { transition: filter 0.4s; }
+
+/* Hero/parallax: full size, no restrictions */
+.hero img, .hero-img, [class*="hero"] img,
+.parallax-section img, .parallax-section,
+[class*="parallax"] img {
+  max-height: none !important;
+  object-fit: cover;
+}
+
+/* Infographics/charts/diagrams: natural size, no crop */
+img[src*="map"], img[src*="chart"], img[src*="timeline"],
+img[src*="img_00"], img[src*="img_08.jpg"],
+.data-card img, .chart-figure img, .survey-info img,
+.viz img, .data-panel img {
+  max-height: none !important;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Inline photos: comfortable size */
+
+
+/* Photo pairs/grids: square-ish, moderate */
+
+
+/* Gallery/grid: square crop */
+.epilogue-gallery img, .photo-grid img, .photo-grid-3 img,
+.triple-grid img {
+  max-height: 300px;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+/* Filmstrip horizontal gallery */
+[class*="filmstrip"] img, [class*="horizontal"] img {
+  max-height: none !important;
+  height: 280px;
+  object-fit: cover;
+}
+
+/* Subtle overlay for depth */
+.bleed-photo, .photo-essay, .img-block, .full-image {
+  position: relative;
+}
+
+
+
+
+
+
+
+/* === MINIMAL IMAGE RULES === */
+.epilogue-gallery img, .photo-grid img, .photo-grid-3 img, .triple-grid img {
+  aspect-ratio: 1; object-fit: cover;
+}
+.text-highlight {
+  font-size: 1.5em; font-weight: 700; line-height: 1.5;
+  text-align: center; padding: 48px 24px; margin: 48px 0;
+  max-width: 680px; margin-left: auto; margin-right: auto;
+  border-top: 2px solid currentColor; border-bottom: 2px solid currentColor;
+}
+.text-break {
+  font-size: 1.25em; font-weight: 500; line-height: 1.7;
+  text-align: center; padding: 40px 24px; margin: 40px auto;
+  max-width: 600px; font-style: italic;
+}
+
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div id="progress-bar"></div>
+
+<!-- ============================================ -->
+<!-- HERO -->
+<!-- ============================================ -->
+<section class="hero">
+  <img src="../images/img_00.png" alt="팀원들이 할머니와 실버카를 끌고 마을길을 걷는 모습">
+  <div class="hero-content">
+    <div class="tag mono">SK SUNNY &middot; TEAM 의구심 &middot; 2025</div>
+    <h1>공유실버카<br>구르미</h1>
+    <p class="subtitle">버스에서 사라지는 실버카, 그 75분의 공백을 기록하다</p>
+    <p class="meta-line mono">UISEONG, GYEONGBUK &middot; JUNE&ndash;AUGUST 2025 &middot; 87 INTERVIEWS</p>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- CHAPTER 1: 의성에 도착하다 -->
+<!-- ============================================ -->
+<section class="title-card" id="ch1">
+  <div class="fade-in">
+    <p class="chapter-num mono">CHAPTER 01</p>
+    <h2 class="chapter-title">의성에<br>도착하다</h2>
+    <div class="divider-line"></div>
+    <p class="chapter-sub">팀 의구심, 정자 할머니를 만나다</p>
+  </div>
+</section>
+
+<!-- SCENE 1-1: 팀 의구심 소개 -->
+<section class="scene">
+  <div class="content">
+    <div class="scene-header fade-in">
+      <span class="scene-code mono">SC. 1-1</span>
+      <span class="scene-title">팀 의구심</span>
+      <span class="line"></span>
+    </div>
+    <p class="body-text fade-in">2025년 여름, 네 명의 대학생이 의성에 도착했다. 팀 이름은 '의구심' &mdash; 의성 구석구석을 탐구하는 마음이라는 뜻이다. SK SUNNY 프로그램의 일환으로 의성 어르신들의 이동권 문제를 탐색하기 위해 모인 이들은, 인터넷 검색으로는 절대 찾을 수 없는 '현장의 진짜 문제'를 찾겠다는 각오로 의성 생활을 시작했다.</p>
+    <p class="body-text fade-in">처음엔 모든 것이 낯설었다. 사투리를 알아듣기 어려웠고, 어디를 가야 어르신을 만날 수 있는지도 몰랐다. 보건소, 우체국, 마트, 시장, 병원, 복지관 &mdash; 어르신이 계실 것 같은 곳이라면 가리지 않고 돌아다녔다. 오전 시간대에 집중적으로 현장을 누비며, 대화와 관찰을 반복했다. 3주쯤 지나자 사투리에 귀가 트이고, 어르신과 눈을 맞추며 이야기를 나누는 것이 자연스러워졌다.</p>
+  </div>
+</section>
+
+<div class="sep"><span class="line-h"></span><span class="dot"></span><span class="line-h"></span></div>
+
+<!-- SCENE 1-2: 정자 할머니 만남 -->
+<section class="scene">
+  <div class="content">
+    <div class="scene-header fade-in">
+      <span class="scene-code mono">SC. 1-2</span>
+      <span class="scene-title">정자 할머니와의 만남</span>
+      <span class="line"></span>
+    </div>
+    <p class="body-text fade-in">의성 읍내 버스정류장에서 실버카를 두고 버스에 오르는 할머니를 처음 목격한 것은 현장 조사 2주차쯤이었다. 실버카 &mdash; 어르신들이 보행을 보조하기 위해 사용하는 바퀴 달린 보행 보조기 &mdash; 는 의성 어디서나 볼 수 있었다. 마을 어귀에서, 시장 입구에서, 병원 앞에서. 하지만 버스정류장에 줄지어 '버려진' 실버카들은 팀원 모두의 시선을 잡아끌었다.</p>
+    <p class="body-text fade-in">정자 할머니를 만난 것은 그즈음이었다. 팔순을 넘긴 정자 할머니는 실버카 없이는 외출이 어려운 분이었다. 지팡이만으로는 걸음이 불안정하고, 장을 보고 온 짐을 들 힘도 없었다. 실버카가 있어야 시장도 가고, 병원도 가고, 이웃집에도 갈 수 있었다.</p>
+  </div>
+
+  <div class="letterbox fade-in" style="margin: 48px auto;">
+    <img src="../images/img_03.jpg" alt="장날 버스에 탑승하려는 어르신들" style="filter:sepia(0.08) saturate(0.85) brightness(0.93);">
+  </div>
+  <div class="content">
+    <p class="img-caption mono">UISEONG BUS STOP &middot; MARKET DAY</p>
+  </div>
+
+  <div class="content" style="margin-top: 48px;">
+    <div class="film-quote fade-in">
+      <p class="quote-text">"이거 없으면 이동 못하지"</p>
+      <p class="quote-attr">&mdash; 정자 할머니</p>
+    </div>
+    <p class="body-text fade-in">정자 할머니에게 실버카는 단순한 보행 보조기가 아니었다. 그것은 바깥세상과 연결되는 유일한 수단이었다. 실버카가 없으면 집 앞 마당을 벗어나기 어렵고, 실버카가 있으면 읍내까지 나갈 수 있었다. 실버카는 정자 할머니의 '다리'였다.</p>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- CHAPTER 2: 실버카의 일상 -->
+<!-- ============================================ -->
+<section class="title-card" id="ch2">
+  <div class="fade-in">
+    <p class="chapter-num mono">CHAPTER 02</p>
+    <h2 class="chapter-title">실버카의<br>일상</h2>
+    <div class="divider-line"></div>
+    <p class="chapter-sub">의성 어르신들의 이동과 실버카</p>
+  </div>
+</section>
+
+<!-- SCENE 2-1: 의성 일상과 실버카 -->
+<section class="scene">
+  <div class="content">
+    <div class="scene-header fade-in">
+      <span class="scene-code mono">SC. 2-1</span>
+      <span class="scene-title">의성의 일상과 실버카</span>
+      <span class="line"></span>
+    </div>
+    <p class="body-text fade-in">의성 읍내를 걷다 보면 실버카는 어디에나 있었다. 마을회관 앞, 병원 대기실, 시장 골목, 경로당 입구. 어르신들은 실버카에 기대어 걷고, 실버카 위에 장바구니를 올리고, 실버카 손잡이에 비닐봉지를 걸고 다녔다. 실버카는 보행 보조기이자 짐 운반 수단이자, 잠깐 쉴 수 있는 간이 의자이기도 했다.</p>
+  </div>
+
+  <div class="letterbox fade-in" style="margin: 48px auto;">
+    <img style="max-height:50vh;width:auto;margin:0 auto;display:block;filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_11.jpg" alt="정류장 실버카 주차 모습">
+  </div>
+  <div class="content">
+    <p class="img-caption mono">SILVER CAR PARKING &middot; BUS STOP</p>
+  </div>
+
+  <div class="content" style="margin-top: 48px;">
+    <div class="transcript-block fade-in">
+      <div class="transcript-entry">
+        <div class="transcript-meta">
+          <span class="code mono">INT-01</span>
+          <span class="speaker">마을 어르신</span>
+        </div>
+        <div class="transcript-dialogue">
+          "<em>할매들은 다 저거(실버카) 끌고 다니지</em>"
+        </div>
+      </div>
+    </div>
+    <p class="body-text fade-in">87명의 어르신을 인터뷰하면서 알게 된 것은, 실버카가 의성 어르신들의 일상에서 떼어낼 수 없는 존재라는 사실이었다. 특히 혼자 사는 여성 어르신들에게 실버카는 유일한 이동 수단이었다. 가족이 곁에 없고, 운전면허가 없고, 대중교통이 드문 시골 마을에서 실버카 하나가 바깥세상과 이어주는 다리 역할을 하고 있었다.</p>
+  </div>
+</section>
+
+<div class="sep"><span class="line-h"></span><span class="dot"></span><span class="line-h"></span></div>
+
+<!-- SCENE 2-2: 실버카 vs 지팡이 -->
+<section class="scene">
+  <div class="content">
+    <div class="scene-header fade-in">
+      <span class="scene-code mono">SC. 2-2</span>
+      <span class="scene-title">실버카 vs 지팡이</span>
+      <span class="line"></span>
+    </div>
+    <p class="body-text fade-in">인터뷰를 거듭하면서 실버카와 지팡이의 차이가 선명하게 드러났다. 지팡이는 한 손으로 짚어야 하기 때문에 체중이 한쪽으로 쏠리고, 오래 걸으면 허리와 종아리에 통증이 왔다. 반면 실버카는 양손으로 잡고 체중을 분산시킬 수 있어 훨씬 안정적이었다. 무엇보다, 지팡이로는 장바구니를 들고 이동하는 것이 불가능했다.</p>
+  </div>
+
+  <div class="content">
+    <div class="transcript-block fade-in">
+      <div class="transcript-entry">
+        <div class="transcript-meta">
+          <span class="code mono">INT-02</span>
+          <span class="speaker">어르신 A</span>
+        </div>
+        <div class="transcript-dialogue">
+          "<em>지팡이 쓸 때는 허리, 종아리 다 아픈데, 확실히 들 아퍼</em>"
+        </div>
+      </div>
+      <div class="transcript-entry">
+        <div class="transcript-meta">
+          <span class="code mono">INT-03</span>
+          <span class="speaker">어르신 B</span>
+        </div>
+        <div class="transcript-dialogue">
+          "<em>실버카 있으면 훨씬 편하지</em>. 짐도 실을 수 있고, 힘들면 앉을 수도 있고."
+        </div>
+      </div>
+    </div>
+    <p class="body-text fade-in">실버카는 단순한 보행 보조기를 넘어서, 어르신들의 행동 반경 자체를 결정하는 장비였다. 실버카가 있으면 시장까지 갈 수 있고, 없으면 집 앞 마당에 머물러야 했다. 실버카의 유무가 곧 '바깥 활동이 가능한가, 불가능한가'를 결정하고 있었다.</p>
+  </div>
+</section>
+
+<div class="sep"><span class="line-h"></span><span class="dot"></span><span class="line-h"></span></div>
+
+<!-- SCENE 2-3: 정자 할머니 외출 동행 -->
+<section class="scene">
+  <div class="content">
+    <div class="scene-header fade-in">
+      <span class="scene-code mono">SC. 2-3</span>
+      <span class="scene-title">정자 할머니의 외출</span>
+      <span class="line"></span>
+    </div>
+    <p class="body-text fade-in">팀 의구심은 정자 할머니의 외출을 직접 동행하며 관찰했다. 아침 일찍 집을 나서 실버카를 끌고 정류장까지 걸어가는 데만 20분이 넘게 걸렸다. 중간중간 실버카 좌석에 앉아 쉬어야 했다. 정류장에 도착하면 버스를 기다렸다.</p>
+  </div>
+
+  <div class="content">
+    <div class="film-quote fade-in">
+      <p class="quote-text">"힘들어서 여기서 쉬었다 가야해"</p>
+      <p class="quote-attr">&mdash; 정자 할머니, 마을길 중간에서</p>
+    </div>
+  </div>
+
+  <div class="content">
+    <p class="body-text fade-in">문제는 버스에 탈 때 벌어졌다. 실버카를 버스에 실을 수 없었다. 버스 계단은 높고, 실버카는 무거웠다. 기사님이 도와주실 때도 있었지만, 대부분의 경우 실버카를 정류장에 두고 빈몸으로 버스에 올라야 했다.</p>
+  </div>
+
+  <div class="letterbox fade-in" style="margin: 48px auto;">
+    <img src="../images/img_10.jpg" alt="버스 장면" style="filter:sepia(0.08) saturate(0.85) brightness(0.93);">
+  </div>
+  <div class="content">
+    <p class="img-caption mono">BUS BOARDING &middot; UISEONG</p>
+  </div>
+
+  <div class="content" style="margin-top: 48px;">
+    <div class="film-quote fade-in">
+      <p class="quote-text">"무거워서 내가 못 드니께 여기다 두는 거여"</p>
+      <p class="quote-attr">&mdash; 정자 할머니</p>
+    </div>
+    <p class="body-text fade-in">정자 할머니는 읍내에 도착하면 실버카 없이 걸어야 했다. 지팡이만 짚거나, 아예 아무것도 없이 벽을 짚으며 걸었다. 시장에서 장을 보고, 병원에 들르고, 다시 버스를 타고 돌아와 정류장에 세워둔 실버카를 찾아 집까지 걸었다. 그 사이, 실버카 없는 시간 동안 정자 할머니의 걸음은 눈에 띄게 불안정했다.</p>
+  </div>
+
+  <div class="content">
+    <div class="transcript-block fade-in">
+      <div class="transcript-entry">
+        <div class="transcript-meta">
+          <span class="code mono">INT-04</span>
+          <span class="speaker">정자 할머니</span>
+        </div>
+        <div class="transcript-dialogue">
+          "<em>아이고 힘들다, 허리고 어깨고 다 쑤신다</em>"
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- CHAPTER 3: 버스에서 사라지는 실버카 -->
+<!-- ============================================ -->
+<section class="title-card" id="ch3">
+  <div class="fade-in">
+    <p class="chapter-num mono">CHAPTER 03</p>
+    <h2 class="chapter-title">버스에서<br>사라지는 실버카</h2>
+    <div class="divider-line"></div>
+    <p class="chapter-sub">75분의 공백, 그 시간 동안 무엇이 일어나는가</p>
+  </div>
+</section>
+
+<!-- STAT: 75분 -->
+<section class="stat-card fade-in">
+  <p class="stat-number">75</p>
+  <p class="stat-unit">분</p>
+  <p class="stat-label">버스에 실버카를 두고 내린 뒤<br>다시 실버카를 잡기까지의 평균 시간</p>
+  <p class="stat-sub mono">SILVER CAR ABSENCE &middot; AVERAGE GAP TIME</p>
+</section>
+
+<!-- SCENE 3-1: 실버카 공백구간 -->
+<section class="scene">
+  <div class="content">
+    <div class="scene-header fade-in">
+      <span class="scene-code mono">SC. 3-1</span>
+      <span class="scene-title">실버카 공백구간</span>
+      <span class="line"></span>
+    </div>
+    <p class="body-text fade-in">팀 의구심은 이 현상에 '실버카 공백구간'이라는 이름을 붙였다. 어르신이 버스를 타기 위해 실버카를 정류장에 두는 순간부터, 목적지에서 용무를 마치고 다시 실버카를 잡는 순간까지 &mdash; 이 시간 동안 어르신은 보행 보조 없이 이동해야 했다. 평균 75분. 이 시간은 단순한 불편이 아니었다. 낙상 위험이 급격히 높아지는 시간이었다.</p>
+  </div>
+
+  <div class="widescreen fade-in" style="margin: 48px auto;">
+    <img style="width:100%;height:auto;filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_08.jpg" alt="75분 실버카 공백구간 타임라인 인포그래픽">
+  </div>
+  <div class="content">
+    <p class="img-caption mono">75-MINUTE GAP TIMELINE &middot; INFOGRAPHIC</p>
+  </div>
+
+  <div class="content" style="margin-top: 48px;">
+    <p class="body-text fade-in">공백구간의 구조는 이랬다. 집에서 정류장까지는 실버카를 끌고 갈 수 있다. 하지만 버스에 타는 순간 실버카를 두고 가야 한다. 읍내에 도착하면 맨몸이다. 시장을 걷고, 병원을 가고, 마트에서 장을 볼 때 &mdash; 가장 활발하게 이동해야 하는 그 시간에 보행 보조가 사라진다. 돌아올 때도 마찬가지다. 버스에서 내려 정류장에 세워둔 실버카를 찾기까지, 다시 맨몸으로 걸어야 한다.</p>
+  </div>
+</section>
+
+<div class="sep"><span class="line-h"></span><span class="dot"></span><span class="line-h"></span></div>
+
+<!-- SCENE 3-2: 의존층 -->
+<section class="scene">
+  <div class="content">
+    <div class="scene-header fade-in">
+      <span class="scene-code mono">SC. 3-2</span>
+      <span class="scene-title">의존층 &mdash; 실버카에 의존하는 어르신들</span>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- STAT: 87명 -->
+  <div class="stat-card fade-in" style="min-height: 40vh;">
+    <p class="stat-number">87</p>
+    <p class="stat-unit">명</p>
+    <p class="stat-label">팀 의구심이 인터뷰한 의성 어르신 수</p>
+    <p class="stat-sub mono">TOTAL INTERVIEWS</p>
+  </div>
+
+  <div class="content">
+    <div class="data-grid fade-in">
+      <div class="data-cell">
+        <div class="val">87<span style="font-size: 0.6em; color: #d4a06a;">명</span></div>
+        <div class="lbl">총 인터뷰 대상</div>
+      </div>
+      <div class="data-cell">
+        <div class="val">51<span style="font-size: 0.6em; color: #d4a06a;">명</span></div>
+        <div class="lbl">실버카 이용자</div>
+      </div>
+      <div class="data-cell">
+        <div class="val">46<span style="font-size: 0.6em; color: #d4a06a;">명</span></div>
+        <div class="lbl">실버카에 의존</div>
+      </div>
+      <div class="data-cell">
+        <div class="val">90.2<span style="font-size: 0.6em; color: #d4a06a;">%</span></div>
+        <div class="lbl">실버카 의존율</div>
+      </div>
+    </div>
+    <p class="body-text fade-in" style="margin-top: 32px;">87명의 어르신을 인터뷰한 결과, 51명이 실버카를 사용하고 있었다. 그 중 46명, 즉 90.2%가 실버카 없이는 외출이 어렵다고 답했다. 이 46명을 팀 의구심은 <strong style="color: #d4a06a; font-weight: 500;">'의존층'</strong>이라고 불렀다. 실버카에 의존해야만 이동이 가능한 어르신들. 이들에게 실버카 공백구간은 단순한 불편이 아니라, 이동 자체의 단절이었다.</p>
+  </div>
+</section>
+
+<div class="sep"><span class="line-h"></span><span class="dot"></span><span class="line-h"></span></div>
+
+<!-- SCENE 3-3: 장날 핵심 -->
+<section class="scene">
+  <div class="content">
+    <div class="scene-header fade-in">
+      <span class="scene-code mono">SC. 3-3</span>
+      <span class="scene-title">장날</span>
+      <span class="line"></span>
+    </div>
+    <p class="body-text fade-in">의성의 장날은 5일마다 돌아온다. 장날에는 어르신들이 읍내로 나와 장을 보고, 이웃을 만나고, 병원에 들른다. 장날은 단순한 쇼핑이 아니라 어르신들의 사회적 생활 자체였다. 일주일에 한두 번, 집 밖으로 나갈 수 있는 거의 유일한 기회였다.</p>
+    <p class="body-text fade-in">그런데 장날이야말로 실버카 공백구간 문제가 가장 심각해지는 날이었다. 시장 안은 사람이 많고 바닥이 고르지 않았다. 짐은 무겁고, 걸어야 할 거리는 멀었다. 실버카가 있어야 하는 그 순간에, 실버카는 마을 정류장에 남겨져 있었다.</p>
+  </div>
+
+  <div class="letterbox fade-in" style="margin: 48px auto;">
+    <img src="../images/img_14.png" alt="버스 내부 짐칸" style="filter:sepia(0.08) saturate(0.85) brightness(0.93);">
+  </div>
+  <div class="content">
+    <p class="img-caption mono">BUS INTERIOR &middot; NO SPACE FOR SILVER CAR</p>
+  </div>
+</section>
+
+<div class="sep"><span class="line-h"></span><span class="dot"></span><span class="line-h"></span></div>
+
+<!-- SCENE 3-4: 저상버스 한계 -->
+<section class="scene">
+  <div class="content">
+    <div class="scene-header fade-in">
+      <span class="scene-code mono">SC. 3-4</span>
+      <span class="scene-title">저상버스의 한계</span>
+      <span class="line"></span>
+    </div>
+    <p class="body-text fade-in">도시에서는 저상버스가 이동 약자 문제의 해법으로 자주 언급된다. 바닥이 낮아 휠체어나 유모차가 탈 수 있고, 경사판이 펼쳐져 나온다. 하지만 의성 현실에서 저상버스는 답이 될 수 없었다.</p>
+    <p class="body-text fade-in">의성의 시내버스 대부분은 계단이 있는 일반 버스였다. 저상버스가 일부 도입되어 있었지만, 운행 노선과 빈도가 제한적이었다. 무엇보다 근본적인 문제가 있었다. 저상버스라 하더라도 실버카를 싣고 내리는 것은 쉽지 않았다. 실버카는 접히지 않는 구조가 대부분이고, 버스 안 공간도 비좁았다. 기사님의 도움 없이는 불가능했고, 혼잡한 장날에는 기사님도 여유가 없었다.</p>
+  </div>
+
+  <div class="content">
+    <div class="transcript-block fade-in">
+      <div class="transcript-entry">
+        <div class="transcript-meta">
+          <span class="code mono">INT-05</span>
+          <span class="speaker">어르신 C</span>
+        </div>
+        <div class="transcript-dialogue">
+          "<em>원래 같았으면 이 차를 못 타지</em>. 실버카 가지고는 올라갈 수가 없어."
+        </div>
+      </div>
+    </div>
+    <p class="body-text fade-in">결국 어르신들은 스스로 선택을 내려야 했다. 실버카를 가지고 가되 버스를 포기하거나, 버스를 타되 실버카를 두고 가거나. 두 가지 모두 포기해야 하는 것이 있었다. 이동의 자유와 신체의 안전, 그 사이에서 어르신들은 매번 타협하고 있었다.</p>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- CHAPTER 4: 두 번의 실패 -->
+<!-- ============================================ -->
+<section class="title-card" id="ch4">
+  <div class="fade-in">
+    <p class="chapter-num mono">CHAPTER 04</p>
+    <h2 class="chapter-title">두 번의<br>실패</h2>
+    <div class="divider-line"></div>
+    <p class="chapter-sub">솔루션을 찾아 헤매다</p>
+  </div>
+</section>
+
+<!-- SCENE 4-1: 솔루션 시도 1 -->
+<section class="scene">
+  <div class="content">
+    <div class="scene-header fade-in">
+      <span class="scene-code mono">SC. 4-1</span>
+      <span class="scene-title">시도 1 &mdash; 버스에 실버카를 싣자</span>
+      <span class="line"></span>
+    </div>
+    <p class="body-text fade-in">첫 번째 시도는 단순했다. 버스에 실버카를 실을 수 있도록 만들면 되지 않을까? 버스 짐칸을 개조하거나, 접이식 실버카를 보급하거나, 버스 뒤편에 거치대를 설치하는 방안을 검토했다.</p>
+  </div>
+
+  <div class="content">
+    <div class="solution-block fade-in" data-phase="ATTEMPT 01">
+      <div class="sol-title">버스 내부 실버카 적재 방안</div>
+      <div class="sol-desc">버스 짐칸 개조, 접이식 실버카 보급, 외부 거치대 설치 등 물리적으로 버스에 실버카를 함께 태우는 방안을 탐색했다.</div>
+      <div class="sol-result fail">결과: 버스 회사의 구조 개조는 비용과 규제 문제로 현실성이 낮았다. 접이식 실버카는 기존 실버카 대비 무겁고, 접는 동작 자체가 어르신에게 어려웠다. 버스 외부 거치대는 농어촌 좁은 도로 환경에서 안전 문제가 있었다. 모든 방안이 '버스'를 바꾸는 것이었는데, 버스는 팀 의구심이 바꿀 수 있는 대상이 아니었다.</div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"><span class="line-h"></span><span class="dot"></span><span class="line-h"></span></div>
+
+<!-- SCENE 4-2: 솔루션 시도 2 -->
+<section class="scene">
+  <div class="content">
+    <div class="scene-header fade-in">
+      <span class="scene-code mono">SC. 4-2</span>
+      <span class="scene-title">시도 2 &mdash; 초경량 실버카를 만들자</span>
+      <span class="line"></span>
+    </div>
+    <p class="body-text fade-in">두 번째 시도는 실버카 자체를 가볍게 만드는 것이었다. 어르신이 직접 들어서 버스에 실을 수 있을 만큼 가벼운 실버카를 만들면 문제가 해결되지 않을까?</p>
+  </div>
+
+  <div class="letterbox fade-in" style="margin: 48px auto;">
+    <img style="max-height:50vh;width:auto;margin:0 auto;display:block;filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_15.jpg" alt="초경량 실버카 제품">
+  </div>
+  <div class="content">
+    <p class="img-caption mono">LIGHTWEIGHT SILVER CAR &middot; PROTOTYPE RESEARCH</p>
+  </div>
+
+  <div class="content" style="margin-top: 48px;">
+    <div class="solution-block fade-in" data-phase="ATTEMPT 02">
+      <div class="sol-title">초경량 실버카 개발</div>
+      <div class="sol-desc">기존 실버카의 무게를 절반 이하로 줄여 어르신이 직접 들고 버스에 탈 수 있도록 하는 방안을 검토했다.</div>
+      <div class="sol-result fail">결과: 이미 시중에 초경량 실버카 제품이 존재했지만, 가격이 비싸고(30~50만 원대), 가벼운 만큼 안정성이 떨어졌다. 더 근본적인 문제는 &mdash; 아무리 가벼워도 어르신이 실버카를 들고 버스 계단을 오르는 것 자체가 위험하다는 점이었다. 한 손에 실버카, 한 손에 손잡이를 잡고 계단을 오르는 것은 젊은 사람에게도 쉽지 않은 동작이었다.</div>
+    </div>
+    <p class="body-text fade-in">두 번의 시도가 모두 실패했다. 팀 의구심은 막다른 골목에 서 있었다.</p>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- CHAPTER 5: 관점 전환 -->
+<!-- ============================================ -->
+<section class="title-card" id="ch5">
+  <div class="fade-in">
+    <p class="chapter-num mono">CHAPTER 05</p>
+    <h2 class="chapter-title">관점의<br>전환</h2>
+    <div class="divider-line"></div>
+    <p class="chapter-sub">실버카를 버스에 태울 것인가,<br>실버카를 목적지에 둘 것인가</p>
+  </div>
+</section>
+
+<!-- SCENE 5-1: 관점 전환 -->
+<section class="scene">
+  <div class="content">
+    <div class="scene-header fade-in">
+      <span class="scene-code mono">SC. 5-1</span>
+      <span class="scene-title">이동의 자율성</span>
+      <span class="line"></span>
+    </div>
+    <p class="body-text fade-in">두 번의 실패 이후, 팀 의구심은 문제를 다시 들여다보았다. 지금까지의 접근은 모두 같은 전제 위에 서 있었다. <strong style="color: #d4a06a; font-weight: 500;">'실버카를 버스에 태워야 한다'</strong>는 전제. 하지만 이 전제 자체가 틀린 것은 아닐까?</p>
+    <p class="body-text fade-in">어르신에게 필요한 것은 '자기 실버카를 버스에 싣는 것'이 아니었다. 필요한 것은 <strong style="color: #d4a06a; font-weight: 500;">'목적지에서도 실버카를 쓸 수 있는 것'</strong>이었다. 핵심은 '나의 실버카'가 아니라 '실버카의 기능'이었다. 출발지에서 실버카를 쓰다가, 버스를 타고, 도착지에서 다시 실버카를 쓸 수 있으면 된다. 그 실버카가 내 것일 필요는 없다.</p>
+    <p class="body-text fade-in">이 깨달음이 모든 것을 바꿨다. 실버카를 옮기는 것이 아니라, <strong style="color: #d4a06a; font-weight: 500;">실버카를 필요한 곳에 미리 두는 것</strong>. 출발지에도 실버카가 있고, 목적지에도 실버카가 있으면 &mdash; 공백구간은 사라진다.</p>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- CHAPTER 6: 공유실버카 구르미 -->
+<!-- ============================================ -->
+<section class="title-card" id="ch6">
+  <div class="fade-in">
+    <p class="chapter-num mono">CHAPTER 06</p>
+    <h2 class="chapter-title">공유실버카<br>구르미</h2>
+    <div class="divider-line"></div>
+    <p class="chapter-sub">구름처럼 어디에나 있는 실버카</p>
+  </div>
+</section>
+
+<!-- SCENE 6-1: 구르미 소개 -->
+<section class="scene">
+  <div class="content">
+    <div class="scene-header fade-in">
+      <span class="scene-code mono">SC. 6-1</span>
+      <span class="scene-title">구르미 &mdash; 공유실버카 서비스</span>
+      <span class="line"></span>
+    </div>
+    <p class="body-text fade-in">'구르미'는 '구름'의 의성 사투리에서 따온 이름이다. 구름처럼 어디에나 있고, 필요할 때 자연스럽게 쓸 수 있는 실버카. 이것이 팀 의구심이 설계한 공유실버카 서비스의 핵심 컨셉이었다.</p>
+    <p class="body-text fade-in">구르미의 작동 방식은 간단했다. 어르신들이 자주 방문하는 장소 &mdash; 시장 입구, 버스정류장, 병원 앞, 마트 근처 &mdash; 에 공유 실버카를 배치한다. 어르신은 집에서 자기 실버카를 끌고 정류장까지 간다. 정류장에 자기 실버카를 세워두고 버스에 탄다. 읍내에 도착하면 대여소에서 구르미를 빌려서 쓴다. 용무를 마치면 구르미를 반납하고 다시 버스를 탄다. 마을 정류장에서 내려 자기 실버카를 찾아 집으로 돌아간다.</p>
+  </div>
+
+  <div class="letterbox fade-in" style="margin: 48px auto;">
+    <img src="../images/img_16.jpg" alt="공유실버카 구르미 대여소 — 남부농협 앞" style="filter:sepia(0.08) saturate(0.85) brightness(0.93);">
+  </div>
+  <div class="content">
+    <p class="img-caption mono">GURUMI STATION &middot; NAMBU NONGHYUP</p>
+  </div>
+
+  <div class="content" style="margin-top: 48px;">
+    <p class="body-text fade-in">75분의 공백구간이 사라진다. 출발지에서도, 목적지에서도, 어르신의 손에는 항상 실버카가 있다. '내 실버카'에서 '우리 실버카'로 &mdash; 소유에서 접근으로의 전환이었다.</p>
+  </div>
+</section>
+
+<div class="sep"><span class="line-h"></span><span class="dot"></span><span class="line-h"></span></div>
+
+<!-- SCENE 6-2: 시범운영 -->
+<section class="scene">
+  <div class="content">
+    <div class="scene-header fade-in">
+      <span class="scene-code mono">SC. 6-2</span>
+      <span class="scene-title">시범운영</span>
+      <span class="line"></span>
+    </div>
+    <p class="body-text fade-in">팀 의구심은 의성 읍내에서 구르미 시범운영을 실시했다. 남부농협 앞에 공유실버카 5대를 배치하고, 어르신들이 자유롭게 빌려 쓸 수 있도록 했다. 별도의 앱이나 복잡한 절차 없이, 대여소에서 실버카를 가져가고 돌아올 때 반납하는 단순한 방식이었다.</p>
+  </div>
+
+  <div class="letterbox fade-in" style="margin: 48px auto;">
+    <img style="max-height:50vh;width:auto;margin:0 auto;display:block;filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_18.jpg" alt="구르미 시범운영 현장">
+  </div>
+  <div class="content">
+    <p class="img-caption mono">GURUMI PILOT &middot; FIELD OPERATION</p>
+  </div>
+
+  <div class="content" style="margin-top: 48px;">
+    <p class="body-text fade-in">시범운영 기간 동안 팀원들은 대여소 근처에서 어르신들의 이용 패턴을 관찰했다. 처음에는 낯설어하시던 어르신들도 한두 번 사용해보시더니 금세 익숙해지셨다. 특히 장날에는 아침 일찍부터 구르미를 찾는 어르신이 줄을 섰다.</p>
+  </div>
+
+  <div class="letterbox fade-in" style="margin: 48px auto;">
+    <img src="../images/img_21.png" alt="시범운영 현장 사진" style="filter:sepia(0.08) saturate(0.85) brightness(0.93);">
+  </div>
+  <div class="content">
+    <p class="img-caption mono">PILOT OPERATION &middot; MARKET DAY</p>
+  </div>
+</section>
+
+<div class="sep"><span class="line-h"></span><span class="dot"></span><span class="line-h"></span></div>
+
+<!-- SCENE 6-3: 결과 -->
+<section class="scene">
+  <div class="content">
+    <div class="scene-header fade-in">
+      <span class="scene-code mono">SC. 6-3</span>
+      <span class="scene-title">결과</span>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- STAT: 93% -->
+  <section class="stat-card fade-in" style="min-height: 50vh;">
+    <p class="stat-number">93<span style="font-size: 0.4em; color: #d4a06a;">%</span></p>
+    <p class="stat-unit">만족도</p>
+    <p class="stat-label">구르미를 사용한 어르신들의<br>서비스 만족 비율</p>
+  </section>
+
+  <div class="content">
+    <div class="data-grid fade-in">
+      <div class="data-cell">
+        <div class="val">93<span style="font-size: 0.6em; color: #d4a06a;">%</span></div>
+        <div class="lbl">서비스 만족도</div>
+      </div>
+      <div class="data-cell">
+        <div class="val">100<span style="font-size: 0.6em; color: #d4a06a;">%</span></div>
+        <div class="lbl">재이용 의향</div>
+      </div>
+      <div class="data-cell">
+        <div class="val">43<span style="font-size: 0.6em; color: #d4a06a;">분</span></div>
+        <div class="lbl">공백구간 단축</div>
+      </div>
+      <div class="data-cell">
+        <div class="val">1,440<span style="font-size: 0.6em; color: #d4a06a;">회</span></div>
+        <div class="lbl">연간 예상 이용 횟수</div>
+      </div>
+    </div>
+    <p class="body-text fade-in" style="margin-top: 32px;">결과는 놀라웠다. 구르미를 사용한 어르신 중 93%가 만족한다고 답했고, 100% &mdash; 단 한 분의 예외도 없이 &mdash; 다시 사용하겠다고 답했다. 공백구간은 평균 75분에서 43분 단축되었다. 단순히 '편해졌다'가 아니었다. 어르신들의 행동 반경 자체가 달라졌다.</p>
+  </div>
+
+  <div class="content" style="margin-top: 48px;">
+    <div class="transcript-block fade-in">
+      <div class="transcript-entry">
+        <div class="transcript-meta">
+          <span class="code mono">INT-06</span>
+          <span class="speaker">이용 어르신</span>
+        </div>
+        <div class="transcript-dialogue">
+          "<em>덕분에 원래 사려던 것보다 훨씬 많이 샀어</em>. 실버카가 있으니까 짐도 실을 수 있고, 더 많이 돌아다닐 수 있으니까."
+        </div>
+      </div>
+      <div class="transcript-entry">
+        <div class="transcript-meta">
+          <span class="code mono">INT-07</span>
+          <span class="speaker">정자 할머니</span>
+        </div>
+        <div class="transcript-dialogue">
+          "<em>내는 고맙고 그래가, 마을에다 막 자랑쳤다</em>"
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"><span class="line-h"></span><span class="dot"></span><span class="line-h"></span></div>
+
+<!-- SCENE 6-4: 경제성 -->
+<section class="scene">
+  <div class="content">
+    <div class="scene-header fade-in">
+      <span class="scene-code mono">SC. 6-4</span>
+      <span class="scene-title">경제성</span>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <!-- STAT: 연 1,000만원 -->
+  <section class="stat-card fade-in" style="min-height: 50vh;">
+    <p class="stat-number" style="font-size: clamp(3rem, 12vw, 8rem);">1,000<span style="font-size: 0.4em; color: #d4a06a;">만원</span></p>
+    <p class="stat-unit">연간 운영 비용</p>
+    <p class="stat-label">저상버스 1대 도입 비용의<br>극히 일부에 해당하는 운영비</p>
+  </section>
+
+  <div class="content">
+    <p class="body-text fade-in">구르미의 경제성은 압도적이었다. 저상버스 1대를 도입하는 데 수억 원이 들고, 노선 변경과 인프라 구축에 추가 비용이 발생한다. 반면 공유실버카는 실버카 구입비와 최소한의 관리비만 있으면 된다. 연간 약 1,000만 원의 운영 비용으로, 연간 예상 1,440회의 이용을 지원할 수 있었다.</p>
+    <p class="body-text fade-in">이용 1회당 비용으로 환산하면 약 7,000원. 택시비보다 저렴하고, 낙상 사고 1건의 의료비와 비교하면 비교할 수 없을 만큼 적은 금액이었다. 무엇보다 이 비용은 어르신 개인이 부담하는 것이 아니라, 마을 단위로 분담할 수 있는 구조였다.</p>
+  </div>
+
+  <div class="content">
+    <div class="data-grid fade-in">
+      <div class="data-cell">
+        <div class="val" style="font-size: 1.4rem;">~1,000만원</div>
+        <div class="lbl">연간 운영비</div>
+      </div>
+      <div class="data-cell">
+        <div class="val" style="font-size: 1.4rem;">1,440회</div>
+        <div class="lbl">연간 예상 이용</div>
+      </div>
+      <div class="data-cell">
+        <div class="val" style="font-size: 1.4rem;">~7,000원</div>
+        <div class="lbl">이용 1회당 비용</div>
+      </div>
+      <div class="data-cell">
+        <div class="val" style="font-size: 1.4rem;">90.2%</div>
+        <div class="lbl">대상 의존층 비율</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- CHAPTER 7: EPILOGUE -->
+<!-- ============================================ -->
+<section class="title-card" id="ch7">
+  <div class="fade-in">
+    <p class="chapter-num mono">CHAPTER 07</p>
+    <h2 class="chapter-title">에필로그</h2>
+    <div class="divider-line"></div>
+    <p class="chapter-sub">노인 이동권, 그 조용한 문제</p>
+  </div>
+</section>
+
+<section class="scene">
+  <div class="content">
+    <div class="scene-header fade-in">
+      <span class="scene-code mono">SC. 7-1</span>
+      <span class="scene-title">보이지 않는 문제</span>
+      <span class="line"></span>
+    </div>
+    <p class="body-text fade-in">노인 이동권 문제는 조용하다. 뉴스에 나오지 않고, 시위가 벌어지지 않고, 해시태그가 달리지 않는다. 어르신들은 불편을 감수하고, 위험을 견디고, 외출을 포기한다. 목소리를 내는 대신 침묵한다. 그래서 이 문제는 '존재하지 않는 문제'처럼 보인다.</p>
+    <p class="body-text fade-in">하지만 의성 현장에서 팀 의구심이 목격한 것은 분명했다. 매일 반복되는 75분의 공백. 정류장에 줄지어 세워진 실버카들. 맨몸으로 시장 바닥을 걷는 어르신들. 넘어질까 봐 벽을 짚으며 한 발씩 옮기는 발걸음. 이것은 추상적인 '이동권 담론'이 아니라, 구체적인 하루하루의 현실이었다.</p>
+    <p class="body-text fade-in">구르미는 이 문제에 대한 완벽한 해답이 아닐 수 있다. 하지만 구르미가 보여준 것은, 문제를 바라보는 각도를 바꾸면 이전에는 보이지 않던 해법이 나타난다는 것이었다. '실버카를 버스에 태우자'에서 '실버카를 목적지에 두자'로 &mdash; 이 전환이 75분의 공백을 43분 단축시켰다.</p>
+  </div>
+
+  <div class="letterbox fade-in" style="margin: 48px auto;">
+    <img style="max-height:55vh;width:auto;margin:0 auto;display:block;filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_26.jpg" alt="어르신이 주신 포도">
+  </div>
+  <div class="content">
+    <p class="img-caption mono">A GIFT FROM AN ELDER &middot; UISEONG GRAPES</p>
+  </div>
+
+  <div class="content" style="margin-top: 48px;">
+    <p class="body-text fade-in">의성의 어르신들이 팀 의구심에게 가르쳐주신 것이 있다. 이동은 단순히 A에서 B로 몸을 옮기는 행위가 아니라는 것. 이동은 사람을 만나는 것이고, 장을 보는 것이고, 병원에 가는 것이고, 이웃에게 인사하는 것이다. 이동이 멈추면 생활이 멈추고, 생활이 멈추면 관계가 끊기고, 관계가 끊기면 삶이 쪼그라든다.</p>
+    <p class="body-text fade-in">실버카 하나가 이 모든 것을 연결하고 있었다. 그리고 그 실버카가 버스정류장에 남겨지는 순간, 연결은 끊어졌다. 구르미는 그 끊어진 연결을 다시 잇는 시도였다.</p>
+  </div>
+</section>
+
+<section class="scene">
+  <div class="content">
+    <div class="film-quote fade-in">
+      <p class="quote-text" style="color: #e0dcd6;">정류장에 남겨진 실버카들은<br>어르신들이 포기한 걸음이었다.<br><br>구르미는 그 걸음을 되돌려드리는 것이었다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Filmstrip gallery -->
+<section class="scene-sm">
+  <div class="filmstrip-wrap">
+    <p class="filmstrip-label mono">UISEONG &middot; SUMMER 2025 &mdash; SCROLL &rarr;</p>
+    <div class="filmstrip">
+      <div class="frame"><img src="../images/img_00.png" alt="팀원과 할머니 마을길"></div>
+      <div class="frame"><img src="../images/img_03.jpg" alt="장날 버스 탑승"></div>
+      <div class="frame"><img src="../images/img_11.jpg" alt="정류장 실버카"></div>
+      <div class="frame"><img src="../images/img_16.jpg" alt="구르미 대여소"></div>
+      <div class="frame"><img src="../images/img_18.jpg" alt="시범운영 현장"></div>
+      <div class="frame"><img src="../images/img_15.jpg" alt="초경량 실버카"></div>
+      <div class="frame"><img src="../images/img_26.jpg" alt="어르신의 포도 선물"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CREDITS -->
+<section class="credits fade-in">
+  <p class="credit-logo mono">AN INTERACTIVE DOCUMENTARY</p>
+  <p class="credit-team">SK SUNNY &middot; TEAM 의구심</p>
+  <p class="credit-year">2025</p>
+  <div style="width: 40px; height: 1px; background: #d4a06a; margin: 24px auto;"></div>
+  <p class="credit-line">공유실버카 구르미 &mdash; 의성의 실버카 공백구간을 기록하다</p>
+  <p class="credit-line" style="margin-top: 8px;">Interactive Story by Problem of Problems Lab</p>
+</section>
+
+<div style="height: 60px;"></div>
+
+<!-- ============================================ -->
+<!-- JAVASCRIPT -->
+<!-- ============================================ -->
+<script>
+// Progress bar
+const progressBar = document.getElementById('progress-bar');
+function updateProgress() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  progressBar.style.width = progress + '%';
+}
+window.addEventListener('scroll', updateProgress, { passive: true });
+
+// Fade-in on scroll (IntersectionObserver)
+const fadeEls = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, {
+  threshold: 0.12,
+  rootMargin: '0px 0px -40px 0px'
+});
+fadeEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SK Sunny Scholar Local 의성</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Pretendard', -apple-system, system-ui, sans-serif; background: #0a0a0a; color: #e0e0e0; min-height: 100vh; }
+
+/* Lock Screen */
+.lock-screen {
+  position: fixed; inset: 0; z-index: 1000;
+  background: #0a0a0a;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: opacity 0.5s, visibility 0.5s;
+}
+.lock-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.lock-icon { font-size: 3rem; margin-bottom: 24px; opacity: 0.5; }
+.lock-title { font-size: 1.4rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.lock-sub { font-size: 0.85rem; color: #666; margin-bottom: 32px; }
+.lock-input {
+  background: #1a1a1a; border: 1px solid #333; border-radius: 12px;
+  padding: 14px 20px; font-size: 1rem; color: #fff; text-align: center;
+  width: 280px; font-family: inherit; outline: none;
+  transition: border-color 0.2s;
+}
+.lock-input:focus { border-color: #E8945A; }
+.lock-input::placeholder { color: #555; }
+.lock-error { color: #e74c3c; font-size: 0.8rem; margin-top: 12px; opacity: 0; transition: opacity 0.3s; }
+.lock-error.show { opacity: 1; }
+.lock-hint { color: #444; font-size: 0.75rem; margin-top: 24px; }
+
+/* Main Content */
+.main-content { display: none; }
+.main-content.visible { display: block; }
+
+/* Header */
+.site-header {
+  padding: 60px 24px 40px; text-align: center;
+  border-bottom: 1px solid #1a1a1a;
+}
+.site-header h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800; color: #fff; margin-bottom: 8px; }
+.site-header .badge { display: inline-block; background: #E8945A; color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; margin-bottom: 16px; }
+.site-header p { color: #888; font-size: 0.95rem; max-width: 500px; margin: 0 auto; }
+
+/* Team Section */
+.container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+.team-section { padding: 60px 0; }
+.team-section h2 {
+  font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 8px;
+  display: flex; align-items: center; gap: 12px;
+}
+.team-section h2 .dot { width: 8px; height: 8px; border-radius: 50%; background: #E8945A; }
+.team-section .team-desc { color: #888; font-size: 0.9rem; margin-bottom: 32px; }
+.team-section + .team-section { border-top: 1px solid #1a1a1a; }
+
+/* Cards */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.card {
+  background: #111; border: 1px solid #222; border-radius: 16px;
+  padding: 24px; transition: border-color 0.2s, transform 0.2s;
+  text-decoration: none; color: inherit; display: block;
+}
+.card:hover { border-color: #E8945A; transform: translateY(-2px); }
+.card-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #E8945A; margin-bottom: 8px; }
+.card-title { font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.card-desc { font-size: 0.85rem; color: #888; line-height: 1.6; }
+.card-version { display: inline-block; background: #1a1a1a; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; color: #666; margin-top: 12px; }
+.card-arrow { float: right; color: #E8945A; font-size: 1.2rem; margin-top: -4px; }
+
+/* Special cards */
+.card-highlight { border-color: #E8945A33; background: linear-gradient(135deg, #111 0%, #1a1208 100%); }
+.card-highlight .card-label { color: #E8945A; }
+
+/* Footer */
+footer { padding: 40px 24px; text-align: center; color: #444; font-size: 0.8rem; border-top: 1px solid #1a1a1a; }
+
+@media (max-width: 640px) {
+  .card-grid { grid-template-columns: 1fr; }
+  .site-header { padding: 40px 20px 30px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== LOCK SCREEN ===== -->
+<div class="lock-screen" id="lock">
+  <div class="lock-icon">&#128274;</div>
+  <div class="lock-title">SK Sunny Scholar Local</div>
+  <div class="lock-sub">비밀번호를 입력하세요</div>
+  <input type="password" class="lock-input" id="pw-input" placeholder="비밀번호" autofocus>
+  <div class="lock-error" id="pw-error">비밀번호가 틀렸습니다</div>
+  <div class="lock-hint">관계자에게 비밀번호를 문의하세요</div>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="main-content" id="main">
+
+<header class="site-header">
+  <div class="badge">2025 SK Sunny Scholar Local · 의성</div>
+  <h1>Sunny Scholar Local — 의성</h1>
+  <p>SK Sunny Scholar Local 의성 활동 기록. 3개 팀의 인터랙티브 보고서, 홈페이지, 비평을 모아봅니다.<br><a href="https://sunnyscholar.oopy.io/" target="_blank" style="color:#E8945A;">sunnyscholar.oopy.io →</a></p>
+</header>
+
+<!-- 의구심 -->
+<section class="team-section">
+  <div class="container">
+    <h2><span class="dot"></span>의구심 (UIGUSIM)</h2>
+    <p class="team-desc">면 지역 어르신의 실버카 공백구간 문제를 발견하고, 공유실버카 '구르미'를 시범운영한 팀</p>
+    <div class="card-grid">
+      <a class="card card-highlight" href="의구심/home.html">
+        <div class="card-label">홈페이지</div>
+        <div class="card-title">의구심 팀 홈페이지 <span class="card-arrow">&rarr;</span></div>
+        <div class="card-desc">구르미 프로젝트 소개, 도입 문의, 팀 소개</div>
+      </a>
+      <a class="card card-highlight" href="의구심/report.html">
+        <div class="card-label">보고서</div>
+        <div class="card-title">최종보고서 (풀 버전) <span class="card-arrow">&rarr;</span></div>
+        <div class="card-desc">18개 섹션, 16개 표, 전체 데이터 포함 스토리텔링</div>
+      </a>
+      <a class="card" href="의구심/v6/index.html">
+        <div class="card-label">인터랙티브웹</div>
+        <div class="card-title">다큐멘터리 (Full) <span class="card-arrow">&rarr;</span></div>
+        <div class="card-desc">현장의 숨결을 담은 몰입형 다큐멘터리 웹</div>
+        <span class="card-version">v6</span>
+      </a>
+      <a class="card" href="의구심/v5/index.html">
+        <div class="card-label">인터랙티브웹</div>
+        <div class="card-title">Film 스타일 <span class="card-arrow">&rarr;</span></div>
+        <div class="card-desc">영화적 연출로 풀어낸 의성 이야기</div>
+        <span class="card-version">v5</span>
+      </a>
+      <a class="card" href="의구심/v4/index.html">
+        <div class="card-label">인터랙티브웹</div>
+        <div class="card-title">Sunny 매거진 <span class="card-arrow">&rarr;</span></div>
+        <div class="card-desc">매거진 레이아웃의 인터랙티브 보고서</div>
+        <span class="card-version">v4</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 스콜라 -->
+<section class="team-section">
+  <div class="container">
+    <h2><span class="dot"></span>스콜라</h2>
+    <p class="team-desc">SK Sunny 스콜라 의성 활동 기록</p>
+    <div class="card-grid">
+      <a class="card" href="스콜라/v5/index.html">
+        <div class="card-label">인터랙티브웹</div>
+        <div class="card-title">Film 스타일 <span class="card-arrow">&rarr;</span></div>
+        <div class="card-desc">영화적 연출의 활동 보고서</div>
+        <span class="card-version">v5</span>
+      </a>
+      <a class="card" href="스콜라/v4/index.html">
+        <div class="card-label">인터랙티브웹</div>
+        <div class="card-title">Sunny 매거진 <span class="card-arrow">&rarr;</span></div>
+        <div class="card-desc">매거진 레이아웃</div>
+        <span class="card-version">v4</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 헷사과 -->
+<section class="team-section">
+  <div class="container">
+    <h2><span class="dot"></span>헷사과</h2>
+    <p class="team-desc">SK Sunny 헷사과 팀 의성 활동 기록</p>
+    <div class="card-grid">
+      <a class="card" href="헷사과/v6/index.html">
+        <div class="card-label">인터랙티브웹</div>
+        <div class="card-title">다큐멘터리 (Full) <span class="card-arrow">&rarr;</span></div>
+        <div class="card-desc">현장 밀착 다큐멘터리 웹</div>
+        <span class="card-version">v6</span>
+      </a>
+      <a class="card" href="헷사과/v5/index.html">
+        <div class="card-label">인터랙티브웹</div>
+        <div class="card-title">Film 스타일 <span class="card-arrow">&rarr;</span></div>
+        <div class="card-desc">영화적 연출</div>
+        <span class="card-version">v5</span>
+      </a>
+      <a class="card" href="헷사과/v4/index.html">
+        <div class="card-label">인터랙티브웹</div>
+        <div class="card-title">Sunny 매거진 <span class="card-arrow">&rarr;</span></div>
+        <div class="card-desc">매거진 레이아웃</div>
+        <span class="card-version">v4</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>SK Sunny Scholar Local · 의성 · 2025</p>
+</footer>
+
+</div><!-- /main-content -->
+
+<script>
+// Password protection
+var HASH = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'; // sha256 of 'scholar'
+
+document.getElementById('pw-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    var input = this.value;
+    crypto.subtle.digest('SHA-256', new TextEncoder().encode(input)).then(function(buf) {
+      var hash = Array.from(new Uint8Array(buf)).map(function(b) { return b.toString(16).padStart(2,'0'); }).join('');
+      if (hash === HASH) {
+        document.getElementById('lock').classList.add('hidden');
+        document.getElementById('main').classList.add('visible');
+        sessionStorage.setItem('sunny_auth', '1');
+      } else {
+        document.getElementById('pw-error').classList.add('show');
+        setTimeout(function() { document.getElementById('pw-error').classList.remove('show'); }, 2000);
+      }
+    });
+  }
+});
+
+// Session persistence
+if (sessionStorage.getItem('sunny_auth') === '1') {
+  document.getElementById('lock').classList.add('hidden');
+  document.getElementById('main').classList.add('visible');
+}
+</script>
+</body>
+</html>

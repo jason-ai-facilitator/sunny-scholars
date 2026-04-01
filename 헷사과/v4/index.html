@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>보이지 않는 열기 — 농촌 초기진입 이주노동자 온열질환 — Sunny Scholar Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #f5f0fa;
+  --bg-warm: #faf5ee;
+  --text: #2a2535;
+  --text-light: #5a5a5a;
+  --text-muted: #8a8a8a;
+  --accent: #6B3FA0;
+  --accent-light: #a85454;
+  --accent-pale: #f0e0d8;
+  --accent-dark: #6b2a2a;
+  --border: #e0d8d0;
+  --serif: 'Noto Serif KR', 'Georgia', serif;
+  --sans: 'Noto Sans KR', 'Helvetica Neue', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--serif);
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ===== PROGRESS BAR ===== */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  width: 0%;
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+/* ===== NAVIGATION ===== */
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9998;
+  background: rgba(254, 252, 248, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(224, 216, 208, 0.4);
+  padding: 0 2rem;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transform: translateY(-100%);
+  transition: transform 0.35s ease;
+}
+
+.nav-bar.visible { transform: translateY(0); }
+
+.nav-bar .nav-title {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.nav-bar .nav-section {
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url('../images/img_01.png') center center / cover no-repeat;
+  filter: sepia(0.08) saturate(0.85) brightness(0.93);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.05) 0%,
+    rgba(0,0,0,0.15) 40%,
+    rgba(0,0,0,0.55) 75%,
+    rgba(0,0,0,0.78) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 clamp(2rem, 6vw, 8rem) clamp(3rem, 6vh, 6rem);
+  max-width: 900px;
+}
+
+.hero-kicker {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.hero-kicker::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--accent-light);
+}
+
+.hero-title {
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.25;
+  color: #fff;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 400;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.82);
+  max-width: 640px;
+  margin-bottom: 2rem;
+}
+
+.hero-meta {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.05em;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  width: 24px;
+  height: 40px;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.hero-scroll-dot {
+  width: 3px;
+  height: 8px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 2px;
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(12px); opacity: 0.3; }
+}
+
+/* ===== ARTICLE CONTAINER ===== */
+.article-container {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 4vw, 3rem);
+}
+
+.article-wide {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 4vw, 3rem);
+}
+
+/* ===== SECTION DIVIDER ===== */
+.section-divider {
+  text-align: center;
+  padding: 4rem 0 3rem;
+}
+
+.section-divider .ornament {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--accent);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+}
+
+.section-divider .ornament::before,
+.section-divider .ornament::after {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ===== CHAPTER HEADER ===== */
+.chapter-header {
+  padding: 5rem 0 3rem;
+  text-align: center;
+}
+
+.chapter-number {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.chapter-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 900;
+  line-height: 1.35;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.chapter-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-light);
+  margin-top: 0.8rem;
+  font-weight: 400;
+}
+
+/* ===== BODY TEXT ===== */
+.body-text {
+  font-size: 1.05rem;
+  line-height: 2;
+  color: var(--text);
+  margin-bottom: 1.6rem;
+  text-align: justify;
+  word-break: keep-all;
+}
+
+.body-text.lead {
+  font-size: 1.2rem;
+  line-height: 2;
+  color: var(--text-light);
+}
+
+/* ===== DROP CAP ===== */
+.drop-cap::first-letter {
+  float: left;
+  font-size: 4.5rem;
+  line-height: 0.75;
+  font-weight: 900;
+  color: var(--accent);
+  padding-right: 0.12em;
+  padding-top: 0.08em;
+  font-family: var(--serif);
+}
+
+/* ===== PULL QUOTE ===== */
+.pull-quote {
+  position: relative;
+  margin: 3.5rem 0;
+  padding: 2.5rem 0 2.5rem 2.5rem;
+  border-left: 3px solid var(--accent);
+}
+
+.pull-quote blockquote {
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+  font-weight: 600;
+  line-height: 1.75;
+  color: var(--accent-dark);
+  font-style: italic;
+}
+
+.pull-quote cite {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  font-style: normal;
+  color: var(--text-muted);
+  font-family: var(--sans);
+  font-weight: 400;
+}
+
+/* ===== CENTERED QUOTE (larger, decorative) ===== */
+.centered-quote {
+  text-align: center;
+  margin: 4rem auto;
+  max-width: 620px;
+  padding: 3rem 2rem;
+  position: relative;
+}
+
+.centered-quote::before {
+  content: '\201C';
+  position: absolute;
+  top: -0.3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 6rem;
+  color: var(--accent-pale);
+  font-family: var(--serif);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.centered-quote blockquote {
+  font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+  font-weight: 700;
+  line-height: 1.7;
+  color: var(--accent-dark);
+  position: relative;
+  z-index: 1;
+}
+
+.centered-quote cite {
+  display: block;
+  margin-top: 1.2rem;
+  font-size: 0.85rem;
+  font-style: normal;
+  color: var(--text-muted);
+  font-family: var(--sans);
+}
+
+/* ===== FULL-WIDTH BLEED IMAGE ===== */
+.bleed-image {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.bleed-image img {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: cover;
+  display: block;
+  filter: sepia(0.08) saturate(0.85) brightness(0.93);
+}
+
+.bleed-image figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 3rem clamp(2rem, 6vw, 8rem) 1.5rem;
+  background: linear-gradient(transparent, rgba(0,0,0,0.6));
+  color: rgba(255,255,255,0.8);
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+/* ===== INLINE IMAGE ===== */
+.inline-image {
+  margin: 2.5rem 0;
+  position: relative;
+}
+
+.inline-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+  display: block;
+  filter: sepia(0.08) saturate(0.85) brightness(0.93);
+}
+
+.inline-image figcaption {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.8rem;
+  padding-left: 0;
+  line-height: 1.6;
+}
+
+/* ===== TWO-COLUMN WITH SIDEBAR ===== */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 3rem;
+  margin: 3rem 0;
+}
+
+.two-col .main-col { }
+
+.two-col .sidebar {
+  position: relative;
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--border);
+}
+
+.sidebar-card {
+  margin-bottom: 2rem;
+}
+
+.sidebar-card .sidebar-label {
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+
+.sidebar-card .sidebar-value {
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: var(--accent-dark);
+  line-height: 1.1;
+  margin-bottom: 0.3rem;
+}
+
+.sidebar-card .sidebar-unit {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.sidebar-card .sidebar-desc {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--text-light);
+  line-height: 1.65;
+  margin-top: 0.5rem;
+}
+
+/* ===== DATA HIGHLIGHT BOX ===== */
+.data-highlight {
+  background: var(--bg-warm);
+  border-radius: 4px;
+  padding: 2.5rem;
+  margin: 3rem 0;
+  border: 1px solid var(--border);
+}
+
+.data-highlight .data-title {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+}
+
+.data-item { text-align: center; }
+
+.data-item .data-number {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--accent-dark);
+  line-height: 1.2;
+}
+
+.data-item .data-label {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  color: var(--text-light);
+  margin-top: 0.3rem;
+}
+
+/* ===== COMPARISON TABLE ===== */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-family: var(--sans);
+  font-size: 0.88rem;
+}
+
+.comparison-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+  background: var(--bg-warm);
+}
+
+.comparison-table td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: top;
+}
+
+.comparison-table tr:last-child td { border-bottom: none; }
+
+.comparison-table .highlight-cell {
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+
+/* ===== PROCESS FLOW ===== */
+.process-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 2.5rem 0;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+}
+
+.process-step {
+  background: var(--bg-warm);
+  border: 1px solid var(--border);
+  padding: 0.7rem 1.2rem;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: 500;
+  color: var(--text);
+  min-width: 120px;
+}
+
+.process-arrow {
+  color: var(--accent);
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+/* ===== BLIND SPOTS GRID ===== */
+.blindspot-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 2.5rem 0;
+}
+
+.blindspot-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  padding: 2rem;
+  border-radius: 0 0 4px 4px;
+}
+
+.blindspot-card .bs-number {
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.blindspot-card .bs-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+}
+
+.blindspot-card .bs-desc {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+/* ===== TIMELINE / STEPS ===== */
+.steps-list {
+  margin: 2rem 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.steps-list li {
+  position: relative;
+  padding-left: 2.5rem;
+  margin-bottom: 1.5rem;
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.steps-list li::before {
+  content: attr(data-step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+/* ===== CONVERSATION BLOCK ===== */
+.conversation {
+  margin: 2.5rem 0;
+  padding: 2rem;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.conversation .conv-label {
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+}
+
+.conversation .conv-line {
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--text);
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(224, 216, 208, 0.3);
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.conversation .conv-line::before {
+  content: '\2014';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.conversation .conv-line:last-child { border-bottom: none; }
+
+/* ===== IMPACT CANVAS ===== */
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.impact-card {
+  background: #fff;
+  padding: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  text-align: center;
+}
+
+.impact-card .impact-stage {
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.impact-card .impact-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.impact-card .impact-desc {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* ===== EPILOGUE ===== */
+.epilogue-block {
+  background: var(--accent-dark);
+  color: #fff;
+  padding: clamp(3rem, 8vw, 6rem) clamp(2rem, 6vw, 5rem);
+  margin-top: 4rem;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+.epilogue-block .epilogue-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.epilogue-block .epilogue-text {
+  font-size: 1.15rem;
+  line-height: 2;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 1.5rem;
+}
+
+.epilogue-block .epilogue-label {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  margin-bottom: 1.5rem;
+}
+
+/* ===== CREDITS ===== */
+.credits {
+  text-align: center;
+  padding: 5rem 2rem;
+  border-top: 1px solid var(--border);
+  margin-top: 4rem;
+}
+
+.credits .credits-logo {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+
+.credits .credits-team {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.credits .credits-year {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ===== ANIMATIONS ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-slow {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in-slow.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .two-col {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .two-col .sidebar {
+    border-left: none;
+    border-top: 1px solid var(--border);
+    padding-left: 0;
+    padding-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1.5rem;
+  }
+  .sidebar-card { margin-bottom: 0; }
+  .blindspot-grid { grid-template-columns: 1fr; }
+  .impact-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  html { font-size: 15px; }
+  .hero { min-height: 85vh; }
+  .hero-title { font-size: 2rem; }
+  .body-text { text-align: left; }
+  .pull-quote { padding-left: 1.5rem; margin: 2.5rem 0; }
+  .centered-quote { padding: 2rem 1rem; }
+  .data-highlight { padding: 1.5rem; }
+  .conversation { padding: 1.5rem; }
+  .process-flow { flex-direction: column; }
+  .process-arrow { transform: rotate(90deg); }
+  .bleed-image img { max-height: 50vh; }
+  .nav-bar { padding: 0 1rem; }
+  .comparison-table { font-size: 0.8rem; }
+  .comparison-table th, .comparison-table td { padding: 0.6rem 0.5rem; }
+}
+
+/* ===== PRINT ===== */
+@media print {
+  .progress-bar, .nav-bar, .hero-scroll { display: none; }
+  .bleed-image { width: 100%; margin-left: 0; }
+  .epilogue-block { width: 100%; margin-left: 0; }
+}
+
+
+/* Subtle overlay on all non-hero images */
+.bleed-photo, .photo-essay, .img-block, .full-image,
+[class*="photo"], [class*="image-pair"], [class*="letterbox"] {
+  position: relative;
+}
+.bleed-photo::after, .photo-essay::after, .img-block::after,
+[class*="photo"]::after, [class*="image-pair"]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.06);
+  pointer-events: none;
+}
+
+
+
+/* Base: warm muted tone for all images */
+img { transition: filter 0.4s; }
+
+/* Hero/parallax: full size, no restrictions */
+.hero img, .hero-img, [class*="hero"] img,
+.parallax-section img, .parallax-section,
+[class*="parallax"] img {
+  max-height: none !important;
+  object-fit: cover;
+}
+
+/* Infographics/charts/diagrams: natural size, no crop */
+img[src*="map"], img[src*="chart"], img[src*="timeline"],
+img[src*="img_00"], img[src*="img_08.jpg"],
+.data-card img, .chart-figure img, .survey-info img,
+.viz img, .data-panel img {
+  max-height: none !important;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Inline photos: comfortable size */
+
+
+/* Photo pairs/grids: square-ish, moderate */
+
+
+/* Gallery/grid: square crop */
+.epilogue-gallery img, .photo-grid img, .photo-grid-3 img,
+.triple-grid img {
+  max-height: 300px;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+/* Filmstrip horizontal gallery */
+[class*="filmstrip"] img, [class*="horizontal"] img {
+  max-height: none !important;
+  height: 280px;
+  object-fit: cover;
+}
+
+/* Subtle overlay for depth */
+.bleed-photo, .photo-essay, .img-block, .full-image {
+  position: relative;
+}
+
+
+
+
+
+
+
+/* === MINIMAL IMAGE RULES === */
+.epilogue-gallery img, .photo-grid img, .photo-grid-3 img, .triple-grid img {
+  aspect-ratio: 1; object-fit: cover;
+}
+.text-highlight {
+  font-size: 1.5em; font-weight: 700; line-height: 1.5;
+  text-align: center; padding: 48px 24px; margin: 48px 0;
+  max-width: 680px; margin-left: auto; margin-right: auto;
+  border-top: 2px solid currentColor; border-bottom: 2px solid currentColor;
+}
+.text-break {
+  font-size: 1.25em; font-weight: 500; line-height: 1.7;
+  text-align: center; padding: 40px 24px; margin: 40px auto;
+  max-width: 600px; font-style: italic;
+}
+
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Navigation -->
+<nav class="nav-bar" id="navBar">
+  <span class="nav-title">TEAM 헷사과</span>
+  <span class="nav-section" id="navSection">보이지 않는 열기</span>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content fade-in-slow">
+    <div class="hero-kicker">SK Sunny Scholar in 의성</div>
+    <h1 class="hero-title">보이지 않는 열기</h1>
+    <p class="hero-subtitle">농촌 초기진입 이주노동자의 온열질환, 그 구조적 사각지대를 파헤치다</p>
+    <div class="hero-meta">
+      <span>TEAM 헷사과</span>
+      <span>2025</span>
+      <span>의성, 경상북도</span>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-dot"></div>
+  </div>
+</header>
+
+<!-- ==================== PROLOGUE ==================== -->
+<section data-section="프롤로그">
+  <div class="article-container">
+
+    <div class="chapter-header fade-in">
+      <div class="chapter-number">Prologue</div>
+      <h2 class="chapter-title">우리가 이 문제를 만난 순간</h2>
+    </div>
+
+    <p class="body-text lead drop-cap fade-in">
+      2025년 6월, SK행복나눔재단의 &lt;Sunny Scholar in 의성&gt; 프로젝트로 헷사과팀은 한데 모이게 되었다. '의성 농산물의 불필요한 유통구조 개선'을 주제로 발걸음을 떼어, 최종적으로는 농촌 이주 노동자의 온열질환을 사회문제로 정의하고 연구한 헷사과의 여정을 소개한다.
+    </p>
+
+  </div>
+
+  <!-- Full-bleed article image -->
+  <figure class="bleed-image fade-in">
+    <img style="max-height:400px;object-fit:contain;" src="../images/img_02.png" alt="온열질환 안심키트 박스">
+    <figcaption>온열질환 안심키트 박스. "모르는 채로 일터에 나서지 않도록" — 헷사과의 슬로건이 담겨 있다.</figcaption>
+  </figure>
+
+  <div class="article-container">
+
+    <div class="pull-quote fade-in">
+      <blockquote>
+        밭에는 한 줌의 그늘도 없었고... 체감온도 40도에 체온과 심박수 모두 치솟은 오후 2시 30분께 정신이 혼미해졌다. 열사병 증세에 결국 작업을 그만뒀다. 바로 그날 경북 포항의 야산에서 제초 작업을 하던 네팔 국적 40대 남성이 죽었다.
+      </blockquote>
+      <cite>한겨레21, 2025년 7월 24일</cite>
+    </div>
+
+    <p class="body-text fade-in">
+      베트남에서 온 후앙 리엔(37)에게 '오늘 너무 덥지 않으냐'고 물었지만 "베트남은 더 덥다"는 시큰둥한 반응이 돌아왔다. 다음날 "사실 어제 오후는 너무 더웠다"고 고백했다. "항상 힘들지만, 베트남에 있는 가족들을 위해서 일한다."
+    </p>
+
+    <p class="body-text fade-in">
+      헷사과가 이 기사를 본 건 정확히 9월 13일이었다. 현장답사를 나갔다가 버스를 놓쳐 의성 점곡면 마을로 1시간을 걸어갔던 기억이 있다. 불평하는 듯 보일까 봐 아무도 "너무 덥다"고 말하지 못했지만, 사실은 금방 쓰러져도 이상하지 않을 날씨였다. "근데 나 아까 죽는 줄 알았어"하는 한 써니의 말에 모두가 비로소 털어놓았다.
+    </p>
+
+    <div class="conversation fade-in">
+      <div class="conv-label">팀 대화</div>
+      <div class="conv-line">"우리도 이렇게 힘들었는데, 저 분들은 진짜 오죽할까?"</div>
+      <div class="conv-line">"진짜 말도 안 돼, 우리 현장 나갈 때마다 만나는 게 외국인분들이잖아"</div>
+      <div class="conv-line">"그 분들 항상 땡볕 밑에서 긴팔 입고 일하시는데 저러다가 큰일 나는 거 아니야?"</div>
+      <div class="conv-line">"1달 전에 의성에서도 농부 한 분이 온열질환으로 돌아가셨다고 했는데?"</div>
+    </div>
+
+    <p class="body-text fade-in">
+      농촌의 온열질환 실태는 심각했다. 이제 막 농업인 온열질환 예방교육이 생겨나는 상황이었으나, 이주노동자를 위한 예방교육은 미미했다. 헷사과는 의성의 논밭에 나가 인터뷰로 사례 데이터를 수집하고, 각종 이주노동자센터의 문을 두드리며 연구를 시작했다.
+    </p>
+
+  </div>
+</section>
+
+<!-- ==================== 다중적 사각지대 ==================== -->
+<section data-section="사각지대">
+  <div class="article-container">
+
+    <div class="section-divider fade-in">
+      <div class="ornament">사각지대</div>
+    </div>
+
+    <div class="chapter-header fade-in">
+      <div class="chapter-number">The Blind Spots</div>
+      <h2 class="chapter-title">다중적 사각지대</h2>
+      <p class="chapter-subtitle">네 겹으로 겹친 구조적 비가시성</p>
+    </div>
+
+    <p class="body-text fade-in">
+      농촌 이주노동자의 온열질환은 단일한 원인으로 설명되지 않는다. 정책, 사회, 기후, 정보라는 네 가지 층위의 사각지대가 중첩되어 이 문제를 체계적으로 비가시화하고 있었다.
+    </p>
+
+  </div>
+
+  <div class="article-wide">
+    <div class="blindspot-grid fade-in">
+      <div class="blindspot-card">
+        <div class="bs-number">사각지대 01</div>
+        <div class="bs-title">정책적 사각지대</div>
+        <div class="bs-desc">한국의 농업은 '가족 단위 자영업'이라는 오래된 제도적 틀 안에 있다. 이 프레임 안에서 외국인 농업 노동자는 근로기준법의 보호 범위 바깥에 놓이며, 산업안전보건법의 적용도 제한적이다. 정책이 현실의 노동 구조를 반영하지 못하는 근본적인 괴리가 존재한다.</div>
+      </div>
+      <div class="blindspot-card">
+        <div class="bs-number">사각지대 02</div>
+        <div class="bs-title">사회적 사각지대</div>
+        <div class="bs-desc">단기계약과 불법체류라는 이중 구조 속에서, 이주노동자들은 법적 보호의 경계 밖에 놓인다. 불법체류 상태의 노동자는 부당한 처우에도 이의를 제기할 수 없고, 의료 서비스 접근도 차단된다. 사회적 안전망의 가장 바깥에 존재하는 이들이다.</div>
+      </div>
+      <div class="blindspot-card">
+        <div class="bs-number">사각지대 03</div>
+        <div class="bs-title">기후적 사각지대</div>
+        <div class="bs-desc">야외 노지에서 진행되는 농업 노동은 폭염에 그대로 노출된다. 그러나 노동자에게는 작업 중단 권한이 없다. 폭염특보가 내려져도 농작물은 기다려주지 않고, 고용주의 판단에 따라 작업이 계속된다. 기후 위기의 최전선에 가장 취약한 이들이 서 있다.</div>
+      </div>
+      <div class="blindspot-card">
+        <div class="bs-number">사각지대 04</div>
+        <div class="bs-title">정보적 사각지대</div>
+        <div class="bs-desc">온열질환 예방 교육 자료는 한국어로만 제공된다. 이주노동자 대부분은 한국어 이해도가 낮아 교육 내용에 접근할 수 없다. 위험 신호를 인지하는 법, 응급 대처 방법 등 생존에 직결되는 정보가 언어 장벽에 의해 차단되어 있다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-container">
+    <figure class="inline-image fade-in">
+      <img style="width:100%;height:auto;" src="../images/img_00.png" alt="연구 타임라인 인포그래픽">
+      <figcaption>온열질환 발생과정 타임라인 — 한국 입국부터 온열질환 발생까지의 경로를 보여준다.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ==================== 1장: 현장 배경 ==================== -->
+<section data-section="현장 배경">
+  <div class="article-container">
+
+    <div class="section-divider fade-in">
+      <div class="ornament">I</div>
+    </div>
+
+    <div class="chapter-header fade-in">
+      <div class="chapter-number">Chapter One</div>
+      <h2 class="chapter-title">현장의 배경</h2>
+      <p class="chapter-subtitle">대한민국에서 가장 뜨거운 땅, 의성</p>
+    </div>
+
+  </div>
+
+  <div class="article-wide">
+    <div class="two-col fade-in">
+      <div class="main-col">
+        <h3 style="font-size:1.15rem; font-weight:700; margin-bottom:1.2rem; color:var(--accent-dark);">1.1 기후 — 전국 1위 폭염 지역</h3>
+        <p class="body-text">
+          의성군의 폭염일수는 연평균 22.4일로, 전국 평균 17.4일을 크게 웃돈다. 2023년에는 전국 1위인 14일 연속 폭염을 기록하며 극한 더위의 중심지로 이름을 올렸다. 분지 지형 특성상 열이 갇혀 빠져나가지 못하고, 도시에 비해 녹지율이 높아도 농지 위의 체감온도는 훨씬 가혹하다.
+        </p>
+        <div class="pull-quote" style="margin-top:1.5rem;">
+          <blockquote>
+            "이 동네가 진짜 분지라 여름에 열이 안 빠져요. 도시보다 더 덥습니다."
+          </blockquote>
+          <cite>의성 사과농부 A씨</cite>
+        </div>
+      </div>
+      <div class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-label">의성 폭염일수</div>
+          <div class="sidebar-value">22.4<span style="font-size:1rem; font-weight:400;">일</span></div>
+          <div class="sidebar-unit">연평균 (전국 17.4일)</div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-label">2023년 기록</div>
+          <div class="sidebar-value">전국 1위</div>
+          <div class="sidebar-unit">14일 연속 폭염</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <figure class="bleed-image fade-in">
+    <img style="max-height:350px;object-fit:contain;" src="../images/img_04.png" alt="안심키트 착용 실험 — 팔토시">
+    <figcaption>안심키트 착용 실험 — 팔토시와 쿨링 스카프를 착용하고 체감온도 변화를 측정했다.</figcaption>
+  </figure>
+
+  <div class="article-container">
+    <h3 class="fade-in" style="font-size:1.15rem; font-weight:700; margin-bottom:1.2rem; color:var(--accent-dark); margin-top:2rem;">1.2 노동환경 — 그늘 없는 노지</h3>
+
+    <p class="body-text fade-in">
+      농업 노동은 대부분 야외 노지에서 이루어진다. 그늘 하나 없는 환경에서 장시간 작업이 계속된다. 사과 적과, 제초, 수확 등 주요 농작업은 한여름 폭염 시기와 정확히 겹치며, 노동자들은 직사광선 아래 하루 8시간 이상 신체 노동에 노출된다. 휴식 공간도 대부분 밭 한구석의 임시 그늘막이 전부다.
+    </p>
+
+    <h3 class="fade-in" style="font-size:1.15rem; font-weight:700; margin-bottom:1.2rem; color:var(--accent-dark); margin-top:2rem;">1.3 인력구성 — 보이지 않는 다수</h3>
+  </div>
+
+  <div class="article-wide">
+    <div class="two-col fade-in">
+      <div class="main-col">
+        <p class="body-text">
+          의성 농가의 64.3%가 외국인 노동자를 고용하고 있으며, 그 중 약 80%가 미등록 체류자다. 이들은 공식 통계에 잡히지 않는 '보이지 않는 다수'로, 농촌 인력의 핵심을 담당하면서도 제도적 보호에서 배제되어 있다.
+        </p>
+        <p class="body-text">
+          특이한 점은 도시 통근형 구조다. 안동이나 구미 등 인근 도시에 거주하는 이주노동자들이 매일 의성으로 출퇴근하며 농작업에 투입된다. 농촌 지역의 숙소 부족과 도시 지역의 커뮤니티 접근성 때문에 형성된 이 구조는, 통근 과정에서의 피로 누적이라는 또 다른 건강 위험 요인을 만들어내고 있었다.
+        </p>
+      </div>
+      <div class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-label">외국인 고용 농가</div>
+          <div class="sidebar-value">64.3%</div>
+          <div class="sidebar-desc">의성 전체 농가 기준</div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-label">미등록 비율</div>
+          <div class="sidebar-value">~80%</div>
+          <div class="sidebar-desc">고용 외국인 중 미등록 체류자</div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-label">통근 패턴</div>
+          <div class="sidebar-value" style="font-size:1.4rem;">도시→농촌</div>
+          <div class="sidebar-desc">안동·구미에서 의성으로 일일 통근</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 2장: 현장 문제 ==================== -->
+<section data-section="현장 문제">
+  <div class="article-container">
+
+    <div class="section-divider fade-in">
+      <div class="ornament">II</div>
+    </div>
+
+    <div class="chapter-header fade-in">
+      <div class="chapter-number">Chapter Two</div>
+      <h2 class="chapter-title">현장의 문제</h2>
+      <p class="chapter-subtitle">숫자 뒤에 숨겨진 목소리들</p>
+    </div>
+
+    <h3 class="fade-in" style="font-size:1.15rem; font-weight:700; margin-bottom:1.2rem; color:var(--accent-dark);">2.1 질환 경험 — 42%의 경험률</h3>
+
+  </div>
+
+  <div class="article-wide">
+    <div class="two-col fade-in">
+      <div class="main-col">
+        <p class="body-text">
+          현장 인터뷰를 진행한 이주노동자 31명 중 13명, 즉 42%가 온열질환을 경험한 적이 있다고 답했다. 두통, 어지러움, 구토, 근육 경련 등 다양한 증상이 보고되었으며, 대부분 의료 조치 없이 참고 넘긴 경험이었다.
+        </p>
+      </div>
+      <div class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-label">온열질환 경험률</div>
+          <div class="sidebar-value">42%</div>
+          <div class="sidebar-unit">31명 중 13명 경험</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-container">
+    <div class="pull-quote fade-in">
+      <blockquote>
+        "작업하다가 눈앞이 갑자기 하얘졌어요. 쓰러질 뻔했지만 아무한테도 말하지 못했어요. 말하면 내일부터 일을 못 하게 될까 봐..."
+      </blockquote>
+      <cite>라오스 출신 C씨</cite>
+    </div>
+
+    <div class="pull-quote fade-in">
+      <blockquote>
+        "머리가 너무 아프고 토할 것 같았는데, 쉬겠다는 말을 어떻게 해요. 한국말도 잘 모르는데."
+      </blockquote>
+      <cite>인도네시아 출신 D씨</cite>
+    </div>
+
+    <p class="body-text fade-in">
+      심층 인터뷰를 반복하면서 헷사과는 하나의 결정적 키워드를 발견했다. 바로 <strong>'초기 진입'</strong>이었다. 한국에 처음 와서 농업 노동에 막 투입된 노동자들이 유독 심한 증상을 경험한다는 패턴이 나타났다. 한국의 폭염에 대한 사전 경험이 없고, 예방 교육을 받은 적도 없으며, 위험 신호를 인지하는 법도 모른 채 현장에 투입되는 것이다.
+    </p>
+
+    <div class="data-highlight fade-in">
+      <div class="data-title">초기진입자 vs 숙련자 생체 데이터 비교</div>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>지표</th>
+            <th>초기진입자</th>
+            <th>숙련자</th>
+            <th>차이</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>평균 심박수</td>
+            <td class="highlight-cell">136 bpm</td>
+            <td>118 bpm</td>
+            <td>+18 bpm</td>
+          </tr>
+          <tr>
+            <td>교감신경 지수</td>
+            <td class="highlight-cell">0.84</td>
+            <td>2.53</td>
+            <td>-1.69</td>
+          </tr>
+          <tr>
+            <td>심부체온</td>
+            <td class="highlight-cell">38.62&deg;C</td>
+            <td>37.83&deg;C</td>
+            <td>+0.79&deg;C</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="body-text fade-in">
+      데이터는 명확했다. 초기진입자의 심박수는 숙련자보다 18bpm 높았고, 심부체온은 0.79&deg;C 이상 높았다. 특히 교감신경 지수의 극적인 차이(0.84 vs 2.53)는 초기진입자의 신체가 열 스트레스에 효과적으로 대응하지 못하고 있음을 보여주었다.
+    </p>
+
+    <h3 class="fade-in" style="font-size:1.15rem; font-weight:700; margin-bottom:1.2rem; color:var(--accent-dark); margin-top:3rem;">2.3 발생 과정</h3>
+
+    <p class="body-text fade-in">
+      온열질환이 발생하는 구조적 경로는 다음과 같이 정리되었다.
+    </p>
+
+    <div class="process-flow fade-in">
+      <div class="process-step">한국 입국</div>
+      <div class="process-arrow">&rarr;</div>
+      <div class="process-step">농작업 처음 진입</div>
+      <div class="process-arrow">&rarr;</div>
+      <div class="process-step">폭염 대비 미흡</div>
+      <div class="process-arrow">&rarr;</div>
+      <div class="process-step">폭염 노출</div>
+      <div class="process-arrow">&rarr;</div>
+      <div class="process-step" style="background:var(--accent); color:#fff; border-color:var(--accent);">온열질환 발생</div>
+    </div>
+
+  </div>
+
+  <figure class="bleed-image fade-in">
+    <img style="max-height:350px;object-fit:contain;" src="../images/img_05.png" alt="안심키트 착용 실험 — 목 선풍기">
+    <figcaption>안심키트 착용 실험 — 목 선풍기를 착용하고 체온을 모니터링하는 모습.</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 3장: 핵심 원인 ==================== -->
+<section data-section="핵심 원인">
+  <div class="article-container">
+
+    <div class="section-divider fade-in">
+      <div class="ornament">III</div>
+    </div>
+
+    <div class="chapter-header fade-in">
+      <div class="chapter-number">Chapter Three</div>
+      <h2 class="chapter-title">핵심 원인</h2>
+      <p class="chapter-subtitle">시스템의 총체적 부재</p>
+    </div>
+
+    <p class="body-text drop-cap fade-in">
+      문제의 핵심은 개별 농가나 노동자의 잘못이 아니었다. 사전-현장-사후 전 단계에 걸쳐 시스템이 총체적으로 부재한 것이 근본 원인이었다.
+    </p>
+
+  </div>
+
+  <div class="article-wide">
+    <div class="data-highlight fade-in">
+      <div class="data-title">시스템 부재의 세 단계</div>
+      <div class="data-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div style="text-align:left;">
+          <div style="font-family:var(--sans); font-size:0.72rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:0.8rem;">사전 단계</div>
+          <p style="font-family:var(--sans); font-size:0.88rem; color:var(--text-light); line-height:1.7;">
+            이주노동자 대상 온열질환 예방교육은 사실상 전무하다. 한국어로만 제공되는 안전 자료, 입국 시 건강 관련 오리엔테이션의 부재, 보호구(쿨링 장비 등) 미지급이 겹쳐 노동자들은 '모르는 채로' 현장에 투입된다.
+          </p>
+        </div>
+        <div style="text-align:left;">
+          <div style="font-family:var(--sans); font-size:0.72rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:0.8rem;">현장 단계</div>
+          <p style="font-family:var(--sans); font-size:0.88rem; color:var(--text-light); line-height:1.7;">
+            경직된 통근 구조는 노동자의 자율적 판단을 제한한다. 도시에서 농촌으로의 단체 이동, 고정된 작업 시간, 열악한 휴식 환경이 결합되어 폭염 상황에서도 작업 중단이나 휴식 요청이 현실적으로 불가능하다.
+          </p>
+        </div>
+        <div style="text-align:left;">
+          <div style="font-family:var(--sans); font-size:0.72rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:0.8rem;">사후 단계</div>
+          <p style="font-family:var(--sans); font-size:0.88rem; color:var(--text-light); line-height:1.7;">
+            미등록 체류 신분은 의료 접근을 차단한다. 온열질환 증상이 나타나도 병원에 갈 수 없고, 설사 간다 해도 체류 자격 문제에 노출될 위험이 있다. 공식 데이터에도 이들의 질환은 기록되지 않아, 문제의 규모조차 파악할 수 없는 데이터 공백이 지속된다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-container">
+    <figure class="inline-image fade-in">
+      <img style="max-height:500px;object-fit:contain;" src="../images/img_07.jpg" alt="설문조사 현장">
+      <figcaption>이주노동자 대상 설문조사 현장 — 다국적 노동자들이 서류를 작성하고 있다.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ==================== 솔루션 ==================== -->
+<section data-section="솔루션">
+  <div class="article-container">
+
+    <div class="section-divider fade-in">
+      <div class="ornament">IV</div>
+    </div>
+
+    <div class="chapter-header fade-in">
+      <div class="chapter-number">Solution</div>
+      <h2 class="chapter-title">온열질환 안심키트</h2>
+      <p class="chapter-subtitle">모르는 채로 일터에 나서지 않도록</p>
+    </div>
+
+    <div class="centered-quote fade-in">
+      <blockquote>
+        "더워도 어떻게 할 수가 없어요... 그냥 더우면 참으라고만 하니까"
+      </blockquote>
+      <cite>의성 소재 농장 이주노동자</cite>
+    </div>
+
+    <p class="body-text drop-cap fade-in">
+      헷사과가 설계한 해법은 '온열질환 안심키트'다. 선풍기 조끼, 쿨링 스카프 등 즉각적으로 체감 온도를 낮출 수 있는 물리적 장비와 함께, 10개 언어로 번역된 다국어 리플렛을 결합한 패키지다. 리플렛에는 온열질환의 위험 신호, 응급 대처법, 수분 섭취 가이드 등이 해당 노동자의 모국어로 담겨 있다.
+    </p>
+
+  </div>
+
+  <figure class="bleed-image fade-in">
+    <img style="max-height:500px;object-fit:contain;" src="../images/img_03.png" alt="다국어 안전 리플렛">
+    <figcaption>10개 언어로 제작된 온열질환 예방 리플렛. 언어 장벽을 넘어 생존 정보를 전달한다.</figcaption>
+  </figure>
+
+  <div class="article-container">
+    <p class="body-text fade-in">
+      "모르는 채로 일터에 나서지 않도록." 이것이 안심키트의 핵심 철학이었다. 예방교육에 접근할 수 없었던 이들에게, 현장에서 바로 사용할 수 있는 물리적 보호와 정보적 보호를 동시에 제공하는 것이다.
+    </p>
+
+    <figure class="inline-image fade-in">
+      <img style="max-height:500px;object-fit:contain;" src="../images/img_08.jpg" alt="버스정류장에서 쉬는 헷사과 팀">
+      <figcaption>의성 현장답사 중 버스정류장에서 쉬고 있는 헷사과 팀원들.</figcaption>
+    </figure>
+
+    <h3 class="fade-in" style="font-size:1.15rem; font-weight:700; margin-bottom:1.2rem; color:var(--accent-dark); margin-top:3rem;">실험 결과</h3>
+
+    <div class="data-highlight fade-in">
+      <div class="data-title">안심키트 착용 효과 측정</div>
+      <div class="data-grid">
+        <div class="data-item">
+          <div class="data-number">3~4&deg;C</div>
+          <div class="data-label">체감온도 감소</div>
+        </div>
+        <div class="data-item">
+          <div class="data-number">1.13&deg;C</div>
+          <div class="data-label">평균 체온 감소</div>
+        </div>
+        <div class="data-item">
+          <div class="data-number">10개</div>
+          <div class="data-label">리플렛 지원 언어</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="body-text fade-in">
+      안심키트의 효과는 실험을 통해 검증되었다. 키트 착용 시 체감온도가 3~4&deg;C 감소했고, 평균 체온은 1.13&deg;C 낮아졌다. 특히 초기진입자에게서 더 큰 효과가 관찰되어, 가장 취약한 시기의 노동자에게 가장 필요한 보호를 제공할 수 있음이 확인되었다.
+    </p>
+
+    <figure class="inline-image fade-in">
+      <img style="max-height:500px;object-fit:contain;" src="../images/img_09.jpg" alt="헷사과 팀 단체사진">
+      <figcaption>헷사과 팀 4명의 단체사진.</figcaption>
+    </figure>
+
+    <h3 class="fade-in" style="font-size:1.15rem; font-weight:700; margin-bottom:1.2rem; color:var(--accent-dark); margin-top:3rem;">4가지 의의</h3>
+
+    <ol class="steps-list fade-in">
+      <li data-step="1"><strong>초기진입 보호:</strong> 가장 취약한 시기에 집중된 개입. 한국 폭염에 대한 적응 기간 없이 투입되는 초기진입 노동자를 즉각 보호한다.</li>
+      <li data-step="2"><strong>폭염 대비 표준 제시:</strong> 개별 농가의 선의에 의존하던 열 보호를 표준화된 키트로 전환, 제도화의 첫걸음을 만든다.</li>
+      <li data-step="3"><strong>데이터 공백 속 가시성:</strong> 공식 통계에서 사라진 이들의 온열질환 경험을 가시화하고, 문제의 규모를 드러낸다.</li>
+      <li data-step="4"><strong>사전 예방 문화:</strong> '참고 일하는 것'에서 '예방하고 보호받는 것'으로, 농업 현장의 안전 문화를 전환하는 계기를 제공한다.</li>
+    </ol>
+
+  </div>
+
+  <figure class="bleed-image fade-in">
+    <img src="../images/img_11.png" alt="안심키트 적용 현장">
+    <figcaption>농촌 노동현장 — 노동자들이 농산물 상자를 트럭에 싣고 있다.</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 에필로그 ==================== -->
+<section data-section="에필로그">
+  <div class="article-container">
+
+    <div class="section-divider fade-in">
+      <div class="ornament">에필로그</div>
+    </div>
+
+    <div class="chapter-header fade-in">
+      <div class="chapter-number">Epilogue</div>
+      <h2 class="chapter-title">수면 위로</h2>
+    </div>
+
+    <h3 class="fade-in" style="font-size:1.05rem; font-weight:700; margin-bottom:1.2rem; color:var(--accent-dark);">후속 계획</h3>
+
+    <ol class="steps-list fade-in">
+      <li data-step="1">안심키트 배포 범위 확대 (의성 외 폭염 취약 농촌 지역)</li>
+      <li data-step="2">이주노동자센터와 연계한 정기 예방교육 프로그램 구축</li>
+      <li data-step="3">다국어 온열질환 정보 플랫폼 개발</li>
+      <li data-step="4">농촌 이주노동자 건강 데이터 수집 체계 제안</li>
+      <li data-step="5">정책 제안서 작성 및 지자체 협력 추진</li>
+    </ol>
+
+    <figure class="inline-image fade-in">
+      <img style="max-height:500px;object-fit:contain;" src="../images/img_12.png" alt="이주노동자 기숙사 인터뷰">
+      <figcaption>이주노동자 기숙사에서의 심층 인터뷰 현장.</figcaption>
+    </figure>
+
+    <h3 class="fade-in" style="font-size:1.05rem; font-weight:700; margin-bottom:1.2rem; color:var(--accent-dark); margin-top:2.5rem;">임팩트 캔버스</h3>
+
+    <div class="impact-grid fade-in">
+      <div class="impact-card">
+        <div class="impact-stage">Stage 1</div>
+        <div class="impact-title">문제 인식</div>
+        <div class="impact-desc">농촌 초기진입 이주노동자 온열질환의 구조적 사각지대를 발견하고 가시화</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-stage">Stage 2</div>
+        <div class="impact-title">솔루션 설계</div>
+        <div class="impact-desc">안심키트(물리적 보호 + 다국어 정보)로 사전 예방 체계 구축</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-stage">Stage 3</div>
+        <div class="impact-title">효과 검증</div>
+        <div class="impact-desc">생체 데이터 기반 실험으로 체감온도 3~4&deg;C, 체온 1.13&deg;C 감소 확인</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-stage">Stage 4</div>
+        <div class="impact-title">확산 및 제도화</div>
+        <div class="impact-desc">배포 확대, 교육 프로그램 연계, 정책 제안으로 구조적 변화 추진</div>
+      </div>
+    </div>
+
+    <h3 class="fade-in" style="font-size:1.05rem; font-weight:700; margin-bottom:1.2rem; color:var(--accent-dark); margin-top:2.5rem;">연구 한계</h3>
+
+    <p class="body-text fade-in">
+      이 연구는 의성이라는 단일 지역에 한정되어 있으며, 인터뷰 대상 31명이라는 표본 규모의 한계가 있다. 미등록 체류자의 높은 비율로 인해 체계적인 표본 추출이 어려웠고, 언어 장벽으로 인한 응답의 정확도 문제도 존재한다. 향후 다지역, 대규모 연구를 통한 검증이 필요하다.
+    </p>
+
+  </div>
+
+  <!-- Director quote - dark block -->
+  <div class="epilogue-block fade-in">
+    <div class="epilogue-inner">
+      <div class="epilogue-label">현장의 목소리</div>
+      <p class="epilogue-text" style="font-size:1.35rem; font-weight:600; font-style:italic; line-height:1.8;">
+        "이주노동자 문제는 팔, 다리가 잘려야만 뉴스에 나와요."
+      </p>
+      <p style="font-family:var(--sans); font-size:0.85rem; color:rgba(255,255,255,0.5); margin-bottom:3rem;">
+        &mdash; 이주노동자센터 소장님
+      </p>
+      <p class="epilogue-text">
+        헷사과는 숨겨진 문제를 수면 위로 드러내는 것을 목표로 삼았다. 이주노동자의 생생한 목소리를 듣고, 삶의 현장을 가까이서 관찰하며, 온열질환이 구조적 사각지대에 놓인 이들의 숨겨진 고통임을 알게 되었다.
+      </p>
+      <p class="epilogue-text">
+        더위에 쓰러져도 말할 수 없었던 사람들, 아파도 병원에 갈 수 없었던 사람들, 위험을 몰라서 대비하지 못했던 사람들. 이들의 이야기가 데이터가 되고, 데이터가 솔루션이 되고, 솔루션이 변화의 시작이 되기를.
+      </p>
+    </div>
+  </div>
+
+  <div class="article-container">
+    <figure class="inline-image fade-in" style="margin-top:3rem;">
+      <img style="max-height:500px;object-fit:contain;" src="../images/img_06.jpg" alt="헷사과 팀과 이주노동자 단체사진">
+      <figcaption>헷사과 팀원과 농장의 이주노동자가 함께 찍은 현장 사진.</figcaption>
+    </figure>
+
+    <figure class="inline-image fade-in">
+      <img style="max-height:500px;object-fit:contain;" src="../images/img_10.jpg" alt="팀 회의">
+      <figcaption>연구 회의를 진행하는 헷사과 팀.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ==================== CREDITS ==================== -->
+<footer class="credits fade-in">
+  <div class="credits-logo">✦ SK SUNNY · Sunny Scholar in 의성 &middot; Sunny Scholar in 의성</div>
+  <div class="credits-team">TEAM 헷사과</div>
+  <div class="credits-year">2025</div>
+  <p style="font-family:var(--sans); font-size:0.75rem; color:var(--text-muted); margin-top:2rem; line-height:1.8;">
+    농촌 초기진입 이주노동자 온열질환 연구<br>
+    &copy; 2025 Team 헷사과. All rights reserved.
+  </p>
+</footer>
+
+<script>
+/* ===== PROGRESS BAR ===== */
+const progressBar = document.getElementById('progressBar');
+function updateProgress() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  progressBar.style.width = progress + '%';
+}
+window.addEventListener('scroll', updateProgress, { passive: true });
+
+/* ===== NAV BAR ===== */
+const navBar = document.getElementById('navBar');
+const navSection = document.getElementById('navSection');
+const sections = document.querySelectorAll('section[data-section]');
+
+function updateNav() {
+  const scrollTop = window.scrollY;
+  navBar.classList.toggle('visible', scrollTop > window.innerHeight * 0.6);
+
+  let currentSection = '보이지 않는 열기';
+  for (const section of sections) {
+    const rect = section.getBoundingClientRect();
+    if (rect.top <= 200) {
+      currentSection = section.dataset.section;
+    }
+  }
+  navSection.textContent = currentSection;
+}
+window.addEventListener('scroll', updateNav, { passive: true });
+
+/* ===== INTERSECTION OBSERVER ===== */
+const observerOptions = {
+  root: null,
+  rootMargin: '0px 0px -60px 0px',
+  threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.fade-in, .fade-in-slow').forEach(el => {
+  observer.observe(el);
+});
+
+/* ===== SMOOTH SCROLL for hero scroll indicator ===== */
+const heroScroll = document.querySelector('.hero-scroll');
+if (heroScroll) {
+  heroScroll.addEventListener('click', () => {
+    const firstSection = document.querySelector('section');
+    if (firstSection) {
+      firstSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+  heroScroll.style.cursor = 'pointer';
+}
+</script>
+
+</body>
+</html>

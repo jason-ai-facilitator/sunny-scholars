@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>의구심 — 75분의 공백을 메우다 | SK Sunny 스콜라 2조</title>
+<meta name="description" content="SK Sunny 스콜라 2조 '의구심' 팀이 의성에서 발견한 실버카 공백구간 문제와, 장날 공유실버카 '구르미' 프로젝트를 소개합니다.">
+<meta property="og:title" content="의구심 — 75분의 공백을 메우다">
+<meta property="og:description" content="면 지역 어르신의 실버카 공백구간을 해결하는 장날 공유실버카 '구르미'. 만족도 93%, 재이용 의향 100%.">
+<meta property="og:image" content="images/17_IMG_2638.jpeg">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: #FAFAF8; color: #2a2a2a; line-height: 1.7; font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ===== NAVIGATION ===== */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(27,67,50,0.97); backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  height: 64px;
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav-logo {
+  font-weight: 800; font-size: 1.05em; color: #E8945A;
+  text-decoration: none; letter-spacing: 1px;
+}
+.nav-links { display: flex; gap: 0; list-style: none; }
+.nav-links li a {
+  text-decoration: none; color: rgba(255,255,255,0.55); font-size: 0.88em; font-weight: 500;
+  transition: color 0.2s; letter-spacing: 0.3px;
+  padding: 20px 20px; display: block; position: relative;
+}
+.nav-links li a:hover { color: #fff; }
+.nav-links li a.active {
+  color: #E8945A; font-weight: 700;
+}
+.nav-links li a.active::after {
+  content: ''; position: absolute; bottom: 0; left: 20px; right: 20px;
+  height: 2px; background: #E8945A; border-radius: 2px;
+}
+
+/* Mobile hamburger */
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+.nav-toggle span { display: block; width: 22px; height: 2px; background: #fff; margin: 5px 0; transition: 0.3s; border-radius: 2px; }
+.nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* ===== PAGE SYSTEM ===== */
+.page {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  min-height: calc(100vh - 64px);
+  padding-top: 64px;
+}
+.page.active {
+  display: block;
+}
+.page.visible {
+  opacity: 1;
+}
+
+/* ===== SHARED LAYOUT ===== */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 100px 0; }
+.section-label {
+  font-size: 0.72em; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+  color: #E8945A; margin-bottom: 16px;
+}
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; line-height: 1.3;
+  margin-bottom: 20px; letter-spacing: -0.5px; color: #1a1a1a;
+}
+.section-desc { font-size: 1.05em; color: #666; max-width: 640px; line-height: 1.8; }
+
+/* ===== HERO (Home only) ===== */
+.hero {
+  position: relative; min-height: calc(100vh - 64px); display: flex; align-items: center; justify-content: center;
+  overflow: hidden; text-align: center;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: url('images/01_정자할머니_첫만남.png') center/cover no-repeat;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(27,67,50,0.85) 0%, rgba(10,20,15,0.92) 100%);
+}
+.hero-content { position: relative; z-index: 2; padding: 0 24px; max-width: 800px; }
+.hero-tag {
+  display: inline-block; border: 1px solid rgba(232,148,90,0.4); color: #E8945A;
+  padding: 6px 20px; border-radius: 50px; font-size: 0.8em; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase; margin-bottom: 32px;
+}
+.hero h1 {
+  font-size: clamp(2.4rem, 7vw, 4rem); font-weight: 900; color: #fff;
+  line-height: 1.15; margin-bottom: 20px; letter-spacing: -1px;
+}
+.hero h1 .amber { color: #E8945A; }
+.hero-sub {
+  font-size: clamp(1rem, 2.5vw, 1.15em); color: rgba(255,255,255,0.6);
+  margin-bottom: 44px; line-height: 1.6;
+}
+.hero-cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-block; background: #E8945A; color: #fff; padding: 16px 40px;
+  border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.95em;
+  transition: all 0.2s; letter-spacing: 0.3px; border: none; cursor: pointer;
+}
+.btn-primary:hover { background: #d4813e; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(232,148,90,0.3); }
+.btn-outline {
+  display: inline-block; color: #fff; padding: 16px 40px;
+  border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95em;
+  border: 1px solid rgba(255,255,255,0.3); transition: all 0.2s; background: transparent; cursor: pointer;
+}
+.btn-outline:hover { border-color: #E8945A; color: #E8945A; }
+.scroll-hint {
+  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); z-index: 2;
+  color: rgba(255,255,255,0.3); font-size: 1.2em;
+}
+.scroll-hint .arrow { display: block; animation: bounce 2.5s infinite ease-in-out; }
+@keyframes bounce { 0%,100%{ transform: translateY(0); opacity:0.3; } 50%{ transform: translateY(10px); opacity:0.7; } }
+
+/* ===== IMPACT CARDS (Home) ===== */
+.impact-cards {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  margin-top: -60px; position: relative; z-index: 3; padding: 0 32px;
+  max-width: 900px; margin-left: auto; margin-right: auto;
+}
+.impact-card {
+  background: #fff; border-radius: 16px; padding: 32px 20px; text-align: center;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.04);
+}
+.impact-num {
+  font-size: 2.6em; font-weight: 900; color: #1B4332; line-height: 1; margin-bottom: 4px;
+}
+.impact-unit { font-size: 0.9em; font-weight: 700; color: #E8945A; }
+.impact-label { font-size: 0.85em; color: #999; margin-top: 6px; }
+
+/* ===== HOME SUMMARY ===== */
+.home-summary {
+  max-width: 720px; margin: 80px auto 0; padding: 0 32px; text-align: center;
+}
+.home-summary p { font-size: 1.1em; color: #555; line-height: 1.9; margin-bottom: 24px; }
+.link-arrow {
+  color: #1B4332; text-decoration: none; font-weight: 700; font-size: 0.95em;
+  display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s;
+}
+.link-arrow:hover { color: #E8945A; }
+
+/* Report card */
+.report-card {
+  max-width: 600px; margin: 60px auto 0; background: #1B4332; border-radius: 16px;
+  padding: 32px 40px; display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; color: #fff; transition: transform 0.2s;
+}
+.report-card:hover { transform: translateY(-3px); }
+.report-card-text h3 { font-size: 1.15em; font-weight: 700; margin-bottom: 4px; }
+.report-card-text p { font-size: 0.88em; color: rgba(255,255,255,0.55); margin: 0; }
+.report-card a {
+  color: #E8945A; text-decoration: none; font-weight: 700; font-size: 0.95em;
+  white-space: nowrap; border: 1px solid rgba(232,148,90,0.4); padding: 10px 24px;
+  border-radius: 8px; transition: all 0.2s;
+}
+.report-card a:hover { background: rgba(232,148,90,0.15); border-color: #E8945A; }
+
+/* ===== PROJECT PAGE ===== */
+.page-header {
+  background: #1B4332; color: #fff; padding: 80px 0 60px; text-align: center;
+}
+.page-header .section-title { color: #fff; }
+.page-header .section-desc { margin: 0 auto; color: rgba(255,255,255,0.55); }
+
+/* Split rows */
+.split-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+  align-items: center; margin-bottom: 80px;
+}
+.split-row:last-child { margin-bottom: 0; }
+.split-row.reverse { direction: rtl; }
+.split-row.reverse > * { direction: ltr; }
+.split-img {
+  border-radius: 16px; overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+}
+.split-img img { width: 100%; height: auto; display: block; }
+.split-text h3 {
+  font-size: 1.5em; font-weight: 800; margin-bottom: 16px; color: #1a1a1a;
+  line-height: 1.35;
+}
+.split-text p { color: #555; font-size: 1em; line-height: 1.9; margin-bottom: 12px; }
+.split-text .highlight { color: #E8945A; font-weight: 700; }
+
+.quote-inline {
+  margin-top: 24px; padding: 20px 24px; background: #FFF8F3; border-radius: 12px;
+  border-left: 3px solid #E8945A; font-style: italic; color: #555;
+}
+.quote-inline .source { font-style: normal; font-size: 0.85em; color: #999; margin-top: 8px; display: block; }
+
+/* Solution banner */
+.solution-banner {
+  background: #1B4332;
+  border-radius: 24px; padding: 56px 48px; margin: 0 auto;
+  text-align: center; color: #fff; max-width: 1000px;
+}
+.solution-banner h2 {
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; margin-bottom: 12px; color: #fff;
+}
+.solution-banner .sub { color: rgba(255,255,255,0.55); font-size: 1em; margin-bottom: 36px; }
+.feature-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.feature-card {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px; padding: 32px 20px; text-align: center;
+  transition: background 0.2s;
+}
+.feature-card:hover { background: rgba(255,255,255,0.1); }
+.feature-icon { font-size: 2em; margin-bottom: 12px; }
+.feature-title { font-weight: 700; font-size: 1em; margin-bottom: 6px; }
+.feature-desc { font-size: 0.88em; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+/* Result highlight */
+.result-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin: 48px 0;
+}
+.result-card {
+  background: #fff; border-radius: 16px; padding: 36px 28px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.04);
+  text-align: center;
+}
+.result-card .r-num { font-size: 2.8em; font-weight: 900; color: #1B4332; line-height: 1; }
+.result-card .r-label { font-size: 0.9em; color: #888; margin-top: 8px; }
+
+/* Project CTA */
+.project-cta {
+  text-align: center; padding: 80px 0; background: #f5f3ef;
+}
+.project-cta h2 { font-size: 1.8em; font-weight: 800; margin-bottom: 12px; color: #1a1a1a; }
+.project-cta p { color: #666; margin-bottom: 32px; font-size: 1.05em; }
+
+/* ===== STORY PAGE ===== */
+/* Timeline */
+.timeline { position: relative; padding-left: 40px; margin-top: 48px; }
+.timeline::before {
+  content: ''; position: absolute; left: 15px; top: 0; bottom: 0;
+  width: 2px; background: #e0dcd4;
+}
+.tl-item { position: relative; margin-bottom: 48px; }
+.tl-item:last-child { margin-bottom: 0; }
+.tl-dot {
+  position: absolute; left: -33px; top: 4px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #E8945A; border: 3px solid #FAFAF8;
+  box-shadow: 0 0 0 2px #E8945A;
+}
+.tl-label { font-size: 0.78em; font-weight: 700; color: #E8945A; margin-bottom: 6px; letter-spacing: 1px; text-transform: uppercase; }
+.tl-title { font-size: 1.2em; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
+.tl-desc { font-size: 0.95em; color: #666; line-height: 1.8; }
+
+/* Gallery */
+.gallery-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  margin-top: 48px;
+}
+.gallery-item {
+  border-radius: 12px; overflow: hidden; aspect-ratio: 1;
+  cursor: pointer; transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+.gallery-item:hover { transform: scale(1.03); }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Lightbox */
+.lightbox {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(0,0,0,0.92); display: none; align-items: center; justify-content: center;
+  cursor: pointer; backdrop-filter: blur(4px);
+}
+.lightbox.active { display: flex; }
+.lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 12px; }
+.lightbox-close {
+  position: absolute; top: 20px; right: 28px; color: #fff; font-size: 2.2em;
+  cursor: pointer; opacity: 0.6; background: none; border: none;
+  transition: opacity 0.2s;
+}
+.lightbox-close:hover { opacity: 1; }
+
+/* Sunny badge */
+.sunny-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #FFF8F3; border: 1px solid #f0e0d0; border-radius: 12px;
+  padding: 16px 24px; margin-top: 40px; font-size: 0.92em; color: #555;
+}
+.sunny-badge strong { color: #1B4332; }
+
+/* ===== TEAM PAGE ===== */
+.team-meaning {
+  max-width: 640px; margin: 0 auto; text-align: center;
+  color: #555; font-size: 1.05em; line-height: 1.9;
+}
+.team-row {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;
+  margin-top: 60px;
+}
+.team-card { text-align: center; }
+.team-photo {
+  width: 140px; height: 140px; border-radius: 50%; object-fit: cover;
+  margin: 0 auto 20px; display: block;
+  border: 4px solid #1B4332; transition: border-color 0.2s;
+}
+.team-photo:hover { border-color: #E8945A; }
+.team-name { font-weight: 700; font-size: 1.1em; margin-bottom: 4px; color: #1a1a1a; }
+.team-role { font-size: 0.82em; color: #E8945A; font-weight: 600; letter-spacing: 1px; }
+.team-bio { font-size: 0.88em; color: #888; margin-top: 8px; line-height: 1.6; }
+
+.team-name-explain {
+  max-width: 680px; margin: 80px auto 0; text-align: center;
+  background: #FFF8F3; border-radius: 20px; padding: 40px; border: 1px solid #f0e0d0;
+}
+.team-name-explain h3 { font-size: 1.3em; font-weight: 800; color: #1B4332; margin-bottom: 12px; }
+.team-name-explain p { color: #666; line-height: 1.8; font-size: 0.95em; margin-bottom: 0; }
+.hanja { color: #E8945A; font-weight: 700; }
+
+.other-projects {
+  text-align: center; margin-top: 60px; padding: 40px;
+  background: #f5f3ef; border-radius: 16px;
+}
+.other-projects p { color: #888; font-size: 0.92em; margin-bottom: 12px; }
+.other-projects a {
+  color: #1B4332; text-decoration: none; font-weight: 700; font-size: 0.95em;
+  transition: color 0.2s;
+}
+.other-projects a:hover { color: #E8945A; }
+
+/* ===== CONTACT PAGE ===== */
+.contact-intro {
+  text-align: center; max-width: 600px; margin: 0 auto 60px;
+}
+.contact-intro h2 { font-size: 2em; font-weight: 800; color: #1a1a1a; margin-bottom: 12px; }
+.contact-intro p { color: #666; font-size: 1.05em; }
+
+/* Condition cards */
+.condition-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 60px;
+}
+.condition-card {
+  background: #fff; border-radius: 16px; padding: 28px 24px; text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.04);
+}
+.condition-icon { font-size: 2em; margin-bottom: 12px; }
+.condition-card h4 { font-weight: 700; font-size: 0.95em; margin-bottom: 6px; color: #1a1a1a; }
+.condition-card p { font-size: 0.85em; color: #888; line-height: 1.6; margin: 0; }
+
+/* Contact form */
+.contact-layout {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
+}
+.contact-info { padding-top: 8px; }
+.contact-info h3 { font-size: 1.3em; font-weight: 700; margin-bottom: 24px; color: #1a1a1a; }
+.contact-method {
+  display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px;
+  padding: 20px; background: #fff; border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.04);
+}
+.contact-method-icon { font-size: 1.5em; flex-shrink: 0; margin-top: 2px; }
+.contact-method h4 { font-weight: 700; font-size: 0.92em; color: #1a1a1a; margin-bottom: 2px; }
+.contact-method p { font-size: 0.88em; color: #888; margin: 0; }
+.contact-method a { color: #E8945A; text-decoration: none; font-weight: 600; }
+.contact-method a:hover { text-decoration: underline; }
+
+.contact-form { }
+.contact-form h3 { font-size: 1.3em; font-weight: 700; margin-bottom: 24px; color: #1a1a1a; }
+.form-group { margin-bottom: 20px; }
+.form-group label {
+  display: block; font-weight: 600; font-size: 0.82em; margin-bottom: 8px;
+  color: #666; text-transform: uppercase; letter-spacing: 1px;
+}
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%; padding: 14px 16px;
+  background: #fff; border: 1px solid #e0dcd4;
+  border-radius: 8px; color: #2a2a2a; font-family: inherit; font-size: 0.95em;
+  transition: border-color 0.2s;
+}
+.form-group input::placeholder, .form-group textarea::placeholder { color: #bbb; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+  outline: none; border-color: #E8945A; box-shadow: 0 0 0 3px rgba(232,148,90,0.1);
+}
+.form-group textarea { resize: vertical; min-height: 120px; }
+.form-group select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' fill='none' stroke-width='1.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
+
+.form-success {
+  display: none; text-align: center; padding: 32px; background: rgba(27,67,50,0.06);
+  border-radius: 12px; color: #1B4332; font-weight: 600; border: 1px solid rgba(27,67,50,0.15);
+  margin-top: 20px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: #1B4332; color: rgba(255,255,255,0.45); padding: 48px 0;
+  text-align: center; font-size: 0.85em;
+}
+footer a { color: #E8945A; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+footer .footer-brand { font-weight: 800; font-size: 1.1em; color: rgba(255,255,255,0.8); margin-bottom: 8px; }
+
+/* ===== FADE ANIMATIONS ===== */
+.fade-up {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.4,0,0.2,1), transform 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .impact-cards { grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 0 20px; }
+  .split-row, .split-row.reverse { grid-template-columns: 1fr; gap: 32px; direction: ltr; }
+  .feature-row { grid-template-columns: 1fr; gap: 16px; }
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+  .team-row { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .condition-grid { grid-template-columns: 1fr; gap: 16px; }
+  .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+  .solution-banner { padding: 40px 24px; }
+  .result-grid { grid-template-columns: repeat(2, 1fr); }
+  .report-card { flex-direction: column; text-align: center; padding: 28px 24px; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+  .nav-links.open {
+    display: flex; flex-direction: column; position: absolute;
+    top: 64px; left: 0; right: 0; background: rgba(27,67,50,0.98);
+    padding: 16px 0; gap: 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-links.open li a { padding: 14px 32px; }
+  .nav-links li a.active::after { display: none; }
+  .nav-links.open li a.active { background: rgba(232,148,90,0.1); }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  body { font-size: 15px; }
+  .section { padding: 64px 0; }
+  .container { padding: 0 20px; }
+  .impact-cards { grid-template-columns: 1fr; gap: 12px; margin-top: -40px; padding: 0 20px; }
+  .team-row { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .team-photo { width: 100px; height: 100px; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .result-grid { grid-template-columns: 1fr; }
+  .hero-cta-group { flex-direction: column; align-items: center; }
+  .hero-cta-group .btn-primary, .hero-cta-group .btn-outline { width: 80%; text-align: center; }
+  .page-header { padding: 60px 0 40px; }
+  .timeline { padding-left: 32px; }
+  .timeline::before { left: 11px; }
+  .tl-dot { left: -29px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="top-nav" id="topNav">
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo" data-nav="home">UIGUSIM</a>
+    <button class="nav-toggle" id="navToggle" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" data-nav="home">홈</a></li>
+      <li><a href="#project" data-nav="project">프로젝트</a></li>
+      <li><a href="#story" data-nav="story">활동</a></li>
+      <li><a href="#team" data-nav="team">팀</a></li>
+      <li><a href="#contact" data-nav="contact">도입문의</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============================================================ -->
+<!-- PAGE: HOME                                                     -->
+<!-- ============================================================ -->
+<div class="page" id="page-home">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-tag">SK Sunny 스콜라 2조</div>
+      <h1>75분의 <span class="amber">공백</span>을,<br>걸음으로 메우다</h1>
+      <p class="hero-sub">경북 의성 &middot; 공유실버카 구르미 프로젝트</p>
+      <div class="hero-cta-group">
+        <a href="#project" class="btn-primary" data-nav="project">프로젝트 보기</a>
+        <a href="#contact" class="btn-outline" data-nav="contact">도입 문의</a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span class="arrow">&#8595;</span>
+    </div>
+  </section>
+
+  <!-- Impact cards -->
+  <div class="impact-cards">
+    <div class="impact-card">
+      <div class="impact-num">93<span class="impact-unit">%</span></div>
+      <div class="impact-label">이용자 만족도</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num">100<span class="impact-unit">%</span></div>
+      <div class="impact-label">재이용 의향</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num">54</div>
+      <div class="impact-label">방문 마을</div>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="home-summary">
+    <p>면 지역 어르신에게 실버카는 다리이자 의자입니다. 하지만 읍내 버스에는 실버카를 실을 수 없어, 버스에서 내린 순간부터 짐도, 의자도, 안정성도 사라지는 <strong>'공백구간'</strong>이 생깁니다. 의구심은 이 공백을 <strong>장날 공유실버카 '구르미'</strong>로 메웁니다.</p>
+    <a href="#project" class="link-arrow" data-nav="project">자세히 보기 &rarr;</a>
+  </div>
+
+  <!-- Report card -->
+  <div class="report-card" style="margin-bottom:100px;">
+    <div class="report-card-text">
+      <h3>전체 보고서 읽기</h3>
+      <p>54개 마을, 154건 인터뷰의 전체 기록</p>
+    </div>
+    <a href="index.html">보고서 &rarr;</a>
+  </div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: PROJECT                                                  -->
+<!-- ============================================================ -->
+<div class="page" id="page-project">
+
+  <div class="page-header">
+    <div class="container">
+      <div class="section-label">Project</div>
+      <div class="section-title">실버카 공백구간 &times; 구르미</div>
+      <p class="section-desc">면 지역 어르신의 이동 공백을 발견하고, 장날 공유실버카로 메우는 프로젝트입니다.</p>
+    </div>
+  </div>
+
+  <!-- Problem -->
+  <section class="section" style="background:#FAFAF8;">
+    <div class="container">
+      <div class="fade-up">
+        <div class="section-label">Problem</div>
+        <div class="section-title">실버카를 두고 내려야 하는 순간</div>
+      </div>
+
+      <div class="split-row fade-up">
+        <div class="split-img">
+          <img src="images/06_버스정류장_실버카.png" alt="버스정류장에 주차된 실버카들" loading="lazy">
+        </div>
+        <div class="split-text">
+          <h3>읍내 버스에는<br>실버카를 실을 수 없습니다</h3>
+          <p>면 지역 어르신에게 실버카는 보행 보조기이자, 앉아 쉴 의자이며, 장 본 짐을 넣는 수납함입니다.</p>
+          <p>하지만 평균 <span class="highlight">8kg</span>인 실버카를 높은 버스 단차 위로 들어올릴 수 없어, 어르신들은 정류장에 실버카를 <span class="highlight">"주차"</span>하고 떠납니다.</p>
+        </div>
+      </div>
+
+      <div class="split-row reverse fade-up">
+        <div class="split-img">
+          <img src="images/07_실버카_이동.png" alt="실버카 공백구간 다이어그램" loading="lazy">
+        </div>
+        <div class="split-text">
+          <h3>짐도, 의자도, 안정성도<br>모두 사라지는 구간</h3>
+          <p>정류장에서 읍내까지 &mdash; 짐을 들 수 없고, 앉아 쉴 곳이 없으며, 보행 안정성이 떨어지는 구간이 생깁니다.</p>
+          <p><span class="highlight">이것이 '실버카 공백구간'입니다.</span></p>
+          <div class="quote-inline">
+            "무거워서 내가 못 드니께 여기다 두는 거여"
+            <span class="source">금성면 초전2리 정자 할머니</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solution -->
+  <section class="section" style="background:#f5f3ef;">
+    <div class="container">
+      <div class="fade-up" style="text-align:center; margin-bottom:48px;">
+        <div class="section-label">Solution</div>
+        <div class="section-title" style="max-width:640px; margin:0 auto 20px;">구르미 = 구르는 + 우리 마을의 이</div>
+        <p class="section-desc" style="margin:0 auto;">읍내 버스 정류장 인근에 공유실버카를 배치해, 어르신이 읍내에서도 실버카를 이용할 수 있게 합니다.</p>
+      </div>
+
+      <div class="solution-banner fade-up">
+        <div class="feature-row">
+          <div class="feature-card">
+            <div class="feature-icon">&#128722;</div>
+            <div class="feature-title">장날 대여소 운영</div>
+            <div class="feature-desc">의성 장날(3&middot;8일)에 맞춰 읍내 버스정류장 인근에서 운영</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">&#9851;</div>
+            <div class="feature-title">무료 공유 실버카</div>
+            <div class="feature-desc">대여 후 반납. 여러 어르신이 돌아가며 사용</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">&#128149;</div>
+            <div class="feature-title">청소년 봉사 연계</div>
+            <div class="feature-desc">지역 청소년이 대여소를 운영하며 세대 간 연결</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="split-row fade-up" style="margin-top:64px;">
+        <div class="split-img">
+          <img src="images/17_IMG_2638.jpeg" alt="구르미 대여소 전경" loading="lazy">
+        </div>
+        <div class="split-text">
+          <h3>장날, 정류장 앞에<br>구르미가 섭니다</h3>
+          <p>어르신이 버스에서 내리면 바로 구르미를 빌려 읍내를 돌아다닐 수 있습니다. 장을 보고, 쉬고, 다시 반납하면 됩니다.</p>
+          <div class="quote-inline">
+            "구르미 타니까 장 보는 게 이렇게 편할 수가 없어. 다음 장날에도 또 해줘."
+            <span class="source">의성 장날 구르미 이용 어르신</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section class="section" style="background:#FAFAF8;">
+    <div class="container">
+      <div class="fade-up" style="text-align:center; margin-bottom:20px;">
+        <div class="section-label">Results</div>
+        <div class="section-title">시범운영, 숫자로 말하다</div>
+      </div>
+      <div class="result-grid fade-up">
+        <div class="result-card">
+          <div class="r-num">93<span style="font-size:0.5em; color:#E8945A;">%</span></div>
+          <div class="r-label">이용자 만족도</div>
+        </div>
+        <div class="result-card">
+          <div class="r-num">100<span style="font-size:0.5em; color:#E8945A;">%</span></div>
+          <div class="r-label">재이용 의향</div>
+        </div>
+        <div class="result-card">
+          <div class="r-num">54</div>
+          <div class="r-label">방문 마을</div>
+        </div>
+        <div class="result-card">
+          <div class="r-num">154</div>
+          <div class="r-label">인터뷰 대상</div>
+        </div>
+      </div>
+      <div class="fade-up" style="margin-top:40px;">
+        <div class="quote-inline" style="max-width:640px; margin:0 auto;">
+          "이런 게 있으면 나도 장날에 나올 수 있겠다. 누가 좀 이런 거 해줬으면 했어."
+          <span class="source">금성면 어르신</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="project-cta">
+    <div class="container fade-up">
+      <h2>우리 지역에서도 시작할 수 있습니다</h2>
+      <p>실버카 공백구간은 의성만의 문제가 아닙니다.</p>
+      <a href="#contact" class="btn-primary" data-nav="contact">도입 문의하기</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: STORY                                                    -->
+<!-- ============================================================ -->
+<div class="page" id="page-story">
+
+  <div class="page-header">
+    <div class="container">
+      <div class="section-label">Story</div>
+      <div class="section-title">54개 마을을 걸었습니다</div>
+      <p class="section-desc">의구심은 의성군 전역을 직접 방문해 어르신들의 일상을 관찰하고, 대화를 나누며 문제를 발견했습니다.</p>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <section class="section" style="background:#FAFAF8;">
+    <div class="container">
+      <div class="fade-up">
+        <div class="section-label">Timeline</div>
+        <div class="section-title">의성에서 보낸 시간</div>
+      </div>
+      <div class="timeline fade-up">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-label">탐색</div>
+          <div class="tl-title">54개 마을 현장 방문</div>
+          <div class="tl-desc">의성군 13개 읍면의 마을을 직접 걸으며 어르신들의 일상을 관찰했습니다. 정류장에 주차된 실버카, 지팡이 하나에 의지해 걷는 모습을 목격하며 공백구간의 실체를 확인했습니다.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-label">발견</div>
+          <div class="tl-title">154건 인터뷰, 문제의 구조화</div>
+          <div class="tl-desc">어르신, 복지사, 버스기사, 이장님 등 154명의 이야기를 들으며 '왜 실버카를 두고 가는가'를 구조적으로 파악했습니다. 단차, 무게, 대안 부재 &mdash; 세 가지 원인이 드러났습니다.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-label">설계</div>
+          <div class="tl-title">구르미 솔루션 설계</div>
+          <div class="tl-desc">장날에 읍내 정류장 인근에 공유실버카를 배치하는 '구르미' 모델을 설계했습니다. 기존 인프라(정류장, 장날)를 활용해 추가 비용을 최소화했습니다.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-label">실행</div>
+          <div class="tl-title">장날 시범운영</div>
+          <div class="tl-desc">의성 장날에 맞춰 구르미 대여소를 운영했습니다. 만족도 93%, 재이용 의향 100%. "다음 장날에도 해달라"는 말이 가장 큰 성과였습니다.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="section" style="background:#f5f3ef;">
+    <div class="container">
+      <div class="fade-up">
+        <div class="section-label">Gallery</div>
+        <div class="section-title">현장의 기록</div>
+      </div>
+      <div class="gallery-grid fade-up" id="gallery">
+        <div class="gallery-item" data-src="images/01_정자할머니_첫만남.png">
+          <img src="images/01_정자할머니_첫만남.png" alt="정자 할머니 첫 만남" loading="lazy">
+        </div>
+        <div class="gallery-item" data-src="images/03_IMG_3713.png">
+          <img src="images/03_IMG_3713.png" alt="실버카" loading="lazy">
+        </div>
+        <div class="gallery-item" data-src="images/19_IMG_3683.jpeg">
+          <img src="images/19_IMG_3683.jpeg" alt="현장 활동" loading="lazy">
+        </div>
+        <div class="gallery-item" data-src="images/04_의성장날_IMG_3676.jpeg">
+          <img src="images/04_의성장날_IMG_3676.jpeg" alt="의성 장날" loading="lazy">
+        </div>
+        <div class="gallery-item" data-src="images/21_윷놀이_아이스크림.png">
+          <img src="images/21_윷놀이_아이스크림.png" alt="윷놀이 봉사" loading="lazy">
+        </div>
+        <div class="gallery-item" data-src="images/18_IMG_3678.png">
+          <img src="images/18_IMG_3678.png" alt="구르미" loading="lazy">
+        </div>
+        <div class="gallery-item" data-src="images/16_IMG_3689.jpeg">
+          <img src="images/16_IMG_3689.jpeg" alt="현장 관찰" loading="lazy">
+        </div>
+        <div class="gallery-item" data-src="images/23_초전2리_포도.png">
+          <img src="images/23_초전2리_포도.png" alt="초전2리 포도" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SK Sunny info -->
+  <section class="section" style="background:#FAFAF8;">
+    <div class="container" style="text-align:center;">
+      <div class="fade-up">
+        <div class="section-label">Program</div>
+        <div class="section-title">SK Sunny 스콜라</div>
+        <p class="section-desc" style="margin:0 auto 24px;">SK Sunny는 SK그룹의 대학생 자원봉사단으로, 사회혁신 프로젝트를 기획하고 실행합니다. 스콜라 과정에서 의구심 팀은 경북 의성을 거점으로 활동하며 실버카 공백구간 문제를 발견했습니다.</p>
+        <div class="sunny-badge">
+          <span style="font-size:1.4em;">&#127891;</span>
+          <span><strong>SK Sunny 스콜라 2조</strong> &middot; 대학생 사회혁신 프로그램</span>
+        </div>
+      </div>
+      <div style="margin-top:40px;" class="fade-up">
+        <a href="index.html" class="link-arrow">활동 보고서 전문 보기 &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: TEAM                                                     -->
+<!-- ============================================================ -->
+<div class="page" id="page-team">
+
+  <div class="page-header">
+    <div class="container">
+      <div class="section-label">Team</div>
+      <div class="section-title">팀 의구심</div>
+      <p class="section-desc">지역의 구석진 문제를, 따뜻한 시선으로 바라봅니다.</p>
+    </div>
+  </div>
+
+  <section class="section" style="background:#FAFAF8;">
+    <div class="container">
+
+      <!-- Team meaning -->
+      <div class="team-meaning fade-up">
+        <p>'의구심(疑仇心)'은 <strong>'의성'의 '의(義)'</strong>, <strong>'구석'의 '구(角)'</strong>, <strong>'마음'의 '심(心)'</strong>을 합친 이름입니다. 지역 구석에 숨은 문제를, 올바른 마음으로 바라보겠다는 뜻을 담았습니다.</p>
+      </div>
+
+      <!-- Members -->
+      <div class="team-row fade-up">
+        <div class="team-card">
+          <img class="team-photo" src="images/24_헤준써니.png" alt="헤준 써니" loading="lazy">
+          <div class="team-name">헤준</div>
+          <div class="team-role">SUNNY</div>
+          <div class="team-bio">현장을 걸으며 질문을 던지는 사람</div>
+        </div>
+        <div class="team-card">
+          <img class="team-photo" src="images/25_혜림써니.png" alt="혜림 써니" loading="lazy">
+          <div class="team-name">혜림</div>
+          <div class="team-role">SUNNY</div>
+          <div class="team-bio">데이터 속에서 이야기를 찾는 사람</div>
+        </div>
+        <div class="team-card">
+          <img class="team-photo" src="images/26_희수써니.png" alt="희수 써니" loading="lazy">
+          <div class="team-name">희수</div>
+          <div class="team-role">SUNNY</div>
+          <div class="team-bio">구조를 설계하고 실행으로 옮기는 사람</div>
+        </div>
+        <div class="team-card">
+          <img class="team-photo" src="images/27_지민써니_IMG_2598.jpeg" alt="지민 써니" loading="lazy">
+          <div class="team-name">지민</div>
+          <div class="team-role">SUNNY</div>
+          <div class="team-bio">사람과 사람 사이를 연결하는 사람</div>
+        </div>
+      </div>
+
+      <!-- Team name card -->
+      <div class="team-name-explain fade-up">
+        <h3><span class="hanja">疑</span>구심이 아닌, <span class="hanja">義</span>구심</h3>
+        <p>의구심(疑心)은 의심하는 마음입니다. 하지만 우리 팀의 의구심(義仇心)은 다릅니다. <span class="hanja">義</span>(의로울 의) &mdash; 의성의 첫 글자이자, 올바름을 뜻합니다. 의심이 아니라 올바른 시선으로 구석을 비추겠다는 이름입니다.</p>
+      </div>
+
+      <!-- Other projects -->
+      <div class="other-projects fade-up">
+        <p>SK Sunny 스콜라 다른 프로젝트도 만나보세요</p>
+        <a href="https://www.sksunny.com" target="_blank" rel="noopener">SK Sunny 공식 사이트 &rarr;</a>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: CONTACT                                                  -->
+<!-- ============================================================ -->
+<div class="page" id="page-contact">
+
+  <div class="page-header">
+    <div class="container">
+      <div class="section-label">Contact</div>
+      <div class="section-title">구르미를 우리 지역에서도</div>
+      <p class="section-desc">실버카 공백구간은 의성만의 문제가 아닙니다. 고령화가 진행되는 모든 면 지역에서 도입할 수 있습니다.</p>
+    </div>
+  </div>
+
+  <!-- Conditions -->
+  <section class="section" style="background:#FAFAF8;">
+    <div class="container">
+      <div class="fade-up" style="text-align:center; margin-bottom:40px;">
+        <div class="section-label">Fit</div>
+        <div class="section-title">이런 지역에 적합합니다</div>
+      </div>
+      <div class="condition-grid fade-up">
+        <div class="condition-card">
+          <div class="condition-icon">&#128652;</div>
+          <h4>면 지역 버스 이용 어르신</h4>
+          <p>실버카를 이용하지만 버스에 싣지 못해 정류장에 두고 가는 지역</p>
+        </div>
+        <div class="condition-card">
+          <div class="condition-icon">&#128197;</div>
+          <h4>정기 장날이 있는 읍내</h4>
+          <p>어르신이 주기적으로 읍내를 방문하는 패턴이 있는 지역</p>
+        </div>
+        <div class="condition-card">
+          <div class="condition-icon">&#129309;</div>
+          <h4>운영 파트너 연계 가능</h4>
+          <p>지역 복지관, 봉사단, 청소년 센터 등과 협업할 수 있는 환경</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact form + info -->
+  <section class="section" style="background:#f5f3ef;">
+    <div class="container">
+      <div class="contact-layout fade-up">
+
+        <!-- Left: Info -->
+        <div class="contact-info">
+          <h3>연락처</h3>
+          <div class="contact-method">
+            <div class="contact-method-icon">&#128231;</div>
+            <div>
+              <h4>이메일 문의</h4>
+              <p>무엇이든 편하게 보내주세요</p>
+              <a href="mailto:uigoosim_y@sksunny.com">uigoosim_y@sksunny.com</a>
+            </div>
+          </div>
+          <div class="contact-method">
+            <div class="contact-method-icon">&#128196;</div>
+            <div>
+              <h4>활동 보고서</h4>
+              <p>54개 마을의 전체 기록</p>
+              <a href="index.html">보고서 전문 보기 &rarr;</a>
+            </div>
+          </div>
+          <div class="contact-method">
+            <div class="contact-method-icon">&#127891;</div>
+            <div>
+              <h4>SK Sunny</h4>
+              <p>대학생 사회혁신 프로그램</p>
+              <a href="https://www.sksunny.com" target="_blank" rel="noopener">공식 사이트 &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="contact-form" id="contactForm">
+          <h3>도입 문의</h3>
+          <div class="form-group">
+            <label for="c-name">이름</label>
+            <input type="text" id="c-name" placeholder="홍길동">
+          </div>
+          <div class="form-group">
+            <label for="c-org">소속</label>
+            <input type="text" id="c-org" placeholder="예: 청송군청 복지과">
+          </div>
+          <div class="form-group">
+            <label for="c-region">관심 지역</label>
+            <input type="text" id="c-region" placeholder="예: 경북 청송군">
+          </div>
+          <div class="form-group">
+            <label for="c-email">이메일</label>
+            <input type="email" id="c-email" placeholder="example@email.com">
+          </div>
+          <div class="form-group">
+            <label for="c-message">메시지</label>
+            <textarea id="c-message" placeholder="궁금한 점이나 하고 싶은 말씀을 자유롭게 적어주세요"></textarea>
+          </div>
+          <div style="text-align:center; margin-top:8px;">
+            <button type="button" class="btn-primary" onclick="handleSubmit()">문의 보내기</button>
+          </div>
+          <div class="form-success" id="formSuccess">
+            &#10003; 감사합니다! 메시지가 전송되었습니다.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== FOOTER (shared) ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-brand">UIGUSIM</div>
+    <p>SK Sunny 스콜라 2조 &middot; 의성 활동</p>
+    <p style="margin-top:8px;"><a href="mailto:uigoosim_y@sksunny.com">uigoosim_y@sksunny.com</a></p>
+    <p style="margin-top:16px; font-size:0.82em; color:rgba(255,255,255,0.25);">&copy; 2026 팀 의구심</p>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" aria-label="닫기">&times;</button>
+  <img src="" alt="확대 사진" id="lightboxImg">
+</div>
+
+<script>
+// ===== HASH ROUTING =====
+var pages = ['home', 'project', 'story', 'team', 'contact'];
+
+function navigateTo(page) {
+  if (pages.indexOf(page) === -1) page = 'home';
+
+  // Immediately hide all pages
+  pages.forEach(function(p) {
+    var el = document.getElementById('page-' + p);
+    if (el) {
+      el.classList.remove('visible');
+      el.classList.remove('active');
+    }
+  });
+
+  // Show target page
+  var target = document.getElementById('page-' + page);
+  if (target) {
+    target.classList.add('active');
+    // Scroll to top immediately
+    window.scrollTo(0, 0);
+    // Trigger fade-in after layout
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        target.classList.add('visible');
+        // Re-observe fade-up elements after page is visible
+        observeFadeTargets();
+      });
+    });
+  }
+
+  // Update nav highlight
+  var navItems = document.querySelectorAll('.nav-links a[data-nav]');
+  navItems.forEach(function(a) {
+    if (a.getAttribute('data-nav') === page) {
+      a.classList.add('active');
+    } else {
+      a.classList.remove('active');
+    }
+  });
+
+  // Close mobile menu
+  var navLinks = document.getElementById('navLinks');
+  var navToggle = document.getElementById('navToggle');
+  navLinks.classList.remove('open');
+  navToggle.classList.remove('open');
+}
+
+// Listen to hash changes (browser back/forward)
+window.addEventListener('hashchange', function() {
+  var hash = window.location.hash.replace('#', '') || 'home';
+  navigateTo(hash);
+});
+
+// Handle clicks on [data-nav] links
+document.addEventListener('click', function(e) {
+  var link = e.target.closest('[data-nav]');
+  if (link) {
+    e.preventDefault();
+    var page = link.getAttribute('data-nav');
+    window.location.hash = '#' + page;
+  }
+});
+
+// Initial load
+window.addEventListener('DOMContentLoaded', function() {
+  var hash = window.location.hash.replace('#', '') || 'home';
+  // Instantly show (no transition on first load)
+  var target = document.getElementById('page-' + (pages.indexOf(hash) !== -1 ? hash : 'home'));
+  if (target) {
+    target.classList.add('active');
+    target.classList.add('visible');
+  }
+  // Update nav
+  var navItems = document.querySelectorAll('.nav-links a[data-nav]');
+  navItems.forEach(function(a) {
+    if (a.getAttribute('data-nav') === (pages.indexOf(hash) !== -1 ? hash : 'home')) {
+      a.classList.add('active');
+    }
+  });
+  // Observe fade targets
+  observeFadeTargets();
+});
+
+// ===== MOBILE NAV =====
+document.getElementById('navToggle').addEventListener('click', function() {
+  document.getElementById('navLinks').classList.toggle('open');
+  this.classList.toggle('open');
+});
+
+// ===== FADE-IN ON SCROLL =====
+function observeFadeTargets() {
+  var fadeTargets = document.querySelectorAll('.fade-up:not(.visible)');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  fadeTargets.forEach(function(el) { observer.observe(el); });
+}
+
+// ===== GALLERY LIGHTBOX =====
+var lightbox = document.getElementById('lightbox');
+var lightboxImg = document.getElementById('lightboxImg');
+document.addEventListener('click', function(e) {
+  var item = e.target.closest('.gallery-item');
+  if (item) {
+    lightboxImg.src = item.getAttribute('data-src');
+    lightbox.classList.add('active');
+  }
+});
+lightbox.addEventListener('click', function() {
+  lightbox.classList.remove('active');
+  lightboxImg.src = '';
+});
+
+// ===== CONTACT FORM =====
+function handleSubmit() {
+  var name = document.getElementById('c-name').value.trim();
+  var org = document.getElementById('c-org').value.trim();
+  var region = document.getElementById('c-region').value.trim();
+  var email = document.getElementById('c-email').value.trim();
+  var message = document.getElementById('c-message').value.trim();
+
+  if (!name || !email) {
+    alert('이름과 이메일을 입력해 주세요.');
+    return;
+  }
+
+  var subject = encodeURIComponent('[구르미 도입 문의] ' + name + (org ? ' / ' + org : ''));
+  var body = encodeURIComponent(
+    '이름: ' + name + '\n' +
+    '소속: ' + (org || '-') + '\n' +
+    '지역: ' + (region || '-') + '\n' +
+    '이메일: ' + email + '\n\n' +
+    '메시지:\n' + (message || '-')
+  );
+
+  window.location.href = 'mailto:uigoosim_y@sksunny.com?subject=' + subject + '&body=' + body;
+
+  // Show success
+  document.getElementById('formSuccess').style.display = 'block';
+  document.getElementById('c-name').value = '';
+  document.getElementById('c-org').value = '';
+  document.getElementById('c-region').value = '';
+  document.getElementById('c-email').value = '';
+  document.getElementById('c-message').value = '';
+}
+</script>
+
+</body>
+</html>

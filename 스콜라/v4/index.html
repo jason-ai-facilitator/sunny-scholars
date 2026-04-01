@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RE:MOVE — 의성, 느린 속도의 기록 — Sunny Scholar Edition</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: 'Noto Serif KR', serif;
+  background: #f5f0fa;
+  color: #2a2a2a;
+  line-height: 2;
+  font-size: 17px;
+  font-weight: 400;
+}
+
+/* ===== PROGRESS BAR ===== */
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: #6B3FA0;
+  z-index: 9999; width: 0%;
+  transition: width 0.1s linear;
+}
+
+/* ===== MASTHEAD ===== */
+.masthead {
+  position: fixed; top: 3px; left: 0; right: 0; z-index: 500;
+  background: rgba(254,252,248,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  padding: 10px 32px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'Noto Sans KR', sans-serif;
+  transition: transform 0.3s ease;
+}
+.masthead.hidden { transform: translateY(-100%); }
+.masthead-brand {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: #6B3FA0;
+}
+.masthead-nav {
+  display: flex; gap: 24px; font-size: 0.72rem; font-weight: 500;
+  color: #888; letter-spacing: 0.5px;
+}
+.masthead-nav a {
+  text-decoration: none; color: inherit; cursor: pointer;
+  transition: color 0.2s;
+}
+.masthead-nav a:hover { color: #6B3FA0; }
+.masthead-nav a.active { color: #2a2a2a; }
+
+/* ===== HERO SECTION ===== */
+.hero {
+  position: relative; width: 100%; height: 100vh;
+  overflow: hidden; background: #1a1a1a;
+}
+.hero-img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: sepia(0.18) saturate(0.6) brightness(0.82) contrast(0.95);
+  opacity: 0.7;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(26,26,26,0.2) 0%,
+    rgba(26,26,26,0.1) 40%,
+    rgba(26,26,26,0.6) 75%,
+    rgba(26,26,26,0.92) 100%
+  );
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 10vw 8vh;
+}
+.hero-kicker {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 16px;
+}
+.hero-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-weight: 900; color: #fff;
+  line-height: 1.3; margin-bottom: 20px;
+  max-width: 700px;
+}
+.hero-subtitle {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 400; color: rgba(255,255,255,0.75);
+  line-height: 1.7; max-width: 550px;
+  margin-bottom: 32px;
+}
+.hero-meta {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.72rem; color: rgba(255,255,255,0.45);
+  letter-spacing: 1px;
+}
+.hero-scroll {
+  position: absolute; bottom: 24px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center;
+  gap: 8px; color: rgba(255,255,255,0.4);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.65rem; letter-spacing: 2px;
+  animation: float 2s ease-in-out infinite;
+}
+.hero-scroll .arrow { font-size: 1.2rem; }
+@keyframes float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-6px); }
+}
+
+/* ===== ARTICLE CONTAINER ===== */
+.article { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+/* ===== CHAPTER HEADER ===== */
+.chapter-break {
+  text-align: center; padding: 100px 24px 60px;
+  max-width: 720px; margin: 0 auto;
+}
+.chapter-break .chapter-num {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 5px; text-transform: uppercase;
+  color: #6B3FA0;
+  margin-bottom: 16px;
+}
+.chapter-break h2 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 900; line-height: 1.35;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+.chapter-break .chapter-rule {
+  width: 40px; height: 2px;
+  background: #6B3FA0;
+  margin: 0 auto;
+}
+
+/* ===== SECTION HEADERS ===== */
+.section-header {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.5rem; font-weight: 700;
+  line-height: 1.4; color: #1a1a1a;
+  margin: 72px 0 28px;
+  padding-top: 16px;
+}
+
+/* ===== PARAGRAPHS ===== */
+.article p {
+  margin-bottom: 28px;
+  color: #333;
+  word-break: keep-all;
+}
+
+/* ===== DROP CAP ===== */
+.drop-cap::first-letter {
+  float: left;
+  font-size: 4.2em;
+  line-height: 0.8;
+  padding-right: 12px;
+  padding-top: 6px;
+  color: #6B3FA0;
+  font-weight: 900;
+}
+
+/* ===== HORIZONTAL RULE ===== */
+.thin-rule {
+  border: none; border-top: 1px solid #d4c6e8;
+  margin: 56px 0;
+}
+
+/* ===== FULL BLEED IMAGE ===== */
+.bleed-photo {
+  width: 100vw; position: relative;
+  left: 50%; transform: translateX(-50%);
+  margin: 56px 0;
+  overflow: hidden;
+}
+.bleed-photo img {
+  width: 100%; height: auto;
+  display: block;
+  filter: sepia(0.18) saturate(0.6) brightness(0.82) contrast(0.95);
+}
+.bleed-photo.tall img {
+  max-height: 85vh; object-fit: cover;
+}
+.bleed-caption {
+  max-width: 720px; margin: 0 auto;
+  padding: 12px 24px 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.72rem; color: #999;
+  line-height: 1.6;
+}
+.bleed-caption .cap-num {
+  color: #6B3FA0; font-weight: 700;
+  margin-right: 6px;
+}
+
+/* ===== INLINE IMAGE (within article width) ===== */
+.inline-photo {
+  margin: 48px 0;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.inline-photo img {
+  width: 100%; height: auto; display: block;
+  filter: sepia(0.18) saturate(0.6) brightness(0.82) contrast(0.95);
+}
+.inline-caption {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.72rem; color: #999;
+  line-height: 1.6; margin-top: 10px;
+}
+.inline-caption .cap-num {
+  color: #6B3FA0; font-weight: 700;
+  margin-right: 6px;
+}
+
+/* ===== WIDE IMAGE (wider than article, narrower than bleed) ===== */
+.wide-photo {
+  width: calc(100% + 200px);
+  margin-left: -100px;
+  margin-top: 48px; margin-bottom: 48px;
+  overflow: hidden;
+}
+.wide-photo img {
+  width: 100%; height: auto; display: block;
+  filter: sepia(0.18) saturate(0.6) brightness(0.82) contrast(0.95);
+}
+.wide-caption {
+  max-width: 720px; margin: 0 auto;
+  padding-top: 10px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.72rem; color: #999;
+  line-height: 1.6;
+}
+.wide-caption .cap-num {
+  color: #6B3FA0; font-weight: 700;
+  margin-right: 6px;
+}
+
+/* ===== PULL QUOTE ===== */
+.pull-quote {
+  margin: 64px 0;
+  padding: 0 0 0 28px;
+  border-left: 3px solid #6B3FA0;
+}
+.pull-quote blockquote {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.8;
+  color: #1a1a1a;
+  font-style: normal;
+}
+.pull-quote cite {
+  display: block; margin-top: 12px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.78rem; font-style: normal;
+  color: #6B3FA0; font-weight: 500;
+}
+
+/* ===== SIDEBAR DATA PANEL ===== */
+.sidebar-panel {
+  float: right;
+  width: 260px;
+  margin: 0 -40px 32px 32px;
+  padding: 24px;
+  background: #f5f0ea;
+  border-top: 3px solid #6B3FA0;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.sidebar-panel h4 {
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: #6B3FA0;
+  margin-bottom: 16px;
+}
+.sidebar-stat {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #d4c6e8;
+}
+.sidebar-stat:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+.sidebar-stat .num {
+  font-size: 2rem; font-weight: 700;
+  color: #1a1a1a; line-height: 1.1;
+}
+.sidebar-stat .label {
+  font-size: 0.78rem; color: #666;
+  line-height: 1.5; margin-top: 4px;
+}
+
+/* ===== INTERVIEW SURVEY INFO ===== */
+.survey-info {
+  max-width: 720px; margin: 0 auto;
+  padding: 40px 24px;
+  text-align: center;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.survey-info .info-grid {
+  display: flex; justify-content: center; gap: 48px;
+  flex-wrap: wrap; margin-top: 24px;
+}
+.survey-info .info-item {
+  text-align: center;
+}
+.survey-info .info-icon {
+  font-size: 1.4rem; margin-bottom: 6px;
+}
+.survey-info .info-label {
+  font-size: 0.7rem; color: #999;
+  letter-spacing: 1px; text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.survey-info .info-value {
+  font-size: 0.88rem; color: #333;
+  font-weight: 500; line-height: 1.5;
+}
+
+/* ===== ELDER QUOTE BLOCK ===== */
+.elder-quotes {
+  margin: 48px 0;
+  padding: 40px 0;
+  border-top: 1px solid #d4c6e8;
+  border-bottom: 1px solid #d4c6e8;
+}
+.elder-quotes h4 {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: #6B3FA0;
+  margin-bottom: 28px;
+}
+.elder-quote-item {
+  margin-bottom: 24px;
+  padding-left: 20px;
+  border-left: 2px solid #ddd;
+}
+.elder-quote-item:last-child { margin-bottom: 0; }
+.elder-quote-item .eq-text {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.9;
+  font-style: italic;
+}
+.elder-quote-item .eq-attr {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.72rem; color: #999;
+  margin-top: 6px;
+}
+
+/* ===== DATA CHART IMAGE ===== */
+.chart-figure {
+  margin: 40px 0;
+  text-align: center;
+}
+.chart-figure img {
+  max-width: 100%; height: auto;
+  display: inline-block;
+  filter: sepia(0.18) saturate(0.6) brightness(0.82) contrast(0.95);
+  border-radius: 4px;
+}
+.chart-figure figcaption {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.75rem; color: #888;
+  margin-top: 10px;
+}
+
+/* ===== SOLUTION CARD ===== */
+.solution-card {
+  margin: 48px 0;
+  padding: 36px;
+  background: #fff;
+  border: 1px solid #e8e4de;
+  border-radius: 4px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+}
+.solution-card .sc-badge {
+  display: inline-block;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: #6B3FA0;
+  background: rgba(139,58,58,0.08);
+  padding: 4px 12px;
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+.solution-card h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.4rem; font-weight: 700;
+  color: #1a1a1a; margin-bottom: 16px;
+}
+.solution-card p {
+  margin-bottom: 16px;
+}
+.solution-card .sc-result {
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: #f9f6f1;
+  border-left: 3px solid #6B3FA0;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.88rem;
+  color: #555;
+  line-height: 1.7;
+}
+
+/* ===== SOLUTION GOALS ===== */
+.solution-goals {
+  margin: 48px 0 40px;
+  padding: 32px;
+  background: #f5f0ea;
+  border-radius: 4px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.solution-goals .sg-item {
+  margin-bottom: 12px;
+  font-size: 0.92rem;
+  color: #333;
+}
+.solution-goals .sg-item:last-child { margin-bottom: 0; }
+
+/* ===== FUTURE PLAN ===== */
+.future-plan {
+  margin: 56px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.future-plan .fp-card {
+  padding: 28px;
+  background: #fff;
+  border: 1px solid #e8e4de;
+  border-top: 3px solid #6B3FA0;
+}
+.future-plan .fp-label {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 2px; color: #6B3FA0;
+  margin-bottom: 10px;
+}
+.future-plan .fp-text {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.95rem; color: #333;
+  line-height: 1.8;
+}
+
+/* ===== EPILOGUE ===== */
+.epilogue-section {
+  padding: 80px 24px;
+  max-width: 660px;
+  margin: 0 auto;
+}
+.epilogue-section h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.25rem; font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 24px;
+  margin-top: 56px;
+}
+.epilogue-section h3:first-child { margin-top: 0; }
+.epilogue-section p {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1rem;
+  line-height: 2.1;
+  color: #444;
+  margin-bottom: 24px;
+  word-break: keep-all;
+}
+
+/* ===== CLOSING POEM ===== */
+.closing-poem {
+  text-align: center;
+  padding: 80px 24px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.closing-poem p {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.1rem;
+  line-height: 2.2;
+  color: #555;
+  font-style: italic;
+}
+
+/* ===== CREDITS ===== */
+.credits {
+  text-align: center;
+  padding: 80px 24px 100px;
+  font-family: 'Noto Sans KR', sans-serif;
+  border-top: 1px solid #d4c6e8;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.credits .credit-line {
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #bbb;
+  margin-bottom: 8px;
+}
+.credits .credit-team {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #6B3FA0;
+  margin-bottom: 8px;
+}
+.credits .credit-year {
+  font-size: 0.72rem;
+  color: #ccc;
+  letter-spacing: 2px;
+}
+
+/* ===== SCROLL ANIMATIONS ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-in-slow {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+.fade-in-slow.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== TWO COLUMN LAYOUT ===== */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 48px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+  align-items: start;
+}
+.two-col .col-main p { margin-bottom: 28px; }
+.two-col .col-side {
+  position: sticky; top: 80px;
+}
+.side-data-card {
+  padding: 24px;
+  background: #f5f0ea;
+  border-top: 3px solid #6B3FA0;
+  margin-bottom: 24px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.side-data-card h4 {
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 3px; color: #6B3FA0;
+  margin-bottom: 14px;
+}
+.side-data-card .sd-stat {
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #d4c6e8;
+}
+.side-data-card .sd-stat:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.side-data-card .sd-num {
+  font-size: 1.8rem; font-weight: 700; color: #1a1a1a; line-height: 1.1;
+}
+.side-data-card .sd-label {
+  font-size: 0.75rem; color: #666; margin-top: 4px; line-height: 1.4;
+}
+
+/* ===== IMAGE PAIR (two images side by side) ===== */
+.image-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 48px 0;
+}
+.image-pair img {
+  width: 100%; height: 250px;
+  object-fit: cover;
+  filter: sepia(0.18) saturate(0.6) brightness(0.82) contrast(0.95);
+  border-radius: 2px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .two-col {
+    grid-template-columns: 1fr;
+    max-width: 720px;
+  }
+  .two-col .col-side {
+    position: static;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .wide-photo {
+    width: 100%; margin-left: 0;
+  }
+  .sidebar-panel {
+    float: none;
+    width: 100%;
+    margin: 32px 0;
+  }
+}
+@media (max-width: 600px) {
+  body { font-size: 16px; line-height: 1.9; }
+  .hero-overlay { padding: 0 6vw 6vh; }
+  .hero-title { font-size: 1.8rem; }
+  .hero-subtitle { font-size: 0.95rem; }
+  .article { padding: 0 20px; }
+  .chapter-break { padding: 80px 20px 48px; }
+  .chapter-break h2 { font-size: 1.6rem; }
+  .section-header { font-size: 1.25rem; margin-top: 56px; }
+  .pull-quote blockquote { font-size: 1.1rem; }
+  .two-col .col-side { grid-template-columns: 1fr; }
+  .future-plan { grid-template-columns: 1fr; }
+  .image-pair { grid-template-columns: 1fr; }
+  .image-pair img { height: 200px; }
+  .masthead-nav { display: none; }
+  .survey-info .info-grid { gap: 24px; }
+  .bleed-caption, .wide-caption { padding: 12px 20px 0; }
+  .epilogue-section { padding: 60px 20px; }
+  .solution-card { padding: 24px; }
+}
+
+
+
+/* Base: warm muted tone for all images */
+img { transition: filter 0.4s; }
+
+/* Hero/parallax: full size, no restrictions */
+.hero img, .hero-img, [class*="hero"] img,
+.parallax-section img, .parallax-section,
+[class*="parallax"] img {
+  max-height: none !important;
+  object-fit: cover;
+}
+
+/* Infographics/charts/diagrams: natural size, no crop */
+img[src*="map"], img[src*="chart"], img[src*="timeline"],
+img[src*="img_00"], img[src*="img_08.jpg"],
+.data-card img, .chart-figure img, .survey-info img,
+.viz img, .data-panel img {
+  max-height: none !important;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Inline photos: comfortable size */
+
+
+/* Photo pairs/grids: square-ish, moderate */
+
+
+/* Gallery/grid: square crop */
+.epilogue-gallery img, .photo-grid img, .photo-grid-3 img,
+.triple-grid img {
+  max-height: 300px;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+/* Filmstrip horizontal gallery */
+[class*="filmstrip"] img, [class*="horizontal"] img {
+  max-height: none !important;
+  height: 280px;
+  object-fit: cover;
+}
+
+/* Subtle overlay for depth */
+.bleed-photo, .photo-essay, .img-block, .full-image {
+  position: relative;
+}
+
+
+
+
+
+
+
+/* === MINIMAL IMAGE RULES === */
+.epilogue-gallery img, .photo-grid img, .photo-grid-3 img, .triple-grid img {
+  aspect-ratio: 1; object-fit: cover;
+}
+.text-highlight {
+  font-size: 1.5em; font-weight: 700; line-height: 1.5;
+  text-align: center; padding: 48px 24px; margin: 48px 0;
+  max-width: 680px; margin-left: auto; margin-right: auto;
+  border-top: 2px solid currentColor; border-bottom: 2px solid currentColor;
+}
+.text-break {
+  font-size: 1.25em; font-weight: 500; line-height: 1.7;
+  text-align: center; padding: 40px 24px; margin: 40px auto;
+  max-width: 600px; font-style: italic;
+}
+
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Masthead -->
+<nav class="masthead" id="masthead">
+  <div class="masthead-brand">RE:MOVE</div>
+  <div class="masthead-nav">
+    <a href="#ch1" data-chapter="1">프롤로그</a>
+    <a href="#ch2" data-chapter="2">오조작 사고</a>
+    <a href="#ch3" data-chapter="3">솔루션</a>
+    <a href="#ch4" data-chapter="4">에필로그</a>
+  </div>
+</nav>
+
+<!-- ============================================ -->
+<!-- HERO -->
+<!-- ============================================ -->
+<header class="hero" id="hero">
+  <img class="hero-img" src="../images/img_00_hero.jpg" alt="의성으로 향하는 버스 안에서">
+  <div class="hero-overlay">
+    <div class="hero-kicker">SK Sunny &middot; Team RE:MOVE &middot; 2025</div>
+    <h1 class="hero-title">느린 속도의<br>기록</h1>
+    <p class="hero-subtitle">의성의 어르신들은 왜 의료용 전동스쿠터 레버를 놓지 못했는가. 네 명의 대학생이 한여름의 의성에서 마주한 이동권의 진짜 문제.</p>
+    <div class="hero-meta">2025년 6월 26일 &mdash; 8월 22일 &middot; 경북 의성군</div>
+  </div>
+  <div class="hero-scroll">
+    <span>SCROLL</span>
+    <span class="arrow">&darr;</span>
+  </div>
+</header>
+
+
+<!-- ============================================ -->
+<!-- CHAPTER 1: 프롤로그 -->
+<!-- ============================================ -->
+<div class="chapter-break fade-in" id="ch1">
+  <div class="chapter-num">Chapter One</div>
+  <h2>프롤로그</h2>
+  <div class="chapter-rule"></div>
+</div>
+
+<!-- 1-1 -->
+<div class="article">
+  <h3 class="section-header fade-in">1-1. '진짜' 문제는 무엇인가</h3>
+
+  <p class="drop-cap fade-in">2025년 6월 26일 4명의 대학생이 의성에 도착했다. 지역 소멸 문제 해결, 소셜 분야 진로 탐색, 시골 삶 경험 등 각기 다른 목표와 관심사를 갖고 있었다. 하지만 '써니'로서 4명이 가지고 있는 공동의 목표가 있었는데, 의성 어르신들의 '진짜' 이동권 문제를 찾아내는 것이었다. 진짜 이동권 문제란 인터넷에 검색하면 나오는 뻔하고 추상적인 문제가 아니라 확실하게 해결할 수 있는 작고 구체적인 문제였다. 그래서 문제 탐색에 앞서, 의성 어르신들의 이동 장벽을 제거(Remove)하고, 이동 제약으로 어려움을 겪고 있는 어르신들을 다시 움직(Re-move)이실 수 있게 만들겠다는 야심 찬 뜻을 담아 'RE:MOVE(리무브)'라는 팀 이름을 만들었다.</p>
+</div>
+
+<div class="article fade-in" style="text-align:center; margin:48px auto;">
+  <img style="max-height:50vh; width:auto; border-radius:4px; filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_01.jpg" alt="화이트보드 브레인스토밍">
+  <p style="font-size:0.72rem; color:#999; margin-top:12px; font-family:'Noto Sans KR',sans-serif;"><span style="color:#6B3FA0; font-weight:700;">01</span> 첫 번째 브레인스토밍. 의성의 이동권 문제에 대해 아는 것은 거의 없었다.</p>
+</div>
+
+<div class="article">
+  <p class="fade-in">하지만 평생 도시에서 살아온 우리에게 '의성의 진짜 이동권 문제 찾기'는 맨땅에 헤딩하기나 다름없었다. '의성', '어르신', '이동권' 중 무엇 하나 확실히 알지 못했기 때문이다. 그래서 우리는 무작정 밖으로 나갔다. 어르신의 주 활동 시간대인 오전에 보건소, 우체국, 마트, 시장, 병원, 복지관 등 어르신이 계실 것 같은 곳이라면 가리지 않고 돌아다녔다. 현장 속에서 보고 들을 수 있는 어르신의 대화, 생활 모습, 의성만의 문화 모두 중요한 학습 자료가 되었다. 3주쯤 지나니 어르신과 대화를 나누는 것이 익숙해졌고, 낯설던 사투리에 귀가 트였다. 무엇보다, 누가 봐도 이방인 같던 도시 청년의 모습이 온데간데없어졌다.</p>
+</div>
+
+<div class="image-pair fade-in" style="max-width:900px; margin-left:auto; margin-right:auto; padding:0 24px; display:flex; gap:12px; align-items:center;">
+  <img style="flex:1; max-height:300px; object-fit:cover; border-radius:4px; filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_07.png" alt="밀짚모자를 쓴 팀원들">
+  <img style="flex:0 0 auto; max-height:300px; width:auto; border-radius:4px; filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_09.png" alt="의성 거리를 걷는 팀원">
+</div>
+
+<div class="article">
+  <p class="fade-in">그러나 여전히 의성의 어르신 이동권 문제가 무엇인진 알기 어려웠다. 처음 관심을 가졌던 행복버스, 행복택시나 이재민의 재난 후 이동권 같은 분야에선 우리가 예상했던 문제를 찾기 어려웠다. 시간은 빠르게 흐르는데 길이 보이지 않았다. 침체기에 빠져있던 어느 날 의료용 전동스쿠터와 도로변 주차 문제에 관심 있던 한 팀원이 '의료용 전동스쿠터는 차체가 높지 않은 편인데, 도로변 주차로 운전자가 의료용 전동스쿠터를 보지 못해 위험할 수 있지 않을까?'라는 의문을 제기했다. 우리는 이 의문에 공감하며 의료용 전동스쿠터에 대한 심층 리서치를 시작했다.</p>
+
+  <hr class="thin-rule">
+
+  <!-- 1-2 -->
+  <h3 class="section-header fade-in">1-2. 의료용 전동스쿠터와의 첫 만남</h3>
+
+  <p class="fade-in">우리가 의료용 전동스쿠터의 존재를 처음 인식한 것은 7월 2일 의성노인복지관에 방문한 날이었다. 시골에서 의료용 전동스쿠터를 많이 이용한다는 것을 알고 있었지만 복지관 앞에 마치 승용차처럼 줄지어 주차되어 있는 모습은 놀라웠다. 의료용 전동스쿠터가 의성에서 꽤 인기 있는 이동 수단임을 느낄 수 있었다. 이후에도 마을회관, 오일장, 읍내 인도와 차도 등에서 시도 때도 없이 의료용 전동스쿠터를 쉽게 목격할 수 있었다.</p>
+</div>
+
+<div class="article fade-in" style="text-align:center; margin:48px auto;">
+  <img style="max-height:55vh; width:auto; border-radius:4px; filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_12.png" alt="복지관 앞에 줄지어 주차된 전동스쿠터">
+  <p style="font-size:0.72rem; color:#999; margin-top:12px; font-family:'Noto Sans KR',sans-serif;"><span style="color:#6B3FA0; font-weight:700;">02</span> 의성노인복지관 앞. 의료용 전동스쿠터가 마치 승용차처럼 줄지어 주차되어 있다.</p>
+</div>
+
+<div class="article">
+  <div class="pull-quote fade-in">
+    <blockquote>"예, 타는 게 좋아요. 그 얼마나 편리한지 몰라요."<br>"딸보다도 낫고 아들보다도 낫고"<br>"그거 뭐 제일 쉬운 게 뭐 전동차인데, 뭐. 자전거는 못 타도 그거는 뭐 대번 되더라고."</blockquote>
+    <cite>의성 어르신들의 전동스쿠터에 대한 목소리</cite>
+  </div>
+
+  <p class="fade-in">흥미로운 것은 의료용 전동스쿠터를 이용하시는 어르신들께서 이렇게 말씀하시는 것과 달리 의료용 전동스쿠터의 안전성에 대해 부정적으로 보도하는 기사들이 많았다. 그래서 우리는 승용차 운전자의 객관적인 시각을 알아보기 위해, 도동3리 노인회장이자 장애인협회에서 활동하셨던 서상우 어르신을 심층 인터뷰했다. 인터뷰를 통해 중요한 정보를 알게 되었는데, 도로변 주차뿐만 아니라 인도 적재물, 교육 부재, 중고 전동차 구매 등 의료용 전동스쿠터 이용자의 안전을 위협하는 문제가 아주 많다는 것이었다.</p>
+</div>
+
+<div class="image-pair fade-in" style="max-width:900px; margin-left:auto; margin-right:auto; padding:0 24px; display:flex; gap:12px; align-items:center; justify-content:center;">
+  <img style="max-height:320px; width:auto; border-radius:4px; filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_10.png" alt="안전 깃발이 달린 전동스쿠터">
+  <img style="max-height:320px; width:auto; border-radius:4px; filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_11.png" alt="도로 위의 전동스쿠터">
+</div>
+
+<div class="article">
+  <hr class="thin-rule">
+
+  <!-- 1-3 -->
+  <h3 class="section-header fade-in">1-3. 진짜 문제를 발견하다</h3>
+
+  <p class="fade-in">우리는 의료용 전동스쿠터의 안전성을 둘러싼 수많은 문제 중 무엇이 진짜 문제인지 찾아야 했다. 그 첫 번째 단계는 폭넓은 이해관계자 리스트업이었다. 의료용 전동스쿠터에 대한 전문적인 의견을 들을 수 있는 의료기기점과 제조업체, 안전 문제와 교통 문제를 책임지는 경찰서, 파출소, 119, 그리고 차도에서 의료용 전동스쿠터를 많이 목격했을 버스와 택시 기사님들, 사고가 나면 빠르게 현장에 도착하는 구난차 업체를 리스트업했다.</p>
+</div>
+
+<div class="article fade-in" style="margin:48px auto;">
+  <img style="width:100%; border-radius:4px; filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_17.png" alt="안동 의료기기점 외관">
+  <p style="font-size:0.72rem; color:#999; margin-top:12px; font-family:'Noto Sans KR',sans-serif;"><span style="color:#6B3FA0; font-weight:700;">03</span> 안동의 의료기기점. 의성에는 큰 규모의 의료기기점이 거의 없어 안동까지 찾아갔다.</p>
+</div>
+
+<div class="article">
+  <p class="fade-in">가장 먼저 찾아 나선 이해관계자는 안동 의료기기점 사장님들이었다. 의성엔 큰 규모의 의료기기점이 거의 없었고, 안동에서 의료용 전동스쿠터를 구매하시는 어르신이 많았기 때문에 안동 의료기기점을 선택했다. 처음 방문한 '메디카'에서 우리는 새로운 이야기를 듣게 되었다. 어르신들께 의료용 전동스쿠터 이용법을 교육할 때 특히 신경 쓰시는 부분이 있냐고 여쭤보자 다음과 같이 답하셨다.</p>
+
+  <div class="pull-quote fade-in">
+    <blockquote>"레버를 잡으면 앞으로 가고, 놓으면 멈추는 방식인데 당황하거나 놀라시면 손을 안 놓으셔서 사고 나는 경우가 많아요. 그래서 멈추려면 손을 꼭 놓으셔야 한다고 말씀드리죠."</blockquote>
+    <cite>안동 의료기기점 '메디카' 사장님</cite>
+  </div>
+
+  <p class="fade-in">데스크리서치와 이전까지의 인터뷰에서 전혀 찾을 수 없던 문제였기 때문에 안동의 다른 4곳의 의료기기점에서 해당 문제가 발생하는지 여쭤보았다. 놀랍게도 처음 방문한 메디카를 포함해 5곳 중 4곳에서 같은 응답을 들을 수 있었다. 이것이 '진짜' 문제의 실마리라고 생각한 우리는 이 문제를 '의료용 전동스쿠터 오조작'이라고 정의 내리고 현장에서 오조작 문제가 얼마나 많이, 얼마나 심각하게 발생하는지 확인하기로 했다.</p>
+
+  <hr class="thin-rule">
+
+  <!-- 1-4 -->
+  <h3 class="section-header fade-in">1-4. 끝없는 인터뷰</h3>
+
+  <p class="fade-in">우선 리스트업 해두었던 경찰서, 파출소, 119, 버스 기사님, 택시 기사님, 구난차 사장님을 인터뷰했지만 의료용 전동스쿠터에 대한 부정적 인식만 확인할 수 있었을 뿐, 오조작 문제에 관한 이야기는 전혀 들을 수 없었다. 아무도 오조작 문제를 알지 못했다. 오조작 문제가 우리가 찾는 문제가 맞을지 불안해지기 시작했지만 답은 현장에 있다는 믿음으로 당사자 인터뷰를 시작했다.</p>
+
+  <p class="fade-in">2주간 10명가량을 인터뷰했을 땐 아직 문제가 모호해보였다. 다음 3가지 이유로 인터뷰에 어려움을 겪었기 때문이다. 먼저, 어르신과 우리의 사고에 대한 관점이 달랐다. 우리는 가벼운 충돌이나 낙상도 사고라고 생각한 반면, 어르신은 크게 다친 경우만 사고라고 생각하셨다. 또, 읍내에서 무작정 돌아다니는 방식으로는 의료용 전동스쿠터를 많이 만날 수 없었다. 대부분의 어르신이 의료용 전동스쿠터를 가장 빠른 속도로 타고 다니셨기 때문에 자전거를 타고 쫓아가야만 간신히 대화를 나눌 수 있었다. 마지막으로, 어르신의 사투리를 알아듣기가 쉽지 않았다. 간단한 일상 대화를 나눌 땐 문제없었지만 구체적인 사고 정황을 파악할 땐 내용을 이해하기 어려웠다.</p>
+</div>
+
+<div class="article fade-in" style="margin:48px auto;">
+  <img style="filter:sepia(0.08) saturate(0.85) brightness(0.93); max-height:70vh; object-fit:cover;" src="../images/img_16.jpg" alt="어르신과 함께 식사하는 팀원들">
+  <p style="font-size:0.72rem; color:#999; margin-top:12px; font-family:'Noto Sans KR',sans-serif;"><span style="color:#6B3FA0; font-weight:700;">04</span> 어르신과 함께한 식사 자리. 인터뷰는 공식적인 자리보다 이런 일상의 순간에서 더 진솔한 이야기가 나왔다.</p>
+</div>
+
+<div class="article">
+  <p class="fade-in">그래서 그다음 2주 간은 새로운 방식으로 인터뷰를 진행했다. "사고 나신 적 있으세요?" 대신 "어디 부딪친 적 있으세요? 위험하다고 느낀 적 있으세요? 나도 모르게 레버를 꽉 잡은 적 있으세요?"로 질문의 방식을 바꿨다. 그러자 이전엔 사고 난 적 없다며 손사래를 치던 어르신들께서 생생한 사고 이야기를 전해주기 시작하셨다. 또, 무작정 읍내를 돌아다니며 의료용 전동스쿠터를 쫓는 대신 마을회관, 노인복지관 등 어르신들이 많이 계신 곳에 방문해 의료용 전동스쿠터를 이용하는 어르신을 찾았다. 의료용 전동스쿠터 이용률이 더 높을 것으로 예상되는 면 지역에도 두 명씩 지역을 나누어 인터뷰를 나가기 시작했다. 이때, 사투리에 능한 대구 출신 팀원이 나머지 팀원과 돌아가며 짝을 맺어 의사소통이 어려울 때 도움을 주고, 팀원들이 모르는 단어를 알려주었다.</p>
+
+  <hr class="thin-rule">
+
+  <!-- 1-5 -->
+  <h3 class="section-header fade-in">1-5. 당사자의 목소리가 알려준 것</h3>
+</div>
+
+<!-- Sidebar + text layout -->
+<div class="two-col fade-in">
+  <div class="col-main">
+    <p>각고의 노력 끝에 의료용 전동스쿠터 이용자 49명의 소중한 데이터를 얻을 수 있었다. 현장에서 어르신들의 목소리를 생생하게 담아내는 것은 정말 쉽지 않았다. 의성의 뜨거운 여름 날씨로 한 걸음 한 걸음 내딛기가 어려웠고, 우리를 의료용 전동스쿠터 판매원으로 오해하시는 일도 적지 않게 있었다. 또, 손주처럼 다정히 대해주시는 분이 대부분이었지만 낯선 이에 대한 경계 어린 시선도 종종 마주쳐야 했다. 그럼에도 우리가 어르신 인터뷰를 포기할 수 없었던 이유는 당사자만이 알려줄 수 있는 것이 있었기 때문이다.</p>
+
+    <p>의료용 전동스쿠터가 어르신들에게 어떤 의미인지, 타고 어디에 가시는지, 불편한 점이 있는지, 이용 중 어쩌다 사고가 나셨는지, 사고가 나셨는데도 계속 타시는 이유가 무엇인지는 어르신들만이 알려주실 수 있었다. 문제를 수치로 정의 내리고 제멋대로 판단하지 않기 위해서 우리는 당사자의 목소리를 충분히 들어야 했다. 이런 마음으로 모은 49명의 데이터는 단순한 숫자가 아니라 어르신들의 이동과 삶을 말하는 목소리였다.</p>
+  </div>
+  <div class="col-side">
+    <div class="side-data-card">
+      <h4>현장 조사</h4>
+      <div class="sd-stat">
+        <div class="sd-num">49명</div>
+        <div class="sd-label">인터뷰 대상 어르신</div>
+      </div>
+      <div class="sd-stat">
+        <div class="sd-num">3주</div>
+        <div class="sd-label">현장 인터뷰 기간</div>
+      </div>
+      <div class="sd-stat">
+        <div class="sd-num">7개 지역</div>
+        <div class="sd-label">의성읍, 안계면, 금성면,<br>가음면, 춘산면, 봉양면, 사곡면</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================ -->
+<!-- CHAPTER 2: 오조작 사고 -->
+<!-- ============================================ -->
+<div class="chapter-break fade-in" id="ch2">
+  <div class="chapter-num">Chapter Two</div>
+  <h2>우리가 찾아낸<br>의료용 전동스쿠터 오조작 사고</h2>
+  <div class="chapter-rule"></div>
+</div>
+
+<div class="article">
+  <p class="drop-cap fade-in">우리 팀은 3주 동안 의성의 마을을 하나하나 찾아다니며 의료용 전동스쿠터와 얽힌 어르신들의 생생한 이야기를 직접 듣기 위한 기록을 이어나갔다.</p>
+</div>
+
+<!-- Survey info banner -->
+<div class="survey-info fade-in">
+  <div class="info-grid">
+    <div class="info-item">
+      <div class="info-icon">&#128197;</div>
+      <div class="info-label">인터뷰 시기</div>
+      <div class="info-value">2025. 7. 21 &mdash; 8. 8</div>
+    </div>
+    <div class="info-item">
+      <div class="info-icon">&#128101;</div>
+      <div class="info-label">인터뷰 대상</div>
+      <div class="info-value">의료용 전동스쿠터<br>이용 어르신 49명</div>
+    </div>
+    <div class="info-item">
+      <div class="info-icon">&#128205;</div>
+      <div class="info-label">인터뷰 지역</div>
+      <div class="info-value">의성읍, 안계면, 금성면, 가음면,<br>춘산면, 봉양면, 사곡면</div>
+    </div>
+  </div>
+</div>
+
+<div class="article fade-in" style="margin:48px auto;">
+  <img style="width:100%;height:auto;" src="../images/img_19_map.png" alt="의성 조사 지역 지도">
+  <p style="font-size:0.72rem; color:#999; margin-top:12px; font-family:'Noto Sans KR',sans-serif;"><span style="color:#6B3FA0; font-weight:700;">05</span> 인터뷰 조사 지역 지도. 의성읍을 중심으로 6개 면 지역까지 직접 찾아다녔다.</p>
+</div>
+
+<div class="article">
+  <h3 class="section-header fade-in">2-1. 어르신들에게 의료용 전동스쿠터의 의미</h3>
+</div>
+
+<!-- Two-column: text + sidebar data -->
+<div class="two-col fade-in">
+  <div class="col-main">
+    <p><strong>1️⃣ 성별 및 거주지 분포 현황</strong></p>
+
+    <p>먼저 49명의 어르신의 성별 분포를 살펴보면, 49명 중 여성이 40명으로 81.6%의 압도적인 비율을 차지하고, 남성은 9명으로 18.4%를 차지했다. 이러한 성별 분포를 보았을 때, 의료용 전동스쿠터가 여성 노년층의 생활 편의를 위한 이동 수단임을 알 수 있다.</p>
+
+    <p>특히, 어르신들의 거주지 분포를 보면 의성 면 지역 거주자가 30명으로, 전체의 61.2%를 차지해 의성읍 지역(38.8%)보다 훨씬 많았다. 이는 경상북도 의성군의 지리적 특성을 고려할 때 중요한 의미를 가진다. 의성군은 면적이 넓고 마을이 흩어져 있어, 병원, 시장, 관공서 등의 주요 편의시설이 밀집되어 있지 않다. 더군다나 도시와 다르게 대중교통이 원활하지 않아 특별한 이동 수단 없이는 이동이 힘들다. 이러한 환경에서 의료용 전동스쿠터는 '있으면 좋은' 보조 이동 수단이 아니다.</p>
+<div class="text-highlight">의료용 전동스쿠터는 '있으면 좋은' 보조 이동 수단이 아니다.</div>
+<p class="fade-in"> 이는 어르신들이 병원을 가고, 장을 보기 위해 반드시 사용해야 하는 '필수적인 발'이다. 걸어서는 도저히 감당할 수 없는 거리를 이동하고, 원하는 시간대에 원하는 곳으로 이동하게 해주는 이동 수단이다. 이렇듯 의성군의 지역적 특성상 어르신들이 일상생활을 영위하기 위해 의료용 전동스쿠터는 선택이 아닌 필수다.</p>
+
+    <p><strong>2️⃣ 기존 면허 유무 및 기존 이동수단 여부</strong></p>
+
+    <p>다음으로, 어르신들의 의료용 전동스쿠터 이전 이동 수단에 주목했다. 의료용 전동스쿠터를 타기 전에 다른 이동 수단을 이용한 경험이 있는지, 그리고 그 경험이 현재의 전동스쿠터 조작 방식이나 이용에 어떤 영향을 미치는지 파악하고자 했다.</p>
+
+    <p>전체 49명 중 77.6%에 달하는 38명이 자동차, 오토바이 등과 같은 운전면허가 없는 것으로 나타났다. 법적으로 의료용 전동스쿠터는 보행자의 발로서 역할을 하기 때문에 '차량'이 아닌 '보행자'로 분류된다. 이에 의료용 전동스쿠터를 탈 때 별다른 면허를 필요로 하지 않는다. 그렇기에 면허가 없는 어르신들에게 의료용 전동스쿠터는 생애 첫 번째 이동 수단일 가능성이 높다. 자가용을 포함하여 오토바이나 자전거조차 운전해 본 경험이 없는 분들도 계셨다. 우리가 인터뷰한 49명의 어르신 중 약 34%의 어르신들께서는 이전에 이동 수단 경험 없이 의료용 전동스쿠터를 첫 이동 수단으로 이용하고 있었다.</p>
+
+    <p><strong>3️⃣ 전동스쿠터 경력</strong></p>
+
+    <p>이어서 의료용 전동스쿠터 운전 경력을 분석한 결과, 48명 중(응답자 49명 중 48명 응답) 1년 미만의 초기 이용자는 2명(4.2%)으로 비교적 적었다. 반면에 가장 높은 비중을 차지한 집단은 1년~5년 미만(17명, 35.4%)였으며 5년~10년 미만(16명, 33.3%), 10년 이상(13명, 27.1%)의 장기 이용자도 상당수를 차지했다. 이는 의료용 전동스쿠터가 한두 번의 필요를 위해 일시적으로 사용되는 것이 아니라 수년 이상 함께하는 장기적인 이동 수단임을 나타낸다. 이처럼 높은 장기 이용률은 의료용 전동스쿠터가 어르신들의 삶에 필수적인 요소로 깊숙이 자리 잡았다는 것을 의미하기도 한다.</p>
+  </div>
+  <div class="col-side">
+    <div class="side-data-card">
+      <h4>핵심 수치</h4>
+      <div class="sd-stat">
+        <div class="sd-num">81.6%</div>
+        <div class="sd-label">이용자 중 여성 비율</div>
+      </div>
+      <div class="sd-stat">
+        <div class="sd-num">77.6%</div>
+        <div class="sd-label">운전면허 미보유</div>
+      </div>
+      <div class="sd-stat">
+        <div class="sd-num">61.2%</div>
+        <div class="sd-label">면 지역 거주자</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="article">
+  <hr class="thin-rule">
+
+  <h3 class="section-header fade-in">2-2. 수면 위로 드러난 위험</h3>
+</div>
+
+<!-- Two-column: charts + sidebar -->
+<div class="two-col fade-in">
+  <div class="col-main">
+    <p><strong>1️⃣ 의료용 전동스쿠터 사고 중 오조작 사고 비중</strong></p>
+
+    <p>49명의 어르신 중 의료용 전동스쿠터 사고 경험이 있다고 말씀해 주신 전체 22건의 사례 중에서 절반이 넘는 12건이 의료용 전동스쿠터 오조작 사고였다. 이 수치를 보며 의료기기 판매점 사장님의 말씀으로 시작됐던 문제가 더욱 선명해지기 시작했다. 12건이라는 큰 수치는 현장에서 지적했던 "의료용 전동스쿠터 오조작"이라는 문제가 몇몇의 특이한 사례가 아님을 여실히 보여준다. 우리 팀이 본격적인 인터뷰를 하기 전 예상했던 것보다 훨씬 빈번하게 발생하고 있었으며, 이미 꽤 많은 수의 어르신들이 이미 겪고 계셨던, 분명히 존재하는 문제임을 알 수 있었다.</p>
+
+    <div class="chart-figure">
+      <img style="max-height:60vh;width:auto;margin:0 auto;display:block;" src="../images/img_30_accident_ratio.png" alt="오조작 사고 비중 도넛 차트">
+      <figcaption>전체 사고 중 오조작 사고 비중</figcaption>
+    </div>
+
+    <p><strong>2️⃣ 오조작 행위와 실제 사고의 연결성</strong></p>
+
+    <p>또한, 인터뷰 데이터를 쌓으면서 '오조작 행위'와 '오조작 사고'의 관계를 정의할 수 있었다. 오조작 행위란 멈춰야 하는 상황에서 엑셀을 꽉 쥐는 것이다. 오조작 사고란 오조작 행위로 인해 발생하는 사고를 말한다.</p>
+
+    <p>인터뷰 결과, 의료용 전동스쿠터를 타면서 오조작 행위를 경험하셨던 것은 총 16건이었다. 그중 12건이 오조작 사고로 연결되었다. 모든 오조작 행위가 오조작 사고로 직결되는 것은 아니었지만, 매우 높은 확률로 오조작 행위가 오조작 사고로 이어졌다. 이는 75%의 확률로 단순히 아찔한 실수나 운이 좋게 가까스로 피한 상황에서 그치는 것이 아니라, 크고 작은 신체적 상해나 기기 파손과 같은 실질적인 피해로 이어진다는 것을 의미한다. 즉, 오조작 행위는 그 자체로 사고로 이어질 수 있는 강력한 신호이자, 어르신들의 일상을 위협하는 즉각적인 위험이다.</p>
+<div class="text-break">오조작 행위는 그 자체로 사고로 이어질 수 있는 강력한 신호이자, 어르신들의 일상을 위협하는 즉각적인 위험이다.</div>
+<p class="fade-in"></p>
+
+    <div class="chart-figure">
+      <img style="max-height:60vh;width:auto;margin:0 auto;display:block;" src="../images/img_31_misop_ratio.png" alt="오조작 행위 사고 전환율">
+      <figcaption>오조작 행위에서 실제 사고로의 전환율</figcaption>
+    </div>
+  </div>
+  <div class="col-side">
+    <div class="side-data-card">
+      <h4>오조작 사고</h4>
+      <div class="sd-stat">
+        <div class="sd-num">54.5%</div>
+        <div class="sd-label">전체 사고 중 오조작 사고 비중</div>
+      </div>
+      <div class="sd-stat">
+        <div class="sd-num">75%</div>
+        <div class="sd-label">오조작 행위의 사고 전환율<br>(16건 중 12건)</div>
+      </div>
+      <div class="sd-stat">
+        <div class="sd-num">22건</div>
+        <div class="sd-label">보고된 총 사고 건수</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="article">
+  <h4 class="fade-in" style="font-family:'Noto Sans KR',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:2px; color:#6B3FA0; margin:48px 0 24px; text-transform:uppercase;">사고 시기 및 유형별 특징</h4>
+
+  <div class="chart-figure fade-in">
+    <img style="width:100%;height:auto;" src="../images/img_32_location.png" alt="사고 장소 분석">
+    <figcaption>사고 장소: 집, 시장, 농로 각 3건 &mdash; 일상 공간에서 발생</figcaption>
+  </div>
+
+  <div class="chart-figure fade-in">
+    <img style="width:100%;height:auto;" src="../images/img_33_timing.png" alt="사고 시기 분석">
+    <figcaption>사고 시기: 초기 4건, 중장기 5건 &mdash; 경력과 무관하게 발생</figcaption>
+  </div>
+
+  <div class="chart-figure fade-in">
+    <img style="width:100%;height:auto;" src="../images/img_34_type.png" alt="사고 유형 분석">
+    <figcaption>사고 유형: 구조물 충돌이 가장 많고, 대인사고도 발생</figcaption>
+  </div>
+
+  <hr class="thin-rule">
+</div>
+
+<!-- Elder Quotes Section -->
+<div class="article">
+  <div class="elder-quotes fade-in">
+    <h4>어르신들의 목소리</h4>
+
+    <div class="elder-quote-item">
+      <div class="eq-text">"내는 시골 살아가 맨날 농로로 댕기지. 근데 농로라 좁아. 정신머리 놓고 있다가 냅다 들이박아삣다"</div>
+      <div class="eq-attr">H 어르신, 80대</div>
+    </div>
+
+    <div class="elder-quote-item">
+      <div class="eq-text">"장에 사람이 많으니까 정신머리가 하나도 없어가 멈춘다카는걸 그냥 꽉 쥐아삣어. 그래가꼬 좌판 다 밀어삣다"</div>
+      <div class="eq-attr">D 어르신, 83세</div>
+    </div>
+
+    <div class="elder-quote-item">
+      <div class="eq-text">"여 집 앞 삽작거리에서 뭐 갑작시레 깜짝 놀라가꼬 헷갈리가꼬 놔야 되는데 꽉 쥐아삣어."</div>
+      <div class="eq-attr">E 어르신, 88세</div>
+    </div>
+
+    <div class="elder-quote-item">
+      <div class="eq-text">"논두렁 가에 세울라캤는데 그냥 꽉 쥐어가꼬 논에 팍 빠져삣어. 왜 그랬는가 몰라.."</div>
+      <div class="eq-attr">C 어르신, 82세 (10년차)</div>
+    </div>
+
+    <div class="elder-quote-item">
+      <div class="eq-text">"집에 다 와가 세울라다가 꽉 잡아삐는 바람에.. 냅다 들이박아삐서 앞이 좀 뿌사짓어"</div>
+      <div class="eq-attr">I 어르신, 81세</div>
+    </div>
+
+    <div class="elder-quote-item">
+      <div class="eq-text">"후진 하다가 멈춰야 되는데 꽉 잡아삐서 마늘가게 기둥에 박았다"</div>
+      <div class="eq-attr">K 어르신, 84세</div>
+    </div>
+
+    <div class="elder-quote-item">
+      <div class="eq-text">"박아뿌고 인나서 회관에 가가 밥도 먹고 다 했어. 그러고 병원 갔더만 뼈가 부러졌다카네. 의사가 왜 인자 왔냐고 해서 119 타고 안동까지 실려 갔지"</div>
+      <div class="eq-attr">C 어르신, 82세</div>
+    </div>
+
+    <div class="elder-quote-item">
+      <div class="eq-text">"장에서 꽉 잡아삐서 사람한테 박아삣다. 발도 낑기고.. 합의금 물어줬어"</div>
+      <div class="eq-attr">B 어르신, 80대</div>
+    </div>
+  </div>
+
+  <hr class="thin-rule">
+
+  <h3 class="section-header fade-in">2-3. 현장에서 찾은 문제의 원인: 노화를 고려하지 못한 의료용 전동스쿠터 설계</h3>
+</div>
+
+<div class="article">
+  <div class="pull-quote fade-in">
+    <blockquote>"정신머리가 없어서"<br>"정신머리 있는 사람만 전동스쿠터 탈 수 있다"</blockquote>
+    <cite>어르신들이 사고 원인을 설명하는 방식</cite>
+  </div>
+
+  <p class="fade-in">현장에 깊이 들어가서 어르신들의 말씀을 들으며 중요한 사실을 확인할 수 있었다. 의료기기점 사장님들이 언급하셨던 '의료용 전동스쿠터 오조작 사고'는 단순 추측이 아니라 많은 어르신들께서 크고 작은 사고로 경험하고 있는 '문제'였다.</p>
+
+  <p class="fade-in">사고의 표면적인 원인은 다양했다. '주의가 분산되어서', '순간 놀라서', 혹은 '헷갈려서' 등 상황은 다양했다. 하지만, 어르신들의 말씀을 통해 이를 관통하는 지점을 찾을 수 있었다. 노화로부터 시작된 인지능력 및 신체 능력의 저하로 인해 오조작 행위가 발생해 크고 작은 오조작 사고로 이어지게끔 만들었다. 인간에게 노화는 누구도 피할 수 없는 필연적인 과정이다. 하지만 정작 어르신들의 필수적인 발이 되어주어야 할 의료용 전동스쿠터는 안타깝게도 이러한 노화를 고려하지 못한 설계로 되어 있었다. 그리고 그 간극이 바로 의료용 전동스쿠터 오조작 사고의 빈틈이 되었다.</p>
+
+  <p class="fade-in">따라서 의료용 전동스쿠터가 어르신들의 '필수적인 발'이자 앞으로 더 많은 어르신들이 타게 될 이동 수단이라는 점을 고려했을 때, 이제는 어르신들의 이러한 노화를 고려한 안전 설계가 필요하다는 결론을 내릴 수 있었다.</p>
+</div>
+
+<div class="article fade-in" style="margin:48px auto;">
+  <img style="width:100%;height:auto;" src="../images/img_15.png" alt="뉴스 헤드라인: 급증하는 농촌 노인전동차 사고">
+  <p style="font-size:0.72rem; color:#999; margin-top:12px; font-family:'Noto Sans KR',sans-serif;"><span style="color:#6B3FA0; font-weight:700;">06</span> "급증하는 농촌 노인전동차 사고" &mdash; 언론 보도는 사고를 다루지만, 오조작이라는 근본 원인을 짚지 못하고 있었다.</p>
+</div>
+
+
+<!-- ============================================ -->
+<!-- CHAPTER 3: 솔루션 -->
+<!-- ============================================ -->
+<div class="chapter-break fade-in" id="ch3">
+  <div class="chapter-num">Chapter Three</div>
+  <h2>솔루션 개발과 실험</h2>
+  <div class="chapter-rule"></div>
+</div>
+
+<div class="article">
+  <div class="solution-goals fade-in">
+    <div class="sg-item"><strong>&#10004;&#65039; 목표:</strong> 의료용 전동스쿠터에 최소한의 안전장치를 설계</div>
+    <div class="sg-item"><strong>&#10004;&#65039; 설계 기준 1:</strong> 실제로 오조작 사고를 방지할 수 있는가</div>
+    <div class="sg-item"><strong>&#10004;&#65039; 설계 기준 2:</strong> 기존 전동스쿠터에 적용 가능한가</div>
+  </div>
+
+  <p class="fade-in">케어라인 나드리 제품 중심으로 개발을 진행했다. 서울 노원구와 관악구의 전동보장구 연습장에서 직접 타보고 치수를 측정했다.</p>
+
+  <hr class="thin-rule">
+
+  <!-- 3-1 안심손 -->
+  <div class="solution-card fade-in">
+    <div class="sc-badge">Solution 01</div>
+    <h3>안심손</h3>
+    <p>가장 먼저 개발한 솔루션은 '안심손'이다. 안심손은 사용자가 엑셀 레버를 끝까지 잡았다는 사실을 인지하지 못해서 오조작 사고가 발생한다는 문제의식에서 출발했다. 안심손은 운전자가 엑셀을 끝까지 잡았을 때, 핸들과 연결된 하얀색 장치가 턱 걸리며 손끝에 이중 자극을 주는 구조로, 이중 자극이 왔을 때 오조작이었다면 반사적으로 손을 놓게 돕는다.</p>
+
+    <p>우리는 안심손을 만들기 위해 3D프린터를 활용해 보기로 했다. 서울에 있는 노원구 전동보장구연습장을 찾아 실제 전동스쿠터의 치수를 측정하고, 3D프린터를 이용해 본 사람이 없었기에 의왕시 메이커스페이스에서 3D프린팅 교육을 받았다. 이후 3D프린팅 프로그램으로 안심손의 프로토타입을 설계했다. 첫 번째 프로토타입을 구현한 후, 관악구 전동보장구연습장에서 해당 프로토타입을 직접 부착하여 규격과 구조를 점검하였다. 이후 개선 사항을 반영하여 의성 G타운 메이커스페이스에서 2차 프로토타입을 구현했다.</p>
+
+    <p>2차 프로토타입으로 의성 도동3리 마을회관 앞에서 당사자 오조작 유도 상황 실험 및 안심손 이용 실험을 진행했다. 실험을 위해 놀라거나 당황할 수 있는 상황을 연출하여 오조작 발생 상황을 인위적으로 설계하고자 하였다.</p>
+
+    <div class="sc-result"><strong>결과:</strong> 안심손의 촉각 자극이 예상보다 명확하게 전달되지 않았고, 어르신들께서 스스로 자극을 인지하여 손을 놓는 것까지 기대하기는 어려웠다. 무엇보다 안심손을 달면 후진할 수 없어지는 구조적 결함이 발견되어 안심손 개발을 중단하였다. 더불어, 인위적인 상황 연출을 통해 오조작을 유도하기 어려웠기 때문에 장치 테스트 방식에 대한 근본적인 변화도 필요하다는 결론을 도출했다.</div>
+  </div>
+</div>
+
+<div class="fade-in" style="display:flex; gap:16px; justify-content:center; align-items:center; max-width:700px; margin:48px auto; padding:0 24px;">
+  <img style="max-height:280px; object-fit:cover; border-radius:4px; filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_38_ansimsohn.png" alt="나드리 조작부에 부착된 안심손">
+  <img style="max-height:280px; object-fit:cover; border-radius:4px; filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_39_ansimsohn2.png" alt="안심손 장치 상세">
+</div>
+
+<div class="article">
+  <hr class="thin-rule">
+
+  <!-- 3-2 스마트레버지킴이 -->
+  <div class="solution-card fade-in">
+    <div class="sc-badge">Solution 02</div>
+    <h3>스마트레버지킴이</h3>
+    <p>우리는 안심손의 실패 경험을 바탕으로 사용자가 스스로 오조작을 인지하는 방식보다, 차체가 스스로 오조작을 감지하고 대응하는 자동제어형 접근이 필요하다고 판단했다. 고령자가 많은 일본에서는 기존 자동차에 부착하는 방식의 오조작 방지 장치가 성행하고 있으며, 국내의 모빌리티 관련 회사에서도 애프터마켓 방식의 오조작 방지 장치를 개발하여 임시 시행 중이었다.</p>
+
+    <p>따라서 우리는 자동차의 오조작 방지 시스템을 참고해, 의료용 전동스쿠터에 부착할 수 있는 '스마트레버지킴이'를 구상했다. 이 장치는 엑셀이 0.7초 이내에 100% 가동될 경우, 전원을 차단해 즉시 정지하도록 하는 전기적 제어장치이다.</p>
+
+    <p>기존 '자동차 오조작'에 대한 정의는 0.25초 만에 엑셀을 100% 밟는 것으로, 이 수치를 전동스쿠터에 바로 적용하기보다 속도와 엑셀 쥐는 압력을 새롭게 설정하는 것이 필요하다고 판단하였다. 따라서 의료기 판매점에서 의료용 전동스쿠터의 조작부를 구매하여 의성 현장에서 어르신들을 대상으로 '엑셀 쥐는 속도 실험'을 진행하였다. 이를 통해 전동스쿠터 이용자의 실제 입력 데이터를 수집했고, 의료용 전동스쿠터에 맞는 감도 기준과 반응 임곗값을 새롭게 설정했다.</p>
+
+    <p>또한 아두이노(전기회로)를 활용해 구현해 보고자 했다. 의왕시 메이커스페이스 전문가의 도움을 받아 아두이노 회로를 활용한 전기적 제어 로직을 설계할 수 있었다. 해당 로직은 일정 속도 이상으로 급격히 올라가는 신호를 감지하면 전원을 자동 차단하도록 설계되었다.</p>
+
+    <div class="sc-result"><strong>한계:</strong> 전기회로를 차체 내부에 직접 연결해야 하는 구조적 특성상, 식약처 인증 및 안전기준 승인 절차라는 제도적 장벽이 존재했다. 또한 움직이던 전동차가 바로 멈추게 되었을 때 타던 사람이 반동으로 튕겨 나갈 수 있는 등 안전과 관련한 기술적 문제도 존재했기에 단기간 내 현장에 바로 적용하는 솔루션을 만들어내기 어렵다고 결론지었다.</div>
+  </div>
+
+  <hr class="thin-rule">
+
+  <!-- 3-3 골든타임 가드 -->
+  <div class="solution-card fade-in">
+    <div class="sc-badge">Solution 03</div>
+    <h3>골든타임 가드</h3>
+    <p>'골든타임 가드'는 전기적 개조 없이 오조작의 피해를 줄일 수 있는 장치로, 레버가 60% 이상 당겨질 때부터 기존보다 더 많은 힘이 필요하게 설계함으로써 오조작 시 천천히 가속되게 한다. 골든타임 가드를 통해 급가속을 지연시켜 사고 발생 시점을 늦추고 사고 규모를 줄일 수 있으며 오조작 행위 감소까지 기대할 수 있다.</p>
+
+    <p>의료용 전동스쿠터를 직접 타본 이후 생각하기 시작한 아이디어인데, 엑셀 레버가 지나치게 헐겁게 만들어져서 손가락 힘으로도 끝까지 쥘 수 있었기 때문이다. 용수철을 몸 바깥쪽 핸들과 레버 사이에 연결해, 레버를 60% 이상 당겼을 때부터 용수철의 인장 저항으로 레버가 기존보다 뻑뻑하게 당겨지는 골든타임 가드를 구현해 보았다.</p>
+
+    <p>이후 관악구 전동보장구연습장에서 교육받으시는 분들께 골든타임 가드에 대한 의견을 여쭈었는데, 끈이 고정되지 않아 불편하다는 의견이 있었다. 또한 용수철을 당겼을 때 저항이 생기는 방식으로, 사용하다 보면 용수철이 늘어나고 변형된다는 단점이 있어 문제점을 개선한 2차 프로토타입을 개발하였다.</p>
+
+    <p>2차 프로토타입은 용수철을 몸쪽 핸들에 달아 스프링이 압축될 때의 저항을 이용해 레버를 끝까지 쥘 때 더 많은 힘이 필요하게 만들었다. 이렇게 개발한 2차 골든타임 가드로 의료용 전동스쿠터 자체 주행 실험을 진행해 보았다. 그 결과, 대처 가능 시간(오조작 행위 발생 장소부터 위험 장소까지 소요되는 시간)을 약 15% 늘려줄 수 있음을 확인하였다.</p>
+
+    <p>자체 실험 후 의성에 내려가 의료용 전동스쿠터를 타신 어르신들을 대상으로 당사자 테스트도 진행해 볼 수 있었다. 그 결과, 다섯 분 중 네 분께서 심리적으로 안심된다는 등 긍정적 반응을 보였다. 특히 의료용 전동스쿠터를 가진 보호자를 네 분을 대상으로 해당 제품에 대해 의견도 조사했는데, 세 분께서 필요할 것 같다는 긍정적 답변을 주셨다. 몇몇 어르신을 대상으로 1주일 정도의 장기 사용 테스트도 진행했는데, 오조작 사고는 방지할 수 있을 것 같지만 평상시에 빨리 달릴 때 방해가 된다는 부정적 의견도 받았다.</p>
+  </div>
+</div>
+
+<div class="fade-in" style="display:flex; gap:16px; justify-content:center; align-items:center; max-width:700px; margin:48px auto; padding:0 24px;">
+  <img style="max-height:45vh; width:auto; border-radius:4px; filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_57_golden1.png" alt="골든타임 가드 1차 프로토타입">
+  <img style="max-height:45vh; width:auto; border-radius:4px; filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_58_golden2.png" alt="골든타임 가드 2차 프로토타입">
+</div>
+
+<div class="article">
+  <div class="pull-quote fade-in">
+    <blockquote>"놔야 멈추는데, 잡고 있어서 사고 날 때 있지. 이거 있으면 확실히 도움 될 것 같아."</blockquote>
+    <cite>김옥자 어르신, 골든타임 가드 테스트 후</cite>
+  </div>
+
+  <p class="fade-in">어르신 테스트에서 5명 중 4명이 긍정적으로 반응했다. 그러나 장기 사용 테스트에서 오조작 방지는 가능하나 평상시 빠른 주행 시 방해가 되는 문제가 발견되었다. 이에 유튜버 '대충라이프'(LG전자 연구위원)의 조언을 받아 댐퍼(damper)를 활용하는 방향으로 개선을 진행했다. 댐퍼를 적용하면 평상시에는 기존과 동일하게 작동하면서, 급조작 시에만 저항이 발생한다.</p>
+
+  <hr class="thin-rule">
+
+  <h3 class="section-header fade-in">3-4. 향후 계획</h3>
+
+  <div class="future-plan fade-in">
+    <div class="fp-card">
+      <div class="fp-label">단기</div>
+      <div class="fp-text">골든타임 가드 구조 개선 및 현장 보급</div>
+    </div>
+    <div class="fp-card">
+      <div class="fp-label">장기</div>
+      <div class="fp-text">제도적 승인을 통한 스마트레버지킴이의 표준 장착</div>
+    </div>
+  </div>
+</div>
+
+<div class="article fade-in" style="margin:48px auto;">
+  <img style="width:100%; border-radius:4px; filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_35_3dprint.jpg" alt="3D 프린팅된 전동스쿠터 모델">
+  <p style="font-size:0.72rem; color:#999; margin-top:12px; font-family:'Noto Sans KR',sans-serif;"><span style="color:#6B3FA0; font-weight:700;">07</span> 3D프린터로 출력한 전동스쿠터 모델. 안전장치의 구조와 작동 원리를 검증하기 위해 제작했다.</p>
+</div>
+
+
+<!-- ============================================ -->
+<!-- CHAPTER 4: 에필로그 -->
+<!-- ============================================ -->
+<div class="chapter-break fade-in" id="ch4">
+  <div class="chapter-num">Chapter Four</div>
+  <h2>에필로그</h2>
+  <div class="chapter-rule"></div>
+</div>
+
+<div class="article fade-in" style="margin:48px auto;">
+  <img style="width:100%; border-radius:4px; filter:sepia(0.1) saturate(0.8) brightness(0.88);" src="../images/img_68_epilogue.jpg" alt="의성의 석양과 전선">
+  <p style="font-size:0.72rem; color:#999; margin-top:12px; font-family:'Noto Sans KR',sans-serif;"><span style="color:#6B3FA0; font-weight:700;">08</span> 의성의 하루가 저문다.</p>
+</div>
+
+<div class="epilogue-section">
+  <h3 class="fade-in">자세히 보아야 예쁘다는 말</h3>
+
+  <p class="fade-in">처음 의성을 향하던 길은 낯설고 멀었다. 지도상으로는 한참 떨어진 거리였지만, 그보다 더 먼 것은 '마음의 거리'였다. 우리는 지역을 하나의 문제로만 인식하고 있었다. '소멸', '고령화', '지방 불균형' 같은 단어들이 그것을 규정했다. 그러나 실제로 그곳에 발을 딛는 순간, 그 단어들은 너무도 추상적이었다. 눈앞의 풍경은 느리고, 사람들의 걸음은 조용했지만, 그 속에는 분명한 생의 리듬이 있었다.</p>
+
+  <p class="fade-in">의성은 '문제 지역'이 아니라, 여전히 누군가의 삶이 이어지는 공간이었다. 한낮의 뜨거운 바람과, 골목 어귀의 웃음소리, 복지관 마당의 분주한 움직임 속에서 우리는 '지역'이 통계가 아닌 온도임을 알게 되었다. 그리고 그 온도는 누군가의 하루, 밥상, 그리고 인사로 이어져 있었다.</p>
+
+  <p class="fade-in">'자세히 보아야 예쁘다'는 말은 의성을 두고 하는 말 같았다. 처음엔 낡아 보였던 간판도, 멈춘 듯했던 거리도, 어느새 사람 냄새가 나는 풍경으로 변해 있었다. 익숙하지 않다는 이유로 '정체된 곳'이라 생각했지만, 오히려 그곳은 가장 자연스러운 속도로 살아가고 있었다. 도시의 시간은 앞만 보게 하지만, 이곳의 시간은 잠시 멈춰 뒤를 돌아보게 했다.</p>
+
+  <p class="fade-in">이 연구는 지역을 살펴보는 일로 시작했지만, 결국 '사람이 살아간다는 것'을 다시 배우는 여정이었다.</p>
+</div>
+
+<div class="fade-in" style="display:flex; gap:16px; justify-content:center; align-items:center; max-width:700px; margin:48px auto; padding:0 24px;">
+  <img style="max-height:45vh; width:auto; border-radius:4px; filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_03.png" alt="의성 전통시장 입구">
+  <img style="max-height:45vh; width:auto; border-radius:4px; filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_69.jpg" alt="시장 내부">
+</div>
+
+<div class="epilogue-section">
+  <h3 class="fade-in">지역소멸과 초고령화, 그곳에 사는 사람들</h3>
+
+  <p class="fade-in">의성은 참 묘한 시간의 밀도를 지닌 곳이었다. 아침이면 마을을 가르는 방송이 들리고, 낮에는 트럭이 지나갈 때마다 먼지가 일었다가 금세 가라앉았다. 해 질 녘이면 밭둑을 따라 천천히 전동스쿠터가 줄지어 돌아오고, 골목마다 저녁밥 짓는 냄새가 퍼졌다. 그곳에서의 하루는 도시의 하루보다 두 배쯤 길게 느껴졌다.</p>
+
+  <p class="fade-in">하지만 그 느림은 결코 멈춤이 아니었다. 그것은 나이 든 사람들이 여전히 하루를 살아내는 속도였다. 우리가 의성을 찾았을 때, 가장 먼저 느낀 것은 '노인의 비율'이었다. 길을 걷는 사람의 열 명 중 아홉은 노인이었고, 그들이 타는 전동스쿠터가 이 마을의 기본 교통수단이었다. 한눈에 봐도 이곳은 고령의 삶이 일상이 된 곳이었다. 그러나 낯설지는 않았다. 그들의 움직임에는 어떤 당당함이 있었다.</p>
+
+  <p class="fade-in">의성의 거리에는 '노화'보다 '지속'이라는 단어가 어울렸다. 하지만 동시에, 그 지속은 버텨야 하는 삶이기도 했다. 의성의 마을들은 젊은 세대의 부재로 점점 고요해졌다. 학교는 폐교가 되었고, 집들은 문이 잠겼다. 남은 사람들은 서로의 이름을 다 알지만, 그만큼 이별에도 익숙했다. 의성의 초고령화는 단순한 통계가 아니라, 조용한 익숙함 속의 고립이었다.</p>
+
+  <p class="fade-in">그럼에도 불구하고, 그들은 여전히 '함께'를 만들었다. 복지관에서 밥을 함께 먹고, 무더운 여름이면 그늘 아래 모여 수박을 나눴다. 그 모습은 작은 공동체의 연대였다.</p>
+
+  <p class="fade-in">의성의 노인들은 단순한 통계 속 고령층이 아니라, 지역을 끝까지 지키는 마지막 세대였다. 지역소멸의 진짜 문제는 '노인'이 많아서가 아니라, 그들의 삶을 존중하지 않는 사회의 시선이었다. 의성은 사라지는 곳이 아니라, 여전히 살아가는 사람들이 있는 곳이었다.</p>
+</div>
+
+<div class="fade-in" style="display:flex; gap:16px; justify-content:center; align-items:center; max-width:700px; margin:48px auto; padding:0 24px;">
+  <img style="max-height:45vh; width:auto; border-radius:4px; filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_70.jpg" alt="마을 골목">
+  <img style="max-height:45vh; width:auto; border-radius:4px; filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_71.jpg" alt="의성 마늘">
+</div>
+
+<div class="epilogue-section">
+  <h3 class="fade-in">우리는 왜 그리도 바쁘게 살아가고 있나</h3>
+
+  <p class="fade-in">의성에서의 시간은 우리를 자주 멈추게 했다. 처음엔 낯선 느림이었지만, 곧 익숙해졌다. 반면, 도시로 돌아오자 모든 것이 다시 빠르게 돌아갔다. 버스, 광고, 회의, 시간표 — 모든 것이 속도와 경쟁으로 이루어져 있었다. 그 속에서 우리는 문득 물었다. "우리는 왜 이렇게 바쁘게 살아가고 있나?"</p>
+
+  <p class="fade-in">노인의 이동 문제를 들여다볼수록, 단순한 기술적 한계를 넘어 사회의 구조적 불균형이 보였다. 우리 사회의 '표준 속도'는 청년 중심으로 설계되어 있다. 걷는 속도, 반응 속도, 정보 처리 속도, 모든 것이 '젊음'을 기준으로 만들어졌다.</p>
+
+  <p class="fade-in">그러나 고령층에게 그 속도는 위험이 되었다. 의료용 전동스쿠터 사고는 부주의의 결과가 아니라, 시스템이 그들의 느림을 고려하지 않은 결과였다. 노인의 느림은 종종 '답답함'으로 오해받고, 그들의 실수는 '노화'로 치부된다. 하지만 그 이면에는 사회가 그들의 시간을 받아들이지 못하는 불관용이 있었다.</p>
+
+  <p class="fade-in">의성의 느림은 결코 비효율이 아니었다. 그것은 삶을 천천히 음미하고, 서로를 바라볼 수 있는 속도였다. 진정한 공존은 서로 다른 속도를 인정할 때 가능하다. 우리가 잃어버린 것은 기술이 아니라 여유였다는 것을, 의성의 하루가 알려주었다.</p>
+</div>
+
+<div class="article fade-in" style="margin:48px auto;">
+  <img style="max-height:60vh;width:auto;margin:0 auto;display:block;" src="../images/img_73.jpg" alt="의성 도로와 산">
+  <p style="font-size:0.72rem; color:#999; margin-top:12px; font-family:'Noto Sans KR',sans-serif;"><span style="color:#6B3FA0; font-weight:700;">09</span> 의성의 도로. 산과 들 사이로 어르신들의 전동스쿠터가 오늘도 달린다.</p>
+</div>
+
+<div class="epilogue-section">
+  <h3 class="fade-in">당신과 의료용 전동스쿠터</h3>
+
+  <p class="fade-in">의료용 전동스쿠터는 단순한 이동수단이 아니라, 그들의 삶을 지탱하는 또 하나의 다리였다. 하지만 동시에, 그 다리는 여전히 위험했다. 우리가 개발한 여러 장치와 실험들은 작은 출발이었다. 기술적 보완은 가능했지만, 진정한 해결은 사회적 공감에서 시작되어야 했다.</p>
+
+  <p class="fade-in">연구가 끝난 지금, 남은 것은 수치나 그래프가 아니다. 현장에서 들었던 목소리, 그들의 두려움과 바람, 그리고 우리의 무력감이었다. 그 감정들이 이 연구의 연료였고, 다음 단계로 이어질 이유였다.</p>
+
+  <p class="fade-in">우리는 한계를 인정했다. 프로토타입은 완벽하지 않았고, 실험은 여전히 진행 중이었다. 그러나 실패 속에서도 방향은 분명했다. '안심'이라는 감정의 기술화. 기술은 차갑지만, 그 안에 따뜻함을 담을 수 있다면 사회는 조금 더 나아질 것이다.</p>
+
+  <p class="fade-in">이 연구가 남긴 가장 큰 교훈은 기술보다 마음이 먼저여야 한다는 것. 사람을 이해하지 못한 기술은 결코 진보가 될 수 없다. 우리가 만든 것은 장치가 아니라 '이해의 시작'이었다. 그리고 그 이해가 언젠가 또 다른 지역, 또 다른 세대의 안전으로 이어지기를 바란다.</p>
+</div>
+
+<div class="fade-in" style="display:flex; gap:16px; justify-content:center; align-items:center; max-width:800px; margin:48px auto; padding:0 24px;">
+  <img style="max-height:45vh; width:auto; border-radius:4px; filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_72.jpg" alt="해바라기 밭">
+  <img style="max-height:45vh; flex:1; object-fit:cover; border-radius:4px; filter:sepia(0.08) saturate(0.85) brightness(0.93);" src="../images/img_87_namcheon.jpg" alt="차창 밖의 녹색 풍경">
+</div>
+
+<!-- Closing Poem -->
+<div class="closing-poem fade-in-slow">
+  <p>고요하게 눈을 감으면, 의성의 여름이 아직도 선명하다.</p>
+  <p style="margin-top:16px;">의성의 바람은 느리게 불겠지만 &mdash;<br>그 느림이야말로 세상을 조금 더 따뜻하게 만드는 속도임을,<br>우리는 이제 안다.</p>
+</div>
+
+<!-- Credits -->
+<div class="credits fade-in">
+  <div class="credit-line">✦ SK SUNNY · Sunny Scholar in 의성</div>
+  <div class="credit-team">TEAM RE:MOVE</div>
+  <div class="credit-year">2025</div>
+  <div class="credit-line" style="margin-top:16px;">Interactive Story by Problem of Problems Lab</div>
+</div>
+
+<!-- ============================================ -->
+<!-- JAVASCRIPT -->
+<!-- ============================================ -->
+<script>
+(function() {
+  'use strict';
+
+  // ===== PROGRESS BAR =====
+  const progressBar = document.getElementById('progressBar');
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  }
+
+  // ===== MASTHEAD SHOW/HIDE =====
+  const masthead = document.getElementById('masthead');
+  let lastScrollY = 0;
+  function updateMasthead() {
+    const currentY = window.scrollY;
+    if (currentY > 400 && currentY > lastScrollY) {
+      masthead.classList.add('hidden');
+    } else {
+      masthead.classList.remove('hidden');
+    }
+    lastScrollY = currentY;
+  }
+
+  // ===== ACTIVE NAV TRACKING =====
+  const navLinks = document.querySelectorAll('.masthead-nav a');
+  const chapters = document.querySelectorAll('.chapter-break, .hero');
+  function updateActiveNav() {
+    let currentId = '';
+    chapters.forEach(function(ch) {
+      const rect = ch.getBoundingClientRect();
+      if (rect.top <= 200) {
+        currentId = ch.id || '';
+      }
+    });
+    navLinks.forEach(function(link) {
+      link.classList.remove('active');
+      const href = link.getAttribute('href');
+      if (href && href.substring(1) === currentId) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  // ===== SMOOTH SCROLL NAV =====
+  navLinks.forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const id = this.getAttribute('href').substring(1);
+      const target = document.getElementById(id);
+      if (target) {
+        const y = target.getBoundingClientRect().top + window.scrollY - 60;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // ===== INTERSECTION OBSERVER FOR ANIMATIONS =====
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -60px 0px'
+  };
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.fade-in, .fade-in-slow').forEach(function(el) {
+    observer.observe(el);
+  });
+
+  // ===== SCROLL HANDLER (throttled) =====
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        updateProgress();
+        updateMasthead();
+        updateActiveNav();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // ===== INITIAL CALLS =====
+  updateProgress();
+
+  // ===== HERO PARALLAX =====
+  const heroImg = document.querySelector('.hero-img');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY < window.innerHeight) {
+      heroImg.style.transform = 'scale(1.05) translateY(' + (window.scrollY * 0.15) + 'px)';
+      heroImg.style.opacity = 0.7 - (window.scrollY / window.innerHeight) * 0.3;
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>
