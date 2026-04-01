@@ -91,6 +91,7 @@ footer { padding: 40px 24px; text-align: center; color: #444; font-size: 0.8rem;
   <div class="lock-title">SK Sunny Scholar Local</div>
   <div class="lock-sub">비밀번호를 입력하세요</div>
   <input type="password" class="lock-input" id="pw-input" placeholder="비밀번호" autofocus>
+  <button onclick="checkPassword()" style="margin-top:16px;padding:12px 32px;background:#E8945A;color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;font-family:inherit;">입장</button>
   <div class="lock-error" id="pw-error">비밀번호가 틀렸습니다</div>
   <div class="lock-hint">관계자에게 비밀번호를 문의하세요</div>
 </div>
@@ -202,21 +203,22 @@ footer { padding: 40px 24px; text-align: center; color: #444; font-size: 0.8rem;
 // Password protection
 var HASH = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'; // sha256 of 'scholar'
 
+function checkPassword() {
+  var input = document.getElementById('pw-input').value;
+  crypto.subtle.digest('SHA-256', new TextEncoder().encode(input)).then(function(buf) {
+    var hash = Array.from(new Uint8Array(buf)).map(function(b) { return b.toString(16).padStart(2,'0'); }).join('');
+    if (hash === HASH) {
+      document.getElementById('lock').classList.add('hidden');
+      document.getElementById('main').classList.add('visible');
+      sessionStorage.setItem('sunny_auth', '1');
+    } else {
+      document.getElementById('pw-error').classList.add('show');
+      setTimeout(function() { document.getElementById('pw-error').classList.remove('show'); }, 2000);
+    }
+  });
+}
 document.getElementById('pw-input').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') {
-    var input = this.value;
-    crypto.subtle.digest('SHA-256', new TextEncoder().encode(input)).then(function(buf) {
-      var hash = Array.from(new Uint8Array(buf)).map(function(b) { return b.toString(16).padStart(2,'0'); }).join('');
-      if (hash === HASH) {
-        document.getElementById('lock').classList.add('hidden');
-        document.getElementById('main').classList.add('visible');
-        sessionStorage.setItem('sunny_auth', '1');
-      } else {
-        document.getElementById('pw-error').classList.add('show');
-        setTimeout(function() { document.getElementById('pw-error').classList.remove('show'); }, 2000);
-      }
-    });
-  }
+  if (e.key === 'Enter') checkPassword();
 });
 
 // Session persistence
