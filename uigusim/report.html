@@ -27,7 +27,7 @@ body {
 
 /* Hero */
 .hero {
-  background: linear-gradient(180deg, rgba(250,249,246,0.55) 0%, rgba(250,249,246,0.65) 100%), url('images/01_정자할머니_첫만남.png') center/cover no-repeat;
+  background: linear-gradient(180deg, rgba(250,249,246,0.55) 0%, rgba(250,249,246,0.65) 100%), url('images/01_grandma.png') center/cover no-repeat;
   color: #1a1a1a; padding: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; text-align: center;
 }
 .hero::after {
@@ -260,15 +260,37 @@ footer .container p { color: #aaa; }
   .stat-card .stat-num { font-size: 1.8em; }
   .gurumi-hero { padding: 32px 20px; }
 }
+
+/* Side nav - reading progress */
+.side-nav {
+  position: fixed; right: 16px; top: 50%; transform: translateY(-50%);
+  z-index: 999; display: flex; flex-direction: column; gap: 6px;
+}
+.side-nav a {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #ddd; display: block; transition: all 0.3s;
+  position: relative;
+}
+.side-nav a.active { background: #5A8F6E; width: 12px; height: 12px; }
+.side-nav a:hover::after {
+  content: attr(data-label); position: absolute; right: 20px; top: 50%;
+  transform: translateY(-50%); background: #2a2a2a; color: #fff;
+  padding: 4px 10px; border-radius: 6px; font-size: 0.75rem;
+  white-space: nowrap; pointer-events: none;
+}
+@media (max-width: 768px) { .side-nav { display: none; } }
 </style>
 </head>
 <body>
+
+<!-- Side nav -->
+<nav class="side-nav" id="sideNav"></nav>
 
 <!-- Progress bar -->
 <div class="progress-bar" id="progressBar"></div>
 
 <!-- ========== HERO (Section 0) ========== -->
-<section class="hero">
+<section id="hero" data-label="시작" class="hero">
   <div class="container">
     <div class="hero-badge">SK Sunny 2조 &middot; 팀 의구심</div>
     <h1><span class="green">의구심</span>(UIGUSIM)</h1>
@@ -289,7 +311,7 @@ footer .container p { color: #aaa; }
 </section>
 
 <!-- ========== Section 1: 팀 소개 + 문제 요약 ========== -->
-<section class="section fade-target">
+<section id="s-intro" data-label="팀 소개" class="section fade-target">
   <div class="container">
     <h2><span class="accent">의구심</span>을 소개합니다</h2>
     <p>"의성에서 살구 먹으며 힘내자!"는 말에서 시작된 '의구심(疑仇心)'은 원래 '의심하는 마음'을 뜻하지만, '의성(Uiseong)'이라는 지역 이름의 '의(義)'와, '구석(角)'의 '구', 그리고 '마음(心)'을 합쳐 지역의 구석진 문제를 따뜻한 시선으로 바라보겠다는 뜻을 담았습니다.</p>
@@ -312,7 +334,7 @@ footer .container p { color: #aaa; }
 </section>
 
 <!-- ========== Section 2: 현장 관찰 개요 ========== -->
-<section class="section fade-target">
+<section id="s-summary" data-label="문제 요약" class="section fade-target">
   <div class="container">
     <h2>현장 관찰 <span class="accent">개요</span></h2>
     <p>의구심은 총 <strong>54개의 마을</strong>을 방문해 <strong>154명</strong>과 대화를 나눴습니다.</p>
@@ -340,7 +362,7 @@ footer .container p { color: #aaa; }
 <div class="section-divider">...</div>
 
 <!-- ========== Section 3: 문제의식의 시작 ========== -->
-<section class="section fade-target">
+<section id="s-start" data-label="문제의식" class="section fade-target">
   <div class="container">
     <h2>문제의식의 시작,<br>금성면 초전 2리 <span class="accent">'정자 할머니'</span></h2>
 
@@ -352,7 +374,7 @@ footer .container p { color: #aaa; }
     <p>우리가 처음 문제의식을 느낀 건 금성면 초전2리 마을 앞 버스 정류장이었다. 그날은 정자 할머니가 읍에서 장을 보고 돌아오는 길이었다. 남부농협 앞 버스 정류장에서 고추 20근이 담긴 보따리를 들고, 지팡이에 의지한 채 혼자 버스에 오르려는 모습을 보고 우리는 짐을 들어드리며 함께 이동하게 되었다.</p>
 
     <div class="img-block">
-      <img src="images/23_초전2리_포도.png" alt="초전2리 어르신이 주신 포도" loading="lazy">
+      <img src="images/23_grape.png" alt="초전2리 어르신이 주신 포도" loading="lazy">
     </div>
 
     <p>버스에서 내려 할머니 댁으로 향하던 중, 정류장 옆에 세워둔 할머니의 실버카가 눈에 들어왔다. 처음엔 그저 '왜 실버카를 여기 두고 가셨을까?'라는 의문이 들었다. 그러나 대화를 나누는 과정에서, 할머니는 "가지고 가고 싶어도 버스에 못 실어서 두고 간다"고 설명했다.</p>
@@ -366,7 +388,7 @@ footer .container p { color: #aaa; }
 </section>
 
 <!-- ========== Section 4: 의성의 일상 ========== -->
-<section class="section fade-target">
+<section id="s-daily" data-label="의성 일상" class="section fade-target">
   <div class="container">
     <h2>그리고 다시 바라본 <span class="accent">의성의 일상</span></h2>
 
@@ -429,7 +451,7 @@ footer .container p { color: #aaa; }
     <p>의자를 겸한 노인용 보행 보조기구로, 짐 수납 기능과 안정적 이동을 동시에 지원한다.</p>
 
     <div class="img-block">
-      <img src="images/03_IMG_3713.png" alt="실버카 사진" loading="lazy">
+      <img src="images/03_IMG_3713.png" alt="실버카 사진" loading="lazy" style="max-width:360px;margin:0 auto;display:block;">
       <div class="img-caption">실버카 - 의자 기능, 수납 기능, 보행 안정성을 겸비한 보행 보조기구</div>
     </div>
 
@@ -451,7 +473,7 @@ footer .container p { color: #aaa; }
 </section>
 
 <!-- ========== Section 5: 버스 안에서 사라지는 실버카 ========== -->
-<section class="section fade-target">
+<section id="s-bus" data-label="버스와 실버카" class="section fade-target">
   <div class="container">
     <h2>버스 안에서<br><span class="accent">사라지는 실버카</span></h2>
 
@@ -461,11 +483,11 @@ footer .container p { color: #aaa; }
 
     <div class="img-grid">
       <div class="img-block">
-        <img src="images/04_의성장날_IMG_3676.jpeg" alt="장날 버스 탑승 어르신들" loading="lazy">
+        <img src="images/04_market_day.jpeg" alt="장날 버스 탑승 어르신들" loading="lazy">
         <div class="img-caption">장날 버스에 탑승하는 어르신들</div>
       </div>
       <div class="img-block">
-        <img src="images/06_버스정류장_실버카.png" alt="버스정류장에 주차된 실버카" loading="lazy">
+        <img src="images/06_bus_stop_silvercar.png" alt="버스정류장에 주차된 실버카" loading="lazy">
         <div class="img-caption">정류장에 남겨진 실버카</div>
       </div>
     </div>
@@ -503,7 +525,7 @@ footer .container p { color: #aaa; }
     <p>특히 장날이 되면 버스는 평소보다 훨씬 붐볐다. 장바구니와 짐보따리를 든 어르신들로 좌석이 금세 채워졌다. 그러나 이렇게나 많은 승객들 사이에서도 실버카를 보기는 어려웠다. 대신 면 지역 버스 정류장에 덩그러니 놓여 있는 실버카를 볼 수 있었다.</p>
 
     <div class="img-block">
-      <img src="images/05_버스_실버카없음.png" alt="버스 안에 실버카가 없는 장면" loading="lazy">
+      <img src="images/05_bus_no_silvercar.png" alt="버스 안에 실버카가 없는 장면" loading="lazy">
       <div class="img-caption">버스 안 &mdash; 실버카는 보이지 않는다</div>
     </div>
 
@@ -516,7 +538,7 @@ footer .container p { color: #aaa; }
 <div class="section-divider">...</div>
 
 <!-- ========== Section 6: 정자 할머니와 함께한 외출 ========== -->
-<section class="section fade-target">
+<section id="s-outing" data-label="외출 동행" class="section fade-target">
   <div class="container">
     <h2>정자 할머니와 <span class="accent">함께한 외출</span></h2>
 
@@ -561,7 +583,7 @@ footer .container p { color: #aaa; }
       <div class="compare-card good">
         <h3>실버카 사용 시</h3>
         <div class="img-block" style="margin-bottom:16px;">
-          <img src="images/07_실버카_이동.png" alt="실버카 이동 다이어그램" loading="lazy">
+          <img src="images/07_silvercar_move.png" alt="실버카 이동 다이어그램" loading="lazy">
         </div>
         <ul class="content-list" style="text-align:left;">
           <li>걸음이 <strong>안정적</strong></li>
@@ -572,7 +594,7 @@ footer .container p { color: #aaa; }
       <div class="compare-card bad">
         <h3>지팡이로 바꾼 뒤</h3>
         <div class="img-block" style="margin-bottom:16px;">
-          <img src="images/08_지팡이_이동.png" alt="지팡이 이동 다이어그램" loading="lazy">
+          <img src="images/08_cane_move.png" alt="지팡이 이동 다이어그램" loading="lazy">
         </div>
         <ul class="content-list" style="text-align:left;">
           <li>보폭이 <strong>좁아지고</strong></li>
@@ -623,7 +645,7 @@ footer .container p { color: #aaa; }
 </section>
 
 <!-- ========== Section 7: 실버카 공백구간 정의 ========== -->
-<section class="section fade-target">
+<section id="s-gap" data-label="공백구간" class="section fade-target">
   <div class="container">
     <h2><span class="accent">실버카 공백구간</span>과<br>실버카 의존층</h2>
 
@@ -753,7 +775,7 @@ footer .container p { color: #aaa; }
 </section>
 
 <!-- ========== Section 8: 실버카 vs 지팡이 ========== -->
-<section class="section fade-target">
+<section id="s-compare" data-label="실버카 vs 지팡이" class="section fade-target">
   <div class="container">
     <h2>실버카와 지팡이는<br><span class="accent">무엇이 다를까?</span></h2>
 
@@ -791,7 +813,7 @@ footer .container p { color: #aaa; }
 <div class="section-divider">...</div>
 
 <!-- ========== Section 9: 장날의 문제 ========== -->
-<section class="section fade-target">
+<section id="s-market" data-label="장날" class="section fade-target">
   <div class="container">
     <h2>장날, <span class="accent">문제의 핵심</span>이 드러난 날</h2>
 
@@ -802,7 +824,7 @@ footer .container p { color: #aaa; }
     <p>평소 어르신들의 이동은 집에서 마을회관이나 이웃집을 오가는 등 약 500m 내외의 짧은 거리에 그쳤다. 하지만 장날이 되면 상황은 완전히 달라졌다. 새벽부터 면 지역 곳곳에서 어르신들이 버스를 타고 읍내로 향했다. 시장에서 장을 보고, 병원에 들러 약을 타며, 은행, 미용실 등 여러 가지 일들을 한 번에 처리하였다.</p>
 
     <div class="img-block">
-      <img src="images/11_실버카_주차_IMG_3677.jpeg" alt="장날 정류장에 주차된 실버카들" loading="lazy">
+      <img src="images/11_silvercar_parked.jpeg" alt="장날 정류장에 주차된 실버카들" loading="lazy">
       <div class="img-caption">장날, 정류장에 주차된 실버카들</div>
     </div>
 
@@ -878,7 +900,7 @@ footer .container p { color: #aaa; }
 </section>
 
 <!-- ========== Section 10: 의성에서 읍내의 중요성 ========== -->
-<section class="section fade-target">
+<section id="s-importance" data-label="읍내 중요성" class="section fade-target">
   <div class="container">
     <h2>의성에서 <span class="accent">'읍내'</span>의 중요성</h2>
 
@@ -973,7 +995,7 @@ footer .container p { color: #aaa; }
     <p>의성 5일장을 방문하기 위해 남부농협 정류장에서 농어촌버스를 이용하는 인원을 관찰해본 결과 주로 의성 동부 지역에 해당하는 옥산면, 점곡면, 단촌면, 사곡면, 춘산면, 가음면에서 오가는 노선의 승객이 많음을 확인하였다.</p>
 
     <div class="img-block">
-      <img src="images/14_diagram_088f2f20.png" alt="버스 승하차 관찰 지도" loading="lazy">
+      <img src="images/14_bus_diagram.png" alt="버스 승하차 관찰 지도" loading="lazy">
       <div class="img-caption">버스 승하차 관찰 지도</div>
     </div>
 
@@ -1011,7 +1033,7 @@ footer .container p { color: #aaa; }
 </section>
 
 <!-- ========== Section 11: 해결 시도 과정 ========== -->
-<section class="section fade-target">
+<section id="s-attempt" data-label="해결 시도" class="section fade-target">
   <div class="container">
     <h2>읍에서도 실버카를<br><span class="accent">사용할 수 있을까</span></h2>
 
@@ -1022,7 +1044,7 @@ footer .container p { color: #aaa; }
         <div class="attempt-label">첫 번째 시도</div>
         <h3>버스를 개조한 실버카 수납공간 제작</h3>
         <div class="img-block" style="margin:12px 0;">
-          <img src="images/15_버스짐칸.png" alt="버스 짐칸 개조 시도" loading="lazy">
+          <img src="images/15_bus_cargo.png" alt="버스 짐칸 개조 시도" loading="lazy">
         </div>
         <ul class="content-list" style="font-size:0.93em;">
           <li>평균 8kg 실버카를 30cm 단차 넘어 싣기 &mdash; 고령자에게 불가능에 가까움</li>
@@ -1068,7 +1090,7 @@ footer .container p { color: #aaa; }
 <div class="section-divider">...</div>
 
 <!-- ========== Section 12: 구르미 소개 ========== -->
-<section class="section fade-target">
+<section id="s-gurumi" data-label="구르미" class="section fade-target">
   <div class="container">
     <div class="gurumi-hero">
       <h2>&lt;공유실버카 : 구르미&gt;를 소개합니다!</h2>
@@ -1090,10 +1112,12 @@ footer .container p { color: #aaa; }
 
     <div class="img-grid">
       <div class="img-block">
-        <img src="images/17_IMG_2638.jpeg" alt="구르미 소개 사진 1" loading="lazy">
+        <img src="images/17_IMG_2638.jpeg" alt="구르미 대여소" loading="lazy" style="object-fit:cover;object-position:center;">
+        <div class="img-caption">남부농협 앞 구르미 대여소 — 실버카 5대가 대기 중</div>
       </div>
       <div class="img-block">
-        <img src="images/18_IMG_3678.png" alt="구르미 소개 사진 2" loading="lazy">
+        <img src="images/18_IMG_3678.png" alt="구르미 캐릭터" loading="lazy">
+        <div class="img-caption">공유실버카 구르미 캐릭터</div>
       </div>
     </div>
 
@@ -1128,7 +1152,7 @@ footer .container p { color: #aaa; }
 </section>
 
 <!-- ========== Section 13: 시범운영 결과 ========== -->
-<section class="section fade-target">
+<section id="s-result" data-label="시범운영" class="section fade-target">
   <div class="container">
     <h2>두 차례에 걸친<br><span class="accent">구르미 시범운영</span></h2>
 
@@ -1204,7 +1228,7 @@ footer .container p { color: #aaa; }
 </section>
 
 <!-- ========== Section 14: 운영 체계 ========== -->
-<section class="section fade-target">
+<section id="s-operation" data-label="운영체계" class="section fade-target">
   <div class="container">
     <h2>구르미는 어떻게<br><span class="accent">운영될까?</span></h2>
 
@@ -1372,7 +1396,7 @@ footer .container p { color: #aaa; }
 </section>
 
 <!-- ========== Section 15: 계속될 구르미 ========== -->
-<section class="section fade-target">
+<section id="s-continue" data-label="계속될 구르미" class="section fade-target">
   <div class="container">
     <h2>계속될 <span class="accent">'구르미'</span></h2>
 
@@ -1408,7 +1432,7 @@ footer .container p { color: #aaa; }
 <div class="section-divider">...</div>
 
 <!-- ========== Section 16: 노인 이동권 ========== -->
-<section class="section fade-target">
+<section id="s-mobility" data-label="이동권" class="section fade-target">
   <div class="container">
     <h2>노인의 이동권은<br><span class="accent">소외되고 있다</span></h2>
 
@@ -1426,7 +1450,7 @@ footer .container p { color: #aaa; }
     </ul>
 
     <div class="img-block">
-      <img src="images/21_윷놀이_아이스크림.png" alt="어르신들과 함께한 봉사활동" loading="lazy">
+      <img src="images/21_yutnori.png" alt="어르신들과 함께한 봉사활동" loading="lazy">
     </div>
 
     <p>이처럼 어르신들의 삶은 구체적인 연령, 성격, 지병 등 다양한 요소에 따라 각기 달랐다. 집 안에 머물기를 선호하시는 분도, 새로운 것을 배우고 사람 만나기를 좋아하시는 분도 계셨다.</p>
@@ -1484,7 +1508,7 @@ footer .container p { color: #aaa; }
 </section>
 
 <!-- ========== Section 17: 에필로그 ========== -->
-<section class="section fade-target" style="background:#f5f2ec;">
+<section id="s-epilogue" data-label="에필로그" class="section fade-target" style="background:#f5f2ec;">
   <div class="container">
     <h2>에필로그<br><span class="accent">"안녕하세요! 저희는 서울에서 온 대학생들인데요..."</span></h2>
 
@@ -1519,19 +1543,19 @@ footer .container p { color: #aaa; }
     <h3>팀 의구심</h3>
     <div class="team-grid">
       <div class="team-card">
-        <img src="images/24_헤준써니.png" alt="헤준 써니" loading="lazy">
+        <img src="images/24_hejun.png" alt="헤준 써니" loading="lazy">
         <div class="team-name">헤준 써니</div>
       </div>
       <div class="team-card">
-        <img src="images/25_혜림써니.png" alt="혜림 써니" loading="lazy">
+        <img src="images/25_hyerim.png" alt="혜림 써니" loading="lazy">
         <div class="team-name">혜림 써니</div>
       </div>
       <div class="team-card">
-        <img src="images/26_희수써니.png" alt="희수 써니" loading="lazy">
+        <img src="images/26_heesoo.png" alt="희수 써니" loading="lazy">
         <div class="team-name">희수 써니</div>
       </div>
       <div class="team-card">
-        <img src="images/27_지민써니_IMG_2598.jpeg" alt="지민 써니" loading="lazy">
+        <img src="images/27_jimin.jpeg" alt="지민 써니" loading="lazy">
         <div class="team-name">지민 써니</div>
       </div>
     </div>
@@ -1582,10 +1606,30 @@ footer .container p { color: #aaa; }
 (function(){
   var bar = document.getElementById('progressBar');
   if (!bar) return;
+  // Side nav 생성
+  var sideNav = document.getElementById('sideNav');
+  var sections = document.querySelectorAll('section[id]');
+  var dots = [];
+  sections.forEach(function(s){
+    var a = document.createElement('a');
+    a.href = '#' + s.id;
+    a.setAttribute('data-label', s.getAttribute('data-label') || s.id);
+    sideNav.appendChild(a);
+    dots.push({el: a, section: s});
+  });
+
   window.addEventListener('scroll', function(){
     var h = document.documentElement;
     var pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
     bar.style.width = pct + '%';
+
+    // Side nav 현재 위치 업데이트
+    var scrollY = window.scrollY + window.innerHeight / 3;
+    dots.forEach(function(d){
+      var top = d.section.offsetTop;
+      var bot = top + d.section.offsetHeight;
+      d.el.classList.toggle('active', scrollY >= top && scrollY < bot);
+    });
   }, {passive: true});
 })();
 
