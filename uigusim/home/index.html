@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>구르미 — 공유실버카 · 팀 의구심</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#2f9e7e; --green-d:#1f7a60; --green-dd:#15543f; --amber:#e0a23a;
+    --bg:#f5f7f3; --card:#ffffff; --ink:#1c2a24; --soft:#6a7b72; --line:#e0e7e0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;word-break:keep-all;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  .nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+       padding:12px 22px;background:rgba(21,84,63,0);transition:background .3s,box-shadow .3s}
+  .nav.solid{background:rgba(21,84,63,.97);box-shadow:0 1px 16px rgba(0,0,0,.16)}
+  .nav .brand{display:flex;align-items:center;gap:9px;font-weight:900;letter-spacing:.5px;color:#fff;font-size:1.05rem}
+  .nav .brand img{width:34px;height:34px;border-radius:50%;background:#fff;object-fit:cover}
+  .nav .links{display:flex;gap:8px;align-items:center}
+  .nav a.btn{font-size:.82rem;font-weight:700;padding:9px 16px;border-radius:999px}
+  .nav a.ghost{color:#dff0e8;border:1px solid rgba(255,255,255,.3)}
+  .nav a.fill{background:var(--amber);color:#3a2806}
+  @media(max-width:560px){.nav .ghost{display:none}}
+
+  .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;color:#fff}
+  .hero .bgimg{position:absolute;inset:0;background:#14442f}
+  .hero .bgimg img{width:100%;height:100%;object-fit:cover;opacity:.5}
+  .hero .grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,68,47,.5) 0%,rgba(20,68,47,.25) 38%,rgba(20,68,47,.94) 100%)}
+  .hero .inner{position:relative;padding:0 0 9vh;width:100%}
+  .eyebrow{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:3px;color:#ffe0a8;text-transform:uppercase;margin-bottom:18px}
+  .hero h1{font-size:clamp(2.1rem,6vw,3.9rem);font-weight:900;line-height:1.24;letter-spacing:-.02em}
+  .hero h1 em{font-style:normal;color:#ffd483}
+  .hero .sub{margin-top:20px;font-size:clamp(1rem,2.2vw,1.22rem);color:#e3efe8;max-width:640px;font-weight:300}
+  .hero .cta{margin-top:34px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn-lg{display:inline-flex;align-items:center;gap:8px;padding:15px 26px;border-radius:999px;font-weight:700;font-size:.98rem;transition:transform .2s,box-shadow .2s}
+  .btn-lg.primary{background:var(--amber);color:#3a2806;box-shadow:0 8px 28px rgba(224,162,58,.4)}
+  .btn-lg.line{border:1px solid rgba(255,255,255,.42);color:#fff}
+  .btn-lg:hover{transform:translateY(-2px)}
+  .scrollcue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);font-size:.7rem;letter-spacing:2px;color:rgba(255,255,255,.6)}
+
+  .stats{background:var(--green-dd);color:#fff;padding:46px 0}
+  .stats .row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;text-align:center}
+  .stats .n{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:#ffd483;line-height:1}
+  .stats .l{font-size:.82rem;color:#bcd3c8;margin-top:8px}
+  @media(max-width:640px){.stats .row{grid-template-columns:1fr 1fr;gap:28px 18px}}
+
+  section.block{padding:96px 0}
+  .tag{font-size:.78rem;font-weight:700;letter-spacing:2px;color:var(--green-d);text-transform:uppercase}
+  h2.t{font-size:clamp(1.6rem,3.6vw,2.3rem);font-weight:900;line-height:1.3;margin:12px 0 20px;letter-spacing:-.01em}
+  p.lead{font-size:1.08rem;color:#33453c;max-width:680px}
+  p.body{color:#445349;max-width:680px;margin-top:14px}
+  .big75{margin:34px 0;text-align:center;background:var(--card);border-radius:16px;padding:40px 24px;box-shadow:0 6px 26px rgba(20,68,47,.07)}
+  .big75 .n{font-size:clamp(3rem,9vw,5rem);font-weight:900;color:var(--green);line-height:1}
+  .big75 .n small{font-size:1.4rem}
+  .big75 .c{color:var(--soft);margin-top:8px;font-size:.98rem}
+  .quote{margin:26px 0;padding:22px 26px;background:var(--card);border-left:4px solid var(--green);border-radius:10px;box-shadow:0 4px 22px rgba(20,68,47,.06);font-size:1.04rem;color:#26342d}
+  .quote .who{margin-top:10px;font-size:.84rem;color:var(--soft);font-weight:500}
+
+  .solwrap{display:grid;grid-template-columns:.95fr 1.05fr;gap:44px;align-items:center}
+  .solwrap img{width:100%;border-radius:14px;box-shadow:0 14px 40px rgba(20,68,47,.14)}
+  @media(max-width:780px){.solwrap{grid-template-columns:1fr;gap:26px}}
+  .steps{margin-top:20px;display:grid;gap:10px}
+  .steps div{background:#eaf2ec;border-radius:10px;padding:14px 18px;font-size:.96rem;color:#2a3a32}
+  .steps b{color:var(--green-d)}
+
+  .partner{background:linear-gradient(135deg,var(--green-d),var(--green));color:#fff;border-radius:20px;padding:56px 40px;text-align:center;margin:40px 0}
+  .partner h3{font-size:clamp(1.4rem,3vw,2rem);font-weight:900;line-height:1.35}
+  .partner p{color:#dff0e8;margin-top:12px;max-width:560px;margin-left:auto;margin-right:auto}
+  .pcards{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:26px 0}
+  .pcards span{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);padding:8px 14px;border-radius:999px;font-size:.85rem;font-weight:500}
+  .partner .btns{margin-top:14px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .ig{display:inline-block;margin-top:16px;color:#fff;font-weight:700;font-size:1.05rem}
+
+  footer{padding:50px 0 70px;text-align:center;color:var(--soft);font-size:.82rem;line-height:1.9}
+  footer b{color:#33453c}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s}
+  .reveal.in{opacity:1;transform:none}
+
+  .hchips{margin-top:24px;display:flex;gap:10px;flex-wrap:wrap}
+  .hchips span{font-size:.8rem;color:#e3efe8;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);padding:7px 14px;border-radius:999px}
+  .sec-head{text-align:center;margin-bottom:26px}
+  .cmp2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+  .cmp2 .c{border-radius:14px;padding:22px 24px}
+  .cmp2 .good{background:#eaf2ec;border:1px solid #cfe3d6}
+  .cmp2 .bad{background:#fbf1ea;border:1px solid #f0ddca}
+  .cmp2 .c h4{font-size:1.05rem;font-weight:900;margin-bottom:10px}
+  .cmp2 .good h4{color:var(--green-d)} .cmp2 .bad h4{color:#bf6a2c}
+  .cmp2 .c .li{font-size:.92rem;color:#3a4a42;margin:7px 0;padding-left:16px;position:relative}
+  .cmp2 .c .li:before{content:'·';position:absolute;left:3px;font-weight:900}
+  @media(max-width:600px){.cmp2{grid-template-columns:1fr}}
+  .videowrap{margin:8px 0;border-radius:14px;overflow:hidden;box-shadow:0 14px 40px rgba(20,68,47,.14);background:#000;display:grid;grid-template-columns:1fr 1fr;gap:2px}
+  .videowrap video{width:100%;display:block;background:#000}
+  @media(max-width:600px){.videowrap{grid-template-columns:1fr}}
+  .videocap{font-size:.85rem;color:var(--soft);text-align:center;margin-top:10px}
+  .gcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px}
+  .gcards .gc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;text-align:center;box-shadow:0 4px 18px rgba(20,68,47,.05)}
+  .gcards .gc .n{font-size:1.7rem;font-weight:900;color:var(--green);line-height:1}
+  .gcards .gc .l{font-size:.84rem;color:var(--soft);margin-top:6px}
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+  .gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;transition:transform .3s}
+  .gallery img:hover{transform:scale(1.02)}
+  @media(max-width:640px){.gallery{grid-template-columns:1fr 1fr}}
+  .voices{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+  .voices .v{background:var(--card);border-radius:12px;padding:22px 24px;border-top:3px solid var(--green);box-shadow:0 4px 20px rgba(20,68,47,.05)}
+  .voices .v p{font-size:1rem;color:#26342d;line-height:1.85}
+  .voices .v .who{margin-top:10px;font-size:.82rem;color:var(--soft);font-weight:600}
+  @media(max-width:640px){.voices{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="brand"><img src="../v10/img/u11.png" alt="구르미">구르미</div>
+  <div class="links">
+    <a class="btn ghost" href="../v19-2026/index.html">전체 리포트</a>
+    <a class="btn fill" href="#partner">운영 파트너 되기</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="bgimg"><img src="../v10/img/u02.jpg" alt="실버카를 끄는 의성 어르신"></div>
+  <div class="grad"></div>
+  <div class="wrap inner">
+    <span class="eyebrow">SK Sunny Scholar in 의성 · 팀 의구심</span>
+    <h1>버스에 못 싣는 두 다리,<br>읍내에서 비는 <em>75분</em></h1>
+    <p class="sub">면에 사는 어르신은 버스를 타려고 실버카를 정류장에 두고 간다. 정작 가장 많이 걷는 읍내에서 실버카가 없다. 그 공백을 메우는 공유실버카, 구르미.</p>
+    <div class="hchips"><span>54개 마을 현장</span><span>어르신 164명</span><span>두 번의 오일장 운영</span><span>앱 없는 아날로그 대여</span></div>
+    <div class="cta">
+      <a class="btn-lg primary" href="#partner">함께 운영하기 →</a>
+      <a class="btn-lg line" href="../v19-2026/index.html">전체 리포트</a>
+    </div>
+  </div>
+  <div class="scrollcue">SCROLL ↓</div>
+</header>
+
+<section class="stats">
+  <div class="wrap">
+    <div class="row">
+      <div><div class="n" data-to="54">54</div><div class="l">조사한 마을</div></div>
+      <div><div class="n" data-to="164">164</div><div class="l">만난 어르신</div></div>
+      <div><div class="n" data-to="75">75</div><div class="l">실버카 공백(분)</div></div>
+      <div><div class="n" data-to="1440">1,440</div><div class="l">대여소 1곳·연간 이용</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <span class="tag reveal">The Problem</span>
+    <h2 class="t reveal">농촌 할머니에게 실버카는 두 다리입니다</h2>
+    <p class="lead reveal">실버카는 네 바퀴로 몸무게를 나눠 받친다. 걷는 동안 허리·무릎에 실리는 무게가 줄고, 힘들면 그 자리에 앉아 쉴 수 있고, 장 본 짐도 싣는다. 그런데 무게 8kg, 30cm 안팎의 버스 계단 앞에서 어르신은 실버카를 정류장에 두고 오른다.</p>
+    <div class="big75 reveal">
+      <div class="n"><span data-to="75">75</span><small>분</small></div>
+      <div class="c">버스로 읍내에 나온 어르신이 실버카 없이 지팡이에 의지해 버티는 평균 시간</div>
+    </div>
+    <div class="quote reveal">"힘들어서 여기서 쉬었다 가야 해. 실버카 있으면 물건도 넣고 훨씬 편하지, 지팡이 들면 허리도 아프고 힘들어."
+      <div class="who">버스 정류장에서 쉬던 할머니</div>
+    </div>
+    <h3 class="reveal" style="font-size:1.15rem;font-weight:900;margin:42px 0 0">지팡이로는 대신할 수 없었다</h3>
+    <div class="cmp2 reveal">
+      <div class="c good"><h4>실버카</h4>
+        <div class="li">네 바퀴로 몸무게를 고르게 분산</div>
+        <div class="li">걸음이 안정되고 속도도 평소처럼</div>
+        <div class="li">장 본 짐을 싣고, 힘들면 앉아 쉰다</div>
+      </div>
+      <div class="c bad"><h4>지팡이</h4>
+        <div class="li">한쪽 팔·어깨에 힘이 쏠린다</div>
+        <div class="li">보폭이 좁아지고 중심이 흔들린다</div>
+        <div class="li">양손에 짐, 쉴 곳을 따로 찾아야</div>
+      </div>
+    </div>
+    <p class="body reveal" style="font-size:.95rem">실제로 정자 할머니의 장날을 동행했다. 지팡이로 바꾸자 7분 거리에서도 병원에 닿자마자 통증을 호소했다.</p>
+  </div>
+</section>
+
+<section class="block" style="background:#eaf2ec">
+  <div class="wrap">
+    <span class="tag reveal">The Solution</span>
+    <h2 class="t reveal">그래서 만들었습니다 — 공유실버카 '구르미'</h2>
+    <div class="solwrap" style="margin-top:30px">
+      <div class="reveal"><img src="../v10/img/u12.jpg" alt="구르미 대여소"></div>
+      <div class="reveal">
+        <p class="body" style="margin-top:0">버스로 면에서 읍으로 나온 뒤 실버카를 못 쓰는 공백을, 정류장 옆 대여소가 메운다. 앱도 QR도 없이 이름과 전화번호만 적으면 바로 빌린다.</p>
+        <div class="steps">
+          <div><b>1.</b> 버스에서 내린다 — 면에서 읍내 정류장으로</div>
+          <div><b>2.</b> 대여소에서 이름·전화번호를 적는다</div>
+          <div><b>3.</b> 구르미를 끌고 장을 본다 — 병원·시장 어디든</div>
+        </div>
+        <p class="body" style="font-size:.92rem;color:var(--soft)">두 번의 오일장에서 시범운영을 마쳤다. 정류장 한 곳·실버카 다섯 대·관리인 한두 명이면 장날에 바로 시작할 수 있다.</p>
+      </div>
+    </div>
+    <div class="videowrap reveal" style="grid-template-columns:1fr;max-width:600px;margin-left:auto;margin-right:auto">
+      <video controls preload="metadata" playsinline poster="../v10/img/u13.jpg"><source src="../videos/simbeom-garo.mp4" type="video/mp4"></video>
+    </div>
+    <div class="videocap reveal">시범운영 현장 — 구르미를 끌고 장을 보는 어르신들</div>
+    <div class="gcards reveal" style="margin-top:24px">
+      <div class="gc"><div class="n">1곳</div><div class="l">정류장 옆 대여소</div></div>
+      <div class="gc"><div class="n">5대</div><div class="l">초기 실버카</div></div>
+      <div class="gc"><div class="n">1~2인</div><div class="l">관리 인력</div></div>
+      <div class="gc"><div class="n">무료</div><div class="l">이름·전화번호만</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag reveal">On Site</span><h2 class="t reveal" style="margin-top:6px">의성, 다섯 달의 현장</h2></div>
+    <div class="gallery reveal">
+      <img src="../v10/img/u02.jpg" alt="실버카를 끄는 어르신" loading="lazy">
+      <img src="../v10/img/u03.jpg" alt="정류장에 두고 간 실버카" loading="lazy">
+      <img src="../v10/img/u04.jpg" alt="장날 버스에 오르는 어르신들" loading="lazy">
+      <img src="../v10/img/u12.jpg" alt="구르미 대여소" loading="lazy">
+      <img src="../v10/img/u06.png" alt="정류장 옆 실버카" loading="lazy">
+      <img src="../v10/img/u10.png" alt="농어촌 버스 계단" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="block" style="background:#eaf2ec">
+  <div class="wrap">
+    <div class="sec-head"><span class="tag reveal">Voices</span><h2 class="t reveal" style="margin-top:6px">시범운영에서 들은 말</h2></div>
+    <div class="voices reveal">
+      <div class="v"><p>"내는 고맙고 그래가, 마을에다 막 자랑쳤다."</p><div class="who">시범운영 재이용자</div></div>
+      <div class="v"><p>"지팡이로 장 볼 때보다 훨씬 편해~ 몸도 덜 아프고 짐 들기도 좋제."</p><div class="who">시범운영 이용자 · 통증 감소 체감</div></div>
+      <div class="v"><p>"덕분에 원래 사려던 것보다 훨씬 많이 샀어."</p><div class="who">시범운영 이용자 · 구매 변화</div></div>
+      <div class="v"><p>"이거 없으면 이동 못하지. 여기 사람들은 다 이거(실버카) 써."</p><div class="who">의성장 상인</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="partner reveal" id="partner">
+      <h3>구르미를 함께 운영할<br>파트너를 찾습니다</h3>
+      <p>의성에서 검증한 운영 가이드라인과 54개 마을 현장 데이터를 그대로 전합니다.</p>
+      <div class="pcards">
+        <span>지자체</span><span>지역재단</span><span>모빌리티 스타트업</span><span>복지기관</span><span>봉사단체</span>
+      </div>
+      <div class="btns">
+        <a class="btn-lg primary" href="https://instagram.com/uig00sim_mag" target="_blank" rel="noopener">인스타그램으로 문의 →</a>
+        <a class="btn-lg line" href="../v19-2026/index.html">전체 리포트 보기</a>
+      </div>
+      <a class="ig" href="https://instagram.com/uig00sim_mag" target="_blank" rel="noopener">📷 @uig00sim_mag</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <b>팀 의구심(疑仇心)</b> · 의성의 義, 구석의 구, 마음 心<br>
+  공유실버카 구르미 · SK 행복나눔재단 「Sunny Scholar in 의성」 · 2025<br>
+  Problem of Problems Lab
+</footer>
+
+<script>
+  var nav=document.getElementById('nav');
+  addEventListener('scroll',function(){nav.classList.toggle('solid',scrollY>40)},{passive:true});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.18});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+  function countUp(el){var raw=el.dataset.to,to=parseFloat(raw),v=0,s=to/34;var t=setInterval(function(){v+=s;if(v>=to){v=to;clearInterval(t)}el.textContent=Math.round(v).toLocaleString()},22)}
+  var sObs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.querySelectorAll('[data-to]').forEach(function(n){if(!n.dataset.done){n.dataset.done='1';countUp(n)}});sObs.unobserve(e.target)}})},{threshold:.5});
+  document.querySelectorAll('.stats .row > div, .big75').forEach(function(el){sObs.observe(el)});
+</script>
+</body>
+</html>

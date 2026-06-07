@@ -57,8 +57,63 @@ footer{text-align:center;padding:30px;color:var(--soft);font-size:.74rem;border-
   <div class="kk">Sunny Scholar in 의성 · Problem of Problems Lab</div>
   <h1>의성 인터랙티브 웹 모음</h1>
   <p>SK 행복나눔재단 「Sunny Scholar in 의성」 세 팀의 후속활동 보고서를 인터랙티브 웹으로 만든 버전들입니다. 카드를 누르면 새 탭에서 열립니다.</p>
-  <div class="meta">3개 팀 · 팀별 V20 · V16 · V10 (총 9개) · ★ 표시가 각 팀 최종본(V20)</div>
+  <div class="meta">3개 팀 · 팀 홈페이지 3 + 리포트 9 (V20·V16·V10) · ★ 표시가 각 팀 최종본(V20)</div>
 </div>
+
+<style>
+  .homes{max-width:1180px;margin:0 auto;padding:28px 20px 4px}
+  .homes-h{text-align:center;margin-bottom:22px}
+  .homes-h .k{font-size:.78rem;font-weight:800;letter-spacing:2px;color:#9aa3b0;text-transform:uppercase}
+  .homes-h h2{font-size:1.55rem;font-weight:900;margin-top:6px;color:#1b2330}
+  .homes-h p{color:#7a8492;font-size:.92rem;margin-top:4px}
+  .homes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .homecard{display:block;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 6px 24px rgba(20,40,60,.1);text-decoration:none;color:inherit;border:1px solid #e6eaf0;transition:transform .2s,box-shadow .2s}
+  .homecard:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(20,40,60,.16)}
+  .homecard .band{height:92px;display:flex;align-items:flex-end;padding:14px 18px;color:#fff;font-weight:900;font-size:1.18rem;letter-spacing:.5px}
+  .homecard .b{padding:18px 18px 20px}
+  .homecard .sub{font-size:.8rem;color:#6b7682}
+  .homecard .tl{font-weight:700;margin-top:6px;font-size:1.02rem;color:#161d27;line-height:1.45}
+  .homecard .chips{margin-top:12px;display:flex;gap:6px;flex-wrap:wrap}
+  .homecard .chips span{font-size:.75rem;background:#eef2f5;color:#3c4651;padding:5px 10px;border-radius:999px}
+  .homecard .go{margin-top:14px;font-weight:800;font-size:.9rem}
+  @media(max-width:760px){.homes-grid{grid-template-columns:1fr}}
+</style>
+<section class="homes">
+  <div class="homes-h">
+    <div class="k">★ Team Homepage</div>
+    <h2>팀 홈페이지 (랜딩 페이지)</h2>
+    <p>리포트와 별개로, 각 팀의 얼굴이 되는 한 장짜리 사이트입니다.</p>
+  </div>
+  <div class="homes-grid">
+    <a class="homecard" href="scholar/home/index.html" target="_blank" rel="noopener">
+      <div class="band" style="background:linear-gradient(135deg,#27435a,#38617f)">RE:MOVE</div>
+      <div class="b">
+        <div class="sub">의료용 전동스쿠터 오조작 사고</div>
+        <div class="tl">살려고 쥔 손이, 사고를 향해 움직였다</div>
+        <div class="chips"><span>49명 인터뷰</span><span>+0.89초</span><span>골든타임 가드</span></div>
+        <div class="go" style="color:#38617f">🏠 홈페이지 열기 ↗</div>
+      </div>
+    </a>
+    <a class="homecard" href="uigusim/home/index.html" target="_blank" rel="noopener">
+      <div class="band" style="background:linear-gradient(135deg,#1f7a60,#2f9e7e)">구르미 · 의구심</div>
+      <div class="b">
+        <div class="sub">노인 이동권 · 공유실버카</div>
+        <div class="tl">버스에 못 싣는 두 다리, 읍내 75분</div>
+        <div class="chips"><span>54개 마을</span><span>164명</span><span>운영 파트너 모집</span></div>
+        <div class="go" style="color:#1f7a60">🏠 홈페이지 열기 ↗</div>
+      </div>
+    </a>
+    <a class="homecard" href="hetsa/home/index.html" target="_blank" rel="noopener">
+      <div class="band" style="background:linear-gradient(135deg,#c0392b,#e07a2c)">헷·사과</div>
+      <div class="b">
+        <div class="sub">농촌 이주노동자 온열질환</div>
+        <div class="tl">통계에 없는 더위, 그늘 없는 밭</div>
+        <div class="chips"><span>31명 중 13명</span><span>안심키트</span><span>10개 언어</span></div>
+        <div class="go" style="color:#c0392b">🏠 홈페이지 열기 ↗</div>
+      </div>
+    </a>
+  </div>
+</section>
 
 <div class="wrap">
 
@@ -67,6 +122,7 @@ footer{text-align:center;padding:30px;color:var(--soft);font-size:.74rem;border-
     <div class="team-h">
       <span class="dot"></span>
       <h2>1조 RE:MOVE <span class="sub">· 의료용 전동스쿠터 오조작 사고</span></h2>
+      <a href="scholar/home/index.html" target="_blank" rel="noopener" style="font-size:.8rem;font-weight:700;color:#fff;background:#2b3340;padding:7px 14px;border-radius:999px;text-decoration:none;white-space:nowrap">🏠 팀 홈페이지 ↗</a>
       <span class="tag">전동스쿠터</span>
     </div>
     <div class="cards">
@@ -102,6 +158,7 @@ footer{text-align:center;padding:30px;color:var(--soft);font-size:.74rem;border-
     <div class="team-h">
       <span class="dot"></span>
       <h2>2조 의구심 <span class="sub">· 노인 이동권 · 공유실버카 구르미</span></h2>
+      <a href="uigusim/home/index.html" target="_blank" rel="noopener" style="font-size:.8rem;font-weight:700;color:#fff;background:#1f7a60;padding:7px 14px;border-radius:999px;text-decoration:none;white-space:nowrap">🏠 팀 홈페이지 ↗</a>
       <span class="tag">공유실버카</span>
     </div>
     <div class="cards">
@@ -137,6 +194,7 @@ footer{text-align:center;padding:30px;color:var(--soft);font-size:.74rem;border-
     <div class="team-h">
       <span class="dot"></span>
       <h2>3조 헷사과 <span class="sub">· 농촌 이주노동자 온열질환 · 안심키트</span></h2>
+      <a href="hetsa/home/index.html" target="_blank" rel="noopener" style="font-size:.8rem;font-weight:700;color:#fff;background:#c0392b;padding:7px 14px;border-radius:999px;text-decoration:none;white-space:nowrap">🏠 팀 홈페이지 ↗</a>
       <span class="tag">온열질환</span>
     </div>
     <div class="cards">
