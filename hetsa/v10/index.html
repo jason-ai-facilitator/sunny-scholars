@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>헷-사과 — 그늘 없는 밭에서 쓰러진 사람들 · Sunny Scholar in 의성</title>
+<meta name="description" content="농촌 이주노동자 온열질환 — 의성에서 만난 31명의 기록. 솔루션 '온열질환 안심키트'. SK 행복나눔재단 Sunny Scholar in 의성, 헷-사과 팀.">
+<link rel="icon" href="data:,">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#6B3FA0; --purple-d:#4e2c77; --purple-l:#f5f0fa; --line:#e0d4f0;
+  --ink:#1a1a1a; --text:#2a2a2a; --muted:#8a8294;
+  --paper:#fefcf9; --danger:#c0392b; --warn:#e08a2c; --dim:#d8d2e2; --safe:#5a8f6b;
+  --maxw:780px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Serif KR',serif;background:var(--purple-l);color:var(--text);line-height:1.9;-webkit-font-smoothing:antialiased}
+.sans{font-family:'Noto Sans KR',sans-serif}
+
+/* ===== masthead ===== */
+.masthead{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+  padding:12px 24px;background:rgba(254,252,249,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+  font-family:'Noto Sans KR',sans-serif;transform:translateY(-100%);transition:transform .4s ease}
+.masthead.show{transform:translateY(0)}
+.masthead .brand{font-weight:900;font-size:.82rem;letter-spacing:.5px;color:var(--ink)}
+.masthead .brand span{color:var(--purple)}
+.masthead nav{display:flex;gap:18px}
+.masthead nav a{text-decoration:none;color:var(--muted);font-size:.72rem;font-weight:500;transition:color .2s}
+.masthead nav a:hover,.masthead nav a.active{color:var(--purple)}
+@media(max-width:640px){.masthead nav{display:none}}
+
+/* ===== hero ===== */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+  position:relative;background:#161016;overflow:hidden;padding:40px 24px}
+.hero::before{content:"";position:absolute;inset:0;background:url('img/h01.png') center/cover;opacity:.38;filter:grayscale(.2)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,16,22,.5),rgba(22,16,22,.86))}
+.hero>*{position:relative;z-index:2}
+.hero .kicker{font-family:'Noto Sans KR',sans-serif;font-size:.74rem;letter-spacing:3px;text-transform:uppercase;color:#c4a8e0;margin-bottom:28px}
+.hero h1{font-weight:900;font-size:clamp(1.9rem,5.5vw,3.3rem);line-height:1.35;color:#fff;letter-spacing:-1px}
+.hero h1 em{font-style:normal;color:#d9b8ff}
+.hero .sub{margin-top:24px;font-size:clamp(1rem,2.4vw,1.25rem);color:rgba(255,255,255,.7);font-weight:400}
+.hero .scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-family:'Noto Sans KR',sans-serif;
+  font-size:.66rem;letter-spacing:2px;color:rgba(255,255,255,.5);z-index:2;animation:bob 2s infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+/* ===== layout ===== */
+section{padding:80px 24px}
+.wrap{max-width:var(--maxw);margin:0 auto}
+.part-tag{font-family:'Noto Sans KR',sans-serif;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--purple);
+  font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.part-tag::before{content:"";width:28px;height:2px;background:var(--purple)}
+h2{font-weight:900;font-size:clamp(1.5rem,4vw,2.1rem);line-height:1.4;color:var(--ink);margin-bottom:8px;letter-spacing:-.5px}
+h3{font-weight:700;font-size:1.15rem;color:var(--purple-d);margin:38px 0 12px}
+p{margin:16px 0;font-size:1.04rem;color:#3a3340}
+.lead{font-size:1.16rem;color:var(--ink);font-weight:500}
+.center{text-align:center}
+.big-line{font-weight:700;font-size:clamp(1.2rem,2.8vw,1.5rem);line-height:1.55;color:var(--ink);text-align:center;margin:38px auto;max-width:640px;letter-spacing:-.5px}
+.big-line em{font-style:normal;color:var(--purple);border-bottom:3px solid #e3d3f5}
+
+/* quote */
+.quote{margin:24px 0;padding:22px 26px;background:#fff;border-left:4px solid var(--purple);border-radius:0 10px 10px 0;
+  box-shadow:0 4px 20px rgba(107,63,160,.06)}
+.quote p{margin:0 0 8px;font-size:1.05rem;color:var(--ink);font-style:italic}
+.quote .who{font-family:'Noto Sans KR',sans-serif;font-size:.78rem;color:var(--muted);font-style:normal;font-weight:500}
+.quote.dark{background:#221a2b;border-color:#a06fd0}
+.quote.dark p{color:#f0e8f8}.quote.dark .who{color:#b89cd6}
+
+/* hooking full-bleed */
+.hook{background:#1d141f;color:#f0e8f5;padding:90px 24px}
+.hook .wrap{max-width:720px}
+.hook .name{font-family:'Noto Sans KR',sans-serif;color:#c4a0e8;font-size:.8rem;letter-spacing:1px;margin-bottom:18px}
+.hook blockquote{font-size:clamp(1.05rem,2.6vw,1.28rem);line-height:1.95;font-weight:400;color:#ece2f4;margin:0}
+.hook blockquote + blockquote{margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,.12)}
+.hook .em-line{font-weight:700;color:#e8c8ff;font-size:1.22rem}
+.hook figure{margin:30px 0}
+.hook figure img{width:100%;border-radius:12px;display:block;border:1px solid rgba(255,255,255,.15)}
+.hook figure.portrait img{max-width:300px;margin:0 auto}
+.hook figcaption{font-family:'Noto Sans KR',sans-serif;font-size:.78rem;color:#b89cd6;text-align:center;margin-top:10px}
+
+/* info table */
+table.info{width:100%;border-collapse:collapse;margin:24px 0;font-family:'Noto Sans KR',sans-serif;font-size:.9rem;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 4px 20px rgba(107,63,160,.06)}
+table.info th,table.info td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+table.info th{background:var(--purple);color:#fff;font-weight:600;width:30%;white-space:nowrap}
+table.info tr:last-child td,table.info tr:last-child th{border-bottom:none}
+
+/* compare table */
+table.cmp{width:100%;border-collapse:collapse;margin:24px 0;font-family:'Noto Sans KR',sans-serif;font-size:.92rem;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 4px 20px rgba(107,63,160,.06)}
+table.cmp th{background:var(--purple-d);color:#fff;padding:12px 18px;font-size:.82rem;text-align:left}
+table.cmp td{padding:14px 18px;border-bottom:1px solid var(--line);font-size:.88rem}
+table.cmp td:first-child{font-weight:700;color:var(--purple-d);width:30%}
+table.cmp tr:last-child td{border-bottom:none}
+table.cmp.three td:first-child{width:24%}
+
+/* ===== stat cards ===== */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:24px 0}
+.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 18px;text-align:center;box-shadow:0 4px 20px rgba(107,63,160,.06)}
+.stat .num{font-family:'Noto Sans KR',sans-serif;font-weight:900;font-size:clamp(1.8rem,5vw,2.4rem);color:var(--purple);line-height:1}
+.stat .num.danger{color:var(--danger)}
+.stat .lbl{font-family:'Noto Sans KR',sans-serif;font-size:.8rem;color:#4a4356;margin-top:8px;line-height:1.5}
+.stat.wide{grid-column:1/-1}
+
+/* ===== gbar (막대) ===== */
+.gbar-wrap{margin:20px 0 8px;padding:22px;background:#faf6ff;border-radius:12px}
+.gbar-wrap .gtitle{font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:.95rem;color:var(--ink);margin-bottom:14px}
+.gbar-row{display:flex;align-items:center;gap:12px;margin:12px 0;font-family:'Noto Sans KR',sans-serif}
+.gbar-label{width:120px;font-size:.82rem;font-weight:600;color:var(--ink);flex-shrink:0;text-align:right;line-height:1.35}
+.gbar-track{flex:1;background:#fff;border-radius:8px;height:36px;position:relative;overflow:hidden;border:1px solid var(--line)}
+.gbar-fill{height:100%;width:0;border-radius:8px;transition:width 1.4s cubic-bezier(.2,.8,.2,1);display:flex;align-items:center;justify-content:flex-end;padding-right:12px;color:#fff;font-weight:700;font-size:.85rem}
+.gbar-fill.off{background:#b9a9d4}.gbar-fill.on{background:var(--purple)}
+.gbar-fill.danger{background:var(--danger)}.gbar-fill.warn{background:var(--warn)}
+
+/* ===== donut ===== */
+.donut-wrap{display:flex;align-items:center;gap:26px;flex-wrap:wrap;justify-content:center;margin:24px 0;padding:24px;background:#faf6ff;border-radius:14px}
+.donut{--p:0;--c:var(--purple);width:150px;height:150px;border-radius:50%;flex-shrink:0;position:relative;
+  background:conic-gradient(var(--c) calc(var(--p)*1%),#e8e2f0 0);transition:--p 1.4s ease}
+.donut::after{content:"";position:absolute;inset:18px;background:#faf6ff;border-radius:50%}
+.donut .donut-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2;
+  font-family:'Noto Sans KR',sans-serif}
+.donut .donut-num b{font-size:1.8rem;font-weight:900;color:var(--purple)}
+.donut .donut-num span{font-size:.72rem;color:var(--muted)}
+.donut-txt{font-family:'Noto Sans KR',sans-serif;font-size:.92rem;color:#3a3340;max-width:360px}
+.donut-txt b{color:var(--purple-d)}
+@property --p{syntax:'<number>';inherits:false;initial-value:0}
+
+/* mechanism steps */
+.steps{counter-reset:s;margin:24px 0}
+.step{position:relative;padding:14px 16px 14px 56px;background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:10px;
+  font-family:'Noto Sans KR',sans-serif;font-size:.95rem;font-weight:500;color:var(--ink)}
+.step::before{counter-increment:s;content:counter(s);position:absolute;left:14px;top:50%;transform:translateY(-50%);
+  width:28px;height:28px;background:var(--purple);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem}
+.step.boom{border-color:var(--danger);background:#fdf3f2}.step.boom::before{background:var(--danger)}
+
+/* solution cards */
+.sol{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;margin:18px 0;box-shadow:0 4px 20px rgba(107,63,160,.06)}
+.sol.star{border:2px solid var(--purple);background:linear-gradient(180deg,#faf6ff,#fff)}
+.sol .sol-no{font-family:'Noto Sans KR',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1px;color:var(--purple);text-transform:uppercase}
+.sol h4{font-weight:900;font-size:1.25rem;color:var(--ink);margin:4px 0 6px}
+.sol .tag{display:inline-block;font-family:'Noto Sans KR',sans-serif;font-size:.66rem;background:var(--purple-l);color:var(--purple-d);
+  padding:3px 10px;border-radius:12px;font-weight:600;margin-bottom:10px}
+.sol .tag.win{background:var(--purple);color:#fff}
+.sol .desc{font-size:.99rem;color:#3a3340;margin:6px 0}
+.sol .poet{font-size:1.02rem;color:var(--purple-d);font-weight:500;font-style:italic;margin:0 0 8px}
+.expert{margin-top:12px;padding:12px 14px;background:#f7f3fc;border-radius:8px;font-family:'Noto Sans KR',sans-serif;font-size:.84rem;color:#4a4356;line-height:1.7}
+.expert b{color:var(--purple-d)}
+.expert+.expert{margin-top:8px}
+
+/* impact canvas */
+.canvas{display:grid;gap:12px;margin:24px 0;counter-reset:cv}
+.cv{position:relative;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px 18px 60px;box-shadow:0 4px 20px rgba(107,63,160,.06)}
+.cv::before{counter-increment:cv;content:counter(cv);position:absolute;left:16px;top:18px;width:30px;height:30px;background:var(--purple);color:#fff;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:.9rem}
+.cv h4{font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:1.02rem;color:var(--ink);margin:0 0 4px}
+.cv p{font-family:'Noto Sans KR',sans-serif;font-size:.9rem;color:#4a4356;margin:0}
+
+/* image */
+.fig{margin:30px 0}
+.fig img{width:100%;border-radius:12px;border:1px solid var(--line);display:block}
+.fig.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fig.chart{max-width:340px;margin-left:auto;margin-right:auto}
+.fig.por{max-width:420px;margin-left:auto;margin-right:auto}
+.fig.wide img{border-radius:12px}
+.contact figure figcaption{color:#b89cd6}
+.fig figcaption{font-family:'Noto Sans KR',sans-serif;font-size:.78rem;color:var(--muted);text-align:center;margin-top:10px;grid-column:1/-1}
+@media(max-width:560px){.fig.two{grid-template-columns:1fr}}
+
+/* definition box */
+.defs{display:grid;gap:10px;margin:22px 0}
+.defbox{background:#faf6ff;border:1px solid var(--line);border-radius:10px;padding:14px 18px;font-family:'Noto Sans KR',sans-serif}
+.defbox b{color:var(--purple-d);font-size:.95rem}
+.defbox span{display:block;font-size:.9rem;color:#4a4356;margin-top:3px}
+
+/* barriers list */
+.barriers{display:grid;gap:10px;margin:22px 0;counter-reset:br}
+.barrier{position:relative;background:#fdf3f2;border:1px solid #f0d0cc;border-radius:10px;padding:14px 16px 14px 54px;font-family:'Noto Sans KR',sans-serif;font-size:.94rem;color:var(--ink)}
+.barrier::before{counter-increment:br;content:counter(br);position:absolute;left:14px;top:50%;transform:translateY(-50%);
+  width:26px;height:26px;background:var(--danger);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem}
+
+/* contact */
+.contact{background:#1d141f;color:#f0e8f5}
+.contact h2{color:#fff}
+.contact .card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:28px;margin-top:24px;text-align:center}
+.contact .mail{font-family:'Noto Sans KR',sans-serif;font-size:1.3rem;font-weight:700;color:#e8c8ff;text-decoration:none;display:inline-block;margin:8px 0 18px}
+.contact .ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:18px;font-family:'Noto Sans KR',sans-serif;text-align:left}
+.contact .way{background:rgba(255,255,255,.04);border-radius:10px;padding:14px 16px;font-size:.82rem;color:#d8c8e8}
+.contact .way b{display:block;color:#fff;font-size:.9rem;margin-bottom:4px}
+.cta-btn{display:inline-block;background:var(--purple);color:#fff;font-family:'Noto Sans KR',sans-serif;font-weight:700;
+  text-decoration:none;padding:14px 32px;border-radius:30px;font-size:.95rem;transition:transform .2s,background .2s}
+.cta-btn:hover{transform:translateY(-2px);background:#7d4fb8}
+
+footer.credit{background:#120c14;color:#7a6e85;text-align:center;padding:40px 24px;font-family:'Noto Sans KR',sans-serif;font-size:.74rem;line-height:1.8}
+footer.credit b{color:#b89cd6}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* progress */
+.progress{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0;z-index:200;transition:width .1s}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<header class="masthead" id="masthead">
+  <div class="brand">헷-<span>사과</span> · Sunny Scholar in 의성</div>
+  <nav>
+    <a href="#clue">현장</a>
+    <a href="#cause">원인</a>
+    <a href="#define">문제정의</a>
+    <a href="#solution">안심키트</a>
+    <a href="#impact">임팩트</a>
+    <a href="#ending">컨택</a>
+  </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="kicker">농촌 이주노동자 온열질환 · 의성에서 만난 31명</div>
+  <h1>그늘 없는 밭에서,<br>그들은 <em>쓰러졌다.</em></h1>
+  <div class="sub">그 더위는 정말 그들이 잘 견디는 것이었을까.</div>
+  <div class="scroll-hint">SCROLL ↓</div>
+</section>
+
+<!-- ===== HOOK: A씨 ===== -->
+<section class="hook">
+  <div class="wrap reveal">
+    <div class="name">태국 출신 60대 노동자 A씨 · 경북의 한 고추밭</div>
+    <blockquote>
+      <span class="em-line">2025년 7월, 그늘조차 없는 노지였다.</span><br>
+      장시간 일하던 태국 출신의 60대 노동자 A씨가 열성 쇼크로 쓰러졌다. 응급실로 이송된 그는 언어 기능에 심각한 후유증을 얻었다. 그러나 이 사건은 정부의 온열질환 통계에 집계되지 않았다.
+    </blockquote>
+    <blockquote>
+      오직 헷-사과 팀이 현장에서 직접 만난 이주노동자단체의 증언과 극소수의 기사를 통해서만 들을 수 있었던 <b style="color:#e8c8ff">'공론화되지 않은 사고'</b>였다. 이주노동자들의 고통은 '죽음'에 이르러서야 비로소 언론에 짧게 다뤄질 뿐, 철저히 소외되어 있다.
+    </blockquote>
+    <figure><img loading="lazy" src="img/h09.png" alt="그늘 없는 밭, 나무 그늘에서 쉬는 이주노동자들"><figcaption>밭 한가운데, 단 한 그루 나무 그늘에 몸을 기댄 이주노동자들. 휴식 공간은 따로 없었다.</figcaption></figure>
+    <div class="quote dark"><p>"폭염 야외작업 50대 이주노동자 사망···온열질환 의심"</p><div class="who">언론 보도 1</div></div>
+    <div class="quote dark"><p>"폭염 속 이주노동자 3주 동안 3명 숨졌다"</p><div class="who">언론 보도 2</div></div>
+    <div class="quote dark"><p>"첫 출근날…폭염에 '체온 40도' 앉아서 숨진 23살 야외노동자"</p><div class="who">언론 보도 3</div></div>
+  </div>
+</section>
+
+<!-- ===== 폭염 재난화 + 문제 제기 ===== -->
+<section>
+  <div class="wrap">
+    <div class="big-line reveal">살인적인 더위 아래,<br>이주노동자들은 속수무책이다.</div>
+    <p class="reveal">갈수록 뜨거워지는 여름, 폭염은 이제 재난이 되었다. 기상청에 따르면 근 10년간의 폭염일수는 꾸준히 증가하고 있으며, 평균 최저기온 역시 상승을 거듭한다. 2026년은 5월부터 이례적인 더위가 시작된 탓에, 역대 연중 가장 이른 시점에 온열질환 사망자가 발생하기도 했다.</p>
+    <p class="reveal sans" style="font-size:.82rem;color:var(--muted)">출처: 질병관리청 온열질환 응급실 감시체계</p>
+
+    <h3 class="reveal">한국 농촌은 이미 이주노동자에게 기대고 있다</h3>
+    <div class="donut-wrap reveal">
+      <div class="donut" data-donut="64.3" style="--c:var(--purple)">
+        <div class="donut-num"><b data-count="64.3" data-suffix="%">0%</b><span>외국인 고용 농가</span></div>
+      </div>
+      <div class="donut-txt">외국인을 고용하는 농가가 <b>64.3%</b>. 한국 농촌의 이주노동자 의존율은 이미 60%를 웃돈다. 더 이상 예외적인 인력이 아니라, 농사를 떠받치는 일손이다.
+      <div class="sans" style="font-size:.78rem;color:var(--muted);margin-top:8px">출처: 뉴스에듀</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 1부 현장 ===== -->
+<section id="clue">
+  <div class="wrap">
+    <div class="part-tag reveal">1부 · 헷-사과 팀이 본 현장</div>
+    <h2 class="reveal">통계에 없는 사고를 찾아, 밭으로 갔다</h2>
+    <p class="reveal">데스크리서치만으로는 문헌연구도 통계 수치도 전무했다. 이주노동자가 사망해도 부검 시 작업 환경·노동 강도·폭염 노출 시간 등이 사인 판정에 충분히 반영되지 않아, 온열질환 통계에조차 집계되지 않기 때문이다. 그래서 헷-사과 팀은 경북 의성을 비롯한 농촌 현장으로 직접 향했다.</p>
+
+    <table class="info reveal">
+      <tr><th>조사 시기</th><td>2025. 8. 30 ~ 2025. 9. 15</td></tr>
+      <tr><th>조사 대상</th><td>이주노동자 <b>31명</b>, 관계자 <b>15명</b></td></tr>
+      <tr><th>조사 지역</th><td>의성군 의성읍·점곡면·옥산면, 안동시 등</td></tr>
+      <tr><th>조사 내용</th><td>질환 경험 실태, 작업 환경, 휴식·그늘 유무, 안전 안내 경험, 체류 자격, 인식</td></tr>
+    </table>
+    <figure class="fig reveal"><img loading="lazy" src="img/h02.jpg" alt="사과밭에서 어르신을 인터뷰하는 헷-사과 팀"><figcaption>의성의 한 사과밭에서 진행한 현장 인터뷰. 이주노동자 31명, 관계자 15명을 직접 만났다.</figcaption></figure>
+
+    <!-- 질환 경험 실태 -->
+    <h3 class="reveal">조사 결과 — 31명 중 13명이 온열질환을 겪고 있었다</h3>
+    <div class="donut-wrap reveal">
+      <div class="donut" data-donut="42" style="--c:var(--danger)">
+        <div class="donut-num"><b class="" data-count="42" data-suffix="%" style="color:var(--danger)">0%</b><span>31명 중 13명</span></div>
+      </div>
+      <div class="donut-txt">설문조사 결과(n=31), <b style="color:var(--danger)">31명 중 13명</b>이 온열질환을 경험했다. 셋 중 하나 이상이 더위에 몸이 무너지는 순간을 이미 겪었다. 체감온도 40도를 넘는 날, 휴식 공간도 그늘도 없이, 가장 더운 오후 1시경에도 작업은 계속됐다.</div>
+    </div>
+    <div class="quote reveal"><p>"일하던 중 얼굴이 창백해지고 몸이 덜덜 떨렸어요. 순간 정신을 잃지 않으려고 마시던 냉수를 머리에 들이부으면서 버텼습니다."</p><div class="who">라오스 출신 가지밭 노동자 C씨</div></div>
+    <div class="quote reveal"><p>"머리는 너무 어지럽고 눈앞이 흐린데 어떻게 해야 할지 모르겠어서 큰 수를 쓸 수 없었습니다."</p><div class="who">인도네시아 출신 벌초 노동자 D씨</div></div>
+    <figure class="fig reveal"><img loading="lazy" src="img/h12.jpg" alt="고추밭에서 만난 이주노동자들"><figcaption>경북의 한 밭에서 만난 이주노동자들. 더위 속에서도 일은 멈추지 않았다.</figcaption></figure>
+
+    <!-- 4주체 인식 -->
+    <h3 class="reveal">온열질환을 둘러싼 네 주체의 인식</h3>
+    <p class="reveal">같은 폭염을 두고, 농부와 인력업체와 노동자와 지자체가 보는 방향은 제각각 달랐다.</p>
+
+    <div class="quote reveal"><p>"외국인들은 원래 우리보다 더위를 훨씬 잘 견딘다니까요?"</p><div class="who">🧑🏼‍🌾 농부 · 의성군 옥산면 최OO</div></div>
+    <div class="quote reveal"><p>"농사는 원래 여름에 하는 건데, 그렇게 따지면 애초에 농사를 어떻게 해요."</p><div class="who">🧑🏼‍🌾 농부 · 의성군 점곡면 김OO</div></div>
+    <p class="reveal sans" style="font-size:.86rem;color:var(--muted)">→ 출신국이 한국보다 덥다는 이유로, 이주노동자가 '더위에 무감할 것'이라는 왜곡된 인식이 팽배했다.</p>
+
+    <div class="quote reveal"><p>"복장이나 더위 대응까지 안내하는 건 현실적으로 잘 안 돼요. 기본 안내 항목에도 안 들어갑니다."</p><div class="who">🧑🏼‍💼 인력업체 · 의성군 A업체</div></div>
+    <div class="quote reveal"><p>"어느 현장으로 갈지도 매일 바뀌는데, 안전교육까지 하기 어려운 구조예요."</p><div class="who">🧑🏼‍💼 인력 관리자 · 안동시 B업체</div></div>
+    <p class="reveal sans" style="font-size:.86rem;color:var(--muted)">→ 안전 교육은 늘 후순위였고, 폭염은 '어쩔 수 없는 환경'으로 받아들여졌다.</p>
+
+    <div class="quote reveal"><p>"작업 도중에 더워서 어지러웠던 적이 많아요. 그런데 병원에 간다거나 하루치 일을 빼는 건 불가능해요."</p><div class="who">👷🏼 이주노동자 · 인도네시아 20대 남성</div></div>
+    <div class="quote reveal"><p>"더워도 그냥 참고 일했어요. 쉬자고 먼저 말할 수 없거든요."</p><div class="who">👷🏼 이주노동자 · 네팔 30대 남성</div></div>
+    <div class="quote reveal"><p>"중간에 쉬면 끝나는 시간이 늦어져서 더 힘들어요. 집이 머니까요."</p><div class="who">👷🏼 이주노동자 · 베트남 30대 여성</div></div>
+    <p class="reveal sans" style="font-size:.86rem;color:var(--muted)">→ 신분·고용 관계상 취약함 때문에, 작업 중단이나 휴식 요구는 애초에 불가능했다.</p>
+
+    <div class="quote reveal"><p>"폭염이 심한 대낮에 영농 활동을 자제하라고 당부합니다. 드론 띄워서 농민들을 안전한 곳으로 대피시키기도 해요. 하지만 이주노동자들에게는 이런 조치가 가닿기 어려워요. 농가와 사적으로 맺은 계약 관계여서 행정 기관의 현장 개입에 한계가 있습니다. 저희 입장에서는 해드릴 수 있는 게 없습니다."</p><div class="who">🏛️ 농촌 지자체 관계자</div></div>
+    <p class="reveal sans" style="font-size:.86rem;color:var(--muted)">→ 지자체조차 개입할 수 없는 거대한 사각지대.</p>
+    <figure class="fig two reveal">
+      <img loading="lazy" src="img/h17.jpg" alt="농산물을 트럭에 싣는 작업 현장">
+      <img loading="lazy" src="img/h03.png" alt="현장에서 만난 농부와 헷-사과 팀">
+      <figcaption>왼쪽: 폭염 속에도 멈추지 않는 출하 작업. 오른쪽: 읍내에서 만난 농부와 함께.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===== 2부 원인 ===== -->
+<section id="cause" style="background:#fff">
+  <div class="wrap">
+    <div class="part-tag reveal">2부 · 왜 그럴까 — 원인 분석</div>
+    <h2 class="reveal">개인의 부주의가 아니라, 들어오는 길부터 어긋나 있었다</h2>
+
+    <h3 class="reveal">2.1. 이주노동자 유입 경로의 특수성</h3>
+    <p class="reveal">농촌으로 들어오는 길은 비자와 체류 자격에 따라 셋으로 갈린다. 그런데 합법과 불법의 경계는 현장에서 쉽게 무너진다.</p>
+    <div class="defs reveal">
+      <div class="defbox"><b>고용허가제 (E-9)</b><span>3년 체류 가능한 합법 취업비자</span></div>
+      <div class="defbox"><b>계절근로자제 (C-4 / E-8)</b><span>3~5개월 단기 합법 취업</span></div>
+      <div class="defbox"><b>관광비자 (C-3)</b><span>체류는 합법이지만 취업은 불법</span></div>
+    </div>
+    <figure class="fig reveal"><img loading="lazy" src="img/h05.png" alt="이주노동자 유입 경로 비자별 분기 도식"><figcaption>송출국에서 출발해 입국 방식에 따라 E-9·C-4/E-8·C-3로 갈리는 유입 경로</figcaption></figure>
+
+    <p class="reveal">합법으로 들어와도 경계는 쉽게 무너진다. 고용허가제(E-9)로 들어온 뒤 무단 이탈해 불법 사업장으로 옮기면 '합법체류·불법취업'이 되고, 3년 후 미귀국하면 '불법체류·불법취업'이 된다. 관광비자(C-3)는 체류기간 내 노동만으로도 이미 불법취업이며, 기한을 넘기면 '불법체류·불법취업'이 된다.</p>
+    <figure class="fig reveal"><img loading="lazy" src="img/h06.png" alt="체류자격별 합법·불법 경계가 무너지는 경로 도식"><figcaption>합법으로 시작해도 무단 이탈·미귀국·기한 초과로 불법 취업·체류로 흘러가는 경로</figcaption></figure>
+
+    <h4 class="sans reveal" style="font-weight:700;color:var(--purple-d);margin:28px 0 4px;font-size:1rem">현장에서 만난 이주노동자 유입경로</h4>
+    <table class="cmp three reveal">
+      <tr><th>사례</th><th>비자 / 체류</th><th>특징</th></tr>
+      <tr><td>인도네시아 20대 남성 3명</td><td>관광비자 단기 입국</td><td>고향친구 소개로 입국</td></tr>
+      <tr><td>베트남 남성 10여 명</td><td>고용허가제 장기 → 불법체류</td><td>농가체류형 숙소</td></tr>
+      <tr><td>캄보디아 여성 15여 명</td><td>계절근로자제 단기 입국</td><td>—</td></tr>
+      <tr><td>베트남 30대 남성 10여 명</td><td>관광비자 단기 입국</td><td>—</td></tr>
+    </table>
+    <p class="reveal">맹점이 누적되며, 거대한 '불법 체류·불법 취업 풀'이 고착화됐다.</p>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="num danger" data-count="80" data-suffix="%">0%</div><div class="lbl">농촌 이주노동자 중<br>공식 체류 자격 없는 '미등록'</div></div>
+      <div class="stat"><div class="num" data-count="91.9" data-suffix="%">0%</div><div class="lbl">채소·과수 작물재배 농가가<br>미등록 노동자에 의지</div></div>
+      <div class="stat"><div class="num" data-count="44.2" data-suffix="%">0%</div><div class="lbl">축산농가가<br>미등록 노동자에 의지</div></div>
+      <div class="stat"><div class="num danger" data-count="42.3" data-suffix="%">0%</div><div class="lbl">불법 취업 규모<br>전년 대비 폭증</div></div>
+      <div class="stat wide"><div class="num danger" data-count="30" data-suffix="만 명 초과">0</div><div class="lbl">불법 취업 규모 전체</div></div>
+    </div>
+    <p class="reveal sans" style="font-size:.8rem;color:var(--muted)">출처: 한국농촌경제연구원</p>
+
+    <h3 class="reveal">2.2. 미등록 신분이 낳은 거대한 제도적 사각지대</h3>
+    <div class="defs reveal">
+      <div class="defbox"><b>서류조차 없는 '그림자 노동자'들의 침묵</b><span>근로계약서가 없고, 신분 노출·해고가 두려워 고통을 숨긴다.</span></div>
+      <div class="defbox"><b>통계에 잡히지 않는 '유령' 같은 죽음</b><span>단속·강제출국이 두려워 응급실을 기피하고, 사망조차 단순 지병으로 축소된다.</span></div>
+      <div class="defbox"><b>의료 사각지대와 책임 전가</b><span>건강보험에서 배제돼 치료비를 개인이 부담한다. 한 베트남 노동자는 농장주의 치료비 자부담 요구로 중도 귀국했고, 현지 보험사도 '해외 노동 중 발생'을 이유로 거절했다.</span></div>
+    </div>
+
+    <h3 class="reveal">2.3. 안전교육 현황 및 실태</h3>
+    <p class="reveal">관광비자(C-3)는 취업 자체가 불법이라 산업안전보건 교육 시스템과 연결될 여지가 없다. 교육이 존재할 수 없는 처지다. 고용허가제(E-9)는 입국 전 45시간, 입국 직후 2박3일(16시간)의 의무 교육이 있지만, 현장에서는 다르게 굴러갔다.</p>
+    <figure class="fig reveal"><img loading="lazy" src="img/h07.png" alt="비자별 안전교육 단계 도식"><figcaption>비자 유형별 안전교육의 제도적 규정 — E-9만 의무 교육이 존재하고, 그마저 형식적이다.</figcaption></figure>
+    <table class="cmp three reveal">
+      <tr><th>교육 단계</th><th>제도적 규정</th><th>현장 실태</th></tr>
+      <tr><td>입국 전 (송출국)</td><td>45시간↑ — 기초 한국어·문화·산업안전 기초</td><td>현장 실무 용어와 괴리가 커 소통 불가, 형식적 이수</td></tr>
+      <tr><td>입국 직후 (공동취업교육)</td><td>16시간↑(2박3일) — 산업안전보건·근로기준법·노동권리</td><td>무단 이탈 방지 경고성 내용에 편중, 폭염 실무 수칙 미흡</td></tr>
+    </table>
+    <p class="reveal">교육의 목적이 노동자 보호가 아니라 <b>이탈 통제</b>에 맞춰져 있었다.</p>
+
+    <div class="donut-wrap reveal">
+      <div class="donut" data-donut="63" style="--c:var(--warn)">
+        <div class="donut-num"><b data-count="63" data-suffix="%" style="color:var(--warn)">0%</b><span>안내 못 받음</span></div>
+      </div>
+      <div class="donut-txt"><b style="color:var(--warn)">63%</b>가 온열질환 관련 안내를 받지 못했다. 더위를 피하는 가장 기본적인 정보조차 닿지 않았다.</div>
+    </div>
+    <div class="quote reveal"><p>"말이 잘 통하지 않으니 작업 방법 정도만 몸으로 보여주는 수준이에요. 10분 따라 하면 끝, 안전 교육은 따로 제공하지 않습니다."</p><div class="who">의성군 옥산면 김정미 사과농부</div></div>
+
+    <h4 class="sans reveal" style="font-weight:700;color:var(--purple-d);margin:28px 0 4px;font-size:1rem">현장 안전교육을 막아서는 세 가지 장벽</h4>
+    <div class="barriers reveal">
+      <div class="barrier">당일 투입 인력의 극심한 불확실성 — 국적조차 예측할 수 없어 맞춤 교육이 불가능하다</div>
+      <div class="barrier">시간이 곧 생산성 손실인 단기 고용 — 교육에 쓸 시간이 없다</div>
+      <div class="barrier">기본적인 소통조차 막아서는 언어의 차이</div>
+    </div>
+
+    <h3 class="reveal">2.4. 건설업과의 비교 — 같은 폭염, 다른 보호</h3>
+    <p class="reveal">같은 야외 노동이지만, 건설업과 농촌이 받는 보호는 전혀 달랐다. 한쪽은 법적 의무, 다른 한쪽은 권고에 머문다.</p>
+    <table class="cmp three reveal">
+      <tr><th>항목</th><th>🏗️ 건설업</th><th>🧑‍🌾 농촌</th></tr>
+      <tr><td>법적 근거</td><td>산업안전보건기준 개정(2025.7.17 시행) — <b style="color:var(--purple-d)">법적 의무</b></td><td>2025 여름철 자연재난종합대책 — <b style="color:var(--danger)">권고 수준</b></td></tr>
+      <tr><td>안전지침</td><td>온·습도계 기록, 자율점검표, 불시 점검·교육, 위반 시 처벌</td><td>예방 가이드·자율점검표 배포, 5인 미만 영세농가 적용 제외</td></tr>
+      <tr><td>휴게 공간</td><td>냉방·환기 그늘막 / 별도 휴게공간 설치 의무화</td><td>나무 그늘 등 간이 휴식에 의존</td></tr>
+    </table>
+    <figure class="fig two reveal">
+      <img loading="lazy" src="img/h08.png" alt="건설현장 냉방 휴게공간">
+      <img loading="lazy" src="img/h09.png" alt="농촌의 나무 그늘 간이 휴식">
+      <figcaption>왼쪽: 건설현장에 설치된 냉방·환기 휴게공간. 오른쪽: 농촌에선 나무 그늘 한 그루가 휴식의 전부다.</figcaption>
+    </figure>
+    <p class="reveal">농업은 작물 생육주기와 날씨에 종속돼 폭염 속에서도 작업을 강행한다. 법적 강제성이 없고, 5인 미만 영세농가는 제외된다.</p>
+  </div>
+</section>
+
+<!-- ===== 3부 문제정의 ===== -->
+<section id="define">
+  <div class="wrap">
+    <div class="part-tag reveal">3부 · 최종 문제정의</div>
+    <h2 class="reveal">사전 예방·현장 대응·사후 관리가 모두 비어 있었다</h2>
+    <div class="big-line reveal">농촌 이주노동자는 사전 예방, 현장 대응, 사후 관리에 이르는 공백 때문에, 폭염이라는 기후 위기 앞에 최소한의 안전망도 없이 방치되는 <em>'다중적 사각지대'</em>에 놓여 있다.</div>
+    <figure class="fig reveal"><img loading="lazy" src="img/h18.jpg" alt="이주노동자 숙소에서의 인터뷰 장면"><figcaption>농가체류형 숙소에서 만난 이주노동자들. 사전 예방부터 사후 관리까지, 어느 단계도 그들을 받치지 못했다.</figcaption></figure>
+    <p class="reveal">그렇다면 지금 당장 현장에 쥐여줄 수 있는 가장 시급하고 현실적인 방패는 무엇일까. 헷-사과 팀은 <b>'복장 표준'</b>에서 답을 찾았다. 명확한 복장 기준이 없어, 잘못된 복장 선택이 온열질환 위험을 더 키우고 있었기 때문이다.</p>
+  </div>
+</section>
+
+<!-- ===== 4부 솔루션 ===== -->
+<section id="solution" style="background:#fff">
+  <div class="wrap">
+    <div class="part-tag reveal">4부 · 헷-사과의 솔루션</div>
+    <h2 class="reveal">온열질환 안심키트</h2>
+    <div class="big-line reveal">폭염 속 농업 현장에 필요한<br><em>생존 장비의 표준</em>을 만들다.</div>
+    <p class="reveal">솔루션이 하나의 '표준'으로 정립되기 위해 세 가지 조건을 세웠다.</p>
+    <div class="defs reveal">
+      <div class="defbox"><b>기능성</b><span>실제 폭염 현장에서 몸을 지킬 수 있는가</span></div>
+      <div class="defbox"><b>접근성</b><span>언어·비용 장벽 없이 누구나 받아 쓸 수 있는가</span></div>
+      <div class="defbox"><b>직관성</b><span>설명 없이도 바로 쓰는 법을 알 수 있는가</span></div>
+    </div>
+    <figure class="fig reveal"><img loading="lazy" src="img/h10.png" alt="온열질환 안심키트 패키지"><figcaption>헷-사과 팀이 설계한 '온열질환 안심키트' — 사전 예방형 생존 장비 세트</figcaption></figure>
+
+    <div class="sol star reveal"><div class="sol-no">구성 ① · 키트 구성품</div><h4>생명과 직결되는 4가지 필수 보호물품</h4><span class="tag win">사전 예방형 생존 장비</span>
+      <p class="poet">"내 몸의 개인 에어컨", "햇님 철벽 방어 세트".</p>
+      <p class="desc">폭염 현장에서 체온을 직접 떨어뜨리고 햇볕을 막는 보호용품으로 구성했다. 별도의 시설 없이도, 몸에 바로 두를 수 있는 휴대형 방패다.</p>
+    </div>
+
+    <div class="sol reveal"><div class="sol-no">구성 ② · 다국어 리플렛</div><h4>총 10개 언어 제작</h4><span class="tag">정보 접근성</span>
+      <p class="poet">언어가 다르다는 이유로, 살아남는 법을 모르지 않도록.</p>
+      <p class="desc">올바른 사용법과 예방 지식을 <b>10개 언어</b>로 담았다. 언어 장벽으로 인한 정보 접근성 차이를 최소화하기 위해서다.</p>
+      <figure class="fig reveal" style="margin:14px 0 0"><img loading="lazy" src="img/h11.png" alt="10개 언어로 제작한 다국어 리플렛"><figcaption>온열질환 예방 지식을 담은 10개 언어 리플렛</figcaption></figure>
+    </div>
+
+    <figure class="fig reveal"><img loading="lazy" src="img/h13.jpg" alt="이주노동자들에게 키트와 리플렛을 전달하는 현장"><figcaption>현장에서 직접 키트와 리플렛을 전달하고 사용법을 함께 확인했다.</figcaption></figure>
+    <figure class="fig reveal"><img loading="lazy" src="img/h04.png" alt="키트를 받고 둘러앉은 이주노동자들"><figcaption>키트를 받아 든 이주노동자들. 작은 장비 하나가 더위 속 하루를 바꾼다.</figcaption></figure>
+
+    <h3 class="reveal">안심키트의 의의</h3>
+    <div class="canvas reveal">
+      <div class="cv"><h4>농촌 현장의 '폭염 대비 표준'을 처음으로 제시</h4><p>건설업에는 있어도 농촌에는 없던 '기본 안전 기준'을, 농촌 버전으로 처음 만들었다.</p></div>
+      <div class="cv"><h4>사전 예방 중심의 농촌 안전문화 정착</h4><p>사고가 난 뒤 대응하는 방식에서, 미리 막는 방식으로 무게중심을 옮긴다.</p></div>
+      <div class="cv"><h4>데이터 공백 속에서 '가시성' 확보</h4><p>통계에 잡히지 않던 문제의 존재를, 눈에 보이는 형태로 드러낸 첫 공식 시도다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5부 임팩트 캔버스 ===== -->
+<section id="impact">
+  <div class="wrap">
+    <div class="part-tag reveal">5부 · 문제의 확장</div>
+    <h2 class="reveal">임팩트 캔버스로 보는 변화</h2>
+    <p class="reveal">키트 하나로 끝나는 일이 아니다. 헷-사과 팀이 그린 변화의 흐름은 네 단계로 이어진다.</p>
+    <div class="canvas reveal">
+      <div class="cv"><h4>수면 위로 떠오른 목소리들</h4><p>다중적 사각지대를 조명한다 — 보이지 않던 고통을 드러낸다.</p></div>
+      <div class="cv"><h4>공론화로 선명해지는 현실</h4><p>문제의 해상도를 고도화한다 — 막연한 문제가 또렷한 의제가 된다.</p></div>
+      <div class="cv"><h4>경계를 넘어선 확장과 연대</h4><p>사회적 책임을 발견한다 — 농가·지자체·기관이 함께 묶인다.</p></div>
+      <div class="cv"><h4>지속 가능한 변화를 위한 초석</h4><p>시스템 개선의 기반을 구축한다 — 일회성 지원을 넘어 제도로 이어간다.</p></div>
+    </div>
+    <p class="reveal sans" style="font-size:.86rem;color:var(--muted)">→ 헷-사과 팀은 이 흐름을 지속 가능한 해결로 잇기 위한 네 가지 관점을 함께 제시했다.</p>
+    <figure class="fig reveal"><img loading="lazy" src="img/h16.jpg" alt="이해관계자와의 회의 장면"><figcaption>문제 당사자부터 고용 농장주·지원기관·인력업체·의성군청까지, 다양한 주체와 마주 앉았다.</figcaption></figure>
+  </div>
+</section>
+
+<!-- ===== 6부 엔딩 + 컨택 ===== -->
+<section id="ending">
+  <div class="wrap">
+    <div class="part-tag reveal">6부 · 연구 여정의 마무리</div>
+    <h2 class="reveal">팔, 다리가 잘려야만 뉴스에 나오는 사람들</h2>
+    <p class="reveal">2025년 6월부터 11월까지, SK 행복나눔재단 「Sunny Scholar in 의성」 프로젝트로 네 명의 대학생이 헷-사과 팀으로 모였다. 문제 당사자와 동료, 고용 농장주, 이주민 지원 기관·센터, 인력업체, 의성군청까지 다양한 이해관계자를 만났다.</p>
+    <div class="quote reveal"><p>"이주노동자 문제는 팔, 다리가 잘려야만 뉴스에 나와요."</p><div class="who">경북북부이주노동자센터 소장</div></div>
+    <figure class="fig reveal"><img loading="lazy" src="img/h15.jpg" alt="버스정류장에서의 현장조사 모습"><figcaption>의성 곳곳을 걸어 다니며 현장을 찾은 헷-사과 팀</figcaption></figure>
+
+    <div class="big-line reveal">죽음에 이르러서야 짧게 다뤄지는 고통을,<br><em>죽음 이전에</em> 멈출 수 있도록.</div>
+    <p class="reveal center lead">온열질환을 '어쩔 수 없는 더위' 탓으로만 기록하지 않기 위해.<br>헷-사과는 이 문제를 개인의 운이 아닌, 함께 바꿔야 할 안전 문제로 다시 봅니다.</p>
+    <figure class="fig reveal" style="margin-top:36px"><img loading="lazy" src="img/h14.jpg" alt="헷-사과 팀 단체 사진"><figcaption>헷-사과 — 의성에서 한 여름을 보낸 네 명의 대학생 연구팀</figcaption></figure>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrap">
+    <h2 class="reveal center">함께 바꿀 수 있습니다</h2>
+    <p class="reveal center" style="color:rgba(255,255,255,.7)">키트 보급 협력 · 지자체/복지기관 연계 · 다국어 안전정보 표준화 · 연구 보고서 — 모든 문의를 받습니다.</p>
+    <div class="card reveal">
+      <div class="sans" style="font-size:.78rem;letter-spacing:1px;color:#b89cd6">CONTACT & 문의사항</div>
+      <div class="mail">헷-사과 · Sunny Scholar in 의성</div>
+      <div style="font-family:'Noto Sans KR',sans-serif;font-size:.82rem;color:rgba(255,255,255,.6);margin:6px 0 4px">문의 연락처 등록 예정</div>
+      <div class="ways">
+        <div class="way"><b>키트 보급 협력</b>온열질환 안심키트를 실제 농촌 현장에 보급할 수 있는지 함께 확인</div>
+        <div class="way"><b>지자체·복지기관</b>이주노동자 생활 동선 기반 지역 폭염 안전사업 연계 실증</div>
+        <div class="way"><b>다국어 안전정보</b>10개 언어 리플렛의 표준화·확장 가능성 검토</div>
+        <div class="way"><b>연구 보고서</b>현장조사 데이터·솔루션 검토 내용 전송 및 후속 미팅</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="credit">
+  <b>Sunny On Site · 헷-사과</b><br>
+  헷-사과는 SK 행복나눔재단의 대학생 지역 기반 사회문제 해결 프로젝트 「Sunny Scholar in 의성」으로 만나,<br>
+  2025년 6월부터 11월까지 '농촌 이주노동자 온열질환 문제'를 연구해온 대학생 연구팀입니다.<br>
+  의성 일대 농촌 현장에서 이주노동자 인터뷰 31명, 관계자 인터뷰 15명을 진행했습니다.<br><br>
+  <span style="color:#5a5060">Interactive Report v10 · 2026 · Problem of Problems Lab</span>
+</footer>
+
+<script>
+/* ===== reveal ===== */
+const revObs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+/* ===== progress + masthead ===== */
+const prog=document.getElementById('progress'),mast=document.getElementById('masthead');
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement,sc=h.scrollTop,max=h.scrollHeight-h.clientHeight;
+  prog.style.width=(sc/max*100)+'%';
+  if(sc>window.innerHeight*.6)mast.classList.add('show');else mast.classList.remove('show');
+});
+/* scrollspy */
+const navLinks=[...document.querySelectorAll('.masthead nav a')];
+const spy=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){
+  navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}})},{rootMargin:'-40% 0px -55% 0px'});
+['clue','cause','define','solution','impact','ending'].forEach(id=>{const el=document.getElementById(id);if(el)spy.observe(el)});
+
+/* ===== count-up (stat / donut numbers) ===== */
+function countUp(el){
+  if(!el)return;const target=parseFloat(el.dataset.count),suf=el.dataset.suffix||'';
+  let cur=0,step=target/40;
+  const t=setInterval(()=>{cur+=step;if(cur>=target){cur=target;clearInterval(t)}
+    el.textContent=(target%1?cur.toFixed(1):Math.round(cur))+suf;},28);
+}
+document.querySelectorAll('[data-count]').forEach(el=>{
+  let done=false;
+  new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting&&!done){done=true;countUp(el);}})},{threshold:.6}).observe(el);
+});
+
+/* ===== donut fill ===== */
+document.querySelectorAll('[data-donut]').forEach(d=>{
+  let done=false;
+  new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting&&!done){done=true;
+    d.style.setProperty('--p',d.dataset.donut);
+  }})},{threshold:.5}).observe(d);
+});
+
+/* ===== gbar fill ===== */
+document.querySelectorAll('[data-gbar]').forEach(g=>{
+  let done=false;
+  new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting&&!done){done=true;
+    g.querySelectorAll('.gbar-fill').forEach(b=>{b.style.width=b.dataset.w+'%'});
+  }})},{threshold:.5}).observe(g);
+});
+</script>
+</body>
+</html>

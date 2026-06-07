@@ -3,206 +3,175 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SK Sunny Scholar Local 의성</title>
-<meta name="robots" content="noindex, nofollow">
+<title>SK SUNNY 의성 — 인터랙티브 웹 모음</title>
+<link rel="icon" href="data:,">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Pretendard', -apple-system, system-ui, sans-serif; background: #0a0a0a; color: #e0e0e0; min-height: 100vh; }
+:root{--bg:#f5f1fa;--ink:#1f1b27;--soft:#7a7287;--line:#e4dcef;--purple:#6B3FA0;--purple-d:#4e2c77;
+  --t1:#38617f;--t2:#2f9e7e;--t3:#c0392b;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased}
+.serif{font-family:'Noto Serif KR',serif}
+.head{text-align:center;padding:64px 24px 36px;background:radial-gradient(120% 80% at 50% 0%,#efe6fa,#f5f1fa)}
+.head .kk{font-size:.74rem;letter-spacing:3px;text-transform:uppercase;color:var(--purple);font-weight:700;margin-bottom:14px}
+.head h1{font-family:'Noto Serif KR',serif;font-weight:700;font-size:clamp(1.8rem,5vw,2.8rem);letter-spacing:-1px}
+.head p{margin-top:14px;color:var(--soft);font-size:.95rem;max-width:600px;margin-left:auto;margin-right:auto}
+.head .meta{margin-top:18px;font-size:.8rem;color:var(--soft)}
 
-/* Lock Screen */
-.lock-screen {
-  position: fixed; inset: 0; z-index: 1000;
-  background: #0a0a0a;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  transition: opacity 0.5s, visibility 0.5s;
-}
-.lock-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-.lock-icon { font-size: 3rem; margin-bottom: 24px; opacity: 0.5; }
-.lock-title { font-size: 1.4rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
-.lock-sub { font-size: 0.85rem; color: #666; margin-bottom: 32px; }
-.lock-input {
-  background: #1a1a1a; border: 1px solid #333; border-radius: 12px;
-  padding: 14px 20px; font-size: 1rem; color: #fff; text-align: center;
-  width: 280px; font-family: inherit; outline: none;
-  transition: border-color 0.2s;
-}
-.lock-input:focus { border-color: #E8945A; }
-.lock-input::placeholder { color: #555; }
-.lock-error { color: #e74c3c; font-size: 0.8rem; margin-top: 12px; opacity: 0; transition: opacity 0.3s; }
-.lock-error.show { opacity: 1; }
-.lock-hint { color: #444; font-size: 0.75rem; margin-top: 24px; }
+.wrap{max-width:1080px;margin:0 auto;padding:20px 24px 80px}
+.team{margin-top:48px}
+.team-h{display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:2px solid var(--line);margin-bottom:24px}
+.team-h .dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
+.team-1 .dot{background:var(--t1)}.team-2 .dot{background:var(--t2)}.team-3 .dot{background:var(--t3)}
+.team-h h2{font-weight:900;font-size:1.3rem}
+.team-h .sub{color:var(--soft);font-size:.86rem;font-weight:400}
+.team-h .tag{margin-left:auto;font-size:.7rem;font-weight:700;padding:4px 12px;border-radius:20px}
+.team-1 .tag{background:rgba(56,97,127,.12);color:var(--t1)}
+.team-2 .tag{background:rgba(47,158,126,.12);color:var(--t2)}
+.team-3 .tag{background:rgba(192,57,44,.12);color:var(--t3)}
 
-/* Main Content */
-.main-content { display: none; }
-.main-content.visible { display: block; }
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 18px rgba(80,50,120,.05)}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(80,50,120,.13)}
+.card .top{height:7px}
+.team-1 .card .top{background:var(--t1)}.team-2 .card .top{background:var(--t2)}.team-3 .card .top{background:var(--t3)}
+.card .body{padding:20px;flex:1;display:flex;flex-direction:column}
+.card .ver{display:flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;color:var(--soft);letter-spacing:1px}
+.card .star{color:#e0a23c}
+.card h3{font-family:'Noto Serif KR',serif;font-size:1.18rem;margin:8px 0 4px;line-height:1.35}
+.card .desc{font-size:.88rem;color:#4a4456;flex:1}
+.card .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.card .tags span{font-size:.68rem;color:var(--soft);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:3px 9px}
+.card .open{margin-top:16px;display:inline-flex;align-items:center;gap:6px;font-size:.84rem;font-weight:700;color:var(--purple)}
+.card.best{border-color:#e0a23c;box-shadow:0 4px 18px rgba(224,162,58,.15)}
+.card.best .ver{color:#c98a1e}
 
-/* Header */
-.site-header {
-  padding: 60px 24px 40px; text-align: center;
-  border-bottom: 1px solid #1a1a1a;
-}
-.site-header h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800; color: #fff; margin-bottom: 8px; }
-.site-header .badge { display: inline-block; background: #E8945A; color: #fff; padding: 4px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; margin-bottom: 16px; }
-.site-header p { color: #888; font-size: 0.95rem; max-width: 500px; margin: 0 auto; }
-
-/* Team Section */
-.container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
-.team-section { padding: 60px 0; }
-.team-section h2 {
-  font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 8px;
-  display: flex; align-items: center; gap: 12px;
-}
-.team-section h2 .dot { width: 8px; height: 8px; border-radius: 50%; background: #E8945A; }
-.team-section .team-desc { color: #888; font-size: 0.9rem; margin-bottom: 32px; }
-.team-section + .team-section { border-top: 1px solid #1a1a1a; }
-
-/* Cards */
-.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
-.card {
-  background: #111; border: 1px solid #222; border-radius: 16px;
-  padding: 24px; transition: border-color 0.2s, transform 0.2s;
-  text-decoration: none; color: inherit; display: block;
-}
-.card:hover { border-color: #E8945A; transform: translateY(-2px); }
-.card-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #E8945A; margin-bottom: 8px; }
-.card-title { font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
-.card-desc { font-size: 0.85rem; color: #888; line-height: 1.6; }
-.card-img { width: 100%; border-radius: 10px; margin-bottom: 12px; display: block; }
-.card-version { display: inline-block; background: #1a1a1a; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; color: #666; margin-top: 12px; }
-.card-arrow { float: right; color: #E8945A; font-size: 1.2rem; margin-top: -4px; }
-
-/* Special cards */
-.card-highlight { border-color: #E8945A33; background: linear-gradient(135deg, #111 0%, #1a1208 100%); }
-.card-highlight .card-label { color: #E8945A; }
-
-/* Footer */
-footer { padding: 40px 24px; text-align: center; color: #444; font-size: 0.8rem; border-top: 1px solid #1a1a1a; }
-
-@media (max-width: 640px) {
-  .card-grid { grid-template-columns: 1fr; }
-  .site-header { padding: 40px 20px 30px; }
-}
+.note{margin-top:60px;padding:22px 24px;background:#fff;border:1px solid var(--line);border-radius:14px;font-size:.85rem;color:#4a4456;line-height:1.8}
+.note b{color:var(--purple-d)}
+footer{text-align:center;padding:30px;color:var(--soft);font-size:.74rem;border-top:1px solid var(--line)}
 </style>
 </head>
 <body>
-
-<!-- ===== LOCK SCREEN ===== -->
-<div class="lock-screen" id="lock">
-  <div class="lock-icon">&#128274;</div>
-  <div class="lock-title">SK Sunny Scholar Local</div>
-  <div class="lock-sub">비밀번호를 입력하세요</div>
-  <input type="password" class="lock-input" id="pw-input" placeholder="비밀번호" autofocus>
-  <button onclick="checkPassword()" style="margin-top:16px;padding:12px 32px;background:#E8945A;color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;font-family:inherit;">입장</button>
-  <div class="lock-error" id="pw-error">비밀번호가 틀렸습니다</div>
-  <div class="lock-hint">관계자에게 비밀번호를 문의하세요</div>
+<div class="head">
+  <div class="kk">Sunny Scholar in 의성 · Problem of Problems Lab</div>
+  <h1>의성 인터랙티브 웹 모음</h1>
+  <p>SK 행복나눔재단 「Sunny Scholar in 의성」 세 팀의 후속활동 보고서를 인터랙티브 웹으로 만든 버전들입니다. 카드를 누르면 새 탭에서 열립니다.</p>
+  <div class="meta">3개 팀 · 팀별 V20 · V16 · V10 (총 9개) · ★ 표시가 각 팀 최종본(V20)</div>
 </div>
 
-<!-- ===== MAIN CONTENT ===== -->
-<div class="main-content" id="main">
+<div class="wrap">
 
-<header class="site-header">
-  <div class="badge">2025 SK Sunny Scholar Local · 의성</div>
-  <h1>Sunny Scholar Local — 의성</h1>
-  <p>SK Sunny Scholar Local 의성 활동 기록. 3개 팀의 인터랙티브 보고서, 홈페이지, 비평을 모아봅니다.<br><a href="https://sunnyscholar.oopy.io/" target="_blank" style="color:#E8945A;">sunnyscholar.oopy.io →</a></p>
-</header>
-
-<!-- 의구심 -->
-<section class="team-section">
-  <div class="container">
-    <h2><span class="dot"></span>의구심 (UIGUSIM)</h2>
-    <p class="team-desc">면 지역 어르신의 실버카 공백구간 문제를 발견하고, 공유실버카 '구르미'를 시범운영한 팀</p>
-    <div class="card-grid">
-      <a class="card card-highlight" href="uigusim/home.html">
-        <div class="card-label">홈페이지</div>
-        <div class="card-title">의구심 팀 홈페이지 <span class="card-arrow">&rarr;</span></div>
-        <div class="card-desc">구르미 프로젝트 소개, 도입 문의, 팀 소개</div>
-      </a>
-      <a class="card card-highlight" href="uigusim/report.html">
-        <div class="card-label">보고서</div>
-        <div class="card-title">수정보고서 (AI 터치) <span class="card-arrow">&rarr;</span></div>
-        <div class="card-desc">18개 섹션, 16개 표, 전체 데이터 포함 스토리텔링</div>
-      </a>
-      <a class="card" href="uigusim/v9/index.html">
-        <div class="card-label">인터랙티브웹</div>
-        <div class="card-title">문제정의 단독 버전 <span class="card-arrow">&rarr;</span></div>
-        <div class="card-desc">문제정의연구소 관점으로 재구성한 뉴스 스타일</div>
-        <span class="card-version">v9</span>
-      </a>
-      <a class="card" href="uigusim/v6/index.html">
-        <div class="card-label">인터랙티브웹</div>
-        <div class="card-title">다큐멘터리 (Full) <span class="card-arrow">&rarr;</span></div>
-        <div class="card-desc">현장의 숨결을 담은 몰입형 다큐멘터리 웹</div>
-        <span class="card-version">v6</span>
-      </a>
+  <!-- 1조 -->
+  <section class="team team-1">
+    <div class="team-h">
+      <span class="dot"></span>
+      <h2>1조 RE:MOVE <span class="sub">· 의료용 전동스쿠터 오조작 사고</span></h2>
+      <span class="tag">전동스쿠터</span>
     </div>
-  </div>
-</section>
-
-<!-- 리무브 -->
-<section class="team-section">
-  <div class="container">
-    <h2><span class="dot"></span>리무브</h2>
-    <p class="team-desc">SK Sunny 리무브 의성 활동 기록</p>
-    <div class="card-grid">
-      <a class="card" href="scholar/v4/index.html">
-        <div class="card-label">인터랙티브웹</div>
-        <div class="card-title">Sunny 매거진 <span class="card-arrow">&rarr;</span></div>
-        <div class="card-desc">매거진 레이아웃</div>
-        <span class="card-version">v4</span>
-      </a>
+    <div class="cards">
+      <a class="card best" href="scholar/v20/index.html" target="_blank" rel="noopener">
+        <div class="top"></div><div class="body">
+          <div class="ver"><span class="star">★</span> V20 · 노션 보강 최종</div>
+          <h3>당신과 의료용 전동스쿠터 · 최종</h3>
+          <div class="desc">V19 결정판에, 노션 원문에 있던 8단계 메커니즘·조작방식 표·노인회장 인용·골든타임 현장 피드백을 보강한 최종본.</div>
+          <div class="tags"><span>최종</span><span>노션 보강</span><span>풀</span></div>
+          <div class="open">열기 ↗</div>
+        </div></a>
+      <a class="card" href="scholar/v16/index.html" target="_blank" rel="noopener">
+        <div class="top"></div><div class="body">
+          <div class="ver">V16 · 합본(V13+V10)</div>
+          <h3>49명의 기록 · 합본</h3>
+          <div class="desc">강철 톤 '사고 기록'(V13)에 초기 풀버전(V10)의 증언·조사표를 합친 버전.</div>
+          <div class="tags"><span>합본</span><span>강철 톤</span><span>풀</span></div>
+          <div class="open">열기 ↗</div>
+        </div></a>
+      <a class="card" href="scholar/v10/index.html" target="_blank" rel="noopener">
+        <div class="top"></div><div class="body">
+          <div class="ver">V10</div>
+          <h3>SK SUNNY · 드라마틱</h3>
+          <div class="desc">보라 브랜드의 드라마틱 풀버전. 49명 카운팅 애니·골든타임 막대 포함.</div>
+          <div class="tags"><span>보라 브랜드</span><span>풀버전</span></div>
+          <div class="open">열기 ↗</div>
+        </div></a>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- 헷사과 -->
-<section class="team-section">
-  <div class="container">
-    <h2><span class="dot"></span>헷사과</h2>
-    <p class="team-desc">SK Sunny 헷사과 팀 의성 활동 기록</p>
-    <div class="card-grid">
-      <a class="card" href="hetsa/v6/index.html">
-        <div class="card-label">인터랙티브웹</div>
-        <div class="card-title">다큐멘터리 (Full) <span class="card-arrow">&rarr;</span></div>
-        <div class="card-desc">현장 밀착 다큐멘터리 웹</div>
-        <span class="card-version">v6</span>
-      </a>
+  <!-- 2조 -->
+  <section class="team team-2">
+    <div class="team-h">
+      <span class="dot"></span>
+      <h2>2조 의구심 <span class="sub">· 노인 이동권 · 공유실버카 구르미</span></h2>
+      <span class="tag">공유실버카</span>
     </div>
+    <div class="cards">
+      <a class="card best" href="uigusim/v20/index.html" target="_blank" rel="noopener">
+        <div class="top"></div><div class="body">
+          <div class="ver"><span class="star">★</span> V20 · 노션 보강 최종</div>
+          <h3>실버카가 사라지는 75분 · 최종</h3>
+          <div class="desc">V19 결정판에, 노션 원문의 운영 가이드라인 표·예상 이용인원 계산(1곳·5대·연 1,440명)을 보강한 최종본.</div>
+          <div class="tags"><span>최종</span><span>노션 보강</span><span>풀</span></div>
+          <div class="open">열기 ↗</div>
+        </div></a>
+      <a class="card" href="uigusim/v16/index.html" target="_blank" rel="noopener">
+        <div class="top"></div><div class="body">
+          <div class="ver">V16 · 합본(V14+V10)</div>
+          <h3>구르미 · 합본</h3>
+          <div class="desc">캠페인 확장판(V14)에 초기 풀버전(V10)의 2차 운영 결과까지 합친 버전.</div>
+          <div class="tags"><span>합본</span><span>캠페인</span><span>풀</span></div>
+          <div class="open">열기 ↗</div>
+        </div></a>
+      <a class="card" href="uigusim/v10/index.html" target="_blank" rel="noopener">
+        <div class="top"></div><div class="body">
+          <div class="ver">V10 · 초기안</div>
+          <h3>드라마틱 풀</h3>
+          <div class="desc">초기 템플릿 기반 풀버전. 시범운영 영상 포함.</div>
+          <div class="tags"><span>초기안</span><span>풀버전</span></div>
+          <div class="open">열기 ↗</div>
+        </div></a>
+    </div>
+  </section>
+
+  <!-- 3조 -->
+  <section class="team team-3">
+    <div class="team-h">
+      <span class="dot"></span>
+      <h2>3조 헷사과 <span class="sub">· 농촌 이주노동자 온열질환 · 안심키트</span></h2>
+      <span class="tag">온열질환</span>
+    </div>
+    <div class="cards">
+      <a class="card best" href="hetsa/v20/index.html" target="_blank" rel="noopener">
+        <div class="top"></div><div class="body">
+          <div class="ver"><span class="star">★</span> V20 · 노션 보강 최종</div>
+          <h3>보이지 않는 여름 · 최종</h3>
+          <div class="desc">V19 결정판에, 노션 원문의 폭염 기사·4주체 인식·비자 유입경로 표·미등록 통계(91.9%)·안전교육 제도표·63%를 보강한 최종본.</div>
+          <div class="tags"><span>최종</span><span>노션 보강</span><span>풀</span></div>
+          <div class="open">열기 ↗</div>
+        </div></a>
+      <a class="card" href="hetsa/v16/index.html" target="_blank" rel="noopener">
+        <div class="top"></div><div class="body">
+          <div class="ver">V16 · 합본(V14+V10)</div>
+          <h3>통계에 없는 더위 · 합본</h3>
+          <div class="desc">폭염 탐사보도 확장판(V14)에 초기 풀버전(V10)의 내용을 합친 버전.</div>
+          <div class="tags"><span>합본</span><span>탐사보도</span><span>풀</span></div>
+          <div class="open">열기 ↗</div>
+        </div></a>
+      <a class="card" href="hetsa/v10/index.html" target="_blank" rel="noopener">
+        <div class="top"></div><div class="body">
+          <div class="ver">V10 · 초기안</div>
+          <h3>드라마틱 풀</h3>
+          <div class="desc">초기 템플릿 기반 풀버전. 모든 통계·표·인용 포함.</div>
+          <div class="tags"><span>초기안</span><span>풀버전</span></div>
+          <div class="open">열기 ↗</div>
+        </div></a>
+    </div>
+  </section>
+
+  <div class="note">
+    <b>버전 안내</b> — <b>★V20</b>은 각 팀 최종본으로, V19 결정판에 노션 원문에서 빠졌던 표·이미지·서사를 보강하고 이미지를 고해상도로 교체한 버전입니다. <b>V16</b>은 각 팀 정체성을 살린 확장판(V13·V14)에 초기 풀버전(V10)을 합친 합본, <b>V10</b>은 초기 템플릿 기반 풀버전입니다.
   </div>
-</section>
+</div>
 
-<footer>
-  <p>SK Sunny Scholar Local · 의성 · 2025</p>
-</footer>
-
-</div><!-- /main-content -->
-
-<script>
-// Password protection
-var HASH = 'f020272c938ba0a213d31613fd5a1a8b053c693d489551f8b24e900db43d6873'; // sha256 of '0213'
-
-function checkPassword() {
-  var input = document.getElementById('pw-input').value;
-  crypto.subtle.digest('SHA-256', new TextEncoder().encode(input)).then(function(buf) {
-    var hash = Array.from(new Uint8Array(buf)).map(function(b) { return b.toString(16).padStart(2,'0'); }).join('');
-    if (hash === HASH) {
-      document.getElementById('lock').classList.add('hidden');
-      document.getElementById('main').classList.add('visible');
-      sessionStorage.setItem('sunny_auth', '1');
-    } else {
-      document.getElementById('pw-error').classList.add('show');
-      setTimeout(function() { document.getElementById('pw-error').classList.remove('show'); }, 2000);
-    }
-  });
-}
-document.getElementById('pw-input').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') checkPassword();
-});
-
-// Session persistence
-if (sessionStorage.getItem('sunny_auth') === '1') {
-  document.getElementById('lock').classList.add('hidden');
-  document.getElementById('main').classList.add('visible');
-}
-</script>
+<footer>SK SUNNY · Sunny Scholar in 의성 · 인터랙티브 웹 모음 · 2026 · Problem of Problems Lab</footer>
 </body>
 </html>

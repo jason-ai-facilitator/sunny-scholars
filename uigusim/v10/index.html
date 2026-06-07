@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>구르미 — 정류장에 두고 간 두 다리, 75분의 공백을 메웁니다 · Sunny Scholar in 의성</title>
+<meta name="description" content="노인 이동권 · 실버카 공백구간 — 의성 54개 마을 164명의 기록. 공유실버카 '구르미'를 운영할 파트너를 찾습니다. SK 행복나눔재단 Sunny Scholar in 의성, 팀 의구심.">
+<link rel="icon" href="data:,">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#6B3FA0; --purple-d:#4e2c77; --purple-l:#f5f0fa; --line:#e0d4f0;
+  --ink:#1a1a1a; --text:#2a2a2a; --muted:#8a8294;
+  --paper:#fefcf9; --danger:#c0392b; --warn:#e08a2c; --dim:#d8d2e2; --safe:#5a8f6b;
+  --maxw:780px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Serif KR',serif;background:var(--purple-l);color:var(--text);line-height:1.9;-webkit-font-smoothing:antialiased}
+.sans{font-family:'Noto Sans KR',sans-serif}
+
+/* ===== masthead ===== */
+.masthead{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+  padding:12px 24px;background:rgba(254,252,249,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+  font-family:'Noto Sans KR',sans-serif;transform:translateY(-100%);transition:transform .4s ease}
+.masthead.show{transform:translateY(0)}
+.masthead .brand{font-weight:900;font-size:.82rem;letter-spacing:.5px;color:var(--ink)}
+.masthead .brand span{color:var(--purple)}
+.masthead nav{display:flex;gap:18px}
+.masthead nav a{text-decoration:none;color:var(--muted);font-size:.72rem;font-weight:500;transition:color .2s}
+.masthead nav a:hover,.masthead nav a.active{color:var(--purple)}
+@media(max-width:640px){.masthead nav{display:none}}
+
+/* ===== hero ===== */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+  position:relative;background:#161016;overflow:hidden;padding:40px 24px}
+.hero::before{content:"";position:absolute;inset:0;background:url('img/u01.jpg') center/cover;opacity:.32;filter:grayscale(.3)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,16,22,.55),rgba(22,16,22,.85))}
+.hero>*{position:relative;z-index:2}
+.hero .kicker{font-family:'Noto Sans KR',sans-serif;font-size:.74rem;letter-spacing:3px;text-transform:uppercase;color:#c4a8e0;margin-bottom:28px}
+.hero h1{font-weight:900;font-size:clamp(1.9rem,5.5vw,3.3rem);line-height:1.35;color:#fff;letter-spacing:-1px}
+.hero h1 em{font-style:normal;color:#d9b8ff}
+.hero .sub{margin-top:24px;font-size:clamp(1rem,2.4vw,1.25rem);color:rgba(255,255,255,.7);font-weight:400}
+.hero .herostats{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin-top:34px;font-family:'Noto Sans KR',sans-serif}
+.hero .herostats .hs{color:#fff}
+.hero .herostats .hs b{display:block;font-size:1.7rem;font-weight:900;color:#e8c8ff;line-height:1.1}
+.hero .herostats .hs span{font-size:.74rem;color:rgba(255,255,255,.6)}
+.hero .scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-family:'Noto Sans KR',sans-serif;
+  font-size:.66rem;letter-spacing:2px;color:rgba(255,255,255,.5);z-index:2;animation:bob 2s infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+/* ===== layout ===== */
+section{padding:80px 24px}
+.wrap{max-width:var(--maxw);margin:0 auto}
+.part-tag{font-family:'Noto Sans KR',sans-serif;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--purple);
+  font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.part-tag::before{content:"";width:28px;height:2px;background:var(--purple)}
+h2{font-weight:900;font-size:clamp(1.5rem,4vw,2.1rem);line-height:1.4;color:var(--ink);margin-bottom:8px;letter-spacing:-.5px}
+h3{font-weight:700;font-size:1.15rem;color:var(--purple-d);margin:38px 0 12px}
+p{margin:16px 0;font-size:1.04rem;color:#3a3340}
+.lead{font-size:1.16rem;color:var(--ink);font-weight:500}
+.center{text-align:center}
+.big-line{font-weight:700;font-size:clamp(1.2rem,2.8vw,1.5rem);line-height:1.55;color:var(--ink);text-align:center;margin:38px auto;max-width:640px;letter-spacing:-.5px}
+.big-line em{font-style:normal;color:var(--purple);border-bottom:3px solid #e3d3f5}
+
+/* quote */
+.quote{margin:24px 0;padding:22px 26px;background:#fff;border-left:4px solid var(--purple);border-radius:0 10px 10px 0;
+  box-shadow:0 4px 20px rgba(107,63,160,.06)}
+.quote p{margin:0 0 8px;font-size:1.05rem;color:var(--ink);font-style:italic}
+.quote .who{font-family:'Noto Sans KR',sans-serif;font-size:.78rem;color:var(--muted);font-style:normal;font-weight:500}
+.quote.dark{background:#221a2b;border-color:#a06fd0}
+.quote.dark p{color:#f0e8f8}.quote.dark .who{color:#b89cd6}
+
+/* hooking full-bleed */
+.hook{background:#1d141f;color:#f0e8f5;padding:90px 24px}
+.hook .wrap{max-width:720px}
+.hook .name{font-family:'Noto Sans KR',sans-serif;color:#c4a0e8;font-size:.8rem;letter-spacing:1px;margin-bottom:18px}
+.hook blockquote{font-size:clamp(1.05rem,2.6vw,1.28rem);line-height:1.95;font-weight:400;color:#ece2f4;margin:0}
+.hook blockquote + blockquote{margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,.12)}
+.hook .em-line{font-weight:700;color:#e8c8ff;font-size:1.22rem}
+.hook figure{margin:30px 0}
+.hook figure img{width:100%;border-radius:12px;display:block;border:1px solid rgba(255,255,255,.15)}
+.hook figure.portrait img{max-width:300px;margin:0 auto}
+.hook figcaption{font-family:'Noto Sans KR',sans-serif;font-size:.78rem;color:#b89cd6;text-align:center;margin-top:10px}
+
+/* info table */
+table.info{width:100%;border-collapse:collapse;margin:24px 0;font-family:'Noto Sans KR',sans-serif;font-size:.9rem;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 4px 20px rgba(107,63,160,.06)}
+table.info th,table.info td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+table.info th{background:var(--purple);color:#fff;font-weight:600;width:30%;white-space:nowrap}
+table.info tr:last-child td,table.info tr:last-child th{border-bottom:none}
+
+/* compare table */
+table.cmp{width:100%;border-collapse:collapse;margin:24px 0;font-family:'Noto Sans KR',sans-serif;font-size:.92rem;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 4px 20px rgba(107,63,160,.06)}
+table.cmp th{background:var(--purple-d);color:#fff;padding:12px 18px;font-size:.82rem;text-align:left}
+table.cmp td{padding:14px 18px;border-bottom:1px solid var(--line)}
+table.cmp td:first-child{font-weight:700;color:var(--purple-d);width:46%}
+table.cmp tr:last-child td{border-bottom:none}
+
+/* ===== STAT cards (funnel 대체) ===== */
+.statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:26px 0}
+.statcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 18px;text-align:center;
+  box-shadow:0 4px 20px rgba(107,63,160,.06)}
+.statcard .num{font-family:'Noto Sans KR',sans-serif;font-weight:900;font-size:2.2rem;color:var(--purple);line-height:1}
+.statcard .num small{font-size:1rem;font-weight:700}
+.statcard .lbl{font-family:'Noto Sans KR',sans-serif;font-size:.8rem;color:#4a4356;margin-top:8px;line-height:1.5}
+.statcard.accent{background:linear-gradient(180deg,#faf6ff,#fff);border:2px solid var(--purple)}
+
+/* mechanism / 이용법 steps */
+.steps{counter-reset:s;margin:24px 0}
+.step{position:relative;padding:14px 16px 14px 56px;background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:10px;
+  font-family:'Noto Sans KR',sans-serif;font-size:.95rem;font-weight:500;color:var(--ink)}
+.step::before{counter-increment:s;content:counter(s);position:absolute;left:14px;top:50%;transform:translateY(-50%);
+  width:28px;height:28px;background:var(--purple);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem}
+.step.boom{border-color:var(--danger);background:#fdf3f2}.step.boom::before{background:var(--danger)}
+
+/* solution / partner cards */
+.sol{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;margin:18px 0;box-shadow:0 4px 20px rgba(107,63,160,.06)}
+.sol.star{border:2px solid var(--purple);background:linear-gradient(180deg,#faf6ff,#fff)}
+.sol .sol-no{font-family:'Noto Sans KR',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1px;color:var(--purple);text-transform:uppercase}
+.sol h4{font-weight:900;font-size:1.25rem;color:var(--ink);margin:4px 0 6px}
+.sol .tag{display:inline-block;font-family:'Noto Sans KR',sans-serif;font-size:.66rem;background:var(--purple-l);color:var(--purple-d);
+  padding:3px 10px;border-radius:12px;font-weight:600;margin-bottom:10px}
+.sol .tag.win{background:var(--purple);color:#fff}
+.sol .desc{font-size:.99rem;color:#3a3340;margin:6px 0}
+.sol .poet{font-size:1.02rem;color:var(--purple-d);font-weight:500;font-style:italic;margin:0 0 8px}
+.expert{margin-top:12px;padding:12px 14px;background:#f7f3fc;border-radius:8px;font-family:'Noto Sans KR',sans-serif;font-size:.84rem;color:#4a4356;line-height:1.7}
+.expert b{color:var(--purple-d)}
+.expert+.expert{margin-top:8px}
+
+/* partner type grid */
+.ptypes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:22px 0}
+.ptype{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;font-family:'Noto Sans KR',sans-serif;
+  box-shadow:0 4px 20px rgba(107,63,160,.06)}
+.ptype b{display:block;color:var(--purple-d);font-size:.95rem;margin-bottom:6px}
+.ptype span{font-size:.85rem;color:#4a4356;line-height:1.6}
+
+/* golden bar (gbar 비교) */
+.gbar-wrap{margin:20px 0 8px;padding:20px;background:#faf6ff;border-radius:12px}
+.gbar-title{font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:.9rem;color:var(--ink);margin-bottom:6px}
+.gbar-row{display:flex;align-items:center;gap:12px;margin:10px 0;font-family:'Noto Sans KR',sans-serif}
+.gbar-label{width:96px;font-size:.82rem;font-weight:600;color:var(--ink);flex-shrink:0;text-align:right}
+.gbar-track{flex:1;background:#fff;border-radius:8px;height:34px;position:relative;overflow:hidden;border:1px solid var(--line)}
+.gbar-fill{height:100%;width:0;border-radius:8px;transition:width 1.4s cubic-bezier(.2,.8,.2,1);display:flex;align-items:center;justify-content:flex-end;padding-right:12px;color:#fff;font-weight:700;font-size:.85rem}
+.gbar-fill.off{background:#b9a9d4}.gbar-fill.on{background:var(--purple)}
+.gdelta{text-align:center;margin-top:16px;font-family:'Noto Sans KR',sans-serif}
+.gdelta .num{font-size:1.8rem;font-weight:900;color:var(--purple);line-height:1}
+.gdelta .lbl{font-size:.82rem;color:var(--muted)}
+
+/* 산출식 */
+.formula{background:#221a2b;color:#f0e8f5;border-radius:14px;padding:26px;margin:22px 0;font-family:'Noto Sans KR',sans-serif;text-align:center}
+.formula .terms{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 6px;font-size:.92rem}
+.formula .terms .t{background:rgba(255,255,255,.08);border-radius:8px;padding:8px 12px;line-height:1.3}
+.formula .terms .t b{display:block;color:#e8c8ff;font-size:1.05rem}
+.formula .terms .op{color:#b89cd6;font-weight:700;font-size:1.1rem}
+.formula .res{margin-top:18px;font-size:2.1rem;font-weight:900;color:#fff}
+.formula .res small{font-size:1rem;color:#d8c8e8;font-weight:600}
+
+/* image */
+.fig{margin:30px 0}
+.fig img{width:100%;border-radius:12px;border:1px solid var(--line);display:block}
+.fig.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fig.chart{max-width:420px;margin-left:auto;margin-right:auto}
+.fig.por{max-width:380px;margin-left:auto;margin-right:auto}
+.fig.mascot img{max-width:240px;margin:0 auto;border:none;background:transparent}
+.contact figure figcaption{color:#b89cd6}
+.fig figcaption{font-family:'Noto Sans KR',sans-serif;font-size:.78rem;color:var(--muted);text-align:center;margin-top:10px;grid-column:1/-1}
+@media(max-width:560px){.fig.two{grid-template-columns:1fr}}
+
+/* video */
+.vid{margin:26px 0}
+.vid.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.vid video{width:100%;display:block;margin:0 auto;border-radius:12px;border:1px solid var(--line);background:#000}
+.vid figcaption{font-family:'Noto Sans KR',sans-serif;font-size:.78rem;color:var(--muted);text-align:center;margin-top:10px;grid-column:1/-1}
+@media(max-width:560px){.vid.two{grid-template-columns:1fr}}
+
+/* definition box */
+.defs{display:grid;gap:10px;margin:22px 0}
+.defbox{background:#faf6ff;border:1px solid var(--line);border-radius:10px;padding:14px 18px;font-family:'Noto Sans KR',sans-serif}
+.defbox b{color:var(--purple-d);font-size:.95rem}
+.defbox span{display:block;font-size:.9rem;color:#4a4356;margin-top:3px}
+
+/* contact */
+.contact{background:#1d141f;color:#f0e8f5}
+.contact h2{color:#fff}
+.contact .card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:28px;margin-top:24px;text-align:center}
+.contact .mail{font-family:'Noto Sans KR',sans-serif;font-size:1.3rem;font-weight:700;color:#e8c8ff;text-decoration:none;display:inline-block;margin:8px 0 18px}
+.contact .ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px;font-family:'Noto Sans KR',sans-serif;text-align:left}
+.contact .way{background:rgba(255,255,255,.04);border-radius:10px;padding:16px 18px;font-size:.84rem;color:#d8c8e8;line-height:1.7}
+.contact .way b{display:block;color:#fff;font-size:.95rem;margin-bottom:6px}
+.cta-btn{display:inline-block;background:var(--purple);color:#fff;font-family:'Noto Sans KR',sans-serif;font-weight:700;
+  text-decoration:none;padding:14px 32px;border-radius:30px;font-size:.95rem;transition:transform .2s,background .2s}
+.cta-btn:hover{transform:translateY(-2px);background:#7d4fb8}
+.cta-btn.ghost{background:transparent;border:1px solid #a06fd0;color:#e8c8ff}
+.cta-btn.ghost:hover{background:rgba(160,111,208,.15)}
+
+/* sticky CTA */
+.stickycta{position:fixed;right:18px;bottom:18px;z-index:120;display:none}
+.stickycta.show{display:block}
+.stickycta a{display:inline-block;background:var(--purple);color:#fff;font-family:'Noto Sans KR',sans-serif;font-weight:700;
+  text-decoration:none;padding:13px 22px;border-radius:30px;font-size:.86rem;box-shadow:0 8px 24px rgba(107,63,160,.4);transition:transform .2s}
+.stickycta a:hover{transform:translateY(-2px)}
+@media(max-width:560px){.stickycta{left:18px;right:18px;text-align:center}.stickycta a{display:block}}
+
+footer.credit{background:#120c14;color:#7a6e85;text-align:center;padding:40px 24px;font-family:'Noto Sans KR',sans-serif;font-size:.74rem;line-height:1.8}
+footer.credit b{color:#b89cd6}
+footer.credit a{color:#b89cd6;text-decoration:none}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* progress */
+.progress{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0;z-index:200;transition:width .1s}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<header class="masthead" id="masthead">
+  <div class="brand">공유실버카 <span>구르미</span> · Sunny Scholar in 의성</div>
+  <nav>
+    <a href="#field">현장</a>
+    <a href="#gap">공백구간</a>
+    <a href="#solution">구르미</a>
+    <a href="#guide">운영</a>
+    <a href="#partner">파트너</a>
+    <a href="#ending">컨택</a>
+  </nav>
+</header>
+
+<div class="stickycta" id="stickycta">
+  <a href="#ending">구르미 운영 파트너 되기 →</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="kicker">노인 이동권 · 실버카 공백구간 · 의성 54개 마을 164명</div>
+  <h1>'공유실버카 : 구르미'를<br><em>운영할 파트너</em>를 찾습니다.</h1>
+  <div class="sub">정류장에 두고 간 두 다리. 우리가 그 75분을 메우는 방법을 만들었습니다.</div>
+  <div class="herostats">
+    <div class="hs"><b>54</b><span>다닌 마을</span></div>
+    <div class="hs"><b>164</b><span>들은 어르신</span></div>
+    <div class="hs"><b>75분</b><span>장날 실버카 공백</span></div>
+    <div class="hs"><b>2회</b><span>시범운영 실증</span></div>
+  </div>
+  <div class="scroll-hint">SCROLL ↓</div>
+</section>
+
+<!-- ===== HOOK: 정류장에 두고 가는 실버카 ===== -->
+<section class="hook">
+  <div class="wrap reveal">
+    <div class="name">의성, 어느 장날 아침</div>
+    <blockquote>
+      <span class="em-line">정류장에 도착하면 할머니는 실버카를 나무 그늘 아래 세워둔다.</span><br>
+      그리고 맨몸으로 버스에 오른다. 계단 단차 30cm, 두세 칸. 한 손으로 손잡이를 잡고 간신히 오르는 동안, 8kg짜리 실버카는 정류장에 남는다. 늘 곁에 있던 두 다리가, 읍내로 가는 길목에서 멈춘다.
+    </blockquote>
+    <figure class="portrait"><img loading="lazy" src="img/u03.jpg" alt="버스 정류장에 실버카를 세워두는 어르신"><figcaption>버스에 오르기 전, 실버카를 정류장에 세워두는 어르신. 8kg을 들고 계단을 오를 수는 없다.</figcaption></figure>
+    <blockquote>
+      "버스에 이걸 어떻게 가지고 타노. 계단도 높고, 접어도 무겁고. 그냥 여기 세워놓고 타는 기라."
+    </blockquote>
+    <blockquote>
+      "힘들어서 여기서 쉬었다 가야해. 지팡이 들면 허리도 아프고 힘들어."<br>
+      <span style="color:#b89cd6;font-size:.9rem">— 정류장에서 만난 할머니</span>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ===== 1부 현장 ===== -->
+<section id="field">
+  <div class="wrap">
+    <div class="part-tag reveal">1부 · 현장에서 만난 것</div>
+    <h2 class="reveal">농촌 할머니들에게 실버카는 두 다리와 같습니다.</h2>
+    <p class="reveal">의구심은 5개월 동안 경북 의성군에서 노인 이동권을 연구했다. 54개 마을을 다니며 어르신 164명의 이야기를 들었다. 면 단위 어르신에게 실버카는 단순한 보행보조기구가 아니었다. 시장에 가고, 약을 타고, 짐을 싣고 오는 하루를 지탱하는 발이었다.</p>
+
+    <div class="quote reveal"><p>"이거 없으면 이동 못하지."</p><div class="who">의성장 상인</div></div>
+    <div class="quote reveal"><p>"여기 사람들은 다 이거(실버카) 써."</p><div class="who">의성 참기름방 사장님</div></div>
+    <div class="quote reveal"><p>"할매들은 다 저거 끌고 다니지."</p><div class="who">의성장 마늘 상회 사장님</div></div>
+
+    <figure class="fig reveal"><img loading="lazy" src="img/u02.jpg" alt="시장에서 실버카를 끌고 장을 보는 어르신"><figcaption>시장에서 실버카에 짐을 싣고 장을 보는 어르신 — 누군가에겐 두 다리를 대신하는 도구다.</figcaption></figure>
+
+    <p class="reveal">의구심이 면담한 80명 중 46명이 실버카를 사용하고 있었다. 평균 농사 경력은 61.4년. 대부분 허리·무릎·관절 질환을 안고 있었다. 실버카는 통증을 덜어주는 동시에, 외출 자체를 가능하게 하는 필수 이동 수단이었다.</p>
+
+    <div class="statgrid reveal">
+      <div class="statcard"><div class="num">54</div><div class="lbl">다닌 마을</div></div>
+      <div class="statcard"><div class="num">164</div><div class="lbl">이야기 들은 어르신</div></div>
+      <div class="statcard accent"><div class="num">46<small>/80</small></div><div class="lbl">실버카를 쓰는 어르신</div></div>
+      <div class="statcard"><div class="num">61.4<small>년</small></div><div class="lbl">평균 농사 경력</div></div>
+    </div>
+
+    <figure class="fig reveal"><img loading="lazy" src="img/u01.jpg" alt="큰 짐을 든 어르신과 함께 마을길을 걷는 팀원들"><figcaption>큰 짐을 든 어르신, 실버카, 그리고 함께 걷는 의구심 팀원들 — 의성 마을길에서.</figcaption></figure>
+  </div>
+</section>
+
+<!-- ===== 2부 공백구간 ===== -->
+<section id="gap" style="background:#fff">
+  <div class="wrap">
+    <div class="part-tag reveal">2부 · 실버카 공백구간</div>
+    <h2 class="reveal">늘 곁에 있던 실버카가, 읍내로 가는 길목에서 멈춘다.</h2>
+    <p class="reveal">실버카는 평균 8kg이다. 농어촌버스에 타려면 평균 30cm 내외의 계단을 두세 칸 오르내려야 한다. 8kg을 들고 그 계단을 오르는 동작은 젊은 사람에게도 쉽지 않다. 그래서 어르신은 실버카를 정류장에 두고 버스에 오른다.</p>
+
+    <div class="defs reveal">
+      <div class="defbox"><b>실버카 공백구간</b><span>평소 실버카를 늘 쓰지만, 버스로 읍내를 다녀오는 동안만큼은 어쩔 수 없이 못 쓰게 되는 시간. 그 시간엔 지팡이로 버틴다.</span></div>
+    </div>
+
+    <p class="reveal">면 안에서의 이동(마을회관·이웃집)은 짧다. 하지만 병원·시장·미용실이 모여 있는 읍내는 동선이 넓다. 가장 많이 걸어야 하는 읍내에서, 정작 실버카를 쓸 수 없다. 장날 기준, 이 공백은 평균 약 <b>75분</b>에 이른다.</p>
+
+    <figure class="fig reveal"><img loading="lazy" src="img/u07.jpg" alt="75분 실버카 공백구간 타임라인"><figcaption>장날 어르신의 하루 동선 — 집에서 마을 정류장까지는 실버카로, 읍내에 내린 뒤로는 지팡이로. 그 75분이 '실버카 공백구간'이다.</figcaption></figure>
+
+    <h3 class="reveal">90% 이상이 "버스엔 실버카를 못 싣는다"고 답했다</h3>
+    <p class="reveal">실버카 이용자의 90% 이상이 농어촌버스를 탈 때 실버카를 싣지 못한다고 응답했다. 이유는 단순했다. 무거운 실버카를 들고 버스 계단을 오르내리기가 어려워서.</p>
+
+    <div class="fig two reveal">
+      <img loading="lazy" src="img/u08.png" alt="버스 탑승 시 실버카 소지 가능 여부 (조사 80명)">
+      <img loading="lazy" src="img/u09.png" alt="46명 중 39명 — 무거워서 못 싣는다고 응답">
+      <figcaption>버스 탑승 시 실버카 소지 가능 여부(조사 대상 80명) · 46명 중 39명이 "무거워서 못 싣는다"고 답했다.</figcaption>
+    </div>
+
+    <div class="fig two reveal">
+      <img loading="lazy" src="img/u04.jpg" alt="장날 붐비는 버스에 오르는 어르신들">
+      <img loading="lazy" src="img/u05.png" alt="농어촌버스 내부">
+      <figcaption>장날, 짐을 든 어르신들이 한꺼번에 버스에 오른다(왼쪽). 좁은 내부에는 실버카를 둘 공간이 없다(오른쪽).</figcaption>
+    </div>
+    <figure class="fig reveal"><img loading="lazy" src="img/u06.png" alt="마을 버스정류장 옆에 세워진 실버카"><figcaption>마을 버스정류장 한편에 세워진 실버카. 어르신이 읍내를 다녀올 동안 이 자리에서 기다린다.</figcaption></figure>
+  </div>
+</section>
+
+<!-- ===== 3부 왜 저상버스·지팡이는 답이 아닌가 ===== -->
+<section id="why">
+  <div class="wrap">
+    <div class="part-tag reveal">3부 · 왜 다른 방법으론 안 되는가</div>
+    <h2 class="reveal">저상버스도, 지팡이도 이 75분을 메우지 못한다.</h2>
+
+    <h3 class="reveal">저상버스 — 농어촌에선 한계가 뚜렷하다</h3>
+    <p class="reveal">의성 같은 농어촌은 고상버스가 대부분이고, 일부 구간은 도로 사정상 저상버스를 물리적으로 운행하기 어렵다. 노선이 코스제로 묶여 있어 일부만 저상으로 바꾸기도 쉽지 않다. 무엇보다 저상버스는 계단을 없앤 버스이지, 실버카를 실을 수 있는 버스가 아니다. 바닥이 낮아져도, 접힌 실버카를 들어 올릴 힘이 없는 어르신에게 문제는 그대로 남는다.</p>
+    <figure class="fig reveal"><img loading="lazy" src="img/u10.png" alt="계단이 있는 농어촌버스에 오르는 어르신"><figcaption>계단을 짚고 버스에 오르는 어르신. 의성 농어촌버스에는 저상버스가 사실상 닿지 못한다.</figcaption></figure>
+    <p class="reveal sans" style="font-size:.9rem;color:var(--muted);background:var(--purple-l);padding:14px 18px;border-radius:10px">
+      <b style="color:var(--purple-d)">현장 자료</b> &nbsp;[표6] 의성군 농어촌버스 저상버스 운행불가 노선 목록 · [표7] 차종별 계단 높이 — 운영 파트너에게 필드리서치 원자료로 공유합니다.</p>
+
+    <h3 class="reveal">지팡이 — 실버카를 대신할 수 없는 세 가지</h3>
+    <table class="cmp reveal">
+      <tr><th>실버카</th><th>지팡이</th></tr>
+      <tr><td>네 바퀴로 체중을 분산</td><td>한쪽으로 체중이 집중됨</td></tr>
+      <tr><td>걸음이 안정되고 속도도 비슷</td><td>보폭이 좁아지고 중심이 흔들림</td></tr>
+      <tr><td>짐을 싣고, 앉아 쉴 수도 있음</td><td>짐을 들 수 없고 쉴 곳도 없음</td></tr>
+    </table>
+    <p class="reveal">동행 관찰에서 차이는 분명했다. 실버카를 쓸 때는 걸음이 안정되고 평소와 속도가 비슷했고, 중간에 앉아 쉴 수도 있었다. 지팡이를 들면 보폭이 좁아지고 중심이 흔들렸다. 약 7분 거리에 불과한 병원에 도착하자마자 통증을 호소하는 분도 있었다.</p>
+    <div class="quote reveal"><p>"실버카 있으면 훨씬 편하지."</p><div class="who">정자 할머니</div></div>
+
+    <div class="big-line reveal">문제는 분명했다. 그러니 답도 분명해야 했다.<br><em>읍내에 내린 그 순간, 다시 쥘 수 있는 실버카</em>가 있으면 된다.</div>
+  </div>
+</section>
+
+<!-- ===== 4부 구르미 ===== -->
+<section id="solution" style="background:#fff">
+  <div class="wrap">
+    <div class="part-tag reveal">4부 · 그래서 만들었습니다</div>
+    <h2 class="reveal">공유실버카 '구르미'</h2>
+    <p class="reveal">구르미는 버스로 면에서 읍으로 이동한 뒤 실버카를 쓸 수 없는 '공백구간'을 메우는 서비스다. 읍내 버스 정류장 옆 대여소에서 누구나 빌려 쓰고, 돌아갈 때 반납한다. 읍내에 내린 그 순간부터, 다시 두 다리가 생긴다.</p>
+
+    <figure class="fig mascot reveal"><img loading="lazy" src="img/u11.png" alt="공유실버카 구르미 캐릭터"><figcaption>'구르미' — 실버카를 끄는 동그란 구름. 어르신 곁을 따라 굴러가는 마음으로 지었다.</figcaption></figure>
+
+    <h3 class="reveal">앱도, QR도 필요 없습니다 — 이름과 전화번호만</h3>
+    <p class="reveal">구르미는 철저히 아날로그 방식으로 설계했다. 스마트폰 앱을 깔거나 QR을 찍을 필요가 없다. 대여소에 들러 이름과 전화번호만 적으면 바로 빌릴 수 있다. 디지털에 익숙하지 않은 고령층도 그 자리에서 곧장 쓸 수 있게, 진입 문턱을 최대한 낮췄다.</p>
+
+    <div class="steps reveal">
+      <div class="step">정류장에서 내린 뒤, 대여소의 '구르미 대여소' 안내를 찾는다</div>
+      <div class="step">이름과 전화번호를 적는다</div>
+      <div class="step">구르미를 빌려 읍내 장과 볼일을 본다</div>
+      <div class="step">버스를 타기 전, 대여소에 구르미를 반납한다</div>
+    </div>
+
+    <figure class="fig reveal"><img loading="lazy" src="img/u12.jpg" alt="의성 남부농협 앞 구르미 대여소 — 실버카 5대"><figcaption>의성 남부농협 앞에 차린 구르미 대여소. "무료로 빌려가세요~" 안내판과 실버카 5대.</figcaption></figure>
+  </div>
+</section>
+
+<!-- ===== 5부 시범운영 ===== -->
+<section id="pilot">
+  <div class="wrap">
+    <div class="part-tag reveal">5부 · 시범운영으로 확인했습니다</div>
+    <h2 class="reveal">두 번의 장날, 직접 운영해봤습니다.</h2>
+
+    <table class="info reveal">
+      <tr><th>운영 장소</th><td>의성군 남부 농협 앞 버스 정류장</td></tr>
+      <tr><th>운영 일정</th><td>9/27(오일장)·10/2(오일장), 각 07:30~14:00 (6.5시간)</td></tr>
+      <tr><th>대여 방식</th><td>이름·전화번호 작성 후 무료 대여 (앱·QR 불필요)</td></tr>
+      <tr><th>실버카 수량</th><td>5대</td></tr>
+    </table>
+
+    <figure class="vid two reveal">
+      <video controls preload="metadata" playsinline>
+        <source src="../videos/simbeom-sero.mp4" type="video/mp4">
+        브라우저가 영상을 지원하지 않습니다.
+      </video>
+      <video controls preload="metadata" playsinline>
+        <source src="../videos/simbeom-garo.mp4" type="video/mp4">
+        브라우저가 영상을 지원하지 않습니다.
+      </video>
+      <figcaption>남부농협 앞 구르미 시범운영 현장 — 어르신들이 직접 빌려 장을 보러 나선다.</figcaption>
+    </figure>
+
+    <h3 class="reveal">현장에서 들은 말들</h3>
+    <div class="quote reveal"><p>"마을에다 막 자랑쳤다."</p><div class="who">재이용 어르신 — 1차에 써보고 2차 장날에 다시 찾아온 분</div></div>
+    <div class="quote reveal"><p>"지팡이로 장 볼 때보다 훨씬 편해~"</p><div class="who">이용 어르신</div></div>
+    <div class="quote reveal"><p>"몸도 덜 아프고 짐 들기도 좋제."</p><div class="who">이용 어르신 — 통증이 줄었다는 후기</div></div>
+    <div class="quote reveal"><p>"원래 사려던 것보다 훨씬 많이 샀어."</p><div class="who">이용 어르신 — 짐을 실을 수 있으니 더 많이 구매</div></div>
+    <div class="quote reveal"><p>"원래 같았으면 지금 버스를 못 타지."</p><div class="who">이용 어르신 — 보행 속도가 빨라져 버스를 제때 탐</div></div>
+
+    <div class="fig two reveal">
+      <img loading="lazy" src="img/u13.jpg" alt="시장에서 구르미를 끌고 장을 보는 어르신">
+      <img loading="lazy" src="img/u14.jpg" alt="마을길에서 구르미를 끌고 가는 어르신">
+      <figcaption>구르미를 빌려 시장과 골목을 다니는 어르신들 — 짐을 싣고, 안정된 걸음으로.</figcaption>
+    </div>
+
+    <figure class="fig reveal"><img loading="lazy" src="img/u15.png" alt="시범운영 2차 결과 — 품절 속도 43분, 만족도 92%, 재이용 의사 100%"><figcaption>2차 운영 결과 — 5대 모두 43분 만에 대여 완료될 만큼 수요가 높았고, 이용 어르신 대부분이 만족했으며, 참여한 분 전원이 다시 쓰겠다고 답했다.</figcaption></figure>
+
+    <div class="big-line reveal">구르미는 이동 편의를 넘어,<br><em>이동의 자율성과 지역 상권</em>까지 움직였다.</div>
+    <p class="reveal center" style="color:var(--muted)">짐을 실을 수 있으니 더 많이 사고, 걸음이 빨라지니 버스를 놓치지 않는다. 어르신의 하루가 다시 어르신의 것이 된다.</p>
+  </div>
+</section>
+
+<!-- ===== 6부 운영 가이드라인 (B2B 전환) ===== -->
+<section id="guide" style="background:#fff">
+  <div class="wrap">
+    <div class="part-tag reveal">6부 · 이대로 따라 하면 됩니다</div>
+    <h2 class="reveal">구르미 운영 가이드라인</h2>
+    <p class="reveal">시범운영으로 확인한 내용을 바탕으로, 어떤 지역이든 곧장 시작할 수 있는 운영 기준을 정리했다. 큰 설비도, 복잡한 시스템도 필요 없다. 정류장 옆 자리 하나, 관리 인력 한두 명, 실버카 다섯 대면 시작할 수 있다.</p>
+
+    <table class="info reveal">
+      <tr><th>이용 대상</th><td>보행보조기구(실버카)를 쓰는 어르신</td></tr>
+      <tr><th>운영 일자</th><td>장날</td></tr>
+      <tr><th>운영 장소</th><td>읍내 주요 버스 정류장 인근(오일장 인근)</td></tr>
+      <tr><th>운영 시간</th><td>07~15시</td></tr>
+      <tr><th>대여 비용</th><td>무료</td></tr>
+      <tr><th>대여 절차</th><td>대여소 방문 후 이름·전화번호 작성</td></tr>
+      <tr><th>관리 인력</th><td>1~2인</td></tr>
+      <tr><th>초기 최소 실버카</th><td>5대</td></tr>
+    </table>
+
+    <h3 class="reveal">대여소 하나가 한 해에 닿는 사람</h3>
+    <p class="reveal">의성군을 기준으로 잡아본 연간 예상 이용 인원이다. 대여소 한 곳, 실버카 다섯 대, 하루 여덟 시간 운영을 가정했다.</p>
+    <div class="formula reveal">
+      <div class="terms">
+        <span class="t">대여소<b>1개</b></span><span class="op">×</span>
+        <span class="t">실버카<b>5대</b></span><span class="op">×</span>
+        <span class="t">07~15시<b>8시간</b></span><span class="op">×</span>
+        <span class="t">하루<b>20명</b></span><span class="op">×</span>
+        <span class="t">연<b>72일</b><small>(장날)</small></span>
+      </div>
+      <div class="res">= 연 1,440<small>명</small></div>
+    </div>
+    <p class="reveal center" style="color:var(--muted)">대여소 한 곳이 한 해에 1,440명의 어르신에게 다시 두 다리를 빌려준다.</p>
+
+    <div class="big-line reveal">검증은 끝났습니다.<br>이제 필요한 건 <em>함께 운영할 한 사람</em>입니다.</div>
+    <div class="center reveal"><a class="cta-btn" href="#ending">구르미 운영, 함께 하시겠어요? →</a></div>
+  </div>
+</section>
+
+<!-- ===== 7부 파트너 ===== -->
+<section id="partner">
+  <div class="wrap">
+    <div class="part-tag reveal">7부 · 이런 분을 찾습니다</div>
+    <h2 class="reveal">구르미를 운영할 파트너</h2>
+    <p class="reveal">구르미는 한 팀의 시범운영으로 끝낼 서비스가 아니다. 지역에 뿌리내려 계속 굴러가야 한다. 그래서 운영을 맡아줄 파트너를 찾는다.</p>
+
+    <h3 class="reveal">찾는 기관</h3>
+    <div class="ptypes reveal">
+      <div class="ptype"><b>지자체</b><span>노인 이동권·복지 사업에 관심 있는 지방자치단체</span></div>
+      <div class="ptype"><b>지역재단</b><span>농촌 고령화를 고민하는 지역 기반 재단</span></div>
+      <div class="ptype"><b>모빌리티 스타트업</b><span>지역 모빌리티를 실험하는 스타트업</span></div>
+      <div class="ptype"><b>복지기관</b><span>어르신을 대상으로 하는 복지기관</span></div>
+      <div class="ptype"><b>봉사단체</b><span>지역에서 활동하는 봉사단체</span></div>
+    </div>
+
+    <h3 class="reveal">함께하는 방식 — 의구심이 드리는 것</h3>
+    <div class="ptypes reveal">
+      <div class="ptype"><b>① 운영 가이드라인 전달</b><span>의성군 기준으로 검증한 구르미 운영 매뉴얼을 그대로 전달합니다.</span></div>
+      <div class="ptype"><b>② 수요 조사·데이터 공유</b><span>이용자 수요 조사와 시범운영 데이터를 함께 봅니다.</span></div>
+      <div class="ptype"><b>③ 대여소 장소 리스트업</b><span>지역 동선에 맞는 대여소 후보 장소를 함께 정리합니다.</span></div>
+      <div class="ptype"><b>④ 필드리서치 자료 공유</b><span>54개 마을·164명 청취 등 현장조사 원자료를 공유합니다.</span></div>
+    </div>
+
+    <figure class="fig reveal"><img loading="lazy" src="img/u12.jpg" alt="구르미 대여소 전경"><figcaption>당신의 지역에도, 이런 대여소 하나가 생길 수 있습니다.</figcaption></figure>
+  </div>
+</section>
+
+<!-- ===== 8부 엔딩 + 컨택 ===== -->
+<section id="ending" class="contact">
+  <div class="wrap">
+    <div class="part-tag reveal" style="color:#c4a0e8">8부 · 함께하기</div>
+    <h2 class="reveal center">구르미를, 당신의 지역에서.</h2>
+    <p class="reveal center" style="color:rgba(255,255,255,.7)">가볍게 물어보셔도 좋고, 바로 운영을 이야기하셔도 좋습니다. 모든 문의는 한곳으로 받습니다.</p>
+
+    <div class="card reveal">
+      <div class="sans" style="font-size:.78rem;letter-spacing:1px;color:#b89cd6">CONTACT · 인스타 매거진</div>
+      <a class="mail" href="https://instagram.com/uig00sim_mag" target="_blank" rel="noopener">@uig00sim_mag</a>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <a class="cta-btn" href="https://instagram.com/uig00sim_mag" target="_blank" rel="noopener">가벼운 Q&amp;A 보내기</a>
+        <a class="cta-btn ghost" href="https://instagram.com/uig00sim_mag" target="_blank" rel="noopener">운영 의사·미팅 요청하기</a>
+      </div>
+      <div class="ways">
+        <div class="way"><b>① 가벼운 Q&amp;A</b>구르미가 궁금한 점, 운영이 가능할지 부담 없이 물어보세요. 어떤 질문이든 환영합니다.</div>
+        <div class="way"><b>② 운영 의사·미팅 요청</b>"우리 지역에서 운영해보고 싶다" 하시면, 가이드라인 전달과 미팅을 바로 잡겠습니다.</div>
+      </div>
+    </div>
+
+    <div class="big-line reveal" style="color:#fff;margin-top:54px">어린이의 위험에는 사회가 먼저 달려갑니다.</div>
+    <p class="reveal center" style="color:rgba(255,255,255,.8)">그 따뜻한 걱정이, 정류장에 실버카를 두고 떠나는 어르신의 75분에도 닿기를.<br>구르미는 그 75분을 메울 한 사람을 기다립니다.</p>
+  </div>
+</section>
+
+<footer class="credit">
+  <b>팀 의구심 (UIGUSIM) · 공유실버카 '구르미'</b><br>
+  의구심은 SK 행복나눔재단의 대학생 지역 기반 사회문제 해결 프로젝트 「Sunny Scholar in 의성」으로 만나,<br>
+  경북 의성군에서 5개월 간 노인 이동권을 연구한 대학생 팀입니다. 54개 마을을 다니며 어르신 164명의 이야기를 들었습니다.<br>
+  '의구심(疑仇心)'은 <b>의성의 義 · 구석의 구 · 마음 心</b> — 지역의 구석진 문제를 따뜻한 시선으로 본다는 뜻입니다.<br>
+  인스타 매거진 <a href="https://instagram.com/uig00sim_mag" target="_blank" rel="noopener">@uig00sim_mag</a><br><br>
+  <span style="color:#5a5060">Interactive Report v10 · 2026 · Problem of Problems Lab</span>
+</footer>
+
+<script>
+/* ===== reveal ===== */
+const revObs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+/* ===== progress + masthead + sticky CTA ===== */
+const prog=document.getElementById('progress'),mast=document.getElementById('masthead'),sticky=document.getElementById('stickycta');
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement,sc=h.scrollTop,max=h.scrollHeight-h.clientHeight;
+  prog.style.width=(sc/max*100)+'%';
+  if(sc>window.innerHeight*.6){mast.classList.add('show');sticky.classList.add('show');}
+  else{mast.classList.remove('show');sticky.classList.remove('show');}
+});
+
+/* scrollspy */
+const navLinks=[...document.querySelectorAll('.masthead nav a')];
+const spy=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){
+  navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}})},{rootMargin:'-40% 0px -55% 0px'});
+['field','gap','solution','guide','partner','ending'].forEach(id=>{const el=document.getElementById(id);if(el)spy.observe(el)});
+
+/* ===== golden bar + count-up (마크업 있을 때만 동작) ===== */
+document.querySelectorAll('[data-gbar]').forEach(g=>{
+  let done=false;
+  new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting&&!done){done=true;
+    g.querySelectorAll('.gbar-fill').forEach(b=>{b.style.width=b.dataset.w+'%'});
+    countUp(g.querySelector('[data-count]'));
+  }})},{threshold:.5}).observe(g);
+});
+function countUp(el){
+  if(!el)return;const target=parseFloat(el.dataset.count),suf=el.dataset.suffix||'';
+  let cur=0,step=target/40;
+  const t=setInterval(()=>{cur+=step;if(cur>=target){cur=target;clearInterval(t)}
+    el.textContent=(target%1?cur.toFixed(1):Math.round(cur))+suf;},28);
+}
+</script>
+</body>
+</html>

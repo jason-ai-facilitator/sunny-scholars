@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RE:MOVE — 살려고 쥔 손이, 사고를 향해 움직였다 · Sunny Scholar in 의성</title>
+<meta name="description" content="의료용 전동스쿠터 오조작 사고 — 의성에서 만난 49명의 기록. SK 행복나눔재단 Sunny Scholar in 의성, 팀 RE:MOVE.">
+<link rel="icon" href="data:,">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#6B3FA0; --purple-d:#4e2c77; --purple-l:#f5f0fa; --line:#e0d4f0;
+  --ink:#1a1a1a; --text:#2a2a2a; --muted:#8a8294;
+  --paper:#fefcf9; --danger:#c0392b; --warn:#e08a2c; --dim:#d8d2e2; --safe:#5a8f6b;
+  --maxw:780px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Serif KR',serif;background:var(--purple-l);color:var(--text);line-height:1.9;-webkit-font-smoothing:antialiased}
+.sans{font-family:'Noto Sans KR',sans-serif}
+
+/* ===== masthead ===== */
+.masthead{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+  padding:12px 24px;background:rgba(254,252,249,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+  font-family:'Noto Sans KR',sans-serif;transform:translateY(-100%);transition:transform .4s ease}
+.masthead.show{transform:translateY(0)}
+.masthead .brand{font-weight:900;font-size:.82rem;letter-spacing:.5px;color:var(--ink)}
+.masthead .brand span{color:var(--purple)}
+.masthead nav{display:flex;gap:18px}
+.masthead nav a{text-decoration:none;color:var(--muted);font-size:.72rem;font-weight:500;transition:color .2s}
+.masthead nav a:hover,.masthead nav a.active{color:var(--purple)}
+@media(max-width:640px){.masthead nav{display:none}}
+
+/* ===== hero ===== */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+  position:relative;background:#161016;overflow:hidden;padding:40px 24px}
+.hero::before{content:"";position:absolute;inset:0;background:url('../images/img_00_hero.jpg') center/cover;opacity:.32;filter:grayscale(.3)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,16,22,.55),rgba(22,16,22,.85))}
+.hero>*{position:relative;z-index:2}
+.hero .kicker{font-family:'Noto Sans KR',sans-serif;font-size:.74rem;letter-spacing:3px;text-transform:uppercase;color:#c4a8e0;margin-bottom:28px}
+.hero h1{font-weight:900;font-size:clamp(1.9rem,5.5vw,3.3rem);line-height:1.35;color:#fff;letter-spacing:-1px}
+.hero h1 em{font-style:normal;color:#d9b8ff}
+.hero .sub{margin-top:24px;font-size:clamp(1rem,2.4vw,1.25rem);color:rgba(255,255,255,.7);font-weight:400}
+.hero .scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-family:'Noto Sans KR',sans-serif;
+  font-size:.66rem;letter-spacing:2px;color:rgba(255,255,255,.5);z-index:2;animation:bob 2s infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+/* ===== layout ===== */
+section{padding:80px 24px}
+.wrap{max-width:var(--maxw);margin:0 auto}
+.part-tag{font-family:'Noto Sans KR',sans-serif;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--purple);
+  font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.part-tag::before{content:"";width:28px;height:2px;background:var(--purple)}
+h2{font-weight:900;font-size:clamp(1.5rem,4vw,2.1rem);line-height:1.4;color:var(--ink);margin-bottom:8px;letter-spacing:-.5px}
+h3{font-weight:700;font-size:1.15rem;color:var(--purple-d);margin:38px 0 12px}
+p{margin:16px 0;font-size:1.04rem;color:#3a3340}
+.lead{font-size:1.16rem;color:var(--ink);font-weight:500}
+.center{text-align:center}
+.big-line{font-weight:700;font-size:clamp(1.2rem,2.8vw,1.5rem);line-height:1.55;color:var(--ink);text-align:center;margin:38px auto;max-width:640px;letter-spacing:-.5px}
+.big-line em{font-style:normal;color:var(--purple);border-bottom:3px solid #e3d3f5}
+
+/* quote */
+.quote{margin:24px 0;padding:22px 26px;background:#fff;border-left:4px solid var(--purple);border-radius:0 10px 10px 0;
+  box-shadow:0 4px 20px rgba(107,63,160,.06)}
+.quote p{margin:0 0 8px;font-size:1.05rem;color:var(--ink);font-style:italic}
+.quote .who{font-family:'Noto Sans KR',sans-serif;font-size:.78rem;color:var(--muted);font-style:normal;font-weight:500}
+.quote.dark{background:#221a2b;border-color:#a06fd0}
+.quote.dark p{color:#f0e8f8}.quote.dark .who{color:#b89cd6}
+
+/* hooking full-bleed */
+.hook{background:#1d141f;color:#f0e8f5;padding:90px 24px}
+.hook .wrap{max-width:720px}
+.hook .name{font-family:'Noto Sans KR',sans-serif;color:#c4a0e8;font-size:.8rem;letter-spacing:1px;margin-bottom:18px}
+.hook blockquote{font-size:clamp(1.05rem,2.6vw,1.28rem);line-height:1.95;font-weight:400;color:#ece2f4;margin:0}
+.hook blockquote + blockquote{margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,.12)}
+.hook .em-line{font-weight:700;color:#e8c8ff;font-size:1.22rem}
+.hook figure{margin:30px 0}
+.hook figure img{width:100%;border-radius:12px;display:block;border:1px solid rgba(255,255,255,.15)}
+.hook figure.portrait img{max-width:300px;margin:0 auto}
+.hook figcaption{font-family:'Noto Sans KR',sans-serif;font-size:.78rem;color:#b89cd6;text-align:center;margin-top:10px}
+
+/* info table */
+table.info{width:100%;border-collapse:collapse;margin:24px 0;font-family:'Noto Sans KR',sans-serif;font-size:.9rem;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 4px 20px rgba(107,63,160,.06)}
+table.info th,table.info td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+table.info th{background:var(--purple);color:#fff;font-weight:600;width:30%;white-space:nowrap}
+table.info tr:last-child td,table.info tr:last-child th{border-bottom:none}
+
+/* compare table */
+table.cmp{width:100%;border-collapse:collapse;margin:24px 0;font-family:'Noto Sans KR',sans-serif;font-size:.92rem;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 4px 20px rgba(107,63,160,.06)}
+table.cmp th{background:var(--purple-d);color:#fff;padding:12px 18px;font-size:.82rem;text-align:left}
+table.cmp td{padding:14px 18px;border-bottom:1px solid var(--line)}
+table.cmp td:first-child{font-weight:700;color:var(--purple-d);width:46%}
+table.cmp tr:last-child td{border-bottom:none}
+
+/* ===== FUNNEL component ===== */
+.funnel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px;margin:24px 0;box-shadow:0 6px 30px rgba(107,63,160,.07)}
+.funnel-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.funnel-head .ttl{font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:.95rem;color:var(--ink)}
+.funnel-tabs{display:flex;gap:4px;background:var(--purple-l);border-radius:8px;padding:3px}
+.funnel-tabs button{border:none;background:none;font-family:'Noto Sans KR',sans-serif;font-size:.72rem;font-weight:600;
+  padding:5px 12px;border-radius:6px;cursor:pointer;color:var(--muted);transition:all .2s}
+.funnel-tabs button.on{background:var(--purple);color:#fff}
+.dots{display:grid;grid-template-columns:repeat(auto-fill,minmax(12px,1fr));gap:5px;margin:6px 0 14px;max-width:420px}
+.dot{aspect-ratio:1;border-radius:3px;background:var(--dim);transition:background .5s ease,transform .5s ease,opacity .5s}
+.dot.base{background:#b9a9d4}
+.dot.dim{background:#e8e2f0;opacity:.5}
+.dot.accident{background:var(--warn)}
+.dot.misop{background:var(--danger)}
+.dot.g1{background:var(--danger)}.dot.g2{background:var(--warn)}.dot.g3{background:var(--purple)}
+.dot.g4{background:#3a7bd5}.dot.g5{background:#5a8f6b}
+.dot.pop{transform:scale(1.18)}
+.funnel-cap{font-family:'Noto Sans KR',sans-serif;font-size:.95rem;font-weight:600;color:var(--ink);min-height:2.4em;
+  display:flex;align-items:center;gap:6px}
+.funnel-cap b{color:var(--danger);font-size:1.1rem}
+.funnel{cursor:pointer}
+.funnel-hint{font-family:'Noto Sans KR',sans-serif;font-size:.66rem;color:var(--muted);opacity:.7}
+.funnel-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:10px}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-family:'Noto Sans KR',sans-serif;font-size:.7rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:10px;height:10px;border-radius:2px;display:inline-block}
+.replay{border:1px solid var(--line);background:#fff;border-radius:20px;font-family:'Noto Sans KR',sans-serif;font-size:.7rem;
+  padding:5px 14px;cursor:pointer;color:var(--purple);font-weight:600;white-space:nowrap}
+.replay:hover{background:var(--purple-l)}
+.funnel-static{display:none}
+.funnel-static img{width:100%;max-width:380px;display:block;margin:0 auto;border-radius:10px;border:1px solid var(--line)}
+.funnel-static .scap{font-family:'Noto Sans KR',sans-serif;font-size:.85rem;color:var(--muted);margin-top:10px;text-align:center}
+.funnel.show-static .funnel-anim{display:none}
+.funnel.show-static .funnel-static{display:block}
+
+/* mechanism steps */
+.steps{counter-reset:s;margin:24px 0}
+.step{position:relative;padding:14px 16px 14px 56px;background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:10px;
+  font-family:'Noto Sans KR',sans-serif;font-size:.95rem;font-weight:500;color:var(--ink)}
+.step::before{counter-increment:s;content:counter(s);position:absolute;left:14px;top:50%;transform:translateY(-50%);
+  width:28px;height:28px;background:var(--purple);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem}
+.step.boom{border-color:var(--danger);background:#fdf3f2}.step.boom::before{background:var(--danger)}
+
+/* solution cards */
+.sol{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;margin:18px 0;box-shadow:0 4px 20px rgba(107,63,160,.06)}
+.sol.star{border:2px solid var(--purple);background:linear-gradient(180deg,#faf6ff,#fff)}
+.sol .sol-no{font-family:'Noto Sans KR',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1px;color:var(--purple);text-transform:uppercase}
+.sol h4{font-weight:900;font-size:1.25rem;color:var(--ink);margin:4px 0 6px}
+.sol .tag{display:inline-block;font-family:'Noto Sans KR',sans-serif;font-size:.66rem;background:var(--purple-l);color:var(--purple-d);
+  padding:3px 10px;border-radius:12px;font-weight:600;margin-bottom:10px}
+.sol .tag.win{background:var(--purple);color:#fff}
+.sol .desc{font-size:.99rem;color:#3a3340;margin:6px 0}
+.sol .poet{font-size:1.02rem;color:var(--purple-d);font-weight:500;font-style:italic;margin:0 0 8px}
+.expert{margin-top:12px;padding:12px 14px;background:#f7f3fc;border-radius:8px;font-family:'Noto Sans KR',sans-serif;font-size:.84rem;color:#4a4356;line-height:1.7}
+.expert b{color:var(--purple-d)}
+.expert+.expert{margin-top:8px}
+
+/* golden bar */
+.gbar-wrap{margin:20px 0 8px;padding:20px;background:#faf6ff;border-radius:12px}
+.gbar-row{display:flex;align-items:center;gap:12px;margin:10px 0;font-family:'Noto Sans KR',sans-serif}
+.gbar-label{width:88px;font-size:.82rem;font-weight:600;color:var(--ink);flex-shrink:0;text-align:right}
+.gbar-track{flex:1;background:#fff;border-radius:8px;height:34px;position:relative;overflow:hidden;border:1px solid var(--line)}
+.gbar-fill{height:100%;width:0;border-radius:8px;transition:width 1.4s cubic-bezier(.2,.8,.2,1);display:flex;align-items:center;justify-content:flex-end;padding-right:12px;color:#fff;font-weight:700;font-size:.85rem}
+.gbar-fill.off{background:#b9a9d4}.gbar-fill.on{background:var(--purple)}
+.gdelta{text-align:center;margin-top:16px;font-family:'Noto Sans KR',sans-serif}
+.gdelta .num{font-size:1.8rem;font-weight:900;color:var(--purple);line-height:1}
+.gdelta .lbl{font-size:.82rem;color:var(--muted)}
+
+/* image */
+.fig{margin:30px 0}
+.fig img{width:100%;border-radius:12px;border:1px solid var(--line);display:block}
+.fig.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fig.chart{max-width:340px;margin-left:auto;margin-right:auto}
+.fig.por{max-width:380px;margin-left:auto;margin-right:auto}
+.contact figure figcaption{color:#b89cd6}
+.fig figcaption{font-family:'Noto Sans KR',sans-serif;font-size:.78rem;color:var(--muted);text-align:center;margin-top:10px;grid-column:1/-1}
+@media(max-width:560px){.fig.two{grid-template-columns:1fr}}
+
+/* video */
+.vid{margin:26px 0}
+.vid video{width:100%;max-width:560px;display:block;margin:0 auto;border-radius:12px;border:1px solid var(--line);background:#000}
+.vid figcaption{font-family:'Noto Sans KR',sans-serif;font-size:.78rem;color:var(--muted);text-align:center;margin-top:10px}
+
+/* definition box */
+.defs{display:grid;gap:10px;margin:22px 0}
+.defbox{background:#faf6ff;border:1px solid var(--line);border-radius:10px;padding:14px 18px;font-family:'Noto Sans KR',sans-serif}
+.defbox b{color:var(--purple-d);font-size:.95rem}
+.defbox span{display:block;font-size:.9rem;color:#4a4356;margin-top:3px}
+
+/* contact */
+.contact{background:#1d141f;color:#f0e8f5}
+.contact h2{color:#fff}
+.contact .card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:28px;margin-top:24px;text-align:center}
+.contact .mail{font-family:'Noto Sans KR',sans-serif;font-size:1.3rem;font-weight:700;color:#e8c8ff;text-decoration:none;display:inline-block;margin:8px 0 18px}
+.contact .ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:18px;font-family:'Noto Sans KR',sans-serif;text-align:left}
+.contact .way{background:rgba(255,255,255,.04);border-radius:10px;padding:14px 16px;font-size:.82rem;color:#d8c8e8}
+.contact .way b{display:block;color:#fff;font-size:.9rem;margin-bottom:4px}
+.cta-btn{display:inline-block;background:var(--purple);color:#fff;font-family:'Noto Sans KR',sans-serif;font-weight:700;
+  text-decoration:none;padding:14px 32px;border-radius:30px;font-size:.95rem;transition:transform .2s,background .2s}
+.cta-btn:hover{transform:translateY(-2px);background:#7d4fb8}
+
+footer.credit{background:#120c14;color:#7a6e85;text-align:center;padding:40px 24px;font-family:'Noto Sans KR',sans-serif;font-size:.74rem;line-height:1.8}
+footer.credit b{color:#b89cd6}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* progress */
+.progress{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0;z-index:200;transition:width .1s}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<header class="masthead" id="masthead">
+  <div class="brand">RE:<span>MOVE</span> · Sunny Scholar in 의성</div>
+  <nav>
+    <a href="#clue">실마리</a>
+    <a href="#mechanism">메커니즘</a>
+    <a href="#mobility">이동권</a>
+    <a href="#solution">해결</a>
+    <a href="#ending">컨택</a>
+  </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="kicker">의료용 전동스쿠터 오조작 사고 · 의성에서 만난 49명</div>
+  <h1>살려고 쥔 손이,<br>사고를 향해 <em>움직였다.</em></h1>
+  <div class="sub">그 사고는 정말 어르신의 실수였을까.</div>
+  <div class="scroll-hint">SCROLL ↓</div>
+</section>
+
+<!-- ===== HOOK: 최귀향 ===== -->
+<section class="hook">
+  <div class="wrap reveal">
+    <div class="name">최귀향 할머니 · 의성</div>
+    <blockquote>
+      <span class="em-line">그날도 할머니는 늘 가던 길을 가고 있었다.</span><br>
+      사고는 낯선 곳이 아니라, 일상의 가장 가까운 곳에서 일어났다. 최귀향 할머니는 논 가장자리에 의료용 전동스쿠터를 세우려 했다. 머리로는 멈춰야 한다고 생각했지만, 손은 레버를 놓지 못했다.
+    </blockquote>
+    <figure class="portrait"><img loading="lazy" src="../images/chgh_02.png" alt="의료용 전동스쿠터를 탄 어르신"><figcaption>의료용 전동스쿠터에 몸을 맡긴 채 길을 나서는 어르신</figcaption></figure>
+    <blockquote>
+      "논 가세 세우려고 했어. 거기서 딱 세워야 된다고 생각하고 있었지. 근데 나도 모르게 손에 힘이 들어가더라고. 세우려면 놔야 되는데, 그걸 꽉 쥐어버린 거야. 그러니까 전동차가 멈추는 게 아니라 앞으로 가버렸어. 그대로 논에 빠졌지. 내가 생각을 안 한 게 아니야. 분명 세워야 한다고 생각은 하고 있었어. 근데 자전거를 오래 타서 그런가, 몸이 헷갈린 것 같아. <b style="color:#e8c8ff">자전거는 잡으면 서잖아. 근데 이건 잡으면 막 가니까.</b>"
+    </blockquote>
+    <figure><img loading="lazy" src="../images/chgh_01.png" alt="전동스쿠터가 수로로 굴러떨어진 사고 현장"><figcaption>늘 가던 길가의 수로로 굴러떨어진 전동스쿠터. 사고는 일상의 가장 가까운 곳에서 일어났다.</figcaption></figure>
+  </div>
+</section>
+
+<!-- ===== 사례 전환 + 문제 제기 ===== -->
+<section>
+  <div class="wrap">
+    <div class="big-line reveal">멈추고 싶었던 순간, 몸은 먼저 굳었다.</div>
+    <p class="reveal">의료용 전동스쿠터는 멈추지 않았고, 사고는 한순간에 찾아왔다. 할머니는 사고 직후에도 다시 전동스쿠터를 타고 집에 갔다. 집에 가서 밥도 먹고, 마을회관에도 있었다. 하지만 시간이 지날수록 몸이 너무 아파, 뒤늦게 병원을 찾았다.</p>
+    <div class="quote reveal"><p>"그때는 그렇게 크게 다친 줄도 몰랐어. 논에 빠진 거 다시 일으켜서, 그거 타고 집에도 갔어. 근데 있다 보니까 몸이 너무 아픈 거야. 병원에 갔더니 뼈가 부러졌다고 하더라고. 갈비뼈도 그렇고 발가락도 그렇고. 병원에서 왜 이제 왔냐고 혼났어. 큰 병원 가야 된다고 119 불러줘서 응급차 타고 안동 큰 병원까지 갔지."</p><div class="who">최귀향 할머니</div></div>
+    <figure class="fig por reveal"><img loading="lazy" src="img/rpt_08.png" alt="뒤늦게 통증을 느낀 어르신"><figcaption>사고 직후엔 멀쩡했지만, 시간이 지나서야 골절의 통증이 찾아왔다.</figcaption></figure>
+    <div class="quote reveal"><p>"전동차가 불편한 게 뭐냐고 물으면, 나는 그게 제일 먼저 생각나. 자전거랑 달라. 자전거는 잡으면 멈추는데, 전동차는 잡으면 막 가. 요즘은 익숙해지긴 했는데도 나도 모르게 꽉 쥘 때가 있어. 마음이 바빠지거나 갑자기 당황하면 엑셀인지 브레이크인지 헷갈려. 머리로는 멈춰야 한다고 아는데, 손이 먼저 꽉 쥐어져."</p><div class="who">최귀향 할머니</div></div>
+
+    <div class="big-line reveal">우리는 그 장면을 너무 쉽게<br><em>'조작 미숙'</em>이라 불러왔다.</div>
+    <p class="reveal">하지만 현장에서 들은 이야기는 사뭇 달랐다.</p>
+
+    <div class="quote reveal"><p>"조작 때문에 사고 난 거라고 단정하기는 어렵습니다. 전동차를 늦게 발견하거나 못 보는 경우도 많아요."</p><div class="who">의성경찰서 교통관리계 관계자</div></div>
+    <div class="quote reveal"><p>"당황하거나 놀라시면 손을 안 놓으셔서 사고 나는 경우가 많아요."</p><div class="who">안동 의료기기점 사장님</div></div>
+    <div class="quote reveal"><p>"갑작시레 깜짝 놀라가꼬 헷갈리가꼬, 놔야 되는데 꽉 쥐아삣어."</p><div class="who">E 어르신, 88세 · 운전 경력 5년차</div></div>
+  </div>
+</section>
+
+<!-- ===== 1부 실마리 ===== -->
+<section id="clue">
+  <div class="wrap">
+    <div class="part-tag reveal">1부 · 문제의 실마리</div>
+    <h2 class="reveal">문제는 조작법을 몰랐다는 데 있지 않았다.</h2>
+    <div class="big-line reveal">위험한 순간, 사람은 본능적으로 몸에 힘을 준다.<br>그런데 전동스쿠터는 그 반응을 <em>멈춤이 아니라 가속</em>으로 받아들인다.</div>
+
+    <div class="defs reveal">
+      <div class="defbox"><b>오조작</b><span>멈춰야 하는 상황에서 엑셀 레버를 계속 쥐고 있는 것</span></div>
+      <div class="defbox"><b>오조작 사고</b><span>오조작으로 인해 발생하는 사고</span></div>
+    </div>
+    <figure class="vid reveal">
+      <video controls preload="metadata" playsinline poster="../images/img_11.png">
+        <source src="../videos/golden-test.mp4" type="video/mp4">
+        브라우저가 영상을 지원하지 않습니다.
+      </video>
+      <figcaption>현장에서 기록한 의료용 전동스쿠터 조작 방식 — 레버를 잡으면 나아가고, 놓아야 멈춘다.</figcaption>
+    </figure>
+
+    <h3 class="reveal">"어르신들은 놀라면, 손을 더 꽉 잡으세요."</h3>
+    <p class="reveal">의료기기 판매점에서 들은 이 말은 사고를 다시 보게 만든 첫 번째 단서였다. 안동의 한 의료기기점 사장님께 판매 시 교육 내용을 묻자 이렇게 답했다. "레버를 놔야 멈추는데, 어르신들께서 놀라거나 당황하면 계속 잡고 있어서 사고 나는 경우가 많아요. 그래서 멈추려면 꼭 놓으라고 알려드려요." 자료 조사나 다른 이해관계자 인터뷰에서는 듣지 못했던 이야기였으나, 연달아 방문한 3곳의 의료기기점에서도 같은 답변을 들을 수 있었다.</p>
+    <figure class="fig reveal"><img loading="lazy" src="img/rpt_11.png" alt="안동 의료기기점"><figcaption>안동의 한 의료기기점. 판매처 세 곳 모두 같은 이야기를 했다.</figcaption></figure>
+    <p class="reveal">그래서 오조작이 정말 사고의 주요 원인이었는지 파악하기 위해 당사자 인터뷰를 시작했다. 2025년 7월 21일부터 8월 8일까지, 의성군에서 의료용 전동스쿠터를 이용하는 어르신 49명을 직접 만났다.</p>
+
+    <table class="info reveal">
+      <tr><th>조사 지역</th><td>경상북도 의성군 (의성읍·안계면·금성면·가음면·춘산면·봉양면·사곡면)</td></tr>
+      <tr><th>인터뷰 기간</th><td>2025. 7. 21 ~ 8. 8</td></tr>
+      <tr><th>당사자 인터뷰</th><td>의료용 전동스쿠터 이용 어르신 <b>49명</b></td></tr>
+      <tr><th>이해관계자</th><td>의료기기점·경찰서·지구대·파출소·119·버스/택시 기사·구난차 업체·전동보장구 연습장</td></tr>
+      <tr><th>조사 내용</th><td>사고 경험, 오조작 경험, 교육·면허 여부, 타 이동수단 운전 경험, 주행 환경, 사고 장소와 피해</td></tr>
+    </table>
+    <figure class="fig reveal"><img loading="lazy" src="img/rpt_13.png" alt="의성 조사 지역 지도"><figcaption>팀 RE:MOVE가 다닌 의성 7개 읍·면</figcaption></figure>
+    <figure class="fig reveal"><img loading="lazy" src="img/rpt_19.png" alt="의성 현장 인터뷰 장면"><figcaption>의성 곳곳에서 어르신을 직접 만났다 — 당사자 인터뷰 49회, 이해관계자 인터뷰 22회.</figcaption></figure>
+
+    <div class="big-line reveal">우리는 사고의 책임을 묻기 전에,<br>사고의 <em>구조</em>를 먼저 물었다.</div>
+    <p class="reveal center" style="color:var(--muted)">의성에서 만난 49명의 이야기 속에는 반복되는 위험의 패턴이 있었다.</p>
+
+    <!-- 조사결과 1 -->
+    <h3 class="reveal">조사 결과 ① — 사고는 어쩌다 한번 일어나는 일이 아니었다</h3>
+    <div class="funnel reveal" data-funnel="f1">
+      <div class="funnel-head"><div class="ttl">49명 중 사고·오조작 경험</div>
+        <div class="funnel-tabs"><button class="on" data-mode="anim">애니메이션</button><button data-mode="static">정적 보기</button></div></div>
+      <div class="funnel-anim">
+        <div class="dots" data-total="49"></div>
+        <div class="funnel-cap"></div>
+        <div class="funnel-foot">
+          <div class="legend"><span><i style="background:#b9a9d4"></i>전체</span><span><i style="background:var(--warn)"></i>사고 경험</span><span><i style="background:var(--danger)"></i>오조작 원인</span></div>
+          <button class="replay">↻ 다시 보기</button></div>
+      </div>
+      <div class="funnel-static">
+        <img src="../images/img_30_accident_ratio.png" alt="49명 중 사고 경험자 비율">
+        <div class="scap">49명 중 22명이 사고 경험 → 그중 12명의 원인은 오조작</div>
+      </div>
+    </div>
+    <p class="reveal">49명 중 22명은 이미 사고를 경험하고 있었다. 그중 12명이 경험한 사고의 원인은 오조작이었다. 사고는 뉴스 속 극단적인 사건이 아니라, 어르신의 생활 안에서 반복되고 있었다.</p>
+
+    <!-- 조사결과 2 -->
+    <h3 class="reveal">조사 결과 ② — 오조작은 가볍게 넘길 수 있는 실수가 아니었다</h3>
+    <div class="funnel reveal" data-funnel="f2">
+      <div class="funnel-head"><div class="ttl">오조작 경험 → 실제 사고</div>
+        <div class="funnel-tabs"><button class="on" data-mode="anim">애니메이션</button><button data-mode="static">정적 보기</button></div></div>
+      <div class="funnel-anim">
+        <div class="dots" data-total="49"></div>
+        <div class="funnel-cap"></div>
+        <div class="funnel-foot">
+          <div class="legend"><span><i style="background:#b9a9d4"></i>전체</span><span><i style="background:var(--warn)"></i>오조작 경험</span><span><i style="background:var(--danger)"></i>사고로 이어짐</span></div>
+          <button class="replay">↻ 다시 보기</button></div>
+      </div>
+      <div class="funnel-static">
+        <img src="../images/img_31_misop_ratio.png" alt="오조작 경험 16건 중 사고 12건">
+        <div class="scap">오조작 경험 16건 중 12건이 실제 사고로 — 골절 등 심각한 부상도</div>
+      </div>
+    </div>
+    <p class="reveal">오조작 경험 16건 중 12건은 실제 사고로 이어졌다. 골절과 같은 심각한 부상도 있었다. 멈춰야 할 순간에 멈추지 못하는 것은, 사고 직전 반복되는 위험 신호였다.</p>
+
+    <!-- 조사결과 3 -->
+    <h3 class="reveal">조사 결과 ③ — 사고는 가장 취약한 이들에게 집중됐다</h3>
+    <div class="funnel reveal" data-funnel="f3">
+      <div class="funnel-head"><div class="ttl">오조작 경험자 16명의 구성</div>
+        <div class="funnel-tabs"><button class="on" data-mode="anim">애니메이션</button><button data-mode="static">정적 보기</button></div></div>
+      <div class="funnel-anim">
+        <div class="dots" data-total="16"></div>
+        <div class="funnel-cap"></div>
+        <div class="funnel-foot">
+          <div class="legend"><span>70대 이상 → 면 거주 → 타 이동수단 무경험 → 여성</span></div>
+          <button class="replay">↻ 다시 보기</button></div>
+      </div>
+      <div class="funnel-static">
+        <table class="info" style="max-width:420px;margin:0 auto">
+          <tr><th>70대 이상</th><td>16명 중 13명</td></tr>
+          <tr><th>면(面) 거주</th><td>13명 중 8명</td></tr>
+          <tr><th>타 이동수단 무경험</th><td>8명 중 4명</td></tr>
+          <tr><th>성별</th><td>4명 전원 여성</td></tr>
+        </table>
+        <div class="scap">오조작 경험자 16명의 취약 구성</div>
+      </div>
+    </div>
+    <p class="reveal">사고는 70대 이상의, 면(面)에 거주하는, 다른 이동수단을 운전해본 경험이 없는 여성들에게 집중됐다. 가장 도움이 필요한 이들에게 위험이 쏠려 있었다.</p>
+
+    <!-- 조사결과 4 -->
+    <h3 class="reveal">조사 결과 ④ — 사고는 먼 도로가 아니라, 매일 지나던 길에서 일어났다</h3>
+    <div class="funnel reveal" data-funnel="f4">
+      <div class="funnel-head"><div class="ttl">오조작 사고 12건의 발생 장소</div>
+        <div class="funnel-tabs"><button class="on" data-mode="anim">애니메이션</button><button data-mode="static">정적 보기</button></div></div>
+      <div class="funnel-anim">
+        <div class="dots" data-total="12"></div>
+        <div class="funnel-cap"></div>
+        <div class="funnel-foot">
+          <div class="legend"><span><i style="background:var(--danger)"></i>집 앞 3</span><span><i style="background:var(--warn)"></i>시장 3</span><span><i style="background:var(--purple)"></i>농로 3</span><span><i style="background:#3a7bd5"></i>차도 1</span><span><i style="background:#5a8f6b"></i>확인불가 2</span></div>
+          <button class="replay">↻ 다시 보기</button></div>
+      </div>
+      <div class="funnel-static">
+        <img src="../images/img_32_location.png" alt="오조작 사고 발생 장소">
+        <div class="scap">집 앞 3 · 시장 3 · 농로 3 · 차도 1 · 확인불가 2 — 가장 익숙한 공간이 가장 위험했다</div>
+      </div>
+    </div>
+    <p class="reveal">집 앞, 시장, 농로. 가장 익숙한 공간이 가장 위험한 순간이 되었다.</p>
+    <div class="quote reveal"><p>"장에 사람이 많으니까 정신머리가 하나도 없어가 멈춘다카는걸 그냥 꽉 쥐아삣어. 그래가꼬 좌판 다 밀어삣다."</p><div class="who">D 어르신, 83세</div></div>
+    <div class="quote reveal"><p>"내는 시골 살아가 맨날 농로로 댕기지. 근데 농로라 좁아. 정신머리 놓고 있다가 냅다 들이박아삣다."</p><div class="who">H 어르신, 80대</div></div>
+    <div class="quote reveal"><p>"집에 다 와가 세울라다가 꽉 잡아삐는 바람에.. 냅다 들이박아삐서 앞이 좀 뿌사짓어."</p><div class="who">I 어르신, 81세</div></div>
+    <figure class="fig reveal"><img loading="lazy" src="img/rpt_14.jpg" alt="읍내에서 만난 어르신"><figcaption>읍내 동선이 가장 넓고 붐비는 곳 — 사고도 집 앞·시장·농로 같은 일상의 길에서 일어났다.</figcaption></figure>
+
+    <!-- 조사결과 5 -->
+    <h3 class="reveal">조사 결과 ⑤ — 오래 탔다고 안전해지는 문제도 아니었다</h3>
+    <div class="funnel reveal" data-funnel="f5">
+      <div class="funnel-head"><div class="ttl">오조작 사고 경험자의 운전 경력</div>
+        <div class="funnel-tabs"><button class="on" data-mode="anim">애니메이션</button><button data-mode="static">정적 보기</button></div></div>
+      <div class="funnel-anim">
+        <div class="dots" data-total="12"></div>
+        <div class="funnel-cap"></div>
+        <div class="funnel-foot">
+          <div class="legend"><span><i style="background:var(--danger)"></i>초기 4</span><span><i style="background:var(--purple)"></i>중장기 5</span><span><i style="background:#5a8f6b"></i>확인불가 3</span></div>
+          <button class="replay">↻ 다시 보기</button></div>
+      </div>
+      <div class="funnel-static">
+        <img src="../images/img_33_timing.png" alt="운전 경력별 오조작 사고">
+        <div class="scap">초기 4 · 중장기 5 · 확인불가 3 — 익숙한 사람에게도 위험은 다시 찾아왔다</div>
+      </div>
+    </div>
+    <p class="reveal">익숙한 사람에게도, 익숙한 길에서도, 위험은 다시 찾아왔다. 운전 경력은 사고를 막아주지 못했다.</p>
+    <div class="quote reveal"><p>"논두렁 가에 세울라캤는데 그냥 꽉 쥐어가꼬 논에 팍 빠져삣어. 왜 그랬는가 몰라.."</p><div class="who">C 어르신, 82세 · 운전 경력 10년차에 사고</div></div>
+    <div class="quote reveal"><p>"여 집 앞 삽작거리에서 뭐 갑작시레 깜짝 놀라가꼬 헷갈리가꼬 놔야 되는데 꽉 쥐아삣어."</p><div class="who">E 어르신, 88세 · 운전 경력 5년차에 사고</div></div>
+
+    <div class="big-line reveal">이제 질문은 달라져야 한다.<br>누가 실수했는가가 아니라, <em>왜 같은 사고가 반복되는가.</em></div>
+    <p class="reveal center" style="color:var(--muted)">조심하지 않았던 사람이 아니라, 조심해도 막기 어려웠던 구조를 봐야 한다.</p>
+  </div>
+</section>
+
+<!-- ===== 3부 메커니즘 ===== -->
+<section id="mechanism" style="background:#fff">
+  <div class="wrap">
+    <div class="part-tag reveal">3부 · 문제의 메커니즘</div>
+    <h2 class="reveal">오조작은 이 순서로 일어난다</h2>
+    <p class="reveal">오조작이 발생하는 순서는 다음과 같다. 작은 주의 분산에서 시작해, 단 몇 초 만에 사고에 이른다.</p>
+    <div class="steps reveal">
+      <div class="step">이용자 주의 분산 / 집중 저하</div>
+      <div class="step">무의식적으로 전진 레버를 쥔다</div>
+      <div class="step">의료용 전동스쿠터가 이동한다</div>
+      <div class="step">당황 · 놀람</div>
+      <div class="step">인지적 과부하로 본인의 행동을 자각하지 못함</div>
+      <div class="step">레버에서 손을 떼지 못한다</div>
+      <div class="step">이용자 패닉 발생</div>
+      <div class="step boom">사고 발생</div>
+    </div>
+    <figure class="fig reveal" style="margin-top:24px">
+      <img loading="lazy" src="img/rpt_10.png" alt="의료용 전동스쿠터 조작부">
+      <figcaption>의료용 전동스쿠터 조작부 — 레버를 잡으면 나아가고(액셀), 놓아야 멈춘다(브레이크).</figcaption>
+    </figure>
+    <p class="reveal">이렇게 인지적 과부하가 발생하는 이유는 레버 구조와 밀접한 관련이 있다. 의료용 전동스쿠터는 본래 장애인을 위한 의료기기로 만들어졌기 때문에, 레버를 아주 적은 힘으로 잡고 놓음으로써 운전할 수 있다. 평소엔 더할 나위 없이 편하고, 놓으면 바로 멈추기에 안전하다. 하지만 당황하거나 놀라는 상황에선 몸에 힘이 들어가는 것이 인간의 자연스러운 반응이다. 이럴 때 레버는 오히려 위험을 가중시킨다. 문제의 원인은 <b>"인지적 과부하를 유발하는 의료용 전동스쿠터 조작 방식"</b>이라고 볼 수 있다.</p>
+    <table class="cmp reveal">
+      <tr><th>현재 조작 방식</th><th>신체 반응</th></tr>
+      <tr><td>레버를 잡으면 이동</td><td>무의식적으로 손에 힘이 들어감</td></tr>
+      <tr><td>레버를 더 잡으면 가속</td><td>패닉에 빠지면 더 세게 쥘 수 있음</td></tr>
+      <tr><td>레버를 놓아야 정지</td><td>당황하면 손을 펴기 어려움</td></tr>
+    </table>
+    <div class="quote reveal"><p>"이게 그러니까 사람이 자기가 그걸 맹신하고 있어도 갑작스러운 일이니, 그러면 주먹을 쥐게 되지, 주먹을 피게 안 된다고."</p><div class="who">의성읍 도동3리 노인회장</div></div>
+  </div>
+</section>
+
+<!-- ===== 4부 이동권 ===== -->
+<section id="mobility">
+  <div class="wrap">
+    <div class="part-tag reveal">4부 · 이동권과 의료용 전동스쿠터</div>
+    <h2 class="reveal">우리는 너무 쉽게 노인의 사고를 노인의 탓으로 끝냈다.</h2>
+    <p class="reveal">조심하라는 말은 쉬웠고, 구조를 바꾸는 일은 늘 늦었다. 하지만 반복되는 사고 앞에서 필요한 것은 더 잦은 주의가 아니라 보장된 안전이다.</p>
+
+    <h3 class="reveal">의료용 전동스쿠터는 어르신의 하루를 이어주는 '발'이었다</h3>
+    <div class="quote reveal"><p>"아이고, 걸어가려 하면 못 가고. 전동차 타믄 갈 수 있지. 시장에나 가고, 약 타러 갈 때도 한 번씩 가고. 매일 타는 건 아니어도 볼일 생기면 그걸 타고 가는 거야."</p><div class="who">김옥자 어르신</div></div>
+    <div class="quote reveal"><p>"그거 없으면 아무것도 안 되지. 꼼짝도 못해. 마트에도 하루에 두세 번씩 가고, 장 봐가 짐도 싣고 오고, 볼일도 보고. 걸어가라 하면 못 가니까 타는 거지. 시간으로 보면 딸보다도 낫고 아들보다도 나아."</p><div class="who">이순자 어르신</div></div>
+    <figure class="fig reveal"><img loading="lazy" src="img/rpt_17.png" alt="전동스쿠터에 의지해 외출하는 어르신"><figcaption>전동스쿠터에 의지해 길을 나서는 어르신. 누군가에겐 두 다리를 대신하는 '발'이다.</figcaption></figure>
+    <p class="reveal">시장에 가는 길. 병원에 가는 길. 마을회관으로 향하는 길. 밭으로 나가는 길. 사고가 한 번 나면 그 길을 다시 나서기가 어려워진다.</p>
+
+    <div class="big-line reveal">넘어진 것은 몸만이 아니었다.<br>다시 나갈 용기와 혼자 움직일 수 있는 일상도 함께 흔들렸다.</div>
+    <div class="quote reveal"><p>"내가 잘못해가 그랬지 싶어서, 요새도 그 길 가면 만날 생각나요. '왜 그랬지' 그 생각이 자꾸 나. 사고가 한 번 나고 나니까 그 길이 그냥 길이 아니라, 그때 일이 자꾸 떠오르는 길이 되는 거야."</p><div class="who">김태선 어르신</div></div>
+    <div class="quote reveal"><p>"사고가 해마다 는다고 그래. 아들도 겁을 줘서 중앙도로는 못 나가. 무조건 택시 타라 그래. 나가면 조심하라카고, 또 조심하라카고. 그러니까 전동차가 있어도 어디는 못 가게 되는 거지."</p><div class="who">이순자 어르신</div></div>
+    <div class="big-line reveal">의료용 전동스쿠터가 멈추면,<br>어르신의 생활도 함께 멈춘다.</div>
+  </div>
+</section>
+
+<!-- ===== 5부 해결 ===== -->
+<section id="solution" style="background:#fff">
+  <div class="wrap">
+    <div class="part-tag reveal">5부 · 해결을 위한 5가지 시도</div>
+    <h2 class="reveal">어르신을 더 조심시키는 대신, 구조를 바꾼다</h2>
+    <p class="reveal">RE:MOVE는 사고를 줄이는 방법을 현장에서 다시 찾기 시작했다. 어르신에게 더 조심하라고 말하기 전에, 사고가 반복되는 조건을 바꾸기 위해서. 의료용 전동스쿠터에 최소한의 안전장치를 직접 설계하고, 3D 프린터로 출력해 현장에서 시험했다.</p>
+    <figure class="fig reveal"><img loading="lazy" src="img/rpt_20.jpg" alt="안전장치 현장 시험"><figcaption>직접 만든 안전장치를 의성 현장에서 시험했다.</figcaption></figure>
+    <p class="reveal sans" style="font-size:.92rem;color:var(--muted);background:var(--purple-l);padding:14px 18px;border-radius:10px">
+      <b style="color:var(--purple-d)">설계 기준</b> &nbsp;① 실제로 오조작 사고를 방지할 수 있는가 &nbsp;② 기존 의료용 전동스쿠터에 적용 가능한가 &nbsp;③ 고령 이용자에게 새로운 인지 부담을 주지는 않는가</p>
+
+    <div class="sol reveal"><div class="sol-no">시도 01</div><h4>안심손</h4><span class="tag">촉각 피드백</span>
+      <p class="poet">끝까지 당긴 순간, 손이 알아차릴 수 있도록.</p>
+      <p class="desc">레버를 끝까지 당겼을 때 촉각 자극을 주어, 위험한 조작을 손이 먼저 인식하게 만드는 시도.</p>
+      <figure class="fig reveal" style="margin:14px 0 0"><img loading="lazy" src="img/rpt_21.png" alt="안심손 프로토타입"><figcaption>전동스쿠터 조작부에 부착한 '안심손' 프로토타입</figcaption></figure></div>
+
+    <div class="sol reveal"><div class="sol-no">시도 02</div><h4>스마트레버지킴이 1안</h4><span class="tag">자동 제어</span>
+      <p class="poet">위험한 가속을, 기계가 먼저 알아차릴 수 있도록.</p>
+      <p class="desc">짧은 시간 안에 레버가 급격히 당겨지는 상황을 감지해 가속을 차단하는 자동 제어 시스템.</p>
+      <figure class="fig reveal" style="margin:12px 0 0"><img loading="lazy" src="img/rpt_22.png" alt="자동 제어 회로 설계도"><figcaption>가속 차단 자동 제어 회로 설계(아두이노 기반)</figcaption></figure>
+      <div class="expert"><b>LG 연구원 (대충라이프)</b> "기술적으로는 만들 수 있지만, 실제 제품에 넣으려면 단순 회로 추가 수준이 아니라 제조사 설계, 안전 로직, 인증 절차가 함께 가야 한다."</div>
+      <div class="expert"><b>별따러가자 김경목 대표</b> "스쿠터는 위험한 순간에 힘이 들어가면 멈추는 게 아니라 더 가속되는 구조라서, 문제를 짚은 방향이 신선하고 좋았습니다. 다만 내부 신호나 ECU까지 건드리는 방식은 기술적으로 가능해도 의료기기 개조와 신뢰성 문제가 커서, 실제 적용까지는 긴 검증이 필요합니다."</div></div>
+
+    <div class="sol reveal"><div class="sol-no">시도 03</div><h4>스마트레버지킴이 2안</h4><span class="tag">진동·소리 경고</span>
+      <p class="poet">멈춰야 할 순간을, 진동과 소리로 알려주도록.</p>
+      <p class="desc">급격한 레버 입력이 감지되면 사용자에게 즉각적인 진동·소리 경고를 보내는 부착형 장치.</p>
+      <figure class="fig por reveal" style="margin:12px 0 0"><img loading="lazy" src="img/rpt_23.png" alt="조작부에 부착한 경고 장치"><figcaption>조작부에 부착한 진동·소리 경고 장치 프로토타입</figcaption></figure>
+      <div class="expert"><b>경희대학교 Age-Tech 연구소</b> "솔루션 설계 방식 자체는 논리적으로 보입니다. 다만 오조작의 수치 데이터를 측정하는 것, 데이터를 바탕으로 오조작을 숫자로 정의하는 것, 솔루션을 개발하는 것, 솔루션을 검증하는 것 하나하나가 큰 연구처럼 보입니다."</div></div>
+
+    <div class="sol star reveal"><div class="sol-no">⭐ 시도 04 · 프로토타입 검증 완료</div><h4>골든타임 레버 가드</h4><span class="tag win">현장 실험</span>
+      <p class="poet">사고 직전, 멈출 수 있는 시간을 조금 더.</p>
+      <p class="desc">레버가 한 번에 끝까지 당겨지는 속도를 늦춰, 사고 직전 사용자가 반응할 수 있는 시간을 확보하는 방식이다. 프로토타입 실험 결과, 오조작 행위가 발생한 지점부터 위험 지점까지 도달하는 시간이 다음과 같이 달라졌다.</p>
+      <div class="gbar-wrap" data-gbar>
+        <div class="gbar-row"><div class="gbar-label">가드 미부착</div><div class="gbar-track"><div class="gbar-fill off" data-w="86">5.77초</div></div></div>
+        <div class="gbar-row"><div class="gbar-label">가드 부착</div><div class="gbar-track"><div class="gbar-fill on" data-w="100">6.66초</div></div></div>
+        <div class="gdelta"><div class="num" data-count="15.4" data-suffix="%">0%</div><div class="lbl">위험 지점까지 도달 시간 +0.89초 — 약 15.4% 더 확보</div></div>
+      </div>
+      <p class="desc">전동스쿠터 오조작 사고는 짧은 순간에 레버가 끝까지 당겨지며 발생한다. 이때 1초에 가까운 시간이 더 생긴다는 것은, 사용자가 손을 놓거나 주변 사람이 제지할 수 있는 '사고 직전의 완충 시간'이 될 수 있다.</p>
+      <div class="fig two reveal" style="margin:18px 0 0">
+        <img loading="lazy" src="img/rpt_25.jpg" alt="골든타임 가드 1차 프로토타입">
+        <img loading="lazy" src="img/rpt_26.png" alt="골든타임 가드 2차 프로토타입">
+        <figcaption>골든타임 레버 가드 1차·2차 프로토타입</figcaption>
+      </div>
+      <div class="expert">"이거 달고 나니까 확 잡아도 바로 훅 나가는 느낌이 덜해서 마음이 좀 놓이더라. 근데 타다 보니까 한 번 떨어진 적이 있었다. 붙어 있는 건 좋았는데, 오래 쓰려면 단단하게 고정돼야 되겠다." — 의성읍 김OO 어르신 (프로토타입 장기 착용)</div>
+    </div>
+
+    <div class="sol reveal"><div class="sol-no">시도 05</div><h4>가위손 기법</h4><span class="tag">현장형 교육</span>
+      <p class="poet">네 손가락의 강한 힘을, 두 손가락의 균형으로.</p>
+      <p class="desc">레버를 강하게 움켜쥐는 습관을 줄이고, 급격한 당김을 완화하기 위한 현장형 교육 방식.</p>
+      <figure class="fig two reveal" style="margin:12px auto 0;max-width:520px"><img loading="lazy" src="img/rpt_27.jpg" alt="가위손 기법 잡기 전"><img loading="lazy" src="img/rpt_28.jpg" alt="가위손 기법 잡은 후"><figcaption>가위손 기법 — 잡기 전(왼쪽)과 잡은 후(오른쪽) 손 모양</figcaption></figure>
+      <div class="expert"><b>경희대학교 Age-Tech 연구소</b> "어르신마다 편한 자세와 손 기능이 다르기 때문에, 바로 권장하기보다는 안전한 환경에서 관찰하고 비교하는 과정이 선행되어야 합니다."</div></div>
+
+    <p class="reveal">우리는 완성된 해답을 만들어냈다고 말하지 않는다. 다만 분명한 방향을 발견했다.</p>
+    <div class="big-line reveal">사고를 줄이는 일은 어르신을 더 조심시키는 일이 아니라,<br><em>위험한 순간을 함께 극복해내는 구조</em>를 만드는 일이다.</div>
+  </div>
+</section>
+
+<!-- ===== 6부 엔딩 + 컨택 ===== -->
+<section id="ending">
+  <div class="wrap">
+    <div class="part-tag reveal">6부 · 실수라고 말하지 않는 사회</div>
+    <h2 class="reveal">이 문제는 한 팀의 아이디어로 끝낼 수 없다.</h2>
+    <p class="reveal">제조사, 지자체, 복지기관, 전문가가 함께 할 때, 의료용 전동스쿠터 사고는 개인의 실수가 아니라 바꿀 수 있는 안전 문제가 된다.</p>
+    <figure class="fig reveal"><img loading="lazy" src="img/rpt_29.png" alt="의성 현장의 전동스쿠터들"><figcaption>의성 곳곳의 전동스쿠터. 이 문제는 한 팀이 아니라 여럿이 함께 풀어야 한다.</figcaption></figure>
+
+    <div class="big-line reveal">어린이의 위험에는 사회가 먼저 달려간다.</div>
+    <p class="reveal center">넘어질까 봐 손을 잡고, 부딪힐까 봐 모서리를 감싸고, 길을 잃을까 봐 표지판을 세운다.<br>그 따뜻한 걱정은 왜 노인의 이동 앞에서는 자주 멈출까.</p>
+    <figure class="fig por reveal"><img loading="lazy" src="img/rpt_30.png" alt="노인의 뒷모습"><figcaption></figcaption></figure>
+
+    <div class="big-line reveal">노인의 이동에도, <em>사회의 관심</em>이 필요하다.</div>
+    <p class="reveal center lead">의료용 전동스쿠터 사고를 어르신의 실수로만 기록하지 않기 위해.<br>RE:MOVE는 이 사고를 개인의 부주의가 아닌, 함께 바꿔야 할 구조로 다시 봅니다.</p>
+    <figure class="fig reveal" style="margin-top:40px"><img loading="lazy" src="img/rpt_31.png" alt="길을 나서는 어르신"><figcaption>오늘도 어르신은 이 길 위에서 레버를 쥔다. 그 이동을 지키는 일은 우리 모두의 몫이다.</figcaption></figure>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrap">
+    <h2 class="reveal center">함께 바꿀 수 있습니다</h2>
+    <p class="reveal center" style="color:rgba(255,255,255,.7)">제조사 협력 · 지자체/복지기관 연계 · 실증 테스트 · 연구 보고서 — 모든 문의는 한곳으로 받습니다.</p>
+    <div class="card reveal">
+      <div class="sans" style="font-size:.78rem;letter-spacing:1px;color:#b89cd6">CONTACT & 문의사항</div>
+      <a class="mail" href="mailto:timehor@naver.com">timehor@naver.com</a>
+      <div><a class="cta-btn" href="mailto:timehor@naver.com?subject=[RE:MOVE] 협력·문의">메일로 문의하기</a></div>
+      <div class="ways">
+        <div class="way"><b>제조사 협력</b>오조작 방지 기능을 실제 제품에 적용할 수 있는지 함께 확인</div>
+        <div class="way"><b>지자체·복지기관</b>어르신 생활 동선 기반 복지관·마을회관·지역 안전사업 연계 실증</div>
+        <div class="way"><b>실증 테스트</b>가위손 기법·골든타임 레버 가드의 실사용 가능성 검증</div>
+        <div class="way"><b>연구 보고서</b>현장조사 데이터·솔루션 검토 내용 전송 및 후속 미팅</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="credit">
+  <b>Sunny On Site · RE:MOVE</b><br>
+  RE:MOVE는 SK 행복나눔재단의 대학생 지역 기반 사회문제 해결 프로젝트 「Sunny Scholar in 의성」으로 만나,<br>
+  2025년 6월부터 2026년 5월까지 '의료용 전동스쿠터 오조작 문제'를 연구해온 대학생 연구팀입니다.<br>
+  의성에서 2개월 간 거주하며 현장관찰과 당사자 인터뷰 49회, 이해관계자 인터뷰 22회를 진행했습니다.<br><br>
+  <span style="color:#5a5060">Interactive Report v10 · 2026 · Problem of Problems Lab</span>
+</footer>
+
+<script>
+/* ===== reveal ===== */
+const revObs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+/* ===== progress + masthead ===== */
+const prog=document.getElementById('progress'),mast=document.getElementById('masthead');
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement,sc=h.scrollTop,max=h.scrollHeight-h.clientHeight;
+  prog.style.width=(sc/max*100)+'%';
+  if(sc>window.innerHeight*.6)mast.classList.add('show');else mast.classList.remove('show');
+});
+/* scrollspy */
+const navLinks=[...document.querySelectorAll('.masthead nav a')];
+const spy=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){
+  navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}})},{rootMargin:'-40% 0px -55% 0px'});
+['clue','mechanism','mobility','solution','ending'].forEach(id=>{const el=document.getElementById(id);if(el)spy.observe(el)});
+
+/* ===== FUNNEL ===== */
+const FUNNELS={
+  f1:{total:49,stages:[
+    {cap:'의성에서 만난 어르신 <b style="color:#6B3FA0">49</b>명',paint:(d)=>d.forEach(x=>cls(x,'base'))},
+    {cap:'이미 사고를 경험한 사람 <b>22</b>명',paint:(d)=>d.forEach((x,i)=>cls(x,i<22?'accident':'dim'))},
+    {cap:'그중 사고 원인이 오조작인 사람 <b>12</b>명',paint:(d)=>d.forEach((x,i)=>cls(x,i<12?'misop':i<22?'accident':'dim'))},
+  ]},
+  f2:{total:49,stages:[
+    {cap:'어르신 <b style="color:#6B3FA0">49</b>명',paint:(d)=>d.forEach(x=>cls(x,'base'))},
+    {cap:'오조작을 경험한 사람 <b>16</b>명',paint:(d)=>d.forEach((x,i)=>cls(x,i<16?'accident':'dim'))},
+    {cap:'그중 실제 사고로 이어진 경우 <b>12</b>건',paint:(d)=>d.forEach((x,i)=>cls(x,i<12?'misop':i<16?'accident':'dim'))},
+  ]},
+  f3:{total:16,stages:[
+    {cap:'오조작 경험자 <b style="color:#6B3FA0">16</b>명',paint:(d)=>d.forEach(x=>cls(x,'base'))},
+    {cap:'70대 이상 <b>13</b>명',paint:(d)=>d.forEach((x,i)=>cls(x,i<13?'g1':'dim'))},
+    {cap:'면(面) 거주 <b>8</b>명',paint:(d)=>d.forEach((x,i)=>cls(x,i<8?'g2':i<13?'g1':'dim'))},
+    {cap:'타 이동수단 무경험 <b>4</b>명',paint:(d)=>d.forEach((x,i)=>cls(x,i<4?'g3':i<8?'g2':i<13?'g1':'dim'))},
+    {cap:'그리고 <b>4</b>명 모두 여성이었다',paint:(d)=>d.forEach((x,i)=>cls(x,i<4?'misop':'dim'))},
+  ]},
+  f4:{total:12,stages:[
+    {cap:'오조작 사고 <b style="color:#6B3FA0">12</b>건',paint:(d)=>d.forEach(x=>cls(x,'base'))},
+    {cap:'집 앞 3 · 시장 3 · 농로 3 · 차도 1 · 확인불가 2',paint:(d)=>d.forEach((x,i)=>cls(x,['g1','g1','g1','g2','g2','g2','g3','g3','g3','g4','g5','g5'][i]))},
+  ]},
+  f5:{total:12,stages:[
+    {cap:'오조작 사고 경험자 <b style="color:#6B3FA0">12</b>명',paint:(d)=>d.forEach(x=>cls(x,'base'))},
+    {cap:'초기 4 · 중장기 5 · 확인불가 3 — 경력과 무관했다',paint:(d)=>d.forEach((x,i)=>cls(x,['g1','g1','g1','g1','g3','g3','g3','g3','g3','g5','g5','g5'][i]))},
+  ]},
+};
+function cls(dot,c){dot.className='dot '+c}
+
+document.querySelectorAll('.funnel').forEach(f=>{
+  const id=f.dataset.funnel,cfg=FUNNELS[id];if(!cfg)return;
+  const grid=f.querySelector('.dots'),cap=f.querySelector('.funnel-cap'),foot=f.querySelector('.funnel-foot');
+  for(let i=0;i<cfg.total;i++){const d=document.createElement('div');d.className='dot';grid.appendChild(d)}
+  const dots=[...grid.querySelectorAll('.dot')];
+  // 클릭 안내
+  if(foot){const hint=document.createElement('span');hint.className='funnel-hint';hint.textContent='클릭: 단계 넘기기';foot.insertBefore(hint,f.querySelector('.replay'));}
+  let timers=[],cur=-1;
+  function clearTimers(){timers.forEach(clearTimeout);timers=[];}
+  function showStage(idx){cur=idx;const st=cfg.stages[idx];st.paint(dots);cap.innerHTML=st.cap;
+    dots.forEach((d)=>{if(!d.classList.contains('dim')){d.classList.add('pop');setTimeout(()=>d.classList.remove('pop'),400)}});}
+  function play(){clearTimers();cfg.stages.forEach((st,idx)=>{timers.push(setTimeout(()=>showStage(idx),idx*1300));});}
+  function reset(){clearTimers();cur=0;cfg.stages[0].paint(dots);cap.innerHTML=cfg.stages[0].cap;}
+  function step(){clearTimers();showStage((cur+1)%cfg.stages.length);}
+  // 탭(애니/정적)
+  f.querySelectorAll('.funnel-tabs button').forEach(b=>b.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    f.querySelectorAll('.funnel-tabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+    if(b.dataset.mode==='static')f.classList.add('show-static');else{f.classList.remove('show-static');play();}
+  }));
+  f.querySelector('.replay').addEventListener('click',(e)=>{e.stopPropagation();play();});
+  // 카드 클릭 → 단계 수동 넘기기
+  f.querySelector('.funnel-anim').addEventListener('click',(e)=>{
+    if(e.target.closest('.funnel-tabs')||e.target.closest('.replay'))return;
+    step();
+  });
+  reset();
+  // 뷰포트 들어올 때마다 재생, 벗어나면 리셋(스크롤 위아래 시 다시 재생)
+  new IntersectionObserver((es)=>{es.forEach(e=>{
+    if(f.classList.contains('show-static'))return;
+    if(e.isIntersecting){play();}else{reset();}
+  })},{threshold:.45}).observe(f);
+});
+
+/* ===== golden bar + count-up ===== */
+document.querySelectorAll('[data-gbar]').forEach(g=>{
+  let done=false;
+  new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting&&!done){done=true;
+    g.querySelectorAll('.gbar-fill').forEach(b=>{b.style.width=b.dataset.w+'%'});
+    countUp(g.querySelector('[data-count]'));
+  }})},{threshold:.5}).observe(g);
+});
+function countUp(el){
+  if(!el)return;const target=parseFloat(el.dataset.count),suf=el.dataset.suffix||'';
+  let cur=0,step=target/40;
+  const t=setInterval(()=>{cur+=step;if(cur>=target){cur=target;clearInterval(t)}
+    el.textContent=(target%1?cur.toFixed(1):Math.round(cur))+suf;},28);
+}
+</script>
+</body>
+</html>
