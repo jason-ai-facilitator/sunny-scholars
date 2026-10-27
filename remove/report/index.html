@@ -732,17 +732,17 @@ footer{margin-top:90px;border-top:1px solid var(--line);padding:36px 22px 60px;t
   <div class="golden" id="golden">
     <div class="wide">
       <div class="k">골든타임 가드 주행 실험</div>
-      <h3>레버를 놓지 못한 순간부터 위험한 곳에 닿기까지, 가드를 단 전동스쿠터는 0.89초가 더 걸렸다</h3>
-      <p class="lede">우리는 2차 시제품을 달고 직접 주행 실험을 해 보았다. 오조작이 시작된 곳에서 위험한 곳에 닿기까지 걸린 시간을 쟀다. 어르신이 손을 놓거나 옆 사람이 말릴 수 있는 시간이다.</p>
+      <h3>레버를 놓지 못한 순간부터 위험한 곳에 도착하기까지, 가드를 단 전동스쿠터는 0.89초가 더 걸렸다</h3>
+      <p class="lede">우리는 2차 시제품을 달고 직접 주행 실험을 해 보았다. 오조작이 시작된 곳에서 위험한 곳에 도착하기까지 걸린 시간을 쟀다. 어르신이 손을 놓거나 옆 사람이 말릴 수 있는 시간이다.</p>
       <div class="race" id="race">
         <div class="top"><div class="clock" id="rclock">0.00<small>초</small></div><button type="button" id="replay">다시 보기</button></div>
-        <div class="lane" data-t="5.77"><div class="ln"><span>골든타임 가드 없이</span><b>5.77초에 닿음</b></div><div class="road"><div class="car"></div><div class="mark"></div><div class="stop"></div></div></div>
-        <div class="lane g" data-t="6.66"><div class="ln"><span>골든타임 가드를 달고</span><b>6.66초에 닿음</b></div><div class="road"><div class="car"></div><div class="mark"></div><div class="stop"></div></div></div>
+        <div class="lane" data-t="5.77"><div class="ln"><span>골든타임 가드 없이</span><b>5.77초에 도착</b></div><div class="road"><div class="car"></div><div class="mark"></div><div class="stop"></div></div></div>
+        <div class="lane g" data-t="6.66"><div class="ln"><span>골든타임 가드를 달고</span><b>6.66초에 도착</b></div><div class="road"><div class="car"></div><div class="mark"></div><div class="stop"></div></div></div>
         <div class="rnote" id="rnote" aria-live="polite"></div>
         <div class="src">두 실험에서 잰 도달 시간에 맞춰, 일정한 빠르기로 움직이게 그렸다. 실제 속도 변화는 그림과 다를 수 있다.</div>
       </div>
       <div class="two">
-        <div><div class="n">+0.89초</div><p>가드 없이 5.77초 걸리던 거리가 6.66초 걸렸다. 위험한 곳에 닿기까지의 시간이 약 15.4% 늘었다.</p></div>
+        <div><div class="n">+0.89초</div><p>가드 없이 5.77초 걸리던 거리가 6.66초 걸렸다. 위험한 곳에 도착하기까지 걸린 시간이 약 15.4% 늘었다.</p></div>
         <div><div class="n">그 사이에</div><p>1초 가까운 시간을 더 벌면 어르신이 손을 놓거나 옆 사람이 말릴 수 있다. 천천히 빨라지는 만큼 부딪칠 때의 힘도 줄어들 것으로 예상한다.</p></div>
       </div>
     </div>
@@ -927,13 +927,13 @@ footer{margin-top:90px;border-top:1px solid var(--line);padding:36px 22px 60px;t
   function setP(l,p){l.querySelector('.car').style.setProperty('--p',p);}
   function finish(){lanes.forEach(function(l){setP(l,1);l.classList.add('done');});clock.innerHTML='6.66<small>초</small>';
     var m=lanes[1].querySelector('.mark');m.style.left='calc((100% - 76px) * '+(5.77/6.66)+' + 64px)';m.classList.add('on');
-    note.textContent='가드 없는 전동스쿠터가 위험한 곳에 닿은 순간, 가드를 단 전동스쿠터는 아직 닿지 않았다.';}
+    note.textContent='가드 없는 전동스쿠터가 위험한 곳에 도착한 순간, 가드를 단 전동스쿠터는 아직 도착하지 않았다.';}
   function run(){cancelAnimationFrame(raf);lanes.forEach(function(l){setP(l,0);l.classList.remove('done');l.querySelector('.mark').classList.remove('on');});note.textContent='';clock.innerHTML='0.00<small>초</small>';
     if(reduce){finish();return;}
     var t0=null,marked=false;
     function f(ts){if(t0===null)t0=ts;var t=(ts-t0)/1000;
       lanes.forEach(function(l){var T=+l.dataset.t,p=Math.min(t/T,1);setP(l,p);if(p>=1&&!l.classList.contains('done'))l.classList.add('done');});
-      if(t>=5.77&&!marked){marked=true;var m=lanes[1].querySelector('.mark');m.style.left='calc((100% - 76px) * '+(5.77/6.66)+' + 64px)';m.classList.add('on');note.textContent='가드 없는 전동스쿠터가 위험한 곳에 닿은 순간, 가드를 단 전동스쿠터는 아직 닿지 않았다.';}
+      if(t>=5.77&&!marked){marked=true;var m=lanes[1].querySelector('.mark');m.style.left='calc((100% - 76px) * '+(5.77/6.66)+' + 64px)';m.classList.add('on');note.textContent='가드 없는 전동스쿠터가 위험한 곳에 도착한 순간, 가드를 단 전동스쿠터는 아직 도착하지 않았다.';}
       clock.innerHTML=Math.min(t,6.66).toFixed(2)+'<small>초</small>';
       if(t<6.66)raf=requestAnimationFrame(f);}
     raf=requestAnimationFrame(f);}
