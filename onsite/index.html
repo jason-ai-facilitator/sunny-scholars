@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunny On-Site 의성 1기 — 세 팀의 현장 연구</title>
+<meta name="description" content="2025년 여름, 대학생 12명이 경북 의성에 머물며 지역 문제를 찾아 정의했습니다. 세 팀의 홈페이지와 보고서를 한곳에 모았습니다.">
+<meta property="og:title" content="Sunny On-Site 의성 1기 — 세 팀의 현장 연구">
+<meta property="og:description" content="의료용 전동스쿠터 오조작 사고, 농촌 어르신의 실버카 이동 문제, 농촌 이주노동자의 온열질환 문제">
+<meta property="og:image" content="https://sunny.problemlab.kr/uigusim/report/img/hero-walk.jpg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --purple:#5a4187; --purple-d:#2e2050; --night:#191f28; --yellow:#ffd73c; --yellow-d:#e8bd12;
+  --bg:#f7f6fb; --card:#fff; --ink:#191f28; --body:#3d4350; --soft:#6f7583; --line:#e6e3ef;
+  --t1:#38617f; --t2:#2f9e7e; --t3:#c6402c;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Pretendard,-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:var(--bg);color:var(--body);font-size:17px;line-height:1.8;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+img{display:block;max-width:100%}
+a{color:inherit}
+
+/* 머리 */
+.nav{position:fixed;inset:0 0 auto 0;z-index:40;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+.nav.solid{background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-color:var(--line)}
+.nav .in{max-width:1120px;margin:0 auto;height:64px;padding:0 22px;display:flex;align-items:center;gap:26px}
+.nav .logo{font-weight:800;font-size:1.02rem;color:#fff;text-decoration:none;letter-spacing:-.01em}
+.nav.solid .logo{color:var(--ink)}
+.nav .logo span{color:var(--yellow)}
+.nav.solid .logo span{color:var(--purple)}
+.nav .sp{flex:1}
+.nav a.l{font-size:.93rem;font-weight:600;color:rgba(255,255,255,.85);text-decoration:none}
+.nav.solid a.l{color:var(--body)}
+.nav a.l:hover{color:var(--yellow)}
+.nav.solid a.l:hover{color:var(--purple)}
+.nav a.cta{font-size:.88rem;font-weight:700;background:var(--yellow);color:var(--night);text-decoration:none;padding:9px 16px;border-radius:999px;white-space:nowrap}
+
+/* 첫 화면 */
+.hero{position:relative;min-height:92vh;display:flex;align-items:flex-end;color:#fff;background:var(--night);overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(25,18,48,.94) 0%,rgba(46,32,80,.55) 50%,rgba(25,18,48,.2) 100%)}
+.hero .in{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:140px 22px 76px;width:100%}
+.hero .badge{display:inline-block;font-size:.85rem;font-weight:700;color:var(--night);background:var(--yellow);border-radius:999px;padding:4px 12px}
+.hero h1{font-weight:800;font-size:clamp(2.4rem,6.4vw,4.4rem);line-height:1.15;letter-spacing:-.02em;margin:18px 0 20px}
+.hero p{font-size:clamp(1.02rem,2vw,1.2rem);color:#ece8f6;max-width:36em;line-height:1.75}
+.hero .btns{margin-top:30px;display:flex;flex-wrap:wrap;gap:10px}
+.b{display:inline-flex;align-items:center;gap:6px;font-weight:700;text-decoration:none;padding:13px 22px;border-radius:999px;font-size:.98rem}
+.b.y{background:var(--yellow);color:var(--night)}
+.b.y:hover{background:#ffe066}
+.b.o{border:1px solid rgba(255,255,255,.55);color:#fff}
+.b.o:hover{background:rgba(255,255,255,.1)}
+.b.p{background:var(--purple);color:#fff}
+.b.line{border:1px solid var(--line);color:var(--ink);background:#fff}
+.b.line:hover{border-color:var(--purple);color:var(--purple)}
+
+/* 숫자 띠 */
+.nums{background:var(--purple-d);color:#fff}
+.nums .in{max-width:1120px;margin:0 auto;padding:34px 22px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.nums .n{font-weight:800;font-size:clamp(1.8rem,3.6vw,2.5rem);line-height:1.1;letter-spacing:-.02em}
+.nums .n small{font-size:.55em;font-weight:700;margin-left:2px}
+.nums .n.y{color:var(--yellow)}
+.nums .l{font-size:.9rem;color:#c9c0de;margin-top:8px;line-height:1.5}
+
+/* 절 */
+section{padding:110px 0 0;scroll-margin-top:64px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+.narrow{max-width:760px}
+.k{font-size:.88rem;font-weight:700;color:var(--purple)}
+h2{font-weight:800;color:var(--ink);font-size:clamp(1.7rem,3.6vw,2.4rem);line-height:1.3;letter-spacing:-.02em;margin:8px 0 22px}
+.lead{font-size:1.1rem;color:var(--body);max-width:40em}
+p+p{margin-top:1em}
+
+/* 소개 */
+.about{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start}
+.about .quote{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:30px 28px}
+.about .quote p{font-size:1.25rem;font-weight:700;color:var(--ink);line-height:1.6}
+.about .quote p::before{content:"“";display:block;font-size:3rem;line-height:.6;color:var(--yellow-d);margin-bottom:10px}
+.about .quote cite{display:block;font-style:normal;font-size:.88rem;color:var(--soft);margin-top:14px}
+.about .facts{list-style:none;margin-top:18px;display:grid;gap:8px}
+.about .facts li{display:flex;gap:12px;font-size:.95rem;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+.about .facts b{color:var(--ink);min-width:4.5em}
+.more{display:inline-flex;margin-top:26px;font-weight:700;color:var(--purple);text-decoration:none;border-bottom:2px solid var(--yellow);padding-bottom:2px}
+
+/* 세 팀 */
+.teams{display:grid;gap:22px;margin-top:40px}
+.team{display:grid;grid-template-columns:.95fr 1.05fr;background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 10px 34px rgba(46,32,80,.06)}
+.team:nth-child(even){grid-template-columns:1.05fr .95fr}
+.team:nth-child(even) .ph{order:2}
+.team .ph{position:relative;min-height:340px;background:#ddd}
+.team .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.team .tx{padding:36px 38px;display:flex;flex-direction:column}
+.team .tm{display:flex;align-items:center;gap:8px;font-size:.92rem;font-weight:700}
+.team .tm i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.team h3{font-weight:800;color:var(--ink);font-size:clamp(1.4rem,2.6vw,1.8rem);line-height:1.35;letter-spacing:-.02em;margin:10px 0 14px}
+.team p{font-size:1rem;line-height:1.75}
+.team .sol{margin-top:18px;font-size:.95rem;color:var(--ink)}
+.team .sol b{display:inline-block;font-size:.8rem;font-weight:700;color:var(--purple);background:#efeaf8;border-radius:6px;padding:2px 8px;margin-right:8px}
+.team .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.team .chips span{font-size:.82rem;font-weight:600;color:var(--body);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:4px 11px}
+.team .btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:26px}
+.team.t1 .tm{color:var(--t1)}.team.t1 .tm i{background:var(--t1)}
+.team.t2 .tm{color:var(--t2)}.team.t2 .tm i{background:var(--t2)}
+.team.t3 .tm{color:var(--t3)}.team.t3 .tm i{background:var(--t3)}
+
+/* 커리큘럼 */
+.steps{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:36px;counter-reset:s}
+.steps li{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 20px;position:relative}
+.steps .no{font-weight:800;font-size:1.5rem;color:var(--purple);line-height:1}
+.steps h4{font-weight:800;color:var(--ink);font-size:1.05rem;margin:14px 0 6px;line-height:1.4}
+.steps p{font-size:.92rem;line-height:1.65}
+.steps li.on{background:var(--purple);border-color:var(--purple)}
+.steps li.on .no{color:var(--yellow)}
+.steps li.on h4,.steps li.on p{color:#fff}
+.note{font-size:.88rem;color:var(--soft);margin-top:16px}
+
+/* 공식 사이트 띠 */
+.official{margin-top:110px;background:var(--night);color:#fff}
+.official .in{max-width:1120px;margin:0 auto;padding:56px 22px;display:flex;flex-wrap:wrap;gap:26px;align-items:center;justify-content:space-between}
+.official h2{color:#fff;margin:6px 0 8px;font-size:clamp(1.5rem,3vw,2rem)}
+.official .k{color:var(--yellow)}
+.official p{color:#c9c0de;max-width:34em}
+.official .btns{display:flex;flex-wrap:wrap;gap:10px}
+
+footer{background:var(--night);color:#8f8aa3;border-top:1px solid rgba(255,255,255,.08)}
+footer .in{max-width:1120px;margin:0 auto;padding:26px 22px 40px;font-size:.85rem;line-height:1.8}
+footer a{color:#c9c0de}
+
+@media (max-width:900px){
+  .about{grid-template-columns:1fr;gap:30px}
+  .team,.team:nth-child(even){grid-template-columns:1fr}
+  .team:nth-child(even) .ph{order:0}
+  .team .ph{min-height:230px}
+  .team .tx{padding:26px 22px}
+  .steps{grid-template-columns:1fr 1fr}
+  .nums .in{grid-template-columns:1fr 1fr}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  .nav a.l{display:none}
+  .steps{grid-template-columns:1fr}
+  section{padding-top:80px}
+}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav"><div class="in">
+  <a class="logo" href="#top">Sunny On-Site <span>의성 1기</span></a>
+  <span class="sp"></span>
+  <a class="l" href="#about">소개</a>
+  <a class="l" href="#teams">연구 결과</a>
+  <a class="l" href="#process">커리큘럼</a>
+  <a class="cta" href="https://www.besunny.com/program/onsite" target="_blank" rel="noopener">공식 사이트 ↗</a>
+</div></header>
+
+<div class="hero" id="top">
+  <img src="../uigusim/report/img/hero-walk.jpg" alt="의성의 마을길에서 실버카를 미는 할머니와 함께 걷는 대학생들">
+  <div class="in">
+    <span class="badge">2025년 6월~11월, 경북 의성</span>
+    <h1>Sunny On-Site<br>의성 1기</h1>
+    <p>2025년 여름, 대학생 12명이 경북 의성에 머물며 지역 문제를 찾아 정의했습니다. 세 팀의 홈페이지와 보고서를 한곳에 모았습니다.</p>
+    <div class="btns">
+      <a class="b y" href="#teams">세 팀 연구 보기</a>
+      <a class="b o" href="https://www.besunny.com/program/onsite" target="_blank" rel="noopener">Sunny 공식 사이트 ↗</a>
+    </div>
+  </div>
+</div>
+
+<div class="nums"><div class="in">
+  <div><div class="n y">12<small>명</small></div><div class="l">의성에 머문 대학생</div></div>
+  <div><div class="n">2<small>개월</small></div><div class="l">의성에 살며 현장 조사한 기간</div></div>
+  <div><div class="n">3<small>개 팀</small></div><div class="l">지역 문제를 정의하고 솔루션을 만든 팀</div></div>
+  <div><div class="n">259<small>명+</small></div><div class="l">세 팀이 현장에서 만난 주민과 관계자</div></div>
+</div></div>
+
+<section id="about">
+  <div class="wrap about">
+    <div>
+      <h2>Sunny On-Site란?</h2>
+      <p class="lead">Sunny On-Site는 SK행복나눔재단의 대학생 사회문제 해결 브랜드 Sunny가 운영하는 현장기반 연구 프로그램입니다. 대학생이 지역에 직접 머물며 주민의 이야기를 듣고 일상을 관찰해, 그곳에 살아야 보이는 문제를 찾아 정의합니다.</p>
+      <p>1기는 2025년 「Sunny Scholar in 의성」이라는 이름으로 경북 의성군에서 진행했습니다. 대학생 12명이 6월 26일 오리엔테이션을 시작으로 2개월 동안 의성에 머물며 노인복지관과 마을회관, 공판장을 정기적으로 찾았습니다. 이후 3개월 동안은 팀마다 정한 솔루션을 구체화했습니다.</p>
+      <a class="more" href="https://www.besunny.com/program/onsite" target="_blank" rel="noopener">Sunny On-Site 공식 소개 보기 ↗</a>
+    </div>
+    <div>
+      <div class="quote">
+        <p>문을 열고 나가면 곧바로 현장을 마주할 수 있는 프로그램</p>
+        <cite>SK행복나눔재단 담당 매니저 (더나은미래, 2025년 7월 9일)</cite>
+      </div>
+      <ul class="facts">
+        <li><b>기간</b><span>2025년 6월 26일 ~ 11월</span></li>
+        <li><b>장소</b><span>경북 의성군</span></li>
+        <li><b>참여</b><span>대학생 12명, 세 팀</span></li>
+        <li><b>주제</b><span>노인 이동, 농촌 노동</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="teams">
+  <div class="wrap">
+    <h2>세 팀의 연구</h2>
+    <p class="lead">팀마다 홈페이지와 보고서가 있습니다. 홈페이지에는 문제와 솔루션을 간추렸고, 보고서에는 현장 조사부터 솔루션을 시험한 결과까지 자세히 담았습니다.</p>
+    <div class="teams">
+
+      <article class="team t1">
+        <div class="ph"><img src="../remove/report/img/market-crossing.jpg" alt="의료용 전동스쿠터를 타고 의성 시장 앞 횡단보도를 건너는 사람" loading="lazy"></div>
+        <div class="tx">
+          <div class="tm"><i></i>1조 RE:MOVE</div>
+          <h3>의료용 전동스쿠터 오조작 사고</h3>
+          <p>의료용 전동스쿠터는 레버를 잡으면 가고 놓아야 멈춥니다. 전동스쿠터를 타는 의성 어르신 49명을 만나 보니 22명이 사고를 겪었고, 그중 12명은 멈춰야 할 때 레버를 놓지 못해 사고가 났습니다.</p>
+          <div class="sol"><b>솔루션</b>사고 직전에 멈출 시간을 벌어 주는 골든타임 가드</div>
+          <div class="chips"><span>어르신 49명 인터뷰</span><span>사고 경험자 22명</span><span>멈출 시간 +0.89초</span></div>
+          <div class="btns"><a class="b p" href="../remove/home/">홈페이지 바로가기</a><a class="b line" href="../remove/report/">보고서 보기</a></div>
+        </div>
+      </article>
+
+      <article class="team t2">
+        <div class="ph"><img src="../uigusim/report/img/rental-stand.jpg" alt="농협 앞 인도에 실버카 다섯 대와 공유실버카 구르미 배너를 세워 둔 대여소" loading="lazy"></div>
+        <div class="tx">
+          <div class="tm"><i></i>2조 의구심</div>
+          <h3>농촌 어르신의 실버카 이동 문제</h3>
+          <p>의성군 면 지역에 사는 어르신들은 버스에 실버카를 싣지 못해 장날마다 평균 75분을 지팡이에 의지해 버팁니다. 팀은 장날 정류장 옆에서 실버카를 무료로 빌려 드리는 대여소를 만들어 장날에 두 번 시범 운영했습니다.</p>
+          <div class="sol"><b>솔루션</b>장날 정류장에서 빌리는 공유실버카 구르미</div>
+          <div class="chips"><span>54개 마을 어르신 164명</span><span>실버카 없는 장날 75분</span><span>시범운영 이용자 14명</span></div>
+          <div class="btns"><a class="b p" href="../uigusim/home/">홈페이지 바로가기</a><a class="b line" href="../uigusim/report/">보고서 보기</a></div>
+        </div>
+      </article>
+
+      <article class="team t3">
+        <div class="ph"><img src="../apple/report/img/rest-farm.jpg" alt="밭가 나무 그늘 아래 앉아 쉬는 노동자들" loading="lazy"></div>
+        <div class="tx">
+          <div class="tm"><i></i>3조 헷사과</div>
+          <h3>농촌 이주노동자의 온열질환 문제</h3>
+          <p>헷사과 팀이 만나 본 이주노동자 31명 가운데 13명이 온열질환을 겪었습니다. 이런 피해는 정부의 온열질환 통계에 집계되지 않습니다. 팀은 필수 보호물품과 10개 언어 리플렛을 하나로 묶어 안심키트를 만들었습니다.</p>
+          <div class="sol"><b>솔루션</b>폭염 속 밭에서 바로 꺼내 입는 온열질환 안심키트</div>
+          <div class="chips"><span>이주노동자 31명</span><span>관계자 15명</span><span>10개 언어 리플렛</span></div>
+          <div class="btns"><a class="b p" href="../apple/home/">홈페이지 바로가기</a><a class="b line" href="../apple/report/">보고서 보기</a></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <h2>지역에 살며 문제를 찾고 정의하는 과정</h2>
+    <ol class="steps">
+      <li><div class="no">01</div><h4>오리엔테이션</h4><p>팀을 꾸리고 현장 연구를 준비합니다.</p></li>
+      <li><div class="no">02</div><h4>Pre-field 온보딩</h4><p>지역을 미리 공부하고 문제정의를 연습합니다.</p></li>
+      <li><div class="no">03</div><h4>현장연구 (직접 거주)</h4><p>지역에 머물며 주민을 인터뷰하고 일상을 관찰합니다.</p></li>
+      <li><div class="no">04</div><h4>문제정의 검증</h4><p>정의한 문제가 맞는지 현장 데이터를 분석해 검증합니다.</p></li>
+      <li class="on"><div class="no">05</div><h4>연구 아카이빙</h4><p>결과를 보고서로 정리해 사회 섹터와 지역 기관에 공유합니다.</p></li>
+    </ol>
+    <p class="note">단계 이름은 Sunny 공식 사이트의 Sunny On-Site 커리큘럼을 따랐습니다. 세 팀이 정리한 연구 결과를 홈페이지와 보고서로 옮겼습니다.</p>
+  </div>
+</section>
+
+<div class="official"><div class="in">
+  <div>
+    <h2>Sunny 프로그램 안내와 모집 소식</h2>
+    <p>Sunny On-Site와 Sunny Scholar의 프로그램 안내, 다른 기수의 리포트, 모집 소식은 Sunny 공식 사이트에서 볼 수 있습니다.</p>
+  </div>
+  <div class="btns">
+    <a class="b y" href="https://www.besunny.com" target="_blank" rel="noopener">Sunny 공식 사이트 ↗</a>
+    <a class="b o" href="https://www.besunny.com/impact/report" target="_blank" rel="noopener">Sunny 리포트 ↗</a>
+  </div>
+</div></div>
+
+<footer><div class="in">
+  Sunny On-Site는 SK행복나눔재단의 대학생 사회문제 해결 브랜드 Sunny가 운영하는 프로그램입니다. 세 팀의 홈페이지와 보고서는 각 팀이 쓴 보고서와 현장 자료를 바탕으로 정리했습니다.<br>
+  <a href="https://www.besunny.com" target="_blank" rel="noopener">Sunny</a>, <a href="https://www.skhappiness.org" target="_blank" rel="noopener">SK행복나눔재단</a>
+</div></footer>
+
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  function f(){nav.classList.toggle('solid',scrollY>innerHeight*.6);}
+  addEventListener('scroll',f,{passive:true}); f();
+})();
+</script>
+</body>
+</html>
